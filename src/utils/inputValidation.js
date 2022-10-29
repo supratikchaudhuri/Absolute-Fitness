@@ -4,5 +4,10 @@ export const validatemail = (email) => {
 }
 
 export const validatePassword = (password) => {
-  return password.length > 0
+  const re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  return re.test(password);
+}
+
+export const validateText = (text) => {
+  return text.length > 0
 }

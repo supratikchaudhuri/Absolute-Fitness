@@ -10,7 +10,7 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
-import {validatemail, validatePassword} from '../utils/inputValidation.js';
+import {validatemail, validateText} from '../utils/inputValidation.js';
 
 function Login() {
   
@@ -18,7 +18,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
 const login = () => {
-  if(validatemail(email) && validatePassword(password)) {
+  if(validatemail(email) && validateText(password)) {
     alert("You've logged in!")
   } 
   else {

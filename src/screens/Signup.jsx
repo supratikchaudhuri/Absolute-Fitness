@@ -10,6 +10,7 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
+import {validatemail, validatePassword, validateText} from '../utils/inputValidation';
 
 function Signup() {
 
@@ -26,7 +27,16 @@ function Signup() {
   };
 
 const signup = () => {
-  console.log("Your Account has been sent for approval.");
+  if(validateText(formValue.fname) &&
+    validateText(formValue.lname) &&
+    validatemail (formValue.email) &&
+    formValue.dob != '' && 
+    validatePassword(formValue.password)) {
+      console.log("Your Account has been sent for approval.");
+    }
+  else {
+    alert("wrong values")
+  }
   //send grid send email saying that make sure you've paid for shit.
 }
 
