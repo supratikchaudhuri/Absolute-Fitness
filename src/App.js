@@ -9,6 +9,7 @@ import WorkoutPlan from './screens/WorkoutPlan';
 import MealPlan from './screens/MealPlan';
 import Trainers from './screens/Trainers';
 import Branches from './screens/Branches';
+import BMIChart from './screens/BMIChart';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/meals" element={<MealPlan/>}/>
         <Route exact path="/trainers" element={<Trainers/>}/>
         <Route exact path="/branches" element={<Branches/>}/>
+        <Route exact path="/user/bmi" element={<BMIChart/>}/>
       </Routes>
       </BrowserRouter>
     </div>
