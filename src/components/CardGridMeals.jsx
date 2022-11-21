@@ -10,6 +10,7 @@ import {
 } from 'mdb-react-ui-kit';
 
 function CardGridMeals({meals}) {
+
   return (
 
     <MDBRow className='row-cols-1 row-cols-md-1 g-4 .h'>
@@ -48,3 +49,6 @@ function CardGridMeals({meals}) {
 }
 
 export default CardGridMeals
+
+
+

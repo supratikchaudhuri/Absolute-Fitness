@@ -7,6 +7,8 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from './screens/Home';
 import WorkoutPlan from './screens/WorkoutPlan';
 import MealPlan from './screens/MealPlan';
+import Trainers from './screens/Trainers';
+import Branches from './screens/Branches';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/workouts" element={<WorkoutPlan/>}/>
         <Route exact path="/meals" element={<MealPlan/>}/>
+        <Route exact path="/trainers" element={<Trainers/>}/>
+        <Route exact path="/branches" element={<Branches/>}/>
       </Routes>
       </BrowserRouter>
     </div>

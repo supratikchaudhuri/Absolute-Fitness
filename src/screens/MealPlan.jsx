@@ -1,5 +1,6 @@
 import React from 'react'
 import CardGridMeals from '../components/CardGridMeals'
+import Navbar from '../components/Navbar'
 
 function MealPlan() {
   const meals = [
@@ -20,11 +21,27 @@ function MealPlan() {
 	]
 
   return (
-    <div className='plan mealPlan'>\<h3>Monday</h3>
-    <h5>Focus: Ches & Triceps</h5>
-    <CardGridMeals meals = {meals}></CardGridMeals>
+	<>
+	<Navbar/>
+    <div className='plan mealPlan'>
+		<h3>Monday</h3>
+    	<h5>Focus: Ches & Triceps</h5>
+    	<CardGridMeals meals = {meals}></CardGridMeals>
+
+		<h3>Monday</h3>
+    	<h5>Focus: Ches & Triceps</h5>
+    	<CardGridMeals meals = {meals}></CardGridMeals>
+
+		<h3>Monday</h3>
+    	<h5>Focus: Ches & Triceps</h5>
+    	<CardGridMeals meals = {meals}></CardGridMeals>
+
+		<h3>Monday</h3>
+    	<h5>Focus: Ches & Triceps</h5>
+    	<CardGridMeals meals = {meals}></CardGridMeals>
 
     </div>
+	</>
   )
 }
 

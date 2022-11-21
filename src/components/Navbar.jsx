@@ -20,7 +20,7 @@ function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
 
   return (
-    <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#FCE700'}} sticky>
+    <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#E4A11B'}} sticky>
         <MDBContainer fluid>
         <MDBNavbarBrand href='#'>Absolute Fitness  <i class="fas fa-dumbbell" style={{'margin-left': '5px'}}></i></MDBNavbarBrand>
         <MDBNavbarToggler
