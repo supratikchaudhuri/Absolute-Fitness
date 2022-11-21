@@ -10,6 +10,7 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
+import axios from 'axios';
 import {validatemail, validatePassword, validateText} from '../utils/inputValidation';
 
 import img1 from "../Images/img1.jpg";
@@ -22,26 +23,44 @@ function Signup() {
     lname: '',
     email: '',
     dob: '',
-    password: ''
+    password: '',
+    age: 20,
+    sex: "Male",
+    gymId: 1
   });
 
   const handleChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
   };
 
-const signup = () => {
-  if(validateText(formValue.fname) &&
-    validateText(formValue.lname) &&
-    validatemail (formValue.email) &&
-    formValue.dob !== '' && 
-    validatePassword(formValue.password)) {
-      console.log("Your Account has been sent for approval.");
+  const signup = async () => {
+    if(validateText(formValue.fname)  &&
+      validateText(formValue.lname)   &&
+      validatemail (formValue.email)  &&
+      formValue.dob !== ''            && 
+      validatePassword(formValue.password)) {
+        console.log("Your Account has been sent for approval.");
+        console.log(formValue);
+        
+        try {
+          const res = await axios.post('user/signup', formValue)
+          console.log(res);
+        }
+        catch(err) {
+          console.log(err);
+        }
+
+        
+      }
+    else {
+      alert("wrong values")
     }
-  else {
-    alert("wrong values")
+
+    
+
+
+    //send grid send email saying that make sure you've paid for shit.
   }
-  //send grid send email saying that make sure you've paid for shit.
-}
 
   return (
     <MDBContainer className="my-5">
