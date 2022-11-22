@@ -14,6 +14,7 @@ import {validatemail, validateText} from '../utils/inputValidation.js';
 
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
+import axios from 'axios';
 
 function Login() {
   
@@ -22,7 +23,12 @@ function Login() {
 
 const login = () => {
   if(validatemail(email) && validateText(password)) {
-    alert("You've logged in!")
+    axios.post("user/login", {email, password}).then((res) => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
   } 
   else {
     alert("Please enter a valid email id or password.")

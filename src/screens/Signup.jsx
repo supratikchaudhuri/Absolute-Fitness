@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MDBBtn,
   MDBContainer,
@@ -8,9 +8,10 @@ import {
   MDBRow,
   MDBCol,
   MDBInput
-}
-from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
+
 import axios from 'axios';
+
 import {validatemail, validatePassword, validateText} from '../utils/inputValidation';
 
 import img1 from "../Images/img1.jpg";
@@ -24,13 +25,18 @@ function Signup() {
     email: '',
     dob: '',
     password: '',
-    age: 20,
-    sex: "Male",
+    sex: '',
     gymId: 1
   });
 
+
+  useEffect(() => {
+    console.log(formValue); //using this cuz setState lagging one step behind
+  }, [formValue])
+
   const handleChange = (e) => {
-    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+    // setFormValue({ ...formValue, [e.target.name]: e.target.value });
+    setFormValue(prevState => ({...prevState, [e.target.name]: e.target.value}));
   };
 
   const signup = async () => {
@@ -50,7 +56,6 @@ function Signup() {
           console.log(err);
         }
 
-        
       }
     else {
       alert("wrong values")
@@ -91,10 +96,23 @@ function Signup() {
                     onChange={handleChange} name = 'lname'  value={formValue.lname}/>
                   </MDBCol>
                 </MDBRow>
-                
 
-                <MDBInput wrapperClass='col-md-5 mb-4' label='Date of birth' type='date' size="lg"
+                <MDBRow>
+                  <MDBCol size="md">
+                  <MDBInput wrapperClass='col-md-11 mb-4' label='Date of birth' type='date' size="lg"
                     onChange={handleChange} name = 'dob'  value={formValue.dob}/>
+                  </MDBCol>
+                  <MDBCol size="md" >
+
+                    <select name='sex' onChange={handleChange} value={formValue.sex}>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Other</option>
+                    </select>
+
+                  </MDBCol>
+                </MDBRow>
+
 
                 <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
                   onChange={handleChange} name = 'email'   value={formValue.email}/>
@@ -104,7 +122,10 @@ function Signup() {
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={signup}>Sign Up</MDBBtn>
               <a className="small text-muted" href="#!">Forgot password?</a>
-              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Already have an account? <a href="login" style={{color: '#393f81'}}>Log in</a></p>
+              
+              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Already have an account? 
+                <a href="login" style={{color: '#393f81'}}>Log in</a>
+              </p>
 
               <div className='d-flex flex-row justify-content-start'>
                 <a href="#!" className="small text-muted me-1">Terms of use.</a>
