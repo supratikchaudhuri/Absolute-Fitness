@@ -16,8 +16,10 @@ import {validatemail, validatePassword, validateText, validPhone} from '../utils
 
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
 
   const [formValue, setFormValue] = useState({
     name: '',
@@ -60,16 +62,18 @@ function Signup() {
   };
 
   const signup = async () => {
+
     if(validateText(formValue.name)   &&
       validatemail (formValue.email)  &&
       validPhone(formValue.phone)     &&
       formValue.dob !== ''            && 
+      formValue.sex !== ''            &&
       formValue.gymId !== -1          &&
       validatePassword(formValue.password)) {
         
         try {
           const res = await axios.post('user/signup', formValue)
-          console.log(res);
+          navigate('/home');
         }
         catch(err) {
           console.log(err);

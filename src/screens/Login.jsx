@@ -15,19 +15,24 @@ import {validatemail, validPhone} from '../utils/inputValidation.js';
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
   
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
 const login = async () => {
+  console.log(username +" . " + password);
   if(validatemail(username) || validPhone(username)) {
     try {
       const res = await axios.post("user/login", {username, password})
-      console.log(res);
+      navigate('/home');
     } catch (err) {
-      console.log(err);
+      alert("Wrong username or password.\n Please try again.")
+      setPassword("");
+      setUsername("");
     }
   } else {
     alert("please check if the values are correct")
@@ -54,10 +59,10 @@ const login = async () => {
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Log into your account</h5>
                 
                 <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='text' size="lg"
-                  onChange={(e) => setUsername(e.target.value)} name = 'username'   value={username}/>
+                  onChange={(e) => setUsername(e.target.value)} name = 'username' value={username}/>
                 
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"
-                  onChange={(e) => setPassword(e.target.value)}/>
+                  onChange={(e) => setPassword(e.target.value)} value={password}/>
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={login}>Login</MDBBtn>
               <a className="small text-muted" href="#!">Forgot password?</a>
