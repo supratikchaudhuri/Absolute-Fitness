@@ -46,7 +46,7 @@ function Branches() {
 		}
 	]
 	const handleClick = (e) => {
-		console.log("clicked...");
+		
 	}
 
   return (

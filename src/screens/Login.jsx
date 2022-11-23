@@ -24,12 +24,26 @@ function Login() {
   const [password, setPassword] = useState("");
 
 const login = async () => {
-  console.log(username +" . " + password);
+
   if(validatemail(username) || validPhone(username)) {
     try {
       const res = await axios.post("user/login", {username, password})
+      
+      try {
+        const res1 = await axios.get(`user/${username}`)
+        const user = res1.data
+        
+        localStorage.setItem('user', JSON.stringify(user))
+        console.log(JSON.parse(localStorage.getItem('user')));
+
+      } catch (err1) {
+        console.log(err1);
+      }
+
       navigate('/home');
+
     } catch (err) {
+      // alert("") // make him retuurn right error style
       alert("Wrong username or password.\n Please try again.")
       setPassword("");
       setUsername("");

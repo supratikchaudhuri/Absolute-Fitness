@@ -16,7 +16,7 @@ function foo() {
         gymData.forEach(gym => {
           gymAddressId[gym.address] = gym.id
         })
-        console.log(gymAddressId);
+  
       } catch (err) {
         console.log(err);
       }

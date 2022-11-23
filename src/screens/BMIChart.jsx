@@ -11,9 +11,7 @@ import {
 
 function BMIChart() {
   const randomColor = () => Math.floor(Math.random()*16777215).toString(16);
-  console.log(randomColor());
-  console.log(randomColor());
-  console.log(randomColor());
+  
   const data = [
     {
       name: "11 nov",

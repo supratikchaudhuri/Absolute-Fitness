@@ -3,7 +3,6 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 function Table({cols, rows}) {
 
-	console.log(rows);
   return (
     <MDBTable className='table' align='middle'>
       <MDBTableHead light>

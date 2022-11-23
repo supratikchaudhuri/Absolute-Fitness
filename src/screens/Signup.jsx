@@ -73,7 +73,18 @@ function Signup() {
         
         try {
           const res = await axios.post('user/signup', formValue)
+
+          try {
+            const res1 = await axios.get(`user/${formValue.email}`)
+            const user = res1.data
+            localStorage.setItem('user', JSON.stringify(user))
+            
+          } catch (err1) {
+            console.log(err1);
+          }
+
           navigate('/home');
+
         }
         catch(err) {
           console.log(err);
