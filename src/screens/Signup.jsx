@@ -126,7 +126,7 @@ function Signup() {
               <a className="small text-muted" href="#!">Forgot password?</a>
               
               <p className="mb-1 pb-lg-2" >Already have an account? 
-                <a href="login" style={{color: '#0077b6'}}>  Log in</a>
+                <a href="login" style={{color: '#ffb703'}}>  Log in</a>
               </p>
 
               <a href="#!" className="small text-muted me-1">Terms of use.</a>
