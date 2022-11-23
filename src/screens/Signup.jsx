@@ -45,8 +45,6 @@ function Signup() {
       validPhone(formValue.phone)     &&
       formValue.dob !== ''            && 
       validatePassword(formValue.password)) {
-        console.log("Your Account has been sent for approval.");
-        console.log(formValue);
         
         try {
           const res = await axios.post('user/signup', formValue)
@@ -60,8 +58,6 @@ function Signup() {
     else {
       alert("wrong values")
     }
-
-    
 
 
     //send grid send email saying that make sure you've paid for shit.
@@ -112,15 +108,28 @@ function Signup() {
 
                   </MDBCol>
                 </MDBRow>
-
-                <MDBInput wrapperClass='mb-4' label='Phone Number (10 digits)' type='text' size="lg"
-                  onChange={handleChange} name = 'phone'   value={formValue.phone}/>
+                
+                <div>
+                  <MDBInput wrapperClass='mb-0' label='Phone Number (10 digits)' type='text' size="lg"
+                    onChange={handleChange} name = 'phone'   value={formValue.phone}/>
+                  <div className='form-text mb-3'>
+                    Must be 10 digits long
+                  </div>
+                </div>
+                
 
                 <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
                   onChange={handleChange} name = 'email'   value={formValue.email}/>
               
-                <MDBInput wrapperClass='mb-4' label='Choose password (must have 1 uppercase, lowecase and special char)' type='password' size="lg"
-                  onChange={handleChange} name = 'password'  value={formValue.password}/>
+                
+                <div> 
+                  <MDBInput wrapperClass='mb-0' label='Choose password (must have 1 uppercase, lowecase and special char)' type='password' size="lg"
+                    onChange={handleChange} name = 'password'  value={formValue.password}/>
+                  <div className='form-text mb-3'>
+                    atleast 8 letters and have 1 uppercase, lowercase and special character (!@#$%^&*) each
+                  </div>
+                </div>
+                
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={signup}>Sign Up</MDBBtn>
               <a className="small text-muted" href="#!">Forgot password?</a>

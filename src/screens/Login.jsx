@@ -10,7 +10,7 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
-import {validatemail, validateText} from '../utils/inputValidation.js';
+import {validatemail, validPhone} from '../utils/inputValidation.js';
 
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
@@ -18,20 +18,19 @@ import axios from 'axios';
 
 function Login() {
   
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-const login = () => {
-  if(validatemail(email) && validateText(password)) {
-    axios.post("user/login", {email, password}).then((res) => {
+const login = async () => {
+  if(validatemail(username) || validPhone(username)) {
+    try {
+      const res = await axios.post("user/login", {username, password})
       console.log(res);
-    })
-    .catch(err => {
+    } catch (err) {
       console.log(err);
-    })
-  } 
-  else {
-    alert("Please enter a valid email id or password.")
+    }
+  } else {
+    alert("please check if the values are correct")
   }
 }
 
@@ -54,8 +53,8 @@ const login = () => {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Log into your account</h5>
                 
-                <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='email' size="lg"
-                  onChange={(e) => setEmail(e.target.value)} name = 'email'   value={email}/>
+                <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='text' size="lg"
+                  onChange={(e) => setUsername(e.target.value)} name = 'username'   value={username}/>
                 
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"
                   onChange={(e) => setPassword(e.target.value)}/>
