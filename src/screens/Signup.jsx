@@ -80,7 +80,7 @@ function Signup() {
               <MDBCardImage src={logoImg} alt="login form" className='rounded' style={{'height': '70px'}}/>
               </div>
 
-              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign up for an account</h5>
+              <h5 className="fw-normal my-4" style={{letterSpacing: '1px'}}>Sign up for an account</h5>
                 
                 {/* <MDBRow>
                   <MDBCol size="md"> */}
@@ -95,7 +95,7 @@ function Signup() {
 
                 <MDBRow>
                   <MDBCol size="md">
-                  <MDBInput wrapperClass='col-md-11 mb-4' label='Date of birth' type='date' size="lg"
+                  <MDBInput wrapperClass='col-md-11 mb-3' label='Date of birth' type='date' size="lg"
                     onChange={handleChange} name = 'dob'  value={formValue.dob}/>
                   </MDBCol>
                   <MDBCol size="md" >
@@ -126,7 +126,7 @@ function Signup() {
                   <MDBInput wrapperClass='mb-0' label='Choose password (must have 1 uppercase, lowecase and special char)' type='password' size="lg"
                     onChange={handleChange} name = 'password'  value={formValue.password}/>
                   <div className='form-text mb-3'>
-                    atleast 8 letters and have 1 uppercase, lowercase and special character (!@#$%^&*) each
+                    atleast 8 letters and have 1 uppercase, lowercase and special character (!@#$%^&*)
                   </div>
                 </div>
                 
@@ -137,9 +137,11 @@ function Signup() {
               <p className="mb-1 pb-lg-2" >Already have an account? 
                 <a href="login" style={{color: '#ffb703'}}>  Log in</a>
               </p>
-
-              <a href="#!" className="small text-muted me-1">Terms of use.</a>
-              <a href="#!" className="small text-muted">Privacy policy</a>
+            
+              <div className='d-inline'>
+                <a href="#!" className="small text-muted me-1">Terms of use.</a>
+                <a href="#!" className="small text-muted">Privacy policy</a>
+              </div>
 
             </MDBCardBody>
           </MDBCol>
