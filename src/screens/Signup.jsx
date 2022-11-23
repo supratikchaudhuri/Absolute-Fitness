@@ -25,7 +25,7 @@ function Signup() {
     email: '',
     dob: '',
     password: '',
-    sex: '',
+    sex: 'Male',
     gymId: 1
   });
 
@@ -88,7 +88,7 @@ function Signup() {
                 
                 {/* <MDBRow>
                   <MDBCol size="md"> */}
-                  <MDBInput wrapperClass='col-md-11 mb-4' label='Full Name' type='text' size="lg"
+                  <MDBInput wrapperClass='col-md-11 mb-4' label='Full Name (only letter ans space allowed)' type='text' size="lg"
                   onChange={handleChange} name = 'name' value={formValue.name}/>
                   {/* </MDBCol>
                   <MDBCol size="md">
@@ -113,13 +113,13 @@ function Signup() {
                   </MDBCol>
                 </MDBRow>
 
-                <MDBInput wrapperClass='mb-4' label='Phone Number' type='text' size="lg"
+                <MDBInput wrapperClass='mb-4' label='Phone Number (10 digits)' type='text' size="lg"
                   onChange={handleChange} name = 'phone'   value={formValue.phone}/>
 
                 <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
                   onChange={handleChange} name = 'email'   value={formValue.email}/>
               
-                <MDBInput wrapperClass='mb-4' label='Choose a password' type='password' size="lg"
+                <MDBInput wrapperClass='mb-4' label='Choose password (must have 1 uppercase, lowecase and special char)' type='password' size="lg"
                   onChange={handleChange} name = 'password'  value={formValue.password}/>
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={signup}>Sign Up</MDBBtn>
