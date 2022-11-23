@@ -54,7 +54,7 @@ const login = () => {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Log into your account</h5>
                 
-                <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
+                <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='email' size="lg"
                   onChange={(e) => setEmail(e.target.value)} name = 'email'   value={email}/>
                 
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"

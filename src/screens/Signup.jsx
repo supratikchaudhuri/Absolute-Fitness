@@ -12,7 +12,7 @@ import {
 
 import axios from 'axios';
 
-import {validatemail, validatePassword, validateText} from '../utils/inputValidation';
+import {validatemail, validatePassword, validateText, validPhone} from '../utils/inputValidation';
 
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
@@ -20,8 +20,8 @@ import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
 function Signup() {
 
   const [formValue, setFormValue] = useState({
-    fname: '',
-    lname: '',
+    name: '',
+    phone: '',
     email: '',
     dob: '',
     password: '',
@@ -40,9 +40,9 @@ function Signup() {
   };
 
   const signup = async () => {
-    if(validateText(formValue.fname)  &&
-      validateText(formValue.lname)   &&
+    if(validateText(formValue.name)   &&
       validatemail (formValue.email)  &&
+      validPhone(formValue.phone)     &&
       formValue.dob !== ''            && 
       validatePassword(formValue.password)) {
         console.log("Your Account has been sent for approval.");
@@ -68,7 +68,7 @@ function Signup() {
   }
 
   return (
-    <MDBContainer className="my-5">
+    <MDBContainer className="my-3">
 
       <MDBCard>
         <MDBRow className='g-0'>
@@ -86,16 +86,16 @@ function Signup() {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Sign up for an account</h5>
                 
-                <MDBRow>
-                  <MDBCol size="md">
-                    <MDBInput wrapperClass='col-md-11 mb-4' label='First Name' type='text' size="lg"
-                    onChange={handleChange} name = 'fname' value={formValue.fname}/>
-                  </MDBCol>
+                {/* <MDBRow>
+                  <MDBCol size="md"> */}
+                  <MDBInput wrapperClass='col-md-11 mb-4' label='Full Name' type='text' size="lg"
+                  onChange={handleChange} name = 'name' value={formValue.name}/>
+                  {/* </MDBCol>
                   <MDBCol size="md">
                     <MDBInput wrapperClass='col-md-11 mb-4' label='Last Name' type='text' size="lg"
                     onChange={handleChange} name = 'lname'  value={formValue.lname}/>
                   </MDBCol>
-                </MDBRow>
+                </MDBRow> */}
 
                 <MDBRow>
                   <MDBCol size="md">
@@ -113,6 +113,8 @@ function Signup() {
                   </MDBCol>
                 </MDBRow>
 
+                <MDBInput wrapperClass='mb-4' label='Phone Number' type='text' size="lg"
+                  onChange={handleChange} name = 'phone'   value={formValue.phone}/>
 
                 <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
                   onChange={handleChange} name = 'email'   value={formValue.email}/>
@@ -123,14 +125,12 @@ function Signup() {
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={signup}>Sign Up</MDBBtn>
               <a className="small text-muted" href="#!">Forgot password?</a>
               
-              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Already have an account? 
-                <a href="login" style={{color: '#393f81'}}>Log in</a>
+              <p className="mb-1 pb-lg-2" >Already have an account? 
+                <a href="login" style={{color: '#0077b6'}}>  Log in</a>
               </p>
 
-              <div className='d-flex flex-row justify-content-start'>
-                <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                <a href="#!" className="small text-muted">Privacy policy</a>
-              </div>
+              <a href="#!" className="small text-muted me-1">Terms of use.</a>
+              <a href="#!" className="small text-muted">Privacy policy</a>
 
             </MDBCardBody>
           </MDBCol>

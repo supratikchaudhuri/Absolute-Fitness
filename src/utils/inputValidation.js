@@ -9,5 +9,9 @@ export const validatePassword = (password) => {
 }
 
 export const validateText = (text) => {
-  return text.length > 0
+  return text.length > 0 && text.match(/^[A-z ]+$/)
+}
+
+export const validPhone = (phone) => {
+  return  phone.match(/\d/g).length===10;
 }
