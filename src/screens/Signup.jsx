@@ -25,9 +25,29 @@ function Signup() {
     email: '',
     dob: '',
     password: '',
-    sex: 'Male',
-    gymId: 1
+    sex: '',
+    gymId: -1
   });
+
+  const [gymAddressId, setGymAddressId] = useState([]);
+  
+
+  useEffect(() => {
+    // getting all gym locations 
+    const getAllGyms = async () => {
+      try {
+        const res = await axios.get("gym/");
+        const gymData = res.data;
+        setGymAddressId(gymData)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getAllGyms();
+
+  }, [])
+  //console.log(gymAddressId);  // need to print or above useEffect don't work as expected
 
 
   useEffect(() => {
@@ -44,6 +64,7 @@ function Signup() {
       validatemail (formValue.email)  &&
       validPhone(formValue.phone)     &&
       formValue.dob !== ''            && 
+      formValue.gymId !== -1          &&
       validatePassword(formValue.password)) {
         
         try {
@@ -84,7 +105,7 @@ function Signup() {
                 
                 {/* <MDBRow>
                   <MDBCol size="md"> */}
-                  <MDBInput wrapperClass='col-md-11 mb-4' label='Full Name (only letter ans space allowed)' type='text' size="lg"
+                  <MDBInput wrapperClass='col-md-11 mb-4' label='Full Name' type='text' size="lg"
                   onChange={handleChange} name = 'name' value={formValue.name}/>
                   {/* </MDBCol>
                   <MDBCol size="md">
@@ -99,18 +120,29 @@ function Signup() {
                     onChange={handleChange} name = 'dob'  value={formValue.dob}/>
                   </MDBCol>
                   <MDBCol size="md" >
-
                     <select name='sex' onChange={handleChange} value={formValue.sex}>
+                    <option value="">--Select Gender--</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                       <option value="Other">Other</option>
                     </select>
-
                   </MDBCol>
+
+                  <MDBCol>
+                    <select name='gymId' onChange={handleChange} value={formValue.gymId}>
+                    <option value="-1">--Select Gym Address--</option>
+                    {
+                      gymAddressId.map(gym => (
+                        <option value={gym.gym_id}>{gym.location}</option>
+                      ))
+                    }
+                    </select>
+                  </MDBCol>
+                  
                 </MDBRow>
                 
                 <div>
-                  <MDBInput wrapperClass='mb-0' label='Phone Number (10 digits)' type='text' size="lg"
+                  <MDBInput wrapperClass='mb-0' label='Phone Number' type='text' size="lg"
                     onChange={handleChange} name = 'phone'   value={formValue.phone}/>
                   <div className='form-text mb-3'>
                     Must be 10 digits long
@@ -123,7 +155,7 @@ function Signup() {
               
                 
                 <div> 
-                  <MDBInput wrapperClass='mb-0' label='Choose password (must have 1 uppercase, lowecase and special char)' type='password' size="lg"
+                  <MDBInput wrapperClass='mb-0' label='Choose a password' type='password' size="lg"
                     onChange={handleChange} name = 'password'  value={formValue.password}/>
                   <div className='form-text mb-3'>
                     atleast 8 letters and have 1 uppercase, lowercase and special character (!@#$%^&*)
