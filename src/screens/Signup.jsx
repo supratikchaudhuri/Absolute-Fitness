@@ -120,7 +120,7 @@ function Signup() {
                 
                 {/* <MDBRow>
                   <MDBCol size="md"> */}
-                  <MDBInput wrapperClass='col-md-11 mb-4' label='Full Name' type='text' size="lg"
+                  <MDBInput wrapperClass='mb-4' label='Full Name' type='text' size="lg"
                   onChange={handleChange} name = 'name' value={formValue.name}/>
                   {/* </MDBCol>
                   <MDBCol size="md">
@@ -131,7 +131,7 @@ function Signup() {
 
                 <MDBRow>
                   <MDBCol size="md">
-                  <MDBInput wrapperClass='col-md-11 mb-3' label='Date of birth' type='date' size="lg"
+                  <MDBInput wrapperClass='col-md-10 mb-3' label='Date of birth' type='date' size="lg"
                     onChange={handleChange} name = 'dob'  value={formValue.dob}/>
                   </MDBCol>
                   <MDBCol size="md" >

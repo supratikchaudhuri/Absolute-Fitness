@@ -10,6 +10,8 @@ import MealPlan from './screens/MealPlan';
 import Trainers from './screens/Trainers';
 import Branches from './screens/Branches';
 import BMIChart from './screens/BMIChart';
+import Navbar from './components/Navbar';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
       {/* <Login></Login> */}
 
       <BrowserRouter>
+      <Navbar></Navbar>
       <Routes>
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/login" element={<Login/>}/>
@@ -27,6 +30,7 @@ function App() {
         <Route exact path="/trainers" element={<Trainers/>}/>
         <Route exact path="/branches" element={<Branches/>}/>
         <Route exact path="/user/bmi" element={<BMIChart/>}/>
+        <Route exact path="/trainers/:trainerId/performace" element={<BMIChart/>}/>
       </Routes>
       </BrowserRouter>
     </div>

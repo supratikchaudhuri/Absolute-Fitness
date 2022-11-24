@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Table from '../components/Table'
 
 function Home() {
@@ -8,8 +7,6 @@ function Home() {
 
   return (
     <>
-    
-    <Navbar/>
 
     <Table cols={cols} rows = {rows}></Table>
     </>

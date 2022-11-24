@@ -15,9 +15,15 @@ import {
   MDBDropdownItem,
   MDBDropdownToggle
 } from 'mdb-react-ui-kit';
+import { useEffect } from 'react';
 
 function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem('user'))
+  // console.log(user);    //calls everytime when we go to new page
+
+
 
   return (
     <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#E4A11B'}} sticky>
@@ -74,7 +80,7 @@ function Navbar() {
             <MDBNavbarItem>
               <MDBDropdown>
                 <MDBDropdownToggle tag='a' className='nav-link'>
-                  Users
+                  {user.name}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
                   <MDBDropdownItem link>Action</MDBDropdownItem>
@@ -84,18 +90,21 @@ function Navbar() {
               </MDBDropdown>
             </MDBNavbarItem>
 
-            <MDBNavbarItem>
-              <MDBDropdown>
-                <MDBDropdownToggle tag='a' className='nav-link'>
-                  Admin
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem link>Action</MDBDropdownItem>
-                  <MDBDropdownItem link>Another action</MDBDropdownItem>
-                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
-            </MDBNavbarItem>
+            {user.isAdmin &&
+              (<MDBNavbarItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle tag='a' className='nav-link'>
+                    Admin
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu>
+                    <MDBDropdownItem link>Action</MDBDropdownItem>
+                    <MDBDropdownItem link>Another action</MDBDropdownItem>
+                    <MDBDropdownItem link>Something else here</MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavbarItem>
+            )}
+            
 
           </MDBNavbarNav>
         </MDBCollapse>

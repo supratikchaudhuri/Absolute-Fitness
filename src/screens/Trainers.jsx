@@ -7,8 +7,10 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBRow,
-  MDBCol
+  MDBCol,
+  MDBBtn
 } from 'mdb-react-ui-kit';
+import { Link } from 'react-router-dom';
 
 function Trainers() {
     const trainers = [
@@ -60,6 +62,13 @@ function Trainers() {
                 This is a longer card with supporting text below as a natural lead-in to additional content.
                 This content is a little bit longer.
               </MDBCardText>
+
+            <Link to={'jimmy/performace'}>
+              <MDBBtn className='text-dark' color='light'>
+                See Performance
+              </MDBBtn>
+            </Link>
+              
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
