@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   MDBCard,
   MDBCardImage,
@@ -11,6 +11,17 @@ import {
 } from 'mdb-react-ui-kit';
 
 function MyPlan() {
+
+  const [myplan, setMyPlan] = useState(null);
+
+  useEffect(() => {
+    //wanna use useContext here
+    const getPlanDetails = () => {
+
+    }
+  })
+
+
   return (
     <div className='planDiv'>
     <MDBCard>
