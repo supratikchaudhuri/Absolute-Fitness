@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   MDBCard,
@@ -11,8 +11,26 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Trainers() {
+
+  // cosnt [trainers, setTrainers] = useState([])
+
+  // useEffect(() => {
+  //   const getTrainers = async () => {
+  //     try {
+  //       // const res = await axios.get("trainers");
+  //       // setTrainers(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+
+  //   getTrainers();
+
+  // }, []);
+
     const trainers = [
         {
             name: "Jimmy",

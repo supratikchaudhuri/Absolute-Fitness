@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -10,6 +11,9 @@ import {
 } from "recharts";
 
 function BMIChart() {
+
+  const [healthRecord, setHealthRecord] = useState({});
+
   const randomColor = () => Math.floor(Math.random()*16777215).toString(16);
   
   const data = [
