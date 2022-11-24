@@ -12,6 +12,7 @@ import Branches from './screens/Branches';
 import BMIChart from './screens/BMIChart';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
+import MyPlan from './screens/MyPlan';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/home" element={<Home/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
+        <Route exact path="/myplan" element={<MyPlan/>}/>
         <Route exact path="/workouts" element={<WorkoutPlan/>}/>
         <Route exact path="/meals" element={<MealPlan/>}/>
         <Route exact path="/trainers" element={<Trainers/>}/>

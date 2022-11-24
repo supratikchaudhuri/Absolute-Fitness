@@ -41,18 +41,18 @@ function Navbar() {
         <MDBCollapse navbar>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              <MDBNavbarLink active={true} h aria-current='page' href='#'>
+              <MDBNavbarLink active={true} h aria-current='page' href='home'>
                 Home
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink active={false} href='#'>Your Plan</MDBNavbarLink>
+              <MDBNavbarLink active={false} href='myplan'>My Plan</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink active={false} h href='#'>Pricing</MDBNavbarLink>
+              <MDBNavbarLink active={false} h href='plans'>View Plans</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem >
-              <MDBNavbarLink active={false} h href='#'>Newsletter</MDBNavbarLink>
+              <MDBNavbarLink active={false} h href='newsletter'>Newsletter</MDBNavbarLink>
             </MDBNavbarItem>
             
           </MDBNavbarNav>
