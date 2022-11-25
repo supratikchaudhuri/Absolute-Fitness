@@ -1,10 +1,51 @@
-import React from 'react';
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
+import React, {useEffect, useState} from 'react';
+import { MDBTable, MDBTableHead, MDBTableBody, MDBIcon, MDBInput,
+  MDBCol,
+  MDBRow,
+  MDBBtn } from 'mdb-react-ui-kit';
 
 function Table({cols, rows}) {
 
+  const [showEditForm, setShowEditForm] = useState(false);
+  // console.log(editFormCSS);
+
+  // useEffect(() => {
+  //   console.log(editFormCSS);
+  // }, [editFormCSS])
+
+  const displayEditForm = (e) => {
+    setShowEditForm(true);
+  }
+
+  const handleEdit = (e) => {
+    e.preventDefault()
+    //edit login
+    //axios post
+    setShowEditForm(false)
+  }
+
   return (
-    <MDBTable className='table' align='middle'>
+    <>
+    <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
+      <form className='m-4' onSubmit={handleEdit}>
+        <MDBRow className='mb-4 w-3'>
+          <MDBCol>
+            <MDBInput id='form3Example1' label='First name' />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput id='form3Example2' label='Last name' />
+          </MDBCol>
+        </MDBRow>
+        <MDBInput className='mb-4' type='email' id='form3Example3' label='Email address' />
+        <MDBInput className='mb-4' type='password' id='form3Example4' label='Password' />
+
+        <MDBBtn type='submit' className='mb-0' block>
+          Update
+        </MDBBtn>
+      </form>
+    </div>
+    
+    <MDBTable className='table mt-5' align='middle'>
       <MDBTableHead light>
         <tr>
 					{
@@ -16,12 +57,15 @@ function Table({cols, rows}) {
       </MDBTableHead>
       <MDBTableBody>
 				{
-					rows.map((row) => 
-						<tr>
+					rows.map((row, idx) => 
+						<tr key={idx}>
 							{row.map((item) => 
 								<td>{item}</td>
 							)
 							}
+              {/* {user.isAdmin && <td><MDBIcon className= "icon" fas icon="pen" /></td>} */}
+
+              <td><MDBIcon className= "icon" fas icon="pen" onClick={displayEditForm}/></td>
 						</tr>
 						
 					)
@@ -43,6 +87,8 @@ function Table({cols, rows}) {
         </tr>
       </tfoot>
     </MDBTable>
+
+    </>
   )
 }
 
