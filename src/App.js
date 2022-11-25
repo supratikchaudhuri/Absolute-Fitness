@@ -17,14 +17,20 @@ import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
 
 function App() {
+  console.log(window.location.pathname);
   return (
     <div className="App">
       <UserContextProvider>
 
         <BrowserRouter>
 
-        <Navbar></Navbar>
+        {/* <Navbar></Navbar> */}
 
+        {window.location.pathname !== "/login" && window.location.pathname !== "/signup "
+          ? 
+          ( <Navbar/> ): null
+        }
+    
         <Routes>
           <Route exact path="/home" element={<Home/>}/>
           <Route exact path="/login" element={<Login/>}/>
