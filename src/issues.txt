@@ -1,1 +1,4 @@
 navbar class log everytime when going to new page
+
+
+userContext not working

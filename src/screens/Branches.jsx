@@ -21,6 +21,7 @@ function Branches() {
 			try {
 				const res = await axios.get("gym/")
 				setBranches(res.data)
+				console.log(branches);
 			} catch (err) {
 				console.log(err);
 			}
@@ -75,17 +76,17 @@ function Branches() {
         branches.map(branch => (
           <MDBCol>
           <MDBCard className='h-100' onClick={handleClick}>
-            <MDBCardImage
+            {/* <MDBCardImage
               src={branch.image}
               alt='...'
               position='top'
-            />
+            /> */}
             <MDBCardBody>
-              <MDBCardTitle>{branch.address}</MDBCardTitle>
+              <MDBCardTitle>{branch.location}</MDBCardTitle>
               <MDBCardText>
-                <p>{branch.city}</p>
-								<p>{branch.state}</p>
-								<p>{branch.zip}</p>
+                <p>{branch.phone}</p>
+								{/* <p>{branch.state}</p>
+								<p>{branch.zip}</p> */}
                 This is a longer card with supporting text below as a natural lead-in to additional content.
                 This content is a little bit longer.
               </MDBCardText>
