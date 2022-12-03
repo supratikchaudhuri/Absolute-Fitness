@@ -34,7 +34,7 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
 }
 
 .planDiv {
@@ -61,4 +61,28 @@ select {
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
     border-radius: 20px;
+}
+
+.memerHealthRecordDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 20px 30px;
+
+}
+
+.memerHealthRecordDiv button {
+    margin-right: 20px;
+}
+
+.branches-div {
+    margin: 20px;
+}
+
+.trainer-div{
+    margin: 20px;
+}
+
+.trainer-div button{
+    margin-right: 10px;
 }

@@ -16,6 +16,7 @@ import {
   MDBDropdownToggle
 } from 'mdb-react-ui-kit';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
@@ -77,15 +78,14 @@ function Navbar() {
         <MDBCollapse navbar show={showNavRight}>
           <MDBNavbarNav right fullWidth={false} className='mb-2 mb-lg-0'>
 
-            <MDBNavbarItem>
+            <MDBNavbarItem style={{cursor: 'pointer'}}>
               <MDBDropdown>
                 <MDBDropdownToggle tag='a' className='nav-link'>
                   {user.name}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link>Action</MDBDropdownItem>
-                  <MDBDropdownItem link>Another action</MDBDropdownItem>
-                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
+                  <MDBDropdownItem link href='/branches'>My Health</MDBDropdownItem>
+                  <MDBDropdownItem link href='/trainers'>Profile</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>

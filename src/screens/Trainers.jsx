@@ -61,7 +61,7 @@ function Trainers() {
     ]
 
   return (
-    <div className='trainerDiv'>
+    <div className='trainer-div'>
       <h1>Meet The team</h1>
       <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
       {
@@ -81,12 +81,19 @@ function Trainers() {
                 This content is a little bit longer.
               </MDBCardText>
 
-            <Link to={'jimmy/performace'}>
+            <div>
+              <Link to={'jimmy/performace'}>
+                <MDBBtn className='text-dark' color='light'>
+                  See Performance
+                </MDBBtn>
+              </Link>
+
               <MDBBtn className='text-dark' color='light'>
-                See Performance
-              </MDBBtn>
-            </Link>
-              
+                  Hire
+                </MDBBtn>
+
+            </div>
+
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

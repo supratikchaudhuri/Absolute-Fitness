@@ -1,5 +1,6 @@
 import React from 'react'
 import Table from '../components/Table'
+import Branches from './Branches';
 
 function Home() {
 	var cols = ["col1", "col2", "col3"];
@@ -8,7 +9,9 @@ function Home() {
   return (
     <>
 
-    <Table cols={cols} rows = {rows}></Table>
+    {/* <Table cols={cols} rows = {rows}></Table> */}
+
+    <Branches/>
     </>
     
   )

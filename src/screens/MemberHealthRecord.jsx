@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { MDBBtn } from 'mdb-react-ui-kit';
 import React, { useEffect, useState } from 'react'
 import BMIChart from '../components/BMIChart'
 
 function MemberHealthRecord() {
-  const [memberHealthRecord, setMemberHealthRecord] = useState({});
+  const [memberHealthRecord, setMemberHealthRecord] = useState(null);
 
   const user = localStorage.getItem('user');
   console.log(user);
@@ -68,14 +69,48 @@ function MemberHealthRecord() {
       setMemberHealthRecord(dummyData)
       
     }
-  })
+
+    getHealthRecord()
+  }, [])
+
+  const memberHealtRecordDataRender = (
+    <div>
+        <p>height:  weight: w</p>
+        <p>health record last updated: </p>
+
+      <div><BMIChart data={memberHealthRecord}></BMIChart></div>
+
+      <div>
+        <MDBBtn outline color='warning'>
+          Update Health Record
+        </MDBBtn>
+      
+
+      <MDBBtn>See Health Progreess</MDBBtn></div>
+    </div>
+  )
+
+  const noMemberHealthRecordRender = (
+    <>
+      <p>No health record Found.</p>
+
+      <MDBBtn>Please add health record.</MDBBtn>
+    </>
+  )
+
+  const dispplayMemberHealthRecord = () => {
+    return (
+      <div className='memerHealthRecordDiv'>
+        { memberHealthRecord ? memberHealtRecordDataRender : noMemberHealthRecordRender }
+      </div>
+    )
+    
+  }
 
   return (
-    <div>
-      <p>height: </p>
-      <p>weigh: t</p>
-      <BMIChart data={memberHealthRecord}></BMIChart>
-    </div>
+    
+    dispplayMemberHealthRecord() 
+    
   )
 }
 
