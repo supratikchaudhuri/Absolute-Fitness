@@ -79,6 +79,10 @@ select {
     margin: 20px;
 }
 
+.branches-div button{
+    margin-right: 10px;
+}
+
 .trainer-div{
     margin: 20px;
 }

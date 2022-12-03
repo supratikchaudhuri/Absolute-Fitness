@@ -16,10 +16,8 @@ import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserContext.js';
 
 function Login() {
-  const {cacheUser} = useContext(UserContext);
   const navigate = useNavigate();
   
   const [username, setUsername] = useState("");
@@ -34,10 +32,9 @@ const login = async () => {
       try {
         const res1 = await axios.get(`user/${username}`)
         const user = res1.data
-        cacheUser(user)
         
         localStorage.setItem('user', JSON.stringify(user))
-        // console.log(JSON.parse(localStorage.getItem('user')));
+        console.log(JSON.parse(localStorage.getItem('user')));
 
       } catch (err1) {
         console.log(err1);

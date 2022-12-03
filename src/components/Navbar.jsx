@@ -22,8 +22,7 @@ function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
 
   const user = JSON.parse(localStorage.getItem('user'))
-  // console.log(user);    //calls everytime when we go to new page
-
+  console.log(user);    //calls everytime when we go to new page
 
 
   return (
