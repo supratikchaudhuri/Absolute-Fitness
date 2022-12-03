@@ -1,87 +1,80 @@
 import axios from 'axios';
-import { MDBBtn } from 'mdb-react-ui-kit';
+
+import {
+  MDBCard,
+  MDBCardTitle,
+  MDBCardBody,
+  MDBBtn,
+  MDBInput
+} from 'mdb-react-ui-kit';
+
 import React, { useEffect, useState } from 'react'
 import BMIChart from '../components/BMIChart'
 
 function MemberHealthRecord() {
-  const [memberHealthRecord, setMemberHealthRecord] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user'))
+  // console.log(user);
 
-  const user = localStorage.getItem('user');
-  console.log(user);
+  const [memberHealthRecord, setMemberHealthRecord] = useState([]);
+  const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);
+  const [latestHealthRecord, setLatestHealthRecord] = useState({ height: '', weight: '', dateCalculated: ''})
+  
+  const handleChange = (e) => {
+    setLatestHealthRecord(prevState => ({...prevState, [e.target.name]: e.target.value}));
+  }
 
-  const dummyData = [
-    {
-      name: "11 nov",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-      ram: 5000
-    },
-    {
-      name: "11 dec",
-      uv: 3000,
-      pv: 1398,
-      amt: 3600,
-      ram: 5000
-    },
-    {
-      name: "11 jan",
-      uv: 2000,
-      pv: 9800,
-      // amt: 2290,
-      ram: 5000
-    },
-    {
-      name: "11 feb",
-      uv: 2780,
-      pv: 3908,
-      // amt: 2000,
-      ram: 5000
-    },
-    {
-      name: "11 mar",
-      uv: 1890,
-      pv: 4800,
-      // amt: 2181,
-      // ram: 5000
-    },
-    {
-      name: "11 apr",
-      uv: 2390,
-      pv: 3800,
-      // amt: 2500,
-      ram: 5000
-    },
-    {
-      name: "11 may",
-      uv: 3490,
-      pv: 4300,
-      // amt: 2100,
-      ram: 5000
+  const submitHealthRecord = async () => {
+    try {
+      console.log(latestHealthRecord);
+      const res = await axios.post(`user/${user.email}/healthRecord`, {...latestHealthRecord, email: user.email});
+      getHealthRecords()
+      setShowHealthRecordForm(false);
+      console.log(res);
+    } 
+    catch (err) {
+      console.log(err);
     }
-  ];
+  }
+
+  const getMemberBMIData = (memberHealthRecord) => {
+    memberHealthRecord.map((record) => {
+        const thisDate = new Date(record.date_calculated);
+        record.date =
+            thisDate.getFullYear() +
+            "-" +
+            (thisDate.getMonth() + 1) +
+            "-" +
+            thisDate.getDate();
+
+        delete record["record_id"];
+        delete record["email"];
+        delete record["date_calculated"];
+    });
+
+    return memberHealthRecord;
+  }
+
+  const getHealthRecords = async () => {
+    const res = await axios.get(`user/${user.email}/healthRecords`);
+    setMemberHealthRecord(res.data);
+  }
 
   useEffect(() => {
-    const getHealthRecord = async () => {
-      const res = await axios.get(`${user.phone}/health-record`);
-      // setMemberHealthRecord(res.data);
-
-      setMemberHealthRecord(dummyData)
-      
-    }
-
-    getHealthRecord()
+    getHealthRecords();
   }, [])
+  console.log(memberHealthRecord);
+
+
 
   const memberHealtRecordDataRender = (
     <div>
-        <p>height:  weight: w</p>
-        <p>health record last updated: </p>
+        {/* <p>height:  weight: w</p>
+        <p>health record last updated: </p> */}
 
-      <div><BMIChart data={memberHealthRecord}></BMIChart></div>
+      <div><BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart></div>
 
       <div>
-        <MDBBtn outline color='warning'>
+        <MDBBtn onClick={e => setShowHealthRecordForm(true)} outline color='warning'>
           Update Health Record
         </MDBBtn>
       
@@ -91,18 +84,41 @@ function MemberHealthRecord() {
   )
 
   const noMemberHealthRecordRender = (
-    <>
+    <div>
       <p>No health record Found.</p>
 
-      <MDBBtn>Please add health record.</MDBBtn>
-    </>
+      <MDBBtn color='warning' onClick={e => setShowHealthRecordForm(true)}>Add health record</MDBBtn>
+    </div>
+  )
+
+  const healthRecordForm = (
+    <MDBCard border='warning' style={{display: showHealthRecordForm ? 'inline' : 'none'}} className='mb-3 health-record-form'>
+      <MDBCardBody className='text'>
+        <MDBCardTitle>Please enter the following records</MDBCardTitle>
+
+        <MDBInput label='Height in cm' id='typeText' type='text' name='height' onChange={handleChange}/>
+        <MDBInput label='Weight in lbs' id='typeText' type='text' name='weight' onChange={handleChange}/>
+        <MDBInput wrapperClass='col-md-10 mb-3' label='Date' type='date' size="lg"
+                    onChange={handleChange} name='dateCalculated'  value={latestHealthRecord.date}/>
+      </MDBCardBody>
+     
+    <div>
+      <MDBBtn color='warning' onClick={submitHealthRecord}>Submit</MDBBtn>
+      <MDBBtn color='danger' onClick={e => setShowHealthRecordForm(false)}>Cancle</MDBBtn>
+    </div>
+
+    </MDBCard>
   )
 
   const dispplayMemberHealthRecord = () => {
     return (
-      <div className='memerHealthRecordDiv'>
+      <>
+        {healthRecordForm}
+        
+        <div className='memerHealthRecordDiv'>
         { memberHealthRecord ? memberHealtRecordDataRender : noMemberHealthRecordRender }
-      </div>
+        </div>
+      </>
     )
     
   }

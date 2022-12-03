@@ -16,6 +16,7 @@ import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
 import MemberProfilePage from './screens/MemberProfilePage';
 import Facilities from './screens/Facilities';
+import BMIChart from './components/BMIChart';
 
 function App() {
   console.log(window.location.pathname);
@@ -53,6 +54,8 @@ function App() {
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/member-profile" element={<MemberProfilePage/>}/>
           <Route exact path="/trainers/:trainerId/performace" element={<TrainerPerformance/>}/>
+
+          <Route exact path="/test" element={<BMIChart/>}/>
         </Routes>
 
         </BrowserRouter>

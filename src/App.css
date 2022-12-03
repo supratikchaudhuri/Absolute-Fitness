@@ -90,3 +90,23 @@ select {
 .trainer-div button{
     margin-right: 10px;
 }
+
+.health-record-form {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    max-width: 400px !important;
+    z-index: 100 !important;
+    text-align: center !important;
+    margin-left: -200px !important;
+    margin-top: -200px !important;
+}
+
+.health-record-form input {
+    margin-bottom: 12px;
+}
+
+.health-record-form button {
+    max-width: 100px;
+    margin: -20px 10px 10px;
+}
