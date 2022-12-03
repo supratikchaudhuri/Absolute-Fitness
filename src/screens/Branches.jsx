@@ -59,8 +59,8 @@ function Branches() {
               </MDBCardText>
 
 							<div>
-								<MDBBtn onClick={e => navigate("/facilities")}>View Facilities</MDBBtn>
-								<MDBBtn onClick={e => navigate("/trainers")}>View Trainers</MDBBtn>
+								<MDBBtn onClick={e => navigate(`../gym/${branch.gym_id}/facilities`)}>View Facilities</MDBBtn>
+								<MDBBtn onClick={e => navigate(`../gym/${branch.gym_id}/trainers`)}>View Trainers</MDBBtn>
 							</div>
             </MDBCardBody>
           </MDBCard>

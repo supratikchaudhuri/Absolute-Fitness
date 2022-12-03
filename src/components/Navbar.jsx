@@ -16,13 +16,19 @@ import {
   MDBDropdownToggle
 } from 'mdb-react-ui-kit';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
 
   const user = JSON.parse(localStorage.getItem('user'))
   console.log(user);    //calls everytime when we go to new page
+
+  //navbar not showing at first is problem due to hiding navbar in login and signup
+
+  // useEffect(() => {
+  //   console.log(user);
+
+  // }, []);
 
 
   return (
@@ -83,7 +89,7 @@ function Navbar() {
                   {user.name}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link href='/branches'>My Health</MDBDropdownItem>
+                  <MDBDropdownItem link href='/health-record'>My Health</MDBDropdownItem>
                   <MDBDropdownItem link href='/trainers'>Profile</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>

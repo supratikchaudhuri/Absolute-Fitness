@@ -63,7 +63,7 @@ function MemberHealthRecord() {
 
   useEffect(() => {
     const getHealthRecord = async () => {
-      // const res = await axios.get(`${user.phone}/healthRecord`);
+      const res = await axios.get(`${user.phone}/health-record`);
       // setMemberHealthRecord(res.data);
 
       setMemberHealthRecord(dummyData)

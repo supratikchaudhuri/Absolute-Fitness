@@ -15,6 +15,7 @@ import { UserContextProvider } from './context/UserContext';
 import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
 import MemberProfilePage from './screens/MemberProfilePage';
+import Facilities from './screens/Facilities';
 
 function App() {
   console.log(window.location.pathname);
@@ -34,15 +35,21 @@ function App() {
     
 
         <Routes>
-          <Route exact path="/home" element={<Home/>}/>
           <Route exact path="/login" element={<Login/>}/>
           <Route exact path="/signup" element={<Signup/>}/>
+
+          <Route exact path="/home" element={<Home/>}/>
+          <Route exact path="/branches" element={<Branches/>}/>
+          <Route exact path="/gym/:gym_id/trainers" element={<Trainers/>}/>
+          <Route exact path="/gym/:gym_id/facilities" element={<Facilities/>}/>
+
+
+          <Route exact path="/user/:userId/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/my-plan" element={<MyPlan/>}/>
           <Route exact path="/workouts" element={<WorkoutPlan/>}/>
           <Route exact path="/meals" element={<MealPlan/>}/>
-          <Route exact path="/trainers" element={<Trainers/>}/>
-          <Route exact path="/branches" element={<Branches/>}/>
-          {/* <Route exact path="/user/:userId/healthrecord" element={<MemberHealthRecord/>}/> */}
+          
+          
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/member-profile" element={<MemberProfilePage/>}/>
           <Route exact path="/trainers/:trainerId/performace" element={<TrainerPerformance/>}/>

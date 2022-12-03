@@ -32,9 +32,14 @@ const login = async () => {
       try {
         const res1 = await axios.get(`user/${username}`)
         const user = res1.data
-        
         localStorage.setItem('user', JSON.stringify(user))
         console.log(JSON.parse(localStorage.getItem('user')));
+
+        const res2 = await axios.get(`gym/${user.gym_id}`)
+        const user_gym = res2.data;
+        localStorage.setItem('user_gym', JSON.stringify(user_gym))
+        console.log(JSON.parse(localStorage.getItem('user_gym')));
+
 
       } catch (err1) {
         console.log(err1);
