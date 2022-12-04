@@ -30,7 +30,7 @@ select {
     margin: 40px
 }
 
-.chartDiv {
+.chart-div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,6 +83,10 @@ select {
     margin-right: 10px;
 }
 
+.facilities-div {
+    margin: 20px
+}
+
 .trainer-div{
     margin: 20px;
 }
@@ -110,3 +114,18 @@ select {
     max-width: 100px;
     margin: -20px 10px 10px;
 }
+
+.health-plan-div {
+    /* margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items:center; */
+    margin-top: 100px;
+    text-align: center;
+    height: 100vh;
+}
+
+.health-plan-div button {
+    margin: 20px;
+}
+

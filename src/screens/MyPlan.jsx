@@ -9,21 +9,31 @@ import {
   MDBListGroup,
   MDBListGroupItem
 } from 'mdb-react-ui-kit';
+import axios from 'axios';
 
 function MyPlan() {
 
-  const [myplan, setMyPlan] = useState(null);
+  const user = localStorage.getItem('user');
+  const [myPlan, setMyPlan] = useState(null);
 
   useEffect(() => {
-    //wanna use useContext here
-    const getPlanDetails = () => {
-
+    const getPlanDetails = async () => {
+      const res = await axios.get(`user/${user.email}/healthPlan`);
+      setMyPlan(res.data);
     }
-  })
 
+    getPlanDetails();
+  }, [])
+  console.log(myPlan);
 
   return (
-    <div className='planDiv'>
+    <div className='plan-div'>
+
+    {myPlan && 
+    
+    <>
+      <p>Your trainer: {myPlan.trainer}</p>
+
     <MDBCard>
       <MDBCardImage position='top' alt='...' src='https://mdbootstrap.com/img/new/standard/city/062.webp' 
         style={{maxHeight: '300 px', maxWidth: '300px'}}
@@ -44,6 +54,8 @@ function MyPlan() {
         <MDBCardLink href='#'>Change Plan</MDBCardLink>
       </MDBCardBody>
     </MDBCard>
+    </>
+    }
     </div>
   )
 }

@@ -17,6 +17,7 @@ import MemberHealthRecord from './screens/MemberHealthRecord';
 import MemberProfilePage from './screens/MemberProfilePage';
 import Facilities from './screens/Facilities';
 import BMIChart from './components/BMIChart';
+import HealthPlan from './screens/HealthPlan';
 
 function App() {
   console.log(window.location.pathname);
@@ -46,9 +47,9 @@ function App() {
 
 
           <Route exact path="/user/:userId/health-record" element={<MemberHealthRecord/>}/>
-          <Route exact path="/my-plan" element={<MyPlan/>}/>
-          <Route exact path="/workouts" element={<WorkoutPlan/>}/>
-          <Route exact path="/meals" element={<MealPlan/>}/>
+          <Route exact path="/user/:userId/health-plan" element={<HealthPlan/>}/>
+          <Route exact path="/user/:userId/workout-plan" element={<WorkoutPlan/>}/>
+          <Route exact path="/user/:userId/diet-plan" element={<MealPlan/>}/>
           
           
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>

@@ -16,8 +16,10 @@ import {
   MDBDropdownToggle
 } from 'mdb-react-ui-kit';
 import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const navigate = useNavigate();
   const [showNavRight, setShowNavRight] = useState(false);
 
   const user = JSON.parse(localStorage.getItem('user'))
@@ -29,6 +31,12 @@ function Navbar() {
   //   console.log(user);
 
   // }, []);
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('user_gym');
+    navigate('/login')
+  }
 
 
   return (
@@ -47,18 +55,24 @@ function Navbar() {
         <MDBCollapse navbar>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
             <MDBNavbarItem>
-              <MDBNavbarLink active={true} h aria-current='page' href='home'>
-                Home
-              </MDBNavbarLink>
+              <Link to="/home">
+                <MDBNavbarLink active={true} h aria-current='page' >
+                  Home
+                </MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink active={false} href='myplan'>My Plan</MDBNavbarLink>
+              <Link to={'user/'+user.email+'/health-plan'}>
+              <MDBNavbarLink active={false} >My Health Plan</MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink active={false} h href='plans'>View Plans</MDBNavbarLink>
+              <Link to={'/user'}>
+              <MDBNavbarLink active={false} h >View Plans</MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
             <MDBNavbarItem >
-              <MDBNavbarLink active={false} h href='newsletter'>Newsletter</MDBNavbarLink>
+              <MDBNavbarLink active={false} h onClick={e => alert("Newsletters comming soon!")}>Newsletter</MDBNavbarLink>
             </MDBNavbarItem>
             
           </MDBNavbarNav>
@@ -91,6 +105,7 @@ function Navbar() {
                 <MDBDropdownMenu>
                   <MDBDropdownItem link href='/health-record'>My Health</MDBDropdownItem>
                   <MDBDropdownItem link href='/trainers'>Profile</MDBDropdownItem>
+                  <MDBDropdownItem link href='' style={{color: 'red !important'}} onClick={logout}>Log Out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>

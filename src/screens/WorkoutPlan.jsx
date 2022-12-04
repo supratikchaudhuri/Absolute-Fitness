@@ -21,7 +21,7 @@ function WorkoutPlan() {
   }, [])
 
   return (
-    <div className='workoutPlan plan'>
+    <div className='workout-plan plan'>
       <h3>Monday</h3>
       <h5>Focus: Ches & Triceps</h5>
       <CardGridWorkout></CardGridWorkout>

@@ -13,7 +13,6 @@ import BMIChart from '../components/BMIChart'
 
 function MemberHealthRecord() {
   const user = JSON.parse(localStorage.getItem('user'))
-  // console.log(user);
 
   const [memberHealthRecord, setMemberHealthRecord] = useState([]);
   const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);
@@ -68,18 +67,14 @@ function MemberHealthRecord() {
 
   const memberHealtRecordDataRender = (
     <div>
-        {/* <p>height:  weight: w</p>
-        <p>health record last updated: </p> */}
-
       <div><BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart></div>
 
       <div>
         <MDBBtn onClick={e => setShowHealthRecordForm(true)} outline color='warning'>
-          Update Health Record
+          Add Latest Health Record
         </MDBBtn>
       
-
-      <MDBBtn>See Health Progreess</MDBBtn></div>
+      </div>
     </div>
   )
 
