@@ -7,19 +7,19 @@ function MealPlan() {
 
 const [meals, setMeals] = useState([]);
 
-useEffect(() => {
-	const getMeals = async () => {
-		try {
-			// const res = await axios.get(`${user.phone}/mealplan`);
-			// setMeals(res.data)
-		} catch (err) {
-			console.log(err);
-		}
+// useEffect(() => {
+// 	const getMeals = async () => {
+// 		try {
+// 			const res = await axios.get(`${user.phone}/mealplan`);
+// 			setMeals(res.data)
+// 		} catch (err) {
+// 			console.log(err);
+// 		}
 
-		getMeals()
-	}
+// 		getMeals()
+// 	}
 	
-}, [])
+// }, [])
 
   // const meals = [
 	// 	{

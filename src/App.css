@@ -116,16 +116,48 @@ select {
 }
 
 .health-plan-div {
-    /* margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items:center; */
-    margin-top: 100px;
+    background-image: linear-gradient(#E4A11B, black, #E4A11B);
+    padding: 15px;
     text-align: center;
     height: 100vh;
+    color: white;
 }
 
 .health-plan-div button {
     margin: 20px;
 }
 
+.health-plan-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.health-plan-2 {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.health-plan-2 button {
+    max-width: 200px;
+}
+
+.health-plan-trainer {
+    margin: auto;
+    max-width: 400px;
+}
+
+.health-plan-trainer img {
+    max-width: 400px;
+    height: auto;
+}
+
+.health-plan-workout {
+    margin: 0 15px;
+}
+
+.health-plan-diet {
+    margin: 0 15px;
+}
