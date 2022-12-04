@@ -33,14 +33,13 @@ function Navbar() {
   // }, []);
 
   const logout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('user_gym');
+    localStorage.clear()
     navigate('/login')
   }
 
 
   return (
-    <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#E4A11B'}} sticky>
+   <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#E4A11B'}} sticky>
         <MDBContainer fluid>
         <MDBNavbarBrand href='#'>Absolute Fitness  <i class="fas fa-dumbbell" style={{'margin-left': '5px'}}></i></MDBNavbarBrand>
         <MDBNavbarToggler
@@ -130,6 +129,7 @@ function Navbar() {
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
+              
   )
 }
 

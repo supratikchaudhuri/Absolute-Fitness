@@ -18,6 +18,7 @@ import MemberProfilePage from './screens/MemberProfilePage';
 import Facilities from './screens/Facilities';
 import BMIChart from './components/BMIChart';
 import HealthPlan from './screens/HealthPlan';
+import StaffLogin from './screens/StaffLogin';
 
 function App() {
   console.log(window.location.pathname);
@@ -30,7 +31,7 @@ function App() {
         {/* <Navbar></Navbar> */}
 
 
-        {window.location.pathname !== "/login" && window.location.pathname !== "/signup "
+        {window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.location.pathname !== "/staff-login"
           ? 
           ( <Navbar/> ): null
         }
@@ -38,7 +39,9 @@ function App() {
 
         <Routes>
           <Route exact path="/login" element={<Login/>}/>
+          <Route exact path="/staff-login" element={<StaffLogin/>}/>
           <Route exact path="/signup" element={<Signup/>}/>
+
 
           <Route exact path="/home" element={<Home/>}/>
           <Route exact path="/branches" element={<Branches/>}/>

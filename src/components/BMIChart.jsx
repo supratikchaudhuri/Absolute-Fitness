@@ -10,6 +10,7 @@ import {
   Legend
 } from "recharts";
 
+//https://recharts.org/en-US/api
 function BMIChart({data}) {
   console.log(data);
 // function BMIChart() {
