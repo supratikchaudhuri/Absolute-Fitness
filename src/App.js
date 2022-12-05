@@ -6,11 +6,9 @@ import Signup from './screens/Signup';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from './screens/Home';
 import WorkoutPlan from './screens/WorkoutPlan';
-import MealPlan from './screens/MealPlan';
 import Trainers from './screens/Trainers';
 import Branches from './screens/Branches';
 import Navbar from './components/Navbar';
-import MyPlan from './screens/MyPlan';
 import { UserContextProvider } from './context/UserContext';
 import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
@@ -19,6 +17,7 @@ import Facilities from './screens/Facilities';
 import BMIChart from './components/BMIChart';
 import HealthPlan from './screens/HealthPlan';
 import StaffLogin from './screens/StaffLogin';
+import DietPlan from './screens/DietPlan';
 
 function App() {
   console.log(window.location.pathname);
@@ -52,7 +51,7 @@ function App() {
           <Route exact path="/user/:userId/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/user/:userId/health-plan" element={<HealthPlan/>}/>
           <Route exact path="/user/:userId/workout-plan" element={<WorkoutPlan/>}/>
-          <Route exact path="/user/:userId/diet-plan" element={<MealPlan/>}/>
+          <Route exact path="/user/:userId/diet-plan" element={<DietPlan/>}/>
           
           
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>

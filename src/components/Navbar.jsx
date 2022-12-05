@@ -1,4 +1,3 @@
-
 import React, {useState} from 'react';
 import {
   MDBNavbar,
@@ -15,7 +14,6 @@ import {
   MDBDropdownItem,
   MDBDropdownToggle
 } from 'mdb-react-ui-kit';
-import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
@@ -23,14 +21,6 @@ function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
 
   const user = JSON.parse(localStorage.getItem('user'))
-  console.log(user);    //calls everytime when we go to new page
-
-  //navbar not showing at first is problem due to hiding navbar in login and signup
-
-  // useEffect(() => {
-  //   console.log(user);
-
-  // }, []);
 
   const logout = () => {
     localStorage.clear()

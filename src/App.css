@@ -116,11 +116,11 @@ select {
 }
 
 .health-plan-div {
-    background-image: linear-gradient(#E4A11B, black, #E4A11B);
+    /* background-image: linear-gradient(#E4A11B, black, #E4A11B); */
     padding: 15px;
     text-align: center;
     height: 100vh;
-    color: white;
+    /* color: white; */
 }
 
 .health-plan-div button {
