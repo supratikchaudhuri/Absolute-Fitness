@@ -28,7 +28,6 @@ function MemberHealthRecord() {
       const res = await axios.post(`user/${user.email}/healthRecord`, {...latestHealthRecord, email: user.email});
       getHealthRecords()
       setShowHealthRecordForm(false);
-      console.log(res);
     } 
     catch (err) {
       console.log(err);
@@ -64,13 +63,12 @@ function MemberHealthRecord() {
   console.log(memberHealthRecord);
 
 
-
   const memberHealtRecordDataRender = (
     <div>
       <div><BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart></div>
 
       <div>
-        <MDBBtn onClick={e => setShowHealthRecordForm(true)} outline color='warning'>
+        <MDBBtn onClick={e => {getHealthRecords(); setShowHealthRecordForm(true)}} outline color='warning'>
           Add Latest Health Record
         </MDBBtn>
       
@@ -99,7 +97,7 @@ function MemberHealthRecord() {
      
     <div>
       <MDBBtn color='warning' onClick={submitHealthRecord}>Submit</MDBBtn>
-      <MDBBtn color='danger' onClick={e => setShowHealthRecordForm(false)}>Cancle</MDBBtn>
+      <MDBBtn color='danger' onClick={e => {getHealthRecords(); setShowHealthRecordForm(false)}}>Cancel</MDBBtn>
     </div>
 
     </MDBCard>
