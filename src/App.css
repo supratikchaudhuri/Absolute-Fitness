@@ -6,6 +6,14 @@ select {
     color: rgb(44, 41, 41)
 }
 
+.profile-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 45vw;
+    margin: 100px auto;
+}
+
 .table {
     margin: auto;
 }

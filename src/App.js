@@ -12,7 +12,6 @@ import Navbar from './components/Navbar';
 import { UserContextProvider } from './context/UserContext';
 import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
-import MemberProfilePage from './screens/MemberProfilePage';
 import Facilities from './screens/Facilities';
 import BMIChart from './components/BMIChart';
 import HealthPlan from './screens/HealthPlan';
@@ -20,6 +19,7 @@ import StaffLogin from './screens/StaffLogin';
 import DietPlan from './screens/DietPlan';
 import GymMembers from './screens/GymMembers';
 import GymStaff from './screens/GymStaff';
+import ProfilePage from './screens/ProfilePage';
 
 function App() {
   console.log(window.location.pathname);
@@ -47,13 +47,13 @@ function App() {
           <Route exact path="/gym/:gym_id/facilities" element={<Facilities/>}/>
 
 
+          <Route exact path="/user/:userId/profile" element={<ProfilePage/>}/>
           <Route exact path="/user/:userId/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/user/:userId/health-plan" element={<HealthPlan/>}/>
           <Route exact path="/user/:userId/workout-plan" element={<WorkoutPlan/>}/>
           <Route exact path="/user/:userId/diet-plan" element={<DietPlan/>}/>
           
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
-          <Route exact path="/member-profile" element={<MemberProfilePage/>}/>
           <Route exact path="/trainers/:trainerId/performace" element={<TrainerPerformance/>}/>
 
 
