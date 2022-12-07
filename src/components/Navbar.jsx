@@ -21,8 +21,9 @@ function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
 
   const user = JSON.parse(localStorage.getItem('user'))
-  // const userType = user.type;
-  const userType = 'member';
+  console.log(user);
+  const userType = user.type;
+
 
   const logout = () => {
     localStorage.clear()
@@ -52,19 +53,12 @@ function Navbar() {
             <>
             <MDBNavbarItem>
               <Link to="/home">
-                <MDBNavbarLink active={true} h aria-current='page' >
-                  Gyms
-                </MDBNavbarLink>
+                <MDBNavbarLink active={true} h aria-current='page' >Gyms</MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <Link to={'user/'+user.email+'/health-plan'}>
               <MDBNavbarLink active={false} >My Health Plan</MDBNavbarLink>
-              </Link>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <Link to={'/user'}>
-              <MDBNavbarLink active={false} h >View Plans</MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
             <MDBNavbarItem >
@@ -73,14 +67,44 @@ function Navbar() {
             </>
           }
 
-          {/* {
+          {
             userType === 'admin'
             &&
             <>
-
+            <MDBNavbarItem>
+              <Link to="/home">
+                <MDBNavbarLink active={true} h aria-current='page' >Gyms</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to={'gym/'+user.gym_id+'/members'}>
+              <MDBNavbarLink active={false} >Members</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to={'gym/'+user.gym_id+'/staff'}>
+              <MDBNavbarLink active={false} h >Staff</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
             </>
-          } */}
+          }
 
+{
+            userType === 'trainer'
+            &&
+            <>
+            <MDBNavbarItem>
+              <Link to="/home">
+                <MDBNavbarLink active={true} h aria-current='page' >Gyms</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to={'trainer/'+user.gym_id+'/members'}>
+              <MDBNavbarLink active={false} >My Clients</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
+            </>
+          }
             
             
           </MDBNavbarNav>

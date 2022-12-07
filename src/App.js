@@ -18,6 +18,7 @@ import BMIChart from './components/BMIChart';
 import HealthPlan from './screens/HealthPlan';
 import StaffLogin from './screens/StaffLogin';
 import DietPlan from './screens/DietPlan';
+import GymMembers from './screens/GymMembers';
 
 function App() {
   console.log(window.location.pathname);
@@ -50,11 +51,12 @@ function App() {
           <Route exact path="/user/:userId/workout-plan" element={<WorkoutPlan/>}/>
           <Route exact path="/user/:userId/diet-plan" element={<DietPlan/>}/>
           
-          
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/member-profile" element={<MemberProfilePage/>}/>
           <Route exact path="/trainers/:trainerId/performace" element={<TrainerPerformance/>}/>
 
+
+          <Route exact path="/gym/:gymId/members" element={<GymMembers/>}/>
 
           <Route exact path="/test" element={<BMIChart/>}/>
         </Routes>
