@@ -63,7 +63,7 @@ function Trainers() {
                 </MDBCardText>
 
               <div>
-                <Link to={'jimmy/performace'}>
+                <Link to={'/trainer/' + (trainer.staff_id) + '/memberRecords'}>
                   <MDBBtn className='text-dark' color='light'>
                     See Performance
                   </MDBBtn>

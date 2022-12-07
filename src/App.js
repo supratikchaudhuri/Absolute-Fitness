@@ -54,7 +54,7 @@ function App() {
           <Route exact path="/user/:userId/diet-plan" element={<DietPlan/>}/>
           
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
-          <Route exact path="/trainers/:trainerId/performace" element={<TrainerPerformance/>}/>
+          <Route exact path="/trainer/:staffId/memberRecords" element={<TrainerPerformance/>}/>
 
 
           <Route exact path="/gym/:gymId/members" element={<GymMembers/>}/>

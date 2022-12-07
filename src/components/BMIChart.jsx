@@ -12,61 +12,9 @@ import {
 } from "recharts";
 
 //https://recharts.org/en-US/api
-function BMIChart({data}) {
+function BMIChart({data, numClients}) {
   console.log(data);
-  data = data[0]
-
-  // data = [
-  //   {
-  //     date: "11 nov",
-  //     bmi: 4000,
-  //     pv: 2400,
-  //     amt: 2400,
-  //     ram: 5000
-  //   },
-  //   {
-  //     date: "11 dec",
-  //     bmi: 3000,
-  //     pv: 1398,
-  //     amt: 3600,
-  //     ram: 5000
-  //   },
-  //   {
-  //     date: "11 jan",
-  //     bmi: 2000,
-  //     pv: 9800,
-  //     amt: 2290,
-  //     ram: 5000
-  //   },
-  //   {
-  //     date: "11 feb",
-  //     bmi: 2780,
-  //     // pv: 3908,
-  //     amt: 2000,
-  //     ram: 5000
-  //   },
-  //   {
-  //     date: "11 mar",
-  //     bmi: 1890,
-  //     // pv: 4800,
-  //     amt: 2181,
-  //     ram: 5000
-  //   },
-  //   {
-  //     date: "11 apr",
-  //     bmi: 2390,
-  //     pv: 3800,
-  //     amt: 2500,
-  //     ram: 5000
-  //   },
-  //   {
-  //     date: "11 may",
-  //     bmi: 3490,
-  //     pv: 4300,
-  //     amt: 2100,
-  //     ram: 5000
-  //   }
-  // ];
+  console.log(numClients);
 
   const randomColor = () => Math.floor(Math.random()*16777215).toString(16);
 
@@ -93,24 +41,21 @@ function BMIChart({data}) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis 
-        domain={[getMin(data), getMax(data)]} 
-        // var max = Math.max.apply(null, maxRow);
-        />
+        <XAxis dataKey="date"/>
+        <YAxis domain={[getMin(data), getMax(data)]}/>
         <Tooltip />
         <Legend />
-        {/* {
-          data.map((userHealthRec, idx) => (
-            <Line type="monotone" dataKey="bmi" stroke={"#" + randomColor()} activeDot={{ r: 5 }}/>
-          ))
-        } */}
-        {/* <Line type="monotone" dataKey="bmi" stroke={"#" + randomColor()} activeDot={{ r: 5 }}/> */}
 
+        { 
+          numClients 
+          ?
+          [...Array(numClients)].map((e, i) => 
+              <Line type="monotone" dataKey={"bmi"+(i+1)} stroke={"#" + randomColor()} activeDot={{ r: 5 }}/>
+              )
+          :
+          <Line type="monotone" dataKey="bmi" stroke={"#" + randomColor()} activeDot={{ r: 5 }}/>
+        }        
 
-        <Line type="monotone" dataKey="bmi" stroke={"#" + randomColor()} activeDot={{ r: 5 }}/>
-        <Line type="monotone" dataKey="pv" stroke={"#" + randomColor()} />
-        <Line type="monotone" dataKey="ram" stroke="black" />
       </LineChart>
       </div>
 

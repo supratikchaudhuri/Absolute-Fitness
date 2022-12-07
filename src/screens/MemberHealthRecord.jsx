@@ -63,7 +63,7 @@ function MemberHealthRecord() {
 
   const memberHealtRecordDataRender = (
     <div>
-      <div><BMIChart data={[getMemberBMIData(memberHealthRecord)]}></BMIChart></div>
+      <div><BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart></div>
 
       <div>
         <MDBBtn onClick={e => {getHealthRecords(); setShowHealthRecordForm(true)}} outline >
