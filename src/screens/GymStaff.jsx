@@ -15,7 +15,11 @@ function GymStaff() {
 
   const handleSubmit = async (updatedStaff) => {
     try {
+      updatedStaff['staffId'] = updatedStaff['staff_id']
+      updatedStaff['partTime'] = updatedStaff['part_time']
+
       const res = await axios.put(`/staff/${updatedStaff.staff_id}`, updatedStaff);
+      getStaff();
       alert('Staff updated successfully!')
     } catch(err) {
       console.log(err);
@@ -67,7 +71,7 @@ function GymStaff() {
   const renderEditForm = (
     staffDetails && 
     <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
-      <form className='m-4' onSubmit={e => handleSubmit(staffDetails)}>
+      <form className='m-4' onSubmit={e => {e.preventDefault(); handleSubmit(staffDetails)}}>
       <MDBRow className='mb-4 w-3'>
           <MDBCol>
             <MDBInput id='form3Example1' disabled
@@ -121,14 +125,14 @@ function GymStaff() {
         <MDBBtn type='submit' className='mb-0' block>
           Update
         </MDBBtn>
-        <MDBBtn color='danger' onClick={e => setShowEditForm(false)} className='mb-0' block>
-          Cancle
+        <MDBBtn color='danger' onClick={e => setShowEditForm(false)} className='mb-0' block type='button'>
+          Cancel
         </MDBBtn>
       </form>
     </div>
   )
 
-
+console.log(staffDetails);
   return (
     staff 
     ?

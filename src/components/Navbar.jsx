@@ -32,7 +32,7 @@ function Navbar() {
 
 
   return (
-   <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#E4A11B'}} sticky>
+   <MDBNavbar expand='lg' light style={{'color':'red', 'background-color':'#4cc9f0'}} sticky>
         <MDBContainer fluid>
         <MDBNavbarBrand href='#'>Absolute Fitness  <i class="fas fa-dumbbell" style={{'margin-left': '5px'}}></i></MDBNavbarBrand>
         <MDBNavbarToggler
@@ -135,27 +135,12 @@ function Navbar() {
                   {user.name}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link href='/health-record'>My Health</MDBDropdownItem>
+                  {userType === 'member' && <MDBDropdownItem link href='/health-record'>My Health</MDBDropdownItem>}
                   <MDBDropdownItem link href='/trainers'>Profile</MDBDropdownItem>
                   <MDBDropdownItem link href='' style={{color: 'red !important'}} onClick={logout}>Log Out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
-
-            {user.isAdmin &&
-              (<MDBNavbarItem>
-                <MDBDropdown>
-                  <MDBDropdownToggle tag='a' className='nav-link'>
-                    Admin
-                  </MDBDropdownToggle>
-                  <MDBDropdownMenu>
-                    <MDBDropdownItem link>Action</MDBDropdownItem>
-                    <MDBDropdownItem link>Another action</MDBDropdownItem>
-                    <MDBDropdownItem link>Something else here</MDBDropdownItem>
-                  </MDBDropdownMenu>
-                </MDBDropdown>
-              </MDBNavbarItem>
-            )}
             
 
           </MDBNavbarNav>
