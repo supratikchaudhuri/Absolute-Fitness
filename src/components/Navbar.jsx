@@ -21,6 +21,8 @@ function Navbar() {
   const [showNavRight, setShowNavRight] = useState(false);
 
   const user = JSON.parse(localStorage.getItem('user'))
+  // const userType = user.type;
+  const userType = 'member';
 
   const logout = () => {
     localStorage.clear()
@@ -43,10 +45,15 @@ function Navbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar>
           <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
+
+          {
+            userType === 'member'
+            &&
+            <>
             <MDBNavbarItem>
               <Link to="/home">
                 <MDBNavbarLink active={true} h aria-current='page' >
-                  Home
+                  Gyms
                 </MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
@@ -63,12 +70,24 @@ function Navbar() {
             <MDBNavbarItem >
               <MDBNavbarLink active={false} h onClick={e => alert("Newsletters comming soon!")}>Newsletter</MDBNavbarLink>
             </MDBNavbarItem>
+            </>
+          }
+
+          {/* {
+            userType === 'admin'
+            &&
+            <>
+
+            </>
+          } */}
+
+            
             
           </MDBNavbarNav>
+
+
             
         </MDBCollapse>
-
-       
       </MDBContainer>
 
       <MDBContainer fluid>

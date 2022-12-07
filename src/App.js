@@ -26,10 +26,7 @@ function App() {
       <UserContextProvider>
 
         <BrowserRouter>
-
-        {/* <Navbar></Navbar> */}
-
-
+        
         {window.location.pathname !== "/login" && window.location.pathname !== "/signup" && window.location.pathname !== "/staff-login"
           ? 
           ( <Navbar/> ): null
@@ -57,6 +54,7 @@ function App() {
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/member-profile" element={<MemberProfilePage/>}/>
           <Route exact path="/trainers/:trainerId/performace" element={<TrainerPerformance/>}/>
+
 
           <Route exact path="/test" element={<BMIChart/>}/>
         </Routes>

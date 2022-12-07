@@ -24,8 +24,8 @@ function MemberHealthRecord() {
 
   const submitHealthRecord = async () => {
     try {
-      console.log(latestHealthRecord);
-      const res = await axios.post(`user/${user.email}/healthRecord`, {...latestHealthRecord, email: user.email});
+      const res = await axios.post(`/healthRecord`, {...latestHealthRecord, email: user.email});
+      console.log(res.data);
       getHealthRecords()
       setShowHealthRecordForm(false);
     } 
@@ -53,7 +53,7 @@ function MemberHealthRecord() {
   }
 
   const getHealthRecords = async () => {
-    const res = await axios.get(`user/${user.email}/healthRecords`);
+    const res = await axios.get(`/healthRecord/${user.email}`);
     setMemberHealthRecord(res.data);
   }
 
