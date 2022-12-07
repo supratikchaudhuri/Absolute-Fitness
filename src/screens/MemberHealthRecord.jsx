@@ -25,7 +25,6 @@ function MemberHealthRecord() {
   const submitHealthRecord = async () => {
     try {
       const res = await axios.post(`/healthRecord`, {...latestHealthRecord, email: user.email});
-      console.log(res.data);
       getHealthRecords()
       setShowHealthRecordForm(false);
     } 
@@ -60,27 +59,27 @@ function MemberHealthRecord() {
   useEffect(() => {
     getHealthRecords();
   }, [])
-  console.log(memberHealthRecord);
 
 
   const memberHealtRecordDataRender = (
     <div>
-      <div><BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart></div>
+      <div><BMIChart data={[getMemberBMIData(memberHealthRecord)]}></BMIChart></div>
 
       <div>
-        <MDBBtn onClick={e => {getHealthRecords(); setShowHealthRecordForm(true)}} outline color='warning'>
+        <MDBBtn onClick={e => {getHealthRecords(); setShowHealthRecordForm(true)}} outline >
           Add Latest Health Record
         </MDBBtn>
       
       </div>
     </div>
   )
+  console.log(memberHealthRecord);
 
   const noMemberHealthRecordRender = (
     <div>
       <p>No health record Found.</p>
 
-      <MDBBtn color='warning' onClick={e => setShowHealthRecordForm(true)}>Add health record</MDBBtn>
+      <MDBBtn onClick={e => setShowHealthRecordForm(true)}>Add health record</MDBBtn>
     </div>
   )
 
@@ -109,7 +108,7 @@ function MemberHealthRecord() {
         {healthRecordForm}
         
         <div className='memerHealthRecordDiv'>
-        { memberHealthRecord ? memberHealtRecordDataRender : noMemberHealthRecordRender }
+        { memberHealthRecord.length === 0 ? noMemberHealthRecordRender : memberHealtRecordDataRender }
         </div>
       </>
     )

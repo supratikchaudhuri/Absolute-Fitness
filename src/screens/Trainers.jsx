@@ -69,10 +69,6 @@ function Trainers() {
                   </MDBBtn>
                 </Link>
 
-                <MDBBtn className='text-dark' color='light'>
-                    Hire
-                  </MDBBtn>
-
               </div>
 
               </MDBCardBody>

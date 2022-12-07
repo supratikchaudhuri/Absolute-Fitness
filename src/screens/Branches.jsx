@@ -55,7 +55,7 @@ function Branches() {
                 <p>Phone: {branch.phone}</p>
 								<p>{branch.state}</p>
 								<p>{branch.zip}</p>
-								<p>Membership Fee: ${branch.membership_fee}</p>
+								<p>Monthly membership fee: ${branch.membership_fee}</p>
               </MDBCardText>
 
 							<div>

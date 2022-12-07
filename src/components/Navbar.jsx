@@ -58,12 +58,17 @@ function Navbar() {
             </MDBNavbarItem>
             <MDBNavbarItem>
               <Link to={'user/'+user.email+'/health-plan'}>
-              <MDBNavbarLink active={false} >My Health Plan</MDBNavbarLink>
+              <MDBNavbarLink active={false} >Health Plan</MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
             <MDBNavbarItem >
-              <MDBNavbarLink active={false} h onClick={e => alert("Newsletters comming soon!")}>Newsletter</MDBNavbarLink>
+              <Link to={'user/'+user.email+'/health-record/'}>
+              <MDBNavbarLink active={false} h >Health Progress</MDBNavbarLink>
+              </Link>
             </MDBNavbarItem>
+            {/* <MDBNavbarItem >
+              <MDBNavbarLink active={false} h onClick={e => alert("Newsletters comming soon!")}>Newsletter</MDBNavbarLink>
+            </MDBNavbarItem> */}
             </>
           }
 
@@ -89,7 +94,7 @@ function Navbar() {
             </>
           }
 
-{
+          {
             userType === 'trainer'
             &&
             <>
@@ -108,9 +113,6 @@ function Navbar() {
             
             
           </MDBNavbarNav>
-
-
-            
         </MDBCollapse>
       </MDBContainer>
 
@@ -135,9 +137,8 @@ function Navbar() {
                   {user.name}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  {userType === 'member' && <MDBDropdownItem link href='/health-record'>My Health</MDBDropdownItem>}
                   <MDBDropdownItem link href='/trainers'>Profile</MDBDropdownItem>
-                  <MDBDropdownItem link href='' style={{color: 'red !important'}} onClick={logout}>Log Out</MDBDropdownItem>
+                  <MDBDropdownItem link href='' onClick={logout}>Log Out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
