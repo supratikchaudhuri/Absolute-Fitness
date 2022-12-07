@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   MDBCard,
   MDBCardBody,
@@ -70,7 +70,10 @@ function ProfilePage() {
 
     <div className='profile-div'>
       <MDBCard alignment='center'>
-        <MDBCardHeader>Profile</MDBCardHeader>
+        <MDBCardHeader>
+          <img src="https://static.scistarter.org/img/nobody.png" alt="Avatar" className="avatar"/>
+        </MDBCardHeader>
+
 
         <MDBCardBody>
           <MDBCardTitle>{user.name}</MDBCardTitle>

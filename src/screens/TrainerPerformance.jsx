@@ -13,6 +13,7 @@ function TrainerPerformance() {
     try {
       const res = await axios.get(`/trainer/${staffId}/memberRecords`)
       setClientHealthRecords(res.data)
+      console.log(res.data);
     }
     catch(err) {
       console.log(err);
@@ -26,8 +27,6 @@ function TrainerPerformance() {
   useEffect(() => {
     console.log("record changed");
   }, [clientHealthRecords])
-
-  console.log(clientHealthRecords);
 
   const processData = (data) => {
     const dateWiseData = [];
@@ -48,7 +47,7 @@ function TrainerPerformance() {
           const obj = {
               date: record["dateCalculated"].substring(0, 10),
           };
-          obj["bmi" + (i + 1)] = record["bmi"];
+          obj["client" + (i + 1)] = record["bmi"];
           dateWiseData.push(obj);
         }
       });
@@ -63,7 +62,7 @@ function TrainerPerformance() {
       }
       return 0;
     });
-    console.log(dateWiseData);
+
     return dateWiseData
   }
 
@@ -73,7 +72,8 @@ function TrainerPerformance() {
   return (
     clientHealthRecords 
     ?
-    <div>
+    <div className=''>
+      <h4>This graph displays the progress {}'s clients have made so far since hirirng him</h4>
       {
         clientHealthRecords.length >= 1 
         && 
@@ -81,7 +81,7 @@ function TrainerPerformance() {
       }
     </div>
     :
-    <p>This trainer has no clients yet.</p>
+    <div className='no-data'>This trainer has no clients yet.</div>
   )
 }
 

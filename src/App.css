@@ -1,9 +1,18 @@
+body {
+    font-family:Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
 select {
     border-color: rgb(168, 164, 164);
     height: 40px;
     border-radius: 5px;
     padding: 0 3px;
     color: rgb(44, 41, 41)
+}
+
+h4 {
+    margin: 20px auto !important;
+    text-align: center;
 }
 
 .profile-div {
@@ -14,16 +23,20 @@ select {
     margin: 100px auto;
 }
 
+.profile-div .avatar {
+    max-width: 100px;
+}
+
+.no-data {
+
+}
+
 .table {
     margin: auto;
 }
 
 .update-btn-table {
     margin-left: -80px;
-}
-
-.update-btn-table .icon{
-    /* margin: 0 5px; */
 }
 
 .plan {

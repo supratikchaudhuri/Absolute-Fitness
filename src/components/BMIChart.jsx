@@ -8,15 +8,19 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  Label
 } from "recharts";
 
 //https://recharts.org/en-US/api
 function BMIChart({data, numClients}) {
-  console.log(data);
-  console.log(numClients);
 
-  const randomColor = () => Math.floor(Math.random()*16777215).toString(16);
+  const randomColor = () => {
+    // console.log(Math.floor(Math.random()*16777215).toString(16));
+    // return (Math.floor(Math.random()*16777215).toString(16));
+    const colors = ['#D73B1A', '#D7C61A', '#20D71A', '#1AC8D7', '#1AD76C', '#1AA4D7', '#1A2FD7', '#631AD7', '#D10BE6', '#E60BAC', '#E60B2E', '#899B05', '#059A9B', '#09F2F3']
+    return colors[Math.floor(Math.random()*colors.length)];
+  }
 
   function getMin(arr) {
     return Math.min(...arr.map(e => Array.isArray(e) ? getMax(e) : e));
@@ -41,8 +45,11 @@ function BMIChart({data, numClients}) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date"/>
-        <YAxis domain={[getMin(data), getMax(data)]}/>
+        <XAxis dataKey="date" />
+        <YAxis 
+          domain={[getMin(data), getMax(data)]}
+          label={{ value: 'BMI Score', angle: -90, position: 'insideLeft' }}
+        />
         <Tooltip />
         <Legend />
 
@@ -50,10 +57,10 @@ function BMIChart({data, numClients}) {
           numClients 
           ?
           [...Array(numClients)].map((e, i) => 
-              <Line type="monotone" dataKey={"bmi"+(i+1)} stroke={"#" + randomColor()} activeDot={{ r: 5 }}/>
+              <Line type="monotone" dataKey={"client"+(i+1)} stroke={randomColor()} activeDot={{ r: 5 }}/>
               )
           :
-          <Line type="monotone" dataKey="bmi" stroke={"#" + randomColor()} activeDot={{ r: 5 }}/>
+          <Line type="monotone" dataKey="bmi" stroke={'red'} activeDot={{ r: 5 }}/>
         }        
 
       </LineChart>

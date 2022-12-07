@@ -41,7 +41,7 @@ function Facilities() {
 
   return (
     <div className='facilities-div'>
-      <h1>Facilities</h1>
+      <h4>Facilities</h4>
 
       {facilities && 
 
