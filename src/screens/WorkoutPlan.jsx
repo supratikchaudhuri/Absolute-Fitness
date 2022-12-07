@@ -11,7 +11,7 @@ function WorkoutPlan() {
   useEffect(() => {
     const getWorkouts = async () => {
       try {
-        const res = await axios.get(`/user/${user.email}/workoutPlan`);
+        const res = await axios.get(`/workoutPlan/${user.email}`);
         console.log(
           res.data
         );

@@ -14,7 +14,7 @@ function HealthPlan() {
 
   const getHealthRecord = async () => {
     try {
-      const res = await axios.get(`/user/${user.email}/healthRecords`);
+      const res = await axios.get(`/healthRecord/${user.email}`);
       setUserHealthRecord(res.data);
     }
     catch (err) {
@@ -24,7 +24,7 @@ function HealthPlan() {
 
   const getHealthPlan = async () => {
     try {
-      const res = await axios.get(`/user/${user.email}/healthPlan`);
+      const res = await axios.get(`/healthPlan/${user.email}`);
       setHealthPlan(res.data);
     }
     catch(err) {

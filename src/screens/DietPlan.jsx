@@ -11,7 +11,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 	useEffect(() => {
 		const getMeals = async () => {
 			try {
-				const res = await axios.get(`/user/${user.email}/dietPlan`);
+				const res = await axios.get(`/dietPlan/${user.email}`);
 				setMealPlan(res.data)
 			} catch (err) {
 				console.log(err);
