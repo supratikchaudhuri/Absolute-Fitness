@@ -7,7 +7,6 @@ import { MDBTable, MDBTableHead, MDBTableBody, MDBIcon, MDBInput,
 function Table({content, data, deleteUser, displayEditForm}) {
   const user = JSON.parse(localStorage.getItem('user'));
 
-  // const [showEditForm, setShowEditForm] = useState(false);
   const cols = Object.keys(data[0]);
 
   const rows = []
@@ -19,7 +18,7 @@ function Table({content, data, deleteUser, displayEditForm}) {
   return (
     <>
     
-    <MDBTable className='table mt-5' align='middle'>
+    <MDBTable className='table mt-0' align='middle'>
       <MDBTableHead light>
         <tr>
 					{
@@ -38,31 +37,20 @@ function Table({content, data, deleteUser, displayEditForm}) {
 							)
 							}
 
+              <div className='update-btn-table'>
+                {user.type === 'admin' && content==='staff' 
+                  && <td><MDBIcon style={{marginRight: '30px'}} className= "icon" fas icon="pen" onClick={displayEditForm}/></td>}
+
+                {user.type === 'admin' 
+                  && <td><MDBIcon className= "icon" fas icon="trash" onClick={e => deleteUser(e, row[0])} /></td>}
+              </div>
               
-              {user.type === 'member' && <td><MDBIcon className= "icon" fas icon="pen" onClick={displayEditForm}/></td>}
-              {user.type === 'admin' && <td><MDBIcon className= "icon" fas icon="trash" onClick={e => deleteUser(e, row[0])} /></td>}
 						</tr>
 						
 					)
 				}
-
-
-        <tr>
-          <th scope='row'>1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
         
       </MDBTableBody>
-      <tfoot>
-        <tr>
-          <td>Footer</td>
-          <td>Footer</td>
-          <td>Footer</td>
-          <td>Footer</td>
-        </tr>
-      </tfoot>
     </MDBTable>
 
     </>

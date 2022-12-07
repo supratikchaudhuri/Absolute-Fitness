@@ -19,6 +19,7 @@ import HealthPlan from './screens/HealthPlan';
 import StaffLogin from './screens/StaffLogin';
 import DietPlan from './screens/DietPlan';
 import GymMembers from './screens/GymMembers';
+import GymStaff from './screens/GymStaff';
 
 function App() {
   console.log(window.location.pathname);
@@ -57,6 +58,7 @@ function App() {
 
 
           <Route exact path="/gym/:gymId/members" element={<GymMembers/>}/>
+          <Route exact path="/gym/:gymId/staff" element={<GymStaff/>}/>
 
           <Route exact path="/test" element={<BMIChart/>}/>
         </Routes>

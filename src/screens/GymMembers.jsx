@@ -37,7 +37,7 @@ function GymMembers() {
   const deleteUser = async (e, email) => {
     console.log(email);
     try {
-      const res = axios.delete(`/user/${email}`)
+      await axios.delete(`/user/${email}`)
       getMembers();
       alert("Member successfuly deleted !")
     }
@@ -79,7 +79,6 @@ function GymMembers() {
         </form>
       </div>
 
-      GymMembers
 
       <Table 
         content='members' 

@@ -10,6 +10,14 @@ select {
     margin: auto;
 }
 
+.update-btn-table {
+    margin-left: -80px;
+}
+
+.update-btn-table .icon{
+    /* margin: 0 5px; */
+}
+
 .plan {
     margin: 0 40px 20px;
 }
@@ -161,3 +169,14 @@ select {
 .health-plan-diet {
     margin: 0 15px;
 }
+
+.gym-staff-div button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gym-staff-div button{
+    margin: auto;
+}
+

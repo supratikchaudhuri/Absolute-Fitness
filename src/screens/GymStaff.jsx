@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import { MDBBtn, MDBCol, MDBInput, MDBRow } from 'mdb-react-ui-kit';
+import React, { useEffect, useState } from 'react'
+import Table from '../components/Table';
 function GymStaff() {
   const user = JSON.parse(localStorage.getItem('user'))
 
-  cosnt [staff, setStaff] = useState(null)
+  const [staff, setStaff] = useState(null)
   const [showEditForm, setShowEditForm] = useState(false);
+
+  const displayEditForm = (e) => {
+    setShowEditForm(true);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -16,10 +23,50 @@ function GymStaff() {
     setShowEditForm(false)
   }
 
+  const deleteUser = async (e, email) => {
+    console.log(email);
+    try {
+      // await axios.delete(`/user/${email}`)
+      getStaff();
+      alert("Staff successfuly deleted !")
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  const getStaff = async() => {
+    console.log("here");
+    try {
+      const res = await axios.get(`/gym/${user.gym_id}/staff`);
+      setStaff(res.data);
+      console.log(res.data);
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
+  const addUser = async () => {
+    alert('user added')
+    try {
+      // await axios.put();
+    }
+    catch(err) {
+
+    }
+
+    getStaff();
+  }
+
+  useEffect(() => {
+    getStaff();
+  }, [])
+
   return (
     staff 
     ?
-    <div className='gym-members-div'>
+    <div className='gym-staff-div'>
       <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
         <form className='m-4' onSubmit={handleSubmit}>
           <MDBRow className='mb-4 w-3'>
@@ -42,18 +89,19 @@ function GymStaff() {
         </form>
       </div>
 
-      Gym Staffs
-
       <Table 
-        content='members' 
+        content='staff' 
         data={staff} 
         handleSubmit={handleSubmit} 
+        deleteUser={deleteUser}
         displayEditForm={displayEditForm}>  
       </Table>
 
+      <MDBBtn onClick={addUser}>Add Staff</MDBBtn>
+
     </div>
     :
-    <div>No members in this gym yet</div>
+    <div>No staff in this gym yet</div>
   )
 }
 
