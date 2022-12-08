@@ -90,7 +90,7 @@ function MemberHealthRecord() {
 
         <MDBInput label='Height in cm' id='typeText' type='text' name='height' onChange={handleChange}/>
         <MDBInput label='Weight in lbs' id='typeText' type='text' name='weight' onChange={handleChange}/>
-        <MDBInput wrapperClass='col-md-10 mb-3' label='Date' type='date' size="lg"
+        <MDBInput wrapperClass='col-md-10 mb-3' label='Date' type='date' size="lg" max={new Date().toJSON().slice(0, 10)}
                     onChange={handleChange} name='dateCalculated'  value={latestHealthRecord.date}/>
       </MDBCardBody>
      

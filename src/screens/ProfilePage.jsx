@@ -57,7 +57,7 @@ function ProfilePage() {
             </MDBCol>
           </MDBRow>
 
-          <MDBInput wrapperClass='col-md-10 mb-3' label='Date of birth' type='date' size="lg"
+          <MDBInput wrapperClass='col-md-10 mb-3' label='Date of birth' type='date' size="lg" max={new Date().toJSON().slice(0, 10)}
             name='dob' value={updatedProfile.dob.substring(0, 10)} onChange={handleChange}/>
           
           <MDBInput className='mb-4' type='password' label='Password' name='password' onChange={handleChange}/>

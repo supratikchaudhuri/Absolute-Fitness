@@ -119,77 +119,66 @@ function Signup() {
 
               <h5 className="fw-normal my-4" style={{letterSpacing: '1px'}}>Sign up for an account</h5>
                 
-                {/* <MDBRow>
-                  <MDBCol size="md"> */}
-                  <MDBInput wrapperClass='mb-4' label='Full Name' type='text' size="lg"
-                  onChange={handleChange} name = 'name' value={formValue.name}/>
-                  {/* </MDBCol>
-                  <MDBCol size="md">
-                    <MDBInput wrapperClass='col-md-11 mb-4' label='Last Name' type='text' size="lg"
-                    onChange={handleChange} name = 'lname'  value={formValue.lname}/>
-                  </MDBCol>
-                </MDBRow> */}
-
-                <MDBRow>
-                  <MDBCol size="md">
-                  <MDBInput wrapperClass='col-md-10 mb-3' label='Date of birth' type='date' size="lg"
-                    onChange={handleChange} name = 'dob'  value={formValue.dob}/>
-                  </MDBCol>
-                  <MDBCol size="md" >
-                    <select name='sex' onChange={handleChange} value={formValue.sex}>
-                    <option value="">--Select Gender--</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </MDBCol>
-
-                  <MDBCol>
-                    <select name='gymId' onChange={handleChange} value={formValue.gymId}>
-                    <option value="-1">--Select Gym Address--</option>
-                    {
-                      gymAddressId.map(gym => (
-                        <option value={gym.gym_id}>{gym.location}</option>
-                      ))
-                    }
-                    </select>
-                  </MDBCol>
-                  
-                </MDBRow>
+          
+              <MDBInput wrapperClass='mb-4' label='Full Name' type='text' size="lg"
+              onChange={handleChange} name = 'name' value={formValue.name}/>
                 
-                <div>
-                  <MDBInput wrapperClass='mb-0' label='Phone Number' type='text' size="lg"
-                    onChange={handleChange} name = 'phone'   value={formValue.phone}/>
-                  <div className='form-text mb-3'>
-                    Must be 10 digits long
-                  </div>
+
+              <MDBRow>
+                <MDBCol size="md">
+                <MDBInput wrapperClass='col-md-10 mb-3' label='Date of birth' type='date' size="lg" 
+                  onChange={handleChange} name = 'dob'  value={formValue.dob} max={new Date().toJSON().slice(0, 10)}/>
+                </MDBCol>
+                <MDBCol size="md" className='mb-3'>
+                  <select name='sex' onChange={handleChange} value={formValue.sex}>
+                  <option value="">--Select Gender--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </MDBCol>
+
+                <MDBCol style={{maxWidth: '150px'}}>
+                  <select name='gymId' onChange={handleChange} value={formValue.gymId} style={{maxWidth: '300px'}}>
+                  <option value="-1">--Select Gym Address--</option>
+                  {
+                    gymAddressId.map(gym => (
+                      <option value={gym.gym_id}>{gym.location}</option>
+                    ))
+                  }
+                  </select>
+                </MDBCol>
+                
+              </MDBRow>
+                
+              <div>
+                <MDBInput wrapperClass='mb-0' label='Phone Number' type='text' size="lg"
+                  onChange={handleChange} name = 'phone'   value={formValue.phone}/>
+                <div className='form-text mb-3'>
+                  Must be 10 digits long
                 </div>
-                
-
-                <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
-                  onChange={handleChange} name = 'email'   value={formValue.email}/>
+              </div>
               
-                
-                <div> 
-                  <MDBInput wrapperClass='mb-0' label='Choose a password' type='password' size="lg"
-                    onChange={handleChange} name = 'password'  value={formValue.password}/>
-                  <div className='form-text mb-3'>
-                    atleast 8 letters and have 1 uppercase, lowercase and special character (!@#$%^&*)
-                  </div>
+
+              <MDBInput wrapperClass='mb-4' label='Email address' type='email' size="lg"
+                onChange={handleChange} name = 'email'   value={formValue.email}/>
+            
+              
+              <div> 
+                <MDBInput wrapperClass='mb-0' label='Choose a password' type='password' size="lg"
+                  onChange={handleChange} name = 'password'  value={formValue.password}/>
+                <div className='form-text mb-3'>
+                  atleast 8 letters and have 1 uppercase, lowercase and special character (!@#$%^&*)
                 </div>
-                
+              </div>
+              
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={signup}>Sign Up</MDBBtn>
-              <a className="small text-muted" href="#!">Forgot password?</a>
               
               <p className="mb-1 pb-lg-2" >Already have an account? 
                 <a href="login" style={{color: '#ffb703'}}>  Log in</a>
               </p>
             
-              <div className='d-inline'>
-                <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                <a href="#!" className="small text-muted">Privacy policy</a>
-              </div>
 
             </MDBCardBody>
           </MDBCol>

@@ -82,12 +82,10 @@ function StaffLogin() {
                   onChange={(e) => setPassword(e.target.value)} value={password}/>
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={staffLogin}>Login</MDBBtn>
-              <a className="small text-muted" href="#!">Forgot password? Contact your admin.</a>
+              {/* <a className="small text-muted" href="#!">Forgot password? Contact your admin.</a> */}
 
-              <div className='d-flex flex-row justify-content-start'>
-                <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                <a href="#!" className="small text-muted">Privacy policy</a>
-              </div>
+              <p className="small mb-0 pb-lg-2" >Don't have an account? <a href="signup" style={{color: '#ffb703'}}>Register here</a></p>
+              <p className="small mb-5 pb-lg-2" >No a staff? <a href="login" style={{color: '#ffb703'}}>Login here</a></p>
 
             </MDBCardBody>
           </MDBCol>
