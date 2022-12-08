@@ -22,6 +22,7 @@ import GymStaff from './screens/GymStaff';
 import ProfilePage from './screens/ProfilePage';
 import StaffProfilePage from './screens/StaffProfilePage';
 import PageNotFound from './screens/PageNotFound';
+import GymEquipments from './screens/GymEquipments';
 
 function App() {
   console.log(window.location.pathname);
@@ -45,8 +46,11 @@ function App() {
 
           <Route exact path="/home" element={<Home/>}/>
           <Route exact path="/branches" element={<Branches/>}/>
+
+
           <Route exact path="/gym/:gym_id/trainers" element={<Trainers/>}/>
           <Route exact path="/gym/:gym_id/facilities" element={<Facilities/>}/>
+          <Route exact path="/gym/:gym_id/equipments" element={<GymEquipments/>}/>
 
 
           <Route exact path="/user/:userId/profile" element={<ProfilePage/>}/>

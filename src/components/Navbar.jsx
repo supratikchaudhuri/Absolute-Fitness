@@ -92,6 +92,11 @@ function Navbar() {
               <MDBNavbarLink active={false} h >Staff</MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
+            <MDBNavbarItem>
+              <Link to={'gym/'+user.gym_id+'/equipments'}>
+              <MDBNavbarLink active={false} h >Equipments</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
             </>
           }
 

@@ -45,6 +45,12 @@ h4 {
     margin: auto;
 }
 
+td img {
+    max-width: 150px;
+    max-height: 150px;
+    
+}
+
 .update-btn-table {
     margin-left: -80px;
 }

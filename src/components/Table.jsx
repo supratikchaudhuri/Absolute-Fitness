@@ -10,12 +10,12 @@ function Table({content, data, deleteUser, displayEditForm, setStaffDetails}) {
   for(var i = 0; i < data.length; i++) {
     rows.push(Object.values(data[i]))
   }
-  console.log(rows);
+  // console.log(rows);
 
   return (
     <>
     
-    <MDBTable className='table mt-0' align='middle'>
+    <MDBTable className='table mt-0 table' align='middle'>
       <MDBTableHead light>
         <tr>
 					{
@@ -30,7 +30,8 @@ function Table({content, data, deleteUser, displayEditForm, setStaffDetails}) {
 					rows.map((row, idx) => 
 						<tr key={idx}>
 							{row.map((item) => 
-								<td>{item}</td>
+								// <td>{console.log(item)}</td>
+                <td>{item ? item : ''}</td>
 							)
 							}
 
