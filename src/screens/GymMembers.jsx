@@ -58,7 +58,7 @@ function GymMembers() {
     ?
     <div className='gym-members-div'>
       <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
-        <form className='m-4' onSubmit={handleSubmit}>
+        <form className='m-4 popup-form' onSubmit={handleSubmit}>
           <MDBRow className='mb-4 w-3'>
             <MDBCol>
               <MDBInput id='form3Example1' label='First name' />

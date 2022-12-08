@@ -45,7 +45,7 @@ function StaffProfilePage() {
   return (
     <>
     <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
-        <form className='m-4' onSubmit={handleSubmit}>
+        <form className='m-4 popup-form' onSubmit={handleSubmit}>
           <MDBInput className='mb-4' type='email' label='Email address' disabled name='email' value={user.staff_id}/>
           
           <MDBRow className='mb-4 w-3'>

@@ -8,6 +8,17 @@ function GymStaff() {
   const [staff, setStaff] = useState(null)
   const [showEditForm, setShowEditForm] = useState(false);
   const [staffDetails, setStaffDetails] = useState(null);
+  const [showAddStaffForm, setShowAddStaddForm] = useState(false);
+  const [newStaffDetails, setNewStaffDetails] = useState({
+    name: '', 
+    gymId: user.gym_id, 
+    description: '',
+    password: 'password',
+    phone: '',
+    salary: '',
+    partTime: false
+  })
+
 
   const displayEditForm = (e) => {
     setShowEditForm(true);
@@ -50,16 +61,15 @@ function GymStaff() {
     }
   }
 
-  const addUser = async () => {
-    alert('user added')
+  const addStaff = async () => {
+    // alert('user added')
     try {
-      // await axios.put();
+      const res = await axios.post(`/staff/signup`, newStaffDetails);
+      getStaff();
     }
     catch(err) {
-
+      alert(err.response.data.msg);
     }
-
-    getStaff();
   }
 
   useEffect(() => {
@@ -71,17 +81,17 @@ function GymStaff() {
   const renderEditForm = (
     staffDetails && 
     <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
-      <form className='m-4' onSubmit={e => {e.preventDefault(); handleSubmit(staffDetails)}}>
+      <form className='m-4 popup-form' onSubmit={e => {e.preventDefault(); handleSubmit(staffDetails)}}>
       <MDBRow className='mb-4 w-3'>
           <MDBCol>
-            <MDBInput id='form3Example1' disabled
+            <MDBInput disabled
               label='ID' 
               name='staff_id'
               value={staffDetails.staff_id} 
             />
           </MDBCol>
           <MDBCol>
-            <MDBInput id='form3Example2' 
+            <MDBInput 
               label='Part Time' 
               name='part_time'
               value={staffDetails.part_time} 
@@ -89,7 +99,7 @@ function GymStaff() {
             />
           </MDBCol>
           <MDBCol>
-            <MDBInput id='form3Example2' 
+            <MDBInput 
               label='Salary'
               name='salary' 
               value={staffDetails.salary} 
@@ -100,7 +110,7 @@ function GymStaff() {
 
         <MDBRow className='mb-4 w-3'>
           <MDBCol>
-            <MDBInput id='form3Example1' 
+            <MDBInput 
               label='First name' 
               name='name'
               value={staffDetails.name} 
@@ -133,26 +143,100 @@ function GymStaff() {
   )
 
 console.log(staffDetails);
+
   return (
-    staff 
-    ?
-    <div className='gym-staff-div'>
-      {renderEditForm}
-      <Table 
-        content='staff' 
-        data={staff} 
-        deleteUser={deleteUser}
-        displayEditForm={displayEditForm}
-        renderEditForm={renderEditForm} 
-        setStaffDetails={setStaffDetails}
-      >
-      </Table>
+    <>
+    <div className='add-staff-form' style={{display: showAddStaffForm ? 'inline' : 'none'}}>
+      <form className='m-4 popup-form' onSubmit={e => {e.preventDefault(); addStaff(newStaffDetails)}}>
+        <MDBRow className='mb-3 w-3'>
+          <MDBCol>
+            <MDBInput disabled
+              label='ID' 
+              name='staffId'
+              value={newStaffDetails.staffId} 
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput 
+              label='Part Time' 
+              name='partTime'
+              value={newStaffDetails.partTime} 
+              onChange={e => setNewStaffDetails({...newStaffDetails, [e.target.name]: e.target.value})}
+            />
+          </MDBCol>
+          <MDBCol>
+            <MDBInput 
+              label='Salary'
+              name='salary' 
+              value={newStaffDetails.salary} 
+              onChange={e => setNewStaffDetails({...newStaffDetails, [e.target.name]: e.target.value})}
+            />
+          </MDBCol>
+        </MDBRow>
 
-      <MDBBtn onClick={addUser}>Add Staff</MDBBtn>
+        <MDBRow className='mb-3'>
+          <MDBCol>
+            <MDBInput 
+              label='Staff Name' 
+              name='name'
+              value={newStaffDetails.name} 
+              onChange={e => setNewStaffDetails({...newStaffDetails, [e.target.name]: e.target.value})}
+            />
+          </MDBCol>
 
+          <MDBCol>
+            <MDBInput 
+              label='Phone' 
+              name='phone'
+              value={newStaffDetails.phone} 
+              onChange={e => setNewStaffDetails({...newStaffDetails, [e.target.name]: e.target.value})}
+            />
+          </MDBCol>
+        </MDBRow>
+
+        <MDBRow className='mb-3'>
+          <MDBCol>
+            <MDBInput
+              label='description'
+              name='description'
+              value={newStaffDetails.description}
+              onChange={e => setNewStaffDetails({...newStaffDetails, [e.target.name]: e.target.value})}
+            />
+          </MDBCol>
+        </MDBRow>
+
+        <MDBBtn type='submit' className='mb-0' block onClick={e => setShowAddStaddForm(false)}>
+          Add Staff
+        </MDBBtn>
+        <MDBBtn color='danger' onClick={e => setShowAddStaddForm(false)} className='mb-0' block type='button'>
+          Cancel
+        </MDBBtn>
+      </form>
     </div>
-    :
-    <div>No staff in this gym yet</div>
+
+
+    {
+      staff 
+      ?
+      <div className='gym-staff-div'>
+        {renderEditForm}
+        <Table 
+          content='staff' 
+          data={staff} 
+          deleteUser={deleteUser}
+          displayEditForm={displayEditForm}
+          renderEditForm={renderEditForm} 
+          setStaffDetails={setStaffDetails}
+        >
+        </Table>
+
+        <MDBBtn onClick={e => setShowAddStaddForm(true)}>Add Staff</MDBBtn>
+
+      </div>
+      :
+      <div>No staff in this gym yet</div>
+    }
+    </>
   )
 }
 
