@@ -24,13 +24,16 @@ function ProfilePage() {
     setUpdatedProfile({...updatedProfile, [e.target.name]: e.target.value})
   }
 
-  const handleSubmit = async() => {
+  const handleSubmit = async(e) => {
+    e.preventDefault();
     try {
       if(user.type === 'member') {
+        console.log("here");
         const res = await axios.put(`/user/${user.email}`, {...updatedProfile, ['gymId']: user.gym_id});
         let newProfile = updatedProfile
         delete newProfile.password
-        localStorage.setItem('user', newProfile);
+        console.log(newProfile);
+        localStorage.setItem('user', JSON.stringify(newProfile));
         alert('Profile Updated Successfully !')
       }
     }
