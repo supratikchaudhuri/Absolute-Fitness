@@ -24,38 +24,32 @@ function Login() {
   const [password, setPassword] = useState("");
 
 const login = async () => {
-
-  if(validatemail(username)) {
+  try {
+    const res = await axios.post("user/login", {username, password})
+    
     try {
-      const res = await axios.post("user/login", {username, password})
-      
-      try {
-        const res1 = await axios.get(`user/${username}`)
-        const user = res1.data
-        localStorage.setItem('user', JSON.stringify(user))
-        console.log(JSON.parse(localStorage.getItem('user')));
+      const res1 = await axios.get(`user/${username}`)
+      const user = res1.data
+      localStorage.setItem('user', JSON.stringify(user))
+      console.log(JSON.parse(localStorage.getItem('user')));
 
-        const res2 = await axios.get(`gym/${user.gym_id}`)
-        const user_gym = res2.data;
-        localStorage.setItem('user_gym', JSON.stringify(user_gym))
-        console.log(JSON.parse(localStorage.getItem('user_gym')));
+      const res2 = await axios.get(`gym/${user.gym_id}`)
+      const user_gym = res2.data;
+      localStorage.setItem('user_gym', JSON.stringify(user_gym))
+      console.log(JSON.parse(localStorage.getItem('user_gym')));
 
 
-      } catch (err1) {
-        console.log(err1);
-      }
-
-      navigate('/home');
-      window.location.reload();
-
-    } catch (err) {
-      // alert("") // make him retuurn right error style
-      alert("Wrong username or password.\n Please try again.")
-      setPassword("");
-      setUsername("");
+    } catch (err1) {
+      console.log(err1);
     }
-  } else {
-    alert("please check if the values are correct")
+
+    navigate('/home');
+    window.location.reload();
+
+  } catch (err) {
+    // alert("") // make him retuurn right error style
+    alert("Wrong username or password.\n Please try again.")
+    setPassword("");
   }
 }
 
@@ -78,7 +72,7 @@ const login = async () => {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Log into your account</h5>
                 
-                <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='text' size="lg"
+                <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='email' size="lg"
                   onChange={(e) => setUsername(e.target.value)} name = 'username' value={username}/>
                 
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"
