@@ -223,7 +223,7 @@ console.log(staffDetails);
         <Table 
           content='staff' 
           data={staff} 
-          deleteUser={deleteUser}
+          deleteItem={deleteUser}
           displayEditForm={displayEditForm}
           renderEditForm={renderEditForm} 
           setStaffDetails={setStaffDetails}

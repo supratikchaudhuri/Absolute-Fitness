@@ -1,7 +1,7 @@
 import React from 'react';
 import { MDBTable, MDBTableHead, MDBTableBody, MDBIcon } from 'mdb-react-ui-kit';
 
-function Table({content, data, deleteUser, displayEditForm, setStaffDetails}) {
+function Table({content, data, deleteItem, displayEditForm, setStaffDetails, setEquipments}) {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const cols = Object.keys(data[0]);
@@ -41,10 +41,16 @@ function Table({content, data, deleteUser, displayEditForm, setStaffDetails}) {
                         className= "icon" fas icon="pen" 
                         onClick={e => {displayEditForm(true); setStaffDetails(data[idx])}}/> 
                         {/* onClick={e => renderEditForm(row[0], row[1], row[2], row[3], row[4], row[5])}/>  */}
-                    </td>}
+                      </td>}
+
+                {user.type==='admin' && content==='equipments'
+                  && <td><MDBIcon style={{marginRight: '30px'}} 
+                        className= "icon" fas icon="pen" 
+                        onClick={e => {displayEditForm(true); setEquipments([{...data[idx], image_url: data[idx].image_url.props.src}])}}/> 
+                      </td>}
 
                 {user.type === 'admin' 
-                  && <td><MDBIcon className= "icon" fas icon="trash" onClick={e => deleteUser(e, row[0])} /></td>}
+                  && <td><MDBIcon className= "icon" fas icon="trash" onClick={e => deleteItem(e, row[0])} /></td>}
               </div>
               
 						</tr>
