@@ -7,7 +7,7 @@ function HealthPlan() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'));
   console.log("emial: " + user.email);
-  const [trainer, setTrainer] = useState(null);
+
   const [userHealthRecord, setUserHealthRecord] = useState(null);
   const [healthPlan, setHealthPlan] = useState(null);
 
@@ -51,7 +51,7 @@ function HealthPlan() {
         userHealthRecord && (
         <>
           <p>
-            Current height: {userHealthRecord[0].height} cm, weight: {userHealthRecord[0].weight} Kg, BMI: {userHealthRecord[0].bmi}
+            Current height: {userHealthRecord.at(-1).height} cm, weight: {userHealthRecord.at(-1).weight} Kg, BMI: {userHealthRecord.at(-1).bmi}
           </p> 
         </>)
       }
@@ -62,6 +62,7 @@ function HealthPlan() {
 
         <img src = {healthPlan.trainer_url}></img>
         
+        <p>About your health plan: {healthPlan.health_plan_description}</p>
 
       </div>
 
@@ -73,7 +74,7 @@ function HealthPlan() {
         </div>
 
         <div className='health-plan-diet'>
-          <p>Your Diet Plan : {healthPlan.diet_plan_name }</p>
+          <p>Your Diet Plan : {healthPlan.diet_name }</p>
           <p> {healthPlan.diet_description} </p>
           <MDBBtn onClick={e => navigate(`/user/${user.email}/diet-plan`)}> View Diets </MDBBtn>
         </div>

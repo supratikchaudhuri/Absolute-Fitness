@@ -88,12 +88,12 @@ function Signup() {
 
         }
         catch(err) {
-          console.log(err);
+          alert(err.response.data.msg);
         }
 
       }
     else {
-      alert("wrong values")
+      alert("Please fill all the fields correctly")
     }
 
 
@@ -138,7 +138,7 @@ function Signup() {
                   </select>
                 </MDBCol>
 
-                <MDBCol style={{maxWidth: '150px'}}>
+                <MDBCol style={{maxWidth: '150px'}} className='mb-3'>
                   <select name='gymId' onChange={handleChange} value={formValue.gymId} style={{maxWidth: '300px'}}>
                   <option value="-1">--Select Gym Address--</option>
                   {

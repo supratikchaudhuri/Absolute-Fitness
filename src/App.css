@@ -163,7 +163,7 @@ h4 {
 }
 
 .health-plan-2 {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,6 +181,7 @@ h4 {
 .health-plan-trainer img {
     max-width: 400px;
     height: auto;
+    margin-bottom: 30px;
 }
 
 .health-plan-workout {

@@ -39,11 +39,10 @@ function Trainers() {
   console.log(trainers);
 
   return (
+    trainers.length > 0
+    ?
     <div className='trainer-div'>
       <h4>Meet The team</h4>
-      {
-        trainers && 
-      
         <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
         {
           trainers.map(trainer => (
@@ -77,42 +76,10 @@ function Trainers() {
           ))
         }
       </MDBRow>
-    }
     </div>
+    :
+    <div className='no-data'>No Trainers Data Found.</div>
   )
 }
 
 export default Trainers
-
-
-
-
-
-    // const trainers = [
-    //     {
-    //         name: "Jimmy",
-    //         speciality: "Calisthenics",
-    //         yearsOfExp: 6,
-    //         image: "https://www.thimble.com/wp-content/uploads/2022/05/Personal-Trainer-Salary-Guide.jpg"
-    //     }, {
-    //         name: "Tom",
-    //         speciality: "Weight Training",
-    //         yearsOfExp: 11,
-    //         image: "https://hips.hearstapps.com/hmg-prod/images/mh-trainer-2-1533576998.png"
-    //     }, {
-    //         name: "Emma",
-    //         speciality: "Weight Loss",
-    //         yearsOfExp: 4,
-    //         image: "https://ici.net.au/blog/wp-content/uploads/2019/04/BecomePersonalTrainer-1024x683.jpg"
-    //     }, {
-    //       name: "Emily",
-    //       speciality: "Weight Training",
-    //       yearsOfExp: 11,
-    //       image: "https://hips.hearstapps.com/hmg-prod/images/mh-trainer-2-1533576998.png"
-    //   }, {
-    //       name: "Raj",
-    //       speciality: "Weight Loss",
-    //       yearsOfExp: 4,
-    //       image: "https://ici.net.au/blog/wp-content/uploads/2019/04/BecomePersonalTrainer-1024x683.jpg"
-    //   }
-    // ]

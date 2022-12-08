@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   MDBBtn,
   MDBContainer,
@@ -10,7 +10,6 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
-import {validatemail, validPhone} from '../utils/inputValidation.js';
 
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
@@ -26,7 +25,7 @@ function Login() {
 const login = async () => {
   try {
     const res = await axios.post("user/login", {username, password})
-    
+    console.log(res.data);
     try {
       const res1 = await axios.get(`user/${username}`)
       const user = res1.data
@@ -48,7 +47,7 @@ const login = async () => {
 
   } catch (err) {
     // alert("") // make him retuurn right error style
-    alert("Wrong username or password.\n Please try again.")
+    alert("Invalid username or password.\n Please try again.")
     setPassword("");
   }
 }
