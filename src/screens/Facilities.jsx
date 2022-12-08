@@ -13,7 +13,6 @@ import {
 
 import { useParams } from 'react-router-dom';
 
-
 function Facilities() {
 
   const params = useParams()
@@ -37,40 +36,43 @@ function Facilities() {
     getFacilities();
 
   }, []);
-  console.log(facilities);
 
   return (
+    facilities.length > 0
+    ?
     <div className='facilities-div'>
       <h4>Facilities</h4>
 
-      {facilities && 
+      {facilities 
+        && 
+        <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
+        {
+          facilities.map(facility => (
+            <MDBCol>
+            <MDBCard className='h-100'	>
+              <MDBCardImage
+                src={facility.image_url}
+                alt='...'
+                position='top'
+              />
+              <MDBCardBody>
+                <MDBCardTitle>{facility.name}</MDBCardTitle>
+                <MDBCardText>
+                  <p>Location: {facility.location}</p>
+                  <p>{facility.opening_time}</p>
+                  <p>{facility.closing_time}</p>
+                </MDBCardText>
 
-      <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
-      {
-        facilities.map(facility => (
-          <MDBCol>
-          <MDBCard className='h-100'	>
-            <MDBCardImage
-              src={facility.image_url}
-              alt='...'
-              position='top'
-            />
-            <MDBCardBody>
-              <MDBCardTitle>{facility.name}</MDBCardTitle>
-              <MDBCardText>
-                <p>Location: {facility.location}</p>
-								<p>{facility.opening_time}</p>
-								<p>{facility.closing_time}</p>
-              </MDBCardText>
-
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-        ))
+              </MDBCardBody>
+            </MDBCard>
+            </MDBCol>
+          ))
+        }
+        </MDBRow>
       }
-    </MDBRow>
-}
     </div>
+    :
+    <div className='no-data '>No Facillieis listed by the gym yet.</div>
   )
 }
 

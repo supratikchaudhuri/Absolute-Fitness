@@ -45,6 +45,7 @@ function StaffLogin() {
       }
 
       navigate('/home');
+      window.location.reload();
 
     } catch (err) {
       // alert("") // make him retuurn right error style

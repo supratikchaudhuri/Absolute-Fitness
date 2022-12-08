@@ -34,7 +34,8 @@ function ProfilePage() {
         delete newProfile.password
         console.log(newProfile);
         localStorage.setItem('user', JSON.stringify(newProfile));
-        alert('Profile Updated Successfully !')
+        setShowEditForm(false)
+        // alert('Profile Updated Successfully !')
       }
     }
     catch(err) {

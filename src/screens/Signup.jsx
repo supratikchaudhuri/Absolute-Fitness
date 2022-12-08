@@ -84,6 +84,7 @@ function Signup() {
           }
 
           navigate('/home');
+          window.location.reload();
 
         }
         catch(err) {
