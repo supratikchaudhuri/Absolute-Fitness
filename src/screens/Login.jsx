@@ -72,7 +72,7 @@ const login = async () => {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Log into your account</h5>
                 
-                <MDBInput wrapperClass='mb-4' label='Enter email or phone' type='email' size="lg"
+                <MDBInput wrapperClass='mb-4' label='Enter email' type='email' size="lg"
                   onChange={(e) => setUsername(e.target.value)} name = 'username' value={username}/>
                 
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"
