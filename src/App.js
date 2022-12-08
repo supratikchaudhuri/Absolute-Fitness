@@ -20,6 +20,8 @@ import DietPlan from './screens/DietPlan';
 import GymMembers from './screens/GymMembers';
 import GymStaff from './screens/GymStaff';
 import ProfilePage from './screens/ProfilePage';
+import StaffProfilePage from './screens/StaffProfilePage';
+import PageNotFound from './screens/PageNotFound';
 
 function App() {
   console.log(window.location.pathname);
@@ -52,6 +54,10 @@ function App() {
           <Route exact path="/user/:userId/health-plan" element={<HealthPlan/>}/>
           <Route exact path="/user/:userId/workout-plan" element={<WorkoutPlan/>}/>
           <Route exact path="/user/:userId/diet-plan" element={<DietPlan/>}/>
+
+
+          <Route exact path="/staff/:staff_id/profile" element={<StaffProfilePage/>}/>
+
           
           <Route exact path="/health-record" element={<MemberHealthRecord/>}/>
           <Route exact path="/trainer/:staffId/memberRecords" element={<TrainerPerformance/>}/>
@@ -61,6 +67,7 @@ function App() {
           <Route exact path="/gym/:gymId/staff" element={<GymStaff/>}/>
 
           <Route exact path="/test" element={<BMIChart/>}/>
+          <Route path="*" element={<PageNotFound/>} />
         </Routes>
 
         </BrowserRouter>

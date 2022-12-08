@@ -25,7 +25,7 @@ function Login() {
 
 const login = async () => {
 
-  if(validatemail(username) || validPhone(username)) {
+  if(validatemail(username)) {
     try {
       const res = await axios.post("user/login", {username, password})
       

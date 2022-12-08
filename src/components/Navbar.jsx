@@ -138,7 +138,7 @@ function Navbar() {
                   {user.name}
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <Link to={'user/'+ (user.email ? user.email : user.staff_id) +'/profile'}>
+                  <Link to={user.staff_id ? 'staff/'+user.staff_id+'/profile' : 'user/'+user.email+'/profile'}>
                     <MDBDropdownItem link href=''>Profile</MDBDropdownItem>
                   </Link>
                   <MDBDropdownItem link href='' onClick={logout}>Log Out</MDBDropdownItem>
