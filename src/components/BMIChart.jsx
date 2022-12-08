@@ -14,6 +14,7 @@ import {
 
 //https://recharts.org/en-US/api
 function BMIChart({data, numClients}) {
+  console.log(data);
 
   const randomColor = () => {
     // console.log(Math.floor(Math.random()*16777215).toString(16));

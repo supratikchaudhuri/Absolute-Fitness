@@ -40,7 +40,7 @@ function Trainers() {
 
   return (
     <div className='trainer-div'>
-      <h1>Meet The team</h1>
+      <h4>Meet The team</h4>
       {
         trainers && 
       

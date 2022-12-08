@@ -38,7 +38,7 @@ function Branches() {
 
   return (
     <div className='branches-div'>
-      <h1>Our branches</h1>
+      <h4>Absolute Fitness Branches</h4>
       <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
       {
         branches.map(branch => (

@@ -29,6 +29,7 @@ function TrainerPerformance() {
   }, [clientHealthRecords])
 
   const processData = (data) => {
+
     const dateWiseData = [];
     for (let i = 0; i < data.length; i++) {
       const healthRecords = data[i]["healthRecords"];
@@ -49,6 +50,7 @@ function TrainerPerformance() {
           };
           obj["client" + (i + 1)] = record["bmi"];
           dateWiseData.push(obj);
+          // console.log(obj);
         }
       });
     }
@@ -63,6 +65,32 @@ function TrainerPerformance() {
       return 0;
     });
 
+
+    let numClients = clientHealthRecords.length
+    let prevBMI = {};
+
+    for(let i = 0; i < numClients; i++) {
+      for(let j = 0; j < dateWiseData.length; j++) {
+        let record = dateWiseData[j];
+        if(record['client'+(i+1)]) {
+          prevBMI['client'+(i+1)] = record['client'+(i+1)];
+          break;
+        }
+      }
+    }
+
+    for(let j = 0; j < dateWiseData.length; j++) {
+      let record = dateWiseData[j]
+      for(let i = 0; i < numClients; i++) {
+        if(record['client'+(i+1)]) {
+          prevBMI['client'+(i+1)] = record['client'+(i+1)]
+        }
+        else {
+          record['client'+(i+1)] = prevBMI['client'+(i+1)]
+        }
+      }
+    }
+    // console.log(dateWise);
     return dateWiseData
   }
 
