@@ -19,7 +19,7 @@ function GymMembers() {
       setMembers(res.data);
     }
     catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
   }
 
@@ -28,7 +28,7 @@ function GymMembers() {
     try {
       // const res = axios.
     } catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
     
     setShowEditForm(false)
@@ -42,7 +42,7 @@ function GymMembers() {
       alert("Member successfuly deleted !")
     }
     catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
   }
 

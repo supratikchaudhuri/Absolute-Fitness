@@ -34,7 +34,7 @@ function GymStaff() {
       getStaff();
       alert('Staff updated successfully!')
     } catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
     
     setShowEditForm(false)
@@ -48,7 +48,7 @@ function GymStaff() {
       alert("Staff successfuly deleted !")
     }
     catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
   }
 
@@ -58,7 +58,7 @@ function GymStaff() {
       setStaff(res.data);
     }
     catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
   }
 
@@ -69,7 +69,7 @@ function GymStaff() {
       getStaff();
     }
     catch(err) {
-      alert(err.response.data.msg);
+      alert(err.response.data.msg || err);
     }
   }
 
