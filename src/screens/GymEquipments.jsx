@@ -8,7 +8,7 @@ function GymEquipments() {
 
   const [equipments, setEquipments] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedEquipment, setUpdatedEquipment] = useState({name: '', quantity: '', last_serviced: '', image_url: ''});
+  const [updatedEquipment, setUpdatedEquipment] = useState({quantity: '', last_serviced: ''});
 
   const getGymEquipments = async() => {
     try {
@@ -16,63 +16,15 @@ function GymEquipments() {
       setEquipments(processEquipmentData(res.data));
     }
     catch(err) {
-      alert(err.response.data.msg);
+      alert(err);
     }
   }
 
   useEffect(() => {
     getGymEquipments();
-    // setEquipments(processEquipmentData(dummy))
 
   }, [])
 
-
-
-  const dummy = [
-    {
-      gym_id: 1, 
-      name: 'bar bell', 
-      image_url: 'https://i.insider.com/5ecd774d3ad86143d7681736?width=1200&format=jpeg', 
-      quantity: 10, 
-      last_serviced: '2022-11-11'
-    },
-    {
-      gym_id: 1, 
-      name: 'bar bell', 
-      image_url: 'https://i.insider.com/5ecd774d3ad86143d7681736?width=1200&format=jpeg',  
-      quantity: 10, 
-      last_serviced: '2022-11-11'
-    },
-    {
-      gym_id: 1, 
-      name: 'bar bell', 
-      image_url: 'https://p.globalsources.com/IMAGES/PDT/B5180629601/Treadmill.png', 
-      quantity: 10, 
-      last_serviced: '2022-11-11'
-    },
-    {
-      gym_id: 1, 
-      name: 'bar bell', 
-      image_url: 'https://i.insider.com/5ecd774d3ad86143d7681736?width=1200&format=jpeg', 
-      quantity: 10, 
-      last_serviced: '2022-11-11'
-    },
-    {
-      gym_id: 1, 
-      name: 'bar bell', 
-      image_url: 'https://truefitness.com/wp-content/uploads/2019/11/SPL0300-Acrylic-Alabaster_960-1.png',  
-      quantity: 10, 
-      last_serviced: null
-    },
-    {
-      gym_id: 1, 
-      name: 'bar bell', 
-      image_url: 'https://i.insider.com/5ecd774d3ad86143d7681736?width=1200&format=jpeg',
-      quantity: 10, 
-      last_serviced: null
-    },
-
-  ]
 
   const processEquipmentData = (equipmentData) => {
     let updatedEquipmentData = [];
@@ -81,7 +33,8 @@ function GymEquipments() {
       let updatedRecord = record
       updatedRecord["image_url"] = <img src={record["image_url"]}/>
       delete updatedRecord.gym_id 
-      delete updatedRecord.equipment_id 
+      // delete updatedRecord.equipment_id 
+      updatedRecord["last_serviced"] = updatedRecord["last_serviced"] && updatedRecord['last_serviced'].substring(0, 10);
       updatedEquipmentData.push(updatedRecord)
     }
     console.log(updatedEquipmentData);
@@ -89,12 +42,14 @@ function GymEquipments() {
     return updatedEquipmentData
   }
 
-  const updateEquipment = async () => {
+  const updateEquipment = async() => {
     try {
-      const res = await axios.put(``, updatedEquipment);
+      const res = await axios.put(`/gym/${user.gym_id}/equipment/${updatedEquipment.equipment_id}`, updatedEquipment);
+      getGymEquipments();
+      setShowEditForm(false)
     } 
     catch(err) {
-      alert(err.response.data.msg);
+      console.log(err);
     }
   }
 
@@ -105,10 +60,7 @@ function GymEquipments() {
 
   const renderEditForm = (
     <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
-      <form className='m-4 popup-form' onSubmit={updateEquipment}>
-
-        <MDBInput className='mb-3' label='name' name='name' value={updatedEquipment.name} onChange={handleChange}/>
-       
+      <form className='m-4 popup-form' onSubmit={e => {e.preventDefault(); updateEquipment()}}>
         <MDBRow className='mb-4 w-3'>
           <MDBCol>
             <MDBInput label='quantity' name='quantity' value={updatedEquipment.quantity} onChange={handleChange}/>
@@ -119,9 +71,6 @@ function GymEquipments() {
               max={new Date().toJSON().slice(0, 10)}/>
           </MDBCol>
         </MDBRow>
-
-        {updatedEquipment.image_url.props
-          && <MDBInput className='mb-3' label='Image URL' value={updatedEquipment.image_url.props.src} onChange={handleChange}/>}
 
         <MDBBtn type='submit' className='mb-0' block>
           Update
