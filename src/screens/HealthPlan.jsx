@@ -48,7 +48,7 @@ function HealthPlan() {
     <div className='health-plan-div'>
 
       {
-        userHealthRecord && (
+        userHealthRecord && userHealthRecord.length > 0 && (
         <>
           <p>
             Current height: {userHealthRecord.at(-1).height} cm, weight: {userHealthRecord.at(-1).weight} Kg, BMI: {userHealthRecord.at(-1).bmi}
@@ -88,7 +88,7 @@ function HealthPlan() {
 
     :
 
-    <div>No health plan. Please contact admin to assign a plan</div>
+    <div className='no-data'>No health plan. Please contact admin to assign a plan</div>
     
   )
 }
