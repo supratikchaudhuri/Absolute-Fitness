@@ -58,7 +58,7 @@ function HealthPlan() {
 
       
       <div className='health-plan-trainer'>
-        <p>Your trainer is {healthPlan.trainer_name}</p>
+        <p>Your trainer is {healthPlan.trainer_name ? healthPlan.trainer_name : 'not assigned'}</p>
 
         <img src = {healthPlan.trainer_url}></img>
         
