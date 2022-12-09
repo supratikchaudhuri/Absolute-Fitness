@@ -80,8 +80,8 @@ function Table({content, data, deleteItem, displayEditForm, setStaffDetails, set
                   (
                     content === 'staff' || content === 'members'
                   )
-                  &&
-                  data[idx].type !== 'admin'
+                  // &&
+                  // data[idx].type !== 'admin'
                   && <td><MDBIcon className= "icon" fas icon="trash" onClick={e => deleteItem(e, row[0])} /></td>}
               </div>
               
