@@ -101,11 +101,15 @@ function TrainerPerformance() {
     clientHealthRecords 
     ?
     <div className=''>
-      <h4>This graph displays the progress {}'s clients have made so far since hirirng him</h4>
       {
         clientHealthRecords.length >= 1 
-        && 
+        ?
+        <>
+        <h4>This graph displays the progress {}'s clients have made so far since hirirng him</h4>
         <BMIChart data={processData(clientHealthRecords)} numClients={clientHealthRecords.length}></BMIChart>
+        </>
+        :
+        <div className='no-data'>No client progress for this trainer found</div>
       }
     </div>
     :

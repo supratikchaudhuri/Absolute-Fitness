@@ -40,10 +40,10 @@ function GymStaff() {
     setShowEditForm(false)
   }
 
-  const deleteUser = async (e, email) => {
-    console.log(email);
+  const deleteUser = async (e, staffId) => {
+    console.log(staffId);
     try {
-      // await axios.delete(`/user/${email}`)
+      await axios.delete(`/user/${staffId}`)
       getStaff();
       alert("Staff successfuly deleted !")
     }
@@ -63,7 +63,6 @@ function GymStaff() {
   }
 
   const addStaff = async () => {
-    // alert('user added')
     try {
       const res = await axios.post(`/staff/signup`, newStaffDetails);
       getStaff();

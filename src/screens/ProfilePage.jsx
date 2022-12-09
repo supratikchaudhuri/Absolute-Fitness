@@ -35,7 +35,7 @@ function ProfilePage() {
         console.log(newProfile);
         localStorage.setItem('user', JSON.stringify(newProfile));
         setShowEditForm(false)
-        // alert('Profile Updated Successfully !')
+        alert('Profile Updated Successfully !')
       }
     }
     catch(err) {

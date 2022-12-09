@@ -35,6 +35,7 @@ function StaffProfilePage() {
       console.log(newProfile);
       localStorage.setItem('user', JSON.stringify(newProfile));
       setShowEditForm(false)
+      alert('Profile successfully updated')
     }
     catch(err) {
       alert(err.response.data.msg || err);
