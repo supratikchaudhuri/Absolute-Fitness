@@ -23,13 +23,17 @@ function MemberHealthRecord() {
   }
 
   const submitHealthRecord = async () => {
+    if(newHealthRecord.height < 0 || newHealthRecord.weight < 0) {
+      alert('Values cannot be negative');
+      return;
+    }
     try {
       const res = await axios.post(`/healthRecord`, {...newHealthRecord, email: user.email});
       getHealthRecords()
       setShowHealthRecordForm(false);
     } 
     catch (err) {
-      console.log(err);
+      alert('Invalid values. Please submit legitimate data.');
     }
   }
 
