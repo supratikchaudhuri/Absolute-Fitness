@@ -43,7 +43,7 @@ function GymStaff() {
   const deleteUser = async (e, staffId) => {
     console.log(staffId);
     try {
-      await axios.delete(`/user/${staffId}`)
+      await axios.delete(`/staff/${staffId}`)
       getStaff();
       alert("Staff successfuly deleted !")
     }

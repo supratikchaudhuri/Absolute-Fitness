@@ -58,7 +58,6 @@ function Facilities() {
               <MDBCardBody>
                 <MDBCardTitle>{facility.name}</MDBCardTitle>
                 <MDBCardText>
-                  <p>Location: {facility.location}</p>
                   <p>Operating Hours: {facility.opening_time} to {facility.closing_time}</p>
                 </MDBCardText>
 
