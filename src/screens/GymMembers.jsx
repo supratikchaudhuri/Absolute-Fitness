@@ -84,7 +84,7 @@ function GymMembers() {
       <Table 
         content='members' 
         data={members} 
-        deleteUser={deleteUser} 
+        deleteItem={deleteUser} 
         displayEditForm={displayEditForm}>  
       </Table>
 
