@@ -105,16 +105,17 @@ function GymEquipments() {
   const renderEditForm = (
     <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
       <form className='m-4 popup-form' onSubmit={updateEquipment}>
+
+        <MDBInput className='mb-3' label='name' name='name' value={updatedEquipment.name} onChange={handleChange}/>
+       
         <MDBRow className='mb-4 w-3'>
-          <MDBCol>
-            <MDBInput label='name' name='name' value={updatedEquipment.name} onChange={handleChange}/>
-          </MDBCol>
           <MDBCol>
             <MDBInput label='quantity' name='quantity' value={updatedEquipment.quantity} onChange={handleChange}/>
           </MDBCol>
           <MDBCol>
             <MDBInput label='Last Serviced' type='date' size="md" onChange={handleChange}
-               name='last_serviced' value={updatedEquipment.last_serviced} max={new Date().toJSON().slice(0, 10)}/>
+              name='last_serviced' value={updatedEquipment.last_serviced ? updatedEquipment.last_serviced : ''} 
+              max={new Date().toJSON().slice(0, 10)}/>
           </MDBCol>
         </MDBRow>
 
@@ -124,8 +125,8 @@ function GymEquipments() {
         <MDBBtn type='submit' className='mb-0' block>
           Update
         </MDBBtn>
-        <MDBBtn color='danger' onClick={e => setShowEditForm(false)} className='mb-0' block>
-          Cancle
+        <MDBBtn type='button' color='danger' onClick={e => setShowEditForm(false)} className='mb-0' block>
+          Cancel
         </MDBBtn>
       </form>
     </div>
