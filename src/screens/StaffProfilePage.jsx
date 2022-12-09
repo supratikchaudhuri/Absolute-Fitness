@@ -99,7 +99,7 @@ function StaffProfilePage() {
           <MDBCardText>Phone: {user.phone}</MDBCardText>
           <MDBCardText>Employment: {user.part_time ? 'Part Time' : 'Full Time'}</MDBCardText>
           <MDBCardText>Your Gym: {user.gym_id}</MDBCardText>
-          <MDBCardText>Salary: {user.salary}</MDBCardText>
+          <MDBCardText>Salary: ${user.salary}</MDBCardText>
           <MDBCardText>Role: {user.description}</MDBCardText>
 
           

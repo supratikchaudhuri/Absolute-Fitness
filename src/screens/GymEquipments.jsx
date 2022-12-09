@@ -21,8 +21,8 @@ function GymEquipments() {
   }
 
   useEffect(() => {
-    // getGymEquipments();
-    setEquipments(processEquipmentData(dummy))
+    getGymEquipments();
+    // setEquipments(processEquipmentData(dummy))
 
   }, [])
 

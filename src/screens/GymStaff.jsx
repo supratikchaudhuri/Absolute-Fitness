@@ -150,7 +150,7 @@ console.log(staffDetails);
       <form className='m-4 popup-form' onSubmit={e => {e.preventDefault(); addStaff(newStaffDetails)}}>
         <MDBRow className='mb-3 w-3'>
           <MDBCol>
-            <MDBInput disabled
+            <MDBInput
               label='ID' 
               name='staffId'
               value={newStaffDetails.staffId} 

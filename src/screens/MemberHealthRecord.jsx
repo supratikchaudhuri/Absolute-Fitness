@@ -16,15 +16,15 @@ function MemberHealthRecord() {
 
   const [memberHealthRecord, setMemberHealthRecord] = useState([]);
   const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);
-  const [latestHealthRecord, setLatestHealthRecord] = useState({ height: '', weight: '', dateCalculated: ''})
+  const [newHealthRecord, setNewHealthRecord] = useState({ height: '', weight: '', dateCalculated: ''})
   
   const handleChange = (e) => {
-    setLatestHealthRecord(prevState => ({...prevState, [e.target.name]: e.target.value}));
+    setNewHealthRecord(prevState => ({...prevState, [e.target.name]: e.target.value}));
   }
 
   const submitHealthRecord = async () => {
     try {
-      const res = await axios.post(`/healthRecord`, {...latestHealthRecord, email: user.email});
+      const res = await axios.post(`/healthRecord`, {...newHealthRecord, email: user.email});
       getHealthRecords()
       setShowHealthRecordForm(false);
     } 
@@ -67,7 +67,7 @@ function MemberHealthRecord() {
 
       <div>
         <MDBBtn onClick={e => {getHealthRecords(); setShowHealthRecordForm(true)}} outline >
-          Add Latest Health Record
+          Add Health Record
         </MDBBtn>
       
       </div>
@@ -91,7 +91,7 @@ function MemberHealthRecord() {
         <MDBInput label='Height in cm' id='typeText' type='text' name='height' onChange={handleChange}/>
         <MDBInput label='Weight in lbs' id='typeText' type='text' name='weight' onChange={handleChange}/>
         <MDBInput wrapperClass='col-md-10 mb-3' label='Date' type='date' size="lg" max={new Date().toJSON().slice(0, 10)}
-                    onChange={handleChange} name='dateCalculated'  value={latestHealthRecord.date}/>
+                    onChange={handleChange} name='dateCalculated'  value={newHealthRecord.date}/>
       </MDBCardBody>
      
     <div>

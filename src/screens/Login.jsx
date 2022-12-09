@@ -46,7 +46,6 @@ const login = async () => {
     window.location.reload();
 
   } catch (err) {
-    // alert("") // make him retuurn right error style
     alert("Invalid username or password.\n Please try again.")
     setPassword("");
   }
