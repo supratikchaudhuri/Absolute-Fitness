@@ -56,8 +56,8 @@ function Trainers() {
               <MDBCardBody>
                 <MDBCardTitle>{trainer.name}</MDBCardTitle>
                 <MDBCardText>
-                  <p>{trainer.speciality}</p>
-                  <p>{trainer.years_of_exp}</p>
+                  <p>Speciality: {trainer.speciality}</p>
+                  <p>Years of Expierence: {trainer.years_of_exp}</p>
                   <p>{trainer.description}</p>
                 </MDBCardText>
 

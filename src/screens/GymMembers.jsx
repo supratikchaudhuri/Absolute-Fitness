@@ -62,14 +62,14 @@ function GymMembers() {
         <form className='m-4 popup-form' onSubmit={handleSubmit}>
           <MDBRow className='mb-4 w-3'>
             <MDBCol>
-              <MDBInput id='form3Example1' label='First name' />
+              <MDBInput label='First name' />
             </MDBCol>
             <MDBCol>
-              <MDBInput id='form3Example2' label='Last name' />
+              <MDBInput label='Last name' />
             </MDBCol>
           </MDBRow>
-          <MDBInput className='mb-4' type='email' id='form3Example3' label='Email address' />
-          <MDBInput className='mb-4' type='password' id='form3Example4' label='Password' />
+          <MDBInput className='mb-4' type='email' label='Email address' />
+          <MDBInput className='mb-4' type='password' label='Password' />
 
           <MDBBtn type='submit' className='mb-0' block>
             Update
