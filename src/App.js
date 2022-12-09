@@ -74,7 +74,6 @@ function App() {
 
           <Route exact path="/" element={<Root/>}/>
           <Route path="*" element={<PageNotFound/>} />
-          <Route exact path="/test" element={<BMIChart/>}/>
         </Routes>
 
         </BrowserRouter>
