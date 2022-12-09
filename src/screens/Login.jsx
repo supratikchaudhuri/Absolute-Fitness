@@ -42,7 +42,7 @@ const login = async () => {
       console.log(err1);
     }
 
-    navigate('/home');
+    // navigate('/home');
     window.location.reload();
 
   } catch (err) {

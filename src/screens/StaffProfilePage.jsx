@@ -37,7 +37,7 @@ function StaffProfilePage() {
       setShowEditForm(false)
     }
     catch(err) {
-      console.log(err);
+      alert(err.response.data.msg);
     }
   }
   console.log(updatedProfile);

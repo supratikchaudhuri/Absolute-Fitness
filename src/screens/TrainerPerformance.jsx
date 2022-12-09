@@ -16,7 +16,7 @@ function TrainerPerformance() {
       console.log(res.data);
     }
     catch(err) {
-      console.log(err);
+      alert(err.response.data.msg);
     }
   }
 

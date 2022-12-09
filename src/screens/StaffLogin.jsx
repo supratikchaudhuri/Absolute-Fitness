@@ -10,7 +10,6 @@ import {
   MDBInput
 }
 from 'mdb-react-ui-kit';
-import {validatemail, validPhone} from '../utils/inputValidation.js';
 
 import img1 from "../Images/img1.jpg";
 import logoImg from "../Images/AbsoluteFitnessLogo.jpg";
@@ -28,6 +27,7 @@ function StaffLogin() {
     try {
       localStorage.clear();
       const res = await axios.post("staff/login", {username, password})
+      console.log(res.data);
       
       try {
         const res1 = await axios.get(`staff/${username}`)
@@ -41,17 +41,15 @@ function StaffLogin() {
         console.log(JSON.parse(localStorage.getItem('user_gym')));
 
       } catch (err1) {
-        console.log(err1);
+        alert(err1.response.data.msg);
       }
 
       navigate('/home');
       window.location.reload();
 
     } catch (err) {
-      // alert("") // make him retuurn right error style
-      alert("Wrong username or password.\n Please try again.")
+      alert(err.response.data.msg)
       setPassword("");
-      setUsername("");
     }
   } 
   

@@ -93,7 +93,7 @@ function GymEquipments() {
       const res = await axios.put(``, updatedEquipment);
     } 
     catch(err) {
-      console.log(err.response.data.msg);
+      alert(err.response.data.msg);
     }
   }
 
