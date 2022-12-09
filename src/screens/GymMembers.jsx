@@ -6,7 +6,7 @@ import { MDBInput, MDBCol, MDBRow, MDBBtn } from 'mdb-react-ui-kit';
 function GymMembers() {
   const user = JSON.parse(localStorage.getItem('user'))
 
-  const [members, setMembers] = useState(null);
+  const [members, setMembers] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
 
   const displayEditForm = (e) => {
@@ -51,10 +51,11 @@ function GymMembers() {
     getMembers();
   }, [])
   
+  console.log(members);
 
   return (
     
-    members 
+    members.length > 0
     ?
     <div className='gym-members-div'>
       <div className='edit-form-div' style={{display: showEditForm ? 'inline' : 'none'}}>
@@ -89,7 +90,7 @@ function GymMembers() {
 
     </div>
     :
-    <div>No members in this gym yet</div>
+    <div className='no-data'>No members in this gym yet</div>
     
   )
 }

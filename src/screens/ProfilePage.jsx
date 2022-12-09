@@ -25,7 +25,6 @@ function ProfilePage() {
   }
 
   const handleSubmit = async(e) => {
-    console.log("here");
     e.preventDefault();
     try {
       if(user.type === 'member') {

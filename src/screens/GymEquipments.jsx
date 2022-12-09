@@ -80,10 +80,11 @@ function GymEquipments() {
       let record = equipmentData[i];
       let updatedRecord = record
       updatedRecord["image_url"] = <img src={record["image_url"]}/>
-      delete updatedRecord.gym_id   
+      delete updatedRecord.gym_id 
+      delete updatedRecord.equipment_id 
       updatedEquipmentData.push(updatedRecord)
     }
-    // console.log(upda);
+    console.log(updatedEquipmentData);
     setUpdatedEquipment(updatedEquipmentData[0])
     return updatedEquipmentData
   }
