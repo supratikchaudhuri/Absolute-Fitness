@@ -10,7 +10,7 @@ function Table({content, data, deleteItem, displayEditForm, setStaffDetails, set
   for(var i = 0; i < data.length; i++) {
     rows.push(Object.values(data[i]))
   }
-  console.log(rows);
+  console.log(data);
 
   return (
     <>
@@ -76,7 +76,12 @@ function Table({content, data, deleteItem, displayEditForm, setStaffDetails, set
                   </td>
                 }
 
-                {user.type === 'admin' 
+                {user.type === 'admin' &&
+                  (
+                    content === 'staff' || content === 'members'
+                  )
+                  &&
+                  data[idx].type !== 'admin'
                   && <td><MDBIcon className= "icon" fas icon="trash" onClick={e => deleteItem(e, row[0])} /></td>}
               </div>
               
