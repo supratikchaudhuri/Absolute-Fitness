@@ -10,6 +10,7 @@ function GymStaff() {
   const [staffDetails, setStaffDetails] = useState(null);
   const [showAddStaffForm, setShowAddStaddForm] = useState(false);
   const [newStaffDetails, setNewStaffDetails] = useState({
+    staffId: '',
     name: '', 
     gymId: user.gym_id, 
     description: '',
@@ -142,7 +143,6 @@ function GymStaff() {
     </div>
   )
 
-console.log(staffDetails);
 
   return (
     <>
@@ -154,6 +154,7 @@ console.log(staffDetails);
               label='ID' 
               name='staffId'
               value={newStaffDetails.staffId} 
+              onChange={e => setNewStaffDetails({...newStaffDetails, [e.target.name]: e.target.value})}
             />
           </MDBCol>
           <MDBCol>
@@ -234,7 +235,7 @@ console.log(staffDetails);
 
       </div>
       :
-      <div>No staff in this gym yet</div>
+      <div className='no-data'>No staff in this gym yet</div>
     }
     </>
   )

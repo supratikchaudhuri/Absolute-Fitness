@@ -45,10 +45,14 @@ h4 {
     margin: auto;
 }
 
+.table td {
+    /* max-width: 35vw; */
+}
+
+
 td img {
     max-width: 150px;
     max-height: 150px;
-    
 }
 
 .update-btn-table {

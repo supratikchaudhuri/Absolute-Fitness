@@ -10,7 +10,7 @@ function Table({content, data, deleteItem, displayEditForm, setStaffDetails, set
   for(var i = 0; i < data.length; i++) {
     rows.push(Object.values(data[i]))
   }
-  // console.log(rows);
+  console.log(rows);
 
   return (
     <>
@@ -31,7 +31,7 @@ function Table({content, data, deleteItem, displayEditForm, setStaffDetails, set
 						<tr key={idx}>
 							{row.map((item) => 
 								// <td>{console.log(item)}</td>
-                <td>{item ? item : ''}</td>
+                <td>{item !== null ? item : ''}</td>
 							)
 							}
 

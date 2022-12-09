@@ -81,7 +81,7 @@ function StaffLogin() {
 
               <MDBBtn className="mb-4 px-5" color='dark' size='lg' type='submit' onClick={staffLogin}>Login</MDBBtn>
 
-              <p className="small mb-5 pb-lg-2" >No a staff? <a href="login" style={{color: '#ffb703'}}>Login here</a></p>
+              <p className="small mb-5 pb-lg-2" >Not a staff? <a href="login" style={{color: '#ffb703'}}>Login here</a></p>
 
             </MDBCardBody>
           </MDBCol>
