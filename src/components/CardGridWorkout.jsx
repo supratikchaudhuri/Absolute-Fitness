@@ -26,7 +26,7 @@ function CardGridWorkout({workouts}) {
 							<MDBCardBody>
 								<MDBCardTitle>{exc.excercise}</MDBCardTitle>
 								<MDBCardText>
-									{exc.sets} Sets {exc.reps} Reps Each.
+									{exc.reps} Sets {exc.sets} Reps Each.
 									{/* <p>{exc.desciption}</p> */}
 								</MDBCardText>
 							</MDBCardBody>
