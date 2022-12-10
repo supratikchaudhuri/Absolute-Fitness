@@ -26,6 +26,10 @@ function ProfilePage() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if(updatedProfile.phone.lenght > 0) {
+      alert('phone needs to be 10 digits long');
+      return;
+    }
     try {
       if(user.type === 'member') {
         console.log("here");

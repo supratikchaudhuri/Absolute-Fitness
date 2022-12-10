@@ -27,6 +27,10 @@ function StaffProfilePage() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if(updatedProfile.phone.lenght > 0) {
+      alert('phone needs to be 10 digits long');
+      return;
+    }
     try {
       console.log("here");
       const res = await axios.put(`/staff/${user.staff_id}`, {...updatedProfile, ['gymId']: user.gym_id});

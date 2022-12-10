@@ -26,6 +26,10 @@ function GymStaff() {
   }
 
   const handleSubmit = async (updatedStaff) => {
+    if(updatedStaff && updatedStaff.phone.lenght > 0) {
+      alert('phone needs to be 10 digits long');
+      return;
+    }
     try {
       updatedStaff['staffId'] = updatedStaff['staff_id']
       updatedStaff['partTime'] = updatedStaff['part_time']
