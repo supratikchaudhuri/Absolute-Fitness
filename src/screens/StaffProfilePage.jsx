@@ -27,7 +27,7 @@ function StaffProfilePage() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    if(updatedProfile.phone.lenght > 0) {
+    if(updatedProfile.phone.lenght != 10) {
       alert('phone needs to be 10 digits long');
       return;
     }

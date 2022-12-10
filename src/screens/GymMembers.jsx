@@ -16,6 +16,7 @@ function GymMembers() {
   const getMembers = async() => {
     try {
       const res = await axios.get(`/gym/${user.gym_id}/members`);
+      res.data['dob'] = res.data['dob'].substring(0, 10)
       setMembers(res.data);
     }
     catch(err) {

@@ -26,13 +26,13 @@ function ProfilePage() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    if(updatedProfile.phone.lenght > 0) {
+    console.log(updatedProfile);
+    if(updatedProfile['phone'].lenght != 10) {
       alert('phone needs to be 10 digits long');
       return;
     }
     try {
       if(user.type === 'member') {
-        console.log("here");
         const res = await axios.put(`/user/${user.email}`, {...updatedProfile, ['gymId']: user.gym_id});
         let newProfile = updatedProfile
         delete newProfile.password
