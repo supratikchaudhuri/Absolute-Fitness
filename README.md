@@ -23,12 +23,14 @@ It should automatically open [http://localhost:3000/](http://localhost:3000) in 
 In case it doesn't please paste the url in __Chrome__ mentioned above to view the website.
 
 
-some credentials to gt you started with all the views are :
+## some credentials to gt you started with all the views are :
 
-Admins
-staff_id            11111, 22222, 33333, 44444, 55555, 66666
-password for all    admin
+### Admins
+*staff_id*            
+`11111, 22222, 33333, 44444, 55555, 66666`\
+*password for all*    `admin`
 
-Users
-email               emma@gmail.com, alex@gmail.com, britney@gmail.com, kaldon@hotmail.com, ziya@google.com, katy@gmail.com
-password for all    Fitness!1
+### Users
+*email*               
+`emma@gmail.com, alex@gmail.com, britney@gmail.com, kaldon@hotmail.com, ziya@google.com, katy@gmail.com]`\
+*password for all*    `Fitness!1`
