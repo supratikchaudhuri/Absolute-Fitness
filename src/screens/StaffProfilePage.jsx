@@ -74,7 +74,7 @@ function StaffProfilePage() {
             onChange={handleChange}
           />
           
-          <MDBInput className='mb-4' type='password' label='Password' name='password' onChange={handleChange}/>
+          <MDBInput className='mb-4' type='password' label='Password (leave empty if you do not want to change)' name='password' onChange={handleChange}/>
 
           <MDBBtn type='submit' className='mb-0' block>
             Update

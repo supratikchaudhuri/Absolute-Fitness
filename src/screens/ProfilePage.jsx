@@ -50,17 +50,17 @@ function ProfilePage() {
           <MDBInput className='mb-4' type='email' label='Email address' disabled name='email' value={user.email}/>
           <MDBRow className='mb-4 w-3'>
             <MDBCol>
-              <MDBInput id='form3Example1' label='Name' name='name' value={updatedProfile.name} onChange={handleChange}/>
+              <MDBInput label='Name' name='name' value={updatedProfile.name} onChange={handleChange}/>
             </MDBCol>
             <MDBCol>
-              <MDBInput id='form3Example2' label='phone' name='phone' value={updatedProfile.phone} onChange={handleChange}/>
+              <MDBInput label='phone' name='phone' value={updatedProfile.phone} onChange={handleChange}/>
             </MDBCol>
           </MDBRow>
 
           <MDBInput wrapperClass='col-md-10 mb-3' label='Date of birth' type='date' size="lg" max={new Date().toJSON().slice(0, 10)}
             name='dob' value={updatedProfile.dob.substring(0, 10)} onChange={handleChange}/>
           
-          <MDBInput className='mb-4' type='password' label='Password' name='password' onChange={handleChange}/>
+          <MDBInput className='mb-4' type='password' label='Password (leave empty if you do not want to change)' name='password' onChange={handleChange}/>
 
           <MDBBtn type='submit' className='mb-0' block>
             Update
