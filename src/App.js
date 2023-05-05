@@ -23,6 +23,7 @@ import ProfilePage from './screens/ProfilePage';
 import StaffProfilePage from './screens/StaffProfilePage';
 import PageNotFound from './screens/PageNotFound';
 import GymEquipments from './screens/GymEquipments';
+import PaymentPlans from './screens/PaymentPlans';
 import Root from './screens/Root';
 
 function App() {
@@ -70,6 +71,8 @@ function App() {
 
           <Route exact path="/gym/:gymId/members" element={<GymMembers/>}/>
           <Route exact path="/gym/:gymId/staff" element={<GymStaff/>}/>
+
+          <Route exact path="/payment-plans" element={<PaymentPlans/>}/>
 
 
           <Route exact path="/" element={<Root/>}/>

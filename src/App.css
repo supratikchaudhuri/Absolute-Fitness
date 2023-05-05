@@ -236,3 +236,14 @@ td img {
     margin: auto;
 }
 
+.payment-plans-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.plan-card {
+    margin: 10px;
+}
+
