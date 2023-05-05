@@ -13,7 +13,6 @@ import { UserContextProvider } from './context/UserContext';
 import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
 import Facilities from './screens/Facilities';
-import BMIChart from './components/BMIChart';
 import HealthPlan from './screens/HealthPlan';
 import StaffLogin from './screens/StaffLogin';
 import DietPlan from './screens/DietPlan';
