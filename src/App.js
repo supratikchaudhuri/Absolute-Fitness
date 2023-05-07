@@ -23,11 +23,21 @@ import StaffProfilePage from './screens/StaffProfilePage';
 import PageNotFound from './screens/PageNotFound';
 import GymEquipments from './screens/GymEquipments';
 import PaymentPlans from './screens/PaymentPlans';
+import MySubscriptionsPage from './screens/MySubscriptionsPage';
 import Root from './screens/Root';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51N4IuESIsW8FsEuEN6OPvDtj95w1XrlO17O9gLaFcrDTRDQWc5CdCCHeqgKznFdcQAGhuHLbzDsFD1NJIlMpFgdW00iQ2mlzNY';
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 function App() {
+  
   console.log(window.location.pathname);
   return (
+    
     <div className="App">
       <UserContextProvider>
 
@@ -71,8 +81,18 @@ function App() {
           <Route exact path="/gym/:gymId/members" element={<GymMembers/>}/>
           <Route exact path="/gym/:gymId/staff" element={<GymStaff/>}/>
 
-          <Route exact path="/payment-plans" element={<PaymentPlans/>}/>
+          <Route exact path="/my-subscriptions" element={<MySubscriptionsPage/>}/>
 
+          
+          <Route exact path="/payment-plans" element={
+            <Elements stripe={stripePromise}>
+            <PaymentPlans/>
+            </Elements>
+          }/>
+
+          
+
+      
 
           <Route exact path="/" element={<Root/>}/>
           <Route path="*" element={<PageNotFound/>} />

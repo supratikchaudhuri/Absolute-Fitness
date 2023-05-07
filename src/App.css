@@ -236,7 +236,7 @@ td img {
     margin: auto;
 }
 
-.payment-plans-div {
+.choose-plans-div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,5 +245,17 @@ td img {
 
 .plan-card {
     margin: 10px;
+}
+
+.card-details-form {
+    /* display: flex; */
+    justify-content: center;
+    max-width: auto;
+}
+
+.flex-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 

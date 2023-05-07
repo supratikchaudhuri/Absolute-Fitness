@@ -1,56 +1,91 @@
 import React, { useEffect, useState } from 'react'
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+
 
 function PaymentPlans() {
+  const [product, setProduct] = useState([]);
+  const stripe = useStripe();
+  const elements = useElements();
 
-  const [plans, setPlans] = useState([]);
-  const [products, setProducts] = useState([]);
+  
+  const createSubscription = async (name, email, priceId) => {
+    try {
+      // create a payment method
+      const {paymentMethod} = await stripe.createPaymentMethod({
+        type: "card",
+        card: elements.getElement('card'),
+        billing_details: {
+          name,
+          email,
+        },
+      });
 
+      const res = await axios.post("stripe/create-subscription", {name, email, priceId, paymentMethod: paymentMethod.id});
+      const {clientSecret, subscriptionId} = res.data;
+
+      // confirm the payment by the user
+      const {error} = await stripe.confirmPayment({
+        clientSecret,
+        confirmParams: {
+          return_url: 'http://localhost:3000/my-subscriptions',
+        },
+      });
+      if (error) 
+        alert("There are an error subscribing");
+      else {
+        alert("Subcription successful.");
+      }
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    const getAllProducts = async() => {
-      // const res = await axios.get("stripe/products");
+    const getGymMembershipPrices = async() => {
       const res = await axios.get("stripe/gym-membership-pricing");
-      setProducts(res.data)
+      setProduct(res.data)
     }
 
-    const getAllPrices = async() => {
-      const res = await axios.get("stripe/prices");
-      setPlans(res.data);
-    }
-
-    getAllProducts();
-    getAllPrices();
+    getGymMembershipPrices();
     
 
   }, []);
 
-  console.log(products);
-  console.log(plans);
+  const subscribe = (priceId) => {
+    const {email, name} = JSON.parse(localStorage.getItem('user'));
+    createSubscription(name, email, priceId)
+  }
 
   return (
-    <div className='payment-plans-div'>
-    <MDBCard className='plan-card'>
-      <MDBCardBody>
-        <MDBCardTitle>$100/Mo</MDBCardTitle>
-        <MDBCardText>
-          Set up montly subscription plan.
-        </MDBCardText>
-        <MDBBtn>Subscribe</MDBBtn>
-      </MDBCardBody>
-    </MDBCard>
-
-    <MDBCard className='plan-card'>
-      <MDBCardBody>
-        <MDBCardTitle>$1050/Year</MDBCardTitle>
-        <MDBCardText>
-          Pay only once for the entire year.
-        </MDBCardText>
-        <MDBBtn>Buy</MDBBtn>
-      </MDBCardBody>
-    </MDBCard>
+    <>
+    <div className='card-details-form'>
+      <CardElement/>
     </div>
+    
+    <div className='choose-plans-div'>
+    {/* <CardElement/> */}
+      
+    {
+      product.prices && product.prices.map( (price, idx) => {
+        
+        return (
+          <MDBCard className='plan-card' key={idx}>
+            <MDBCardBody>
+              <MDBCardTitle>{price.amount}</MDBCardTitle>
+              <MDBCardText>
+                {price.nickname}
+              </MDBCardText>
+              
+              <MDBBtn onClick={() => subscribe(price.id)}>Subscribe</MDBBtn>
+            </MDBCardBody>
+          </MDBCard>
+      )})
+    }
+    </div>
+    </>
   )
 }
 
