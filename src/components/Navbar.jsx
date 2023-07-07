@@ -67,6 +67,12 @@ function Navbar() {
               <MDBNavbarLink active={false} h >Health Progress</MDBNavbarLink>
               </Link>
             </MDBNavbarItem>
+
+            <MDBNavbarItem >
+              <Link to={'/payment-plans'}>
+              <MDBNavbarLink active={false} h >Plans</MDBNavbarLink>
+              </Link>
+            </MDBNavbarItem>
             {/* <MDBNavbarItem >
               <MDBNavbarLink active={false} h onClick={e => alert("Newsletters comming soon!")}>Newsletter</MDBNavbarLink>
             </MDBNavbarItem> */}

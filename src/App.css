@@ -236,3 +236,26 @@ td img {
     margin: auto;
 }
 
+.choose-plans-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.plan-card {
+    margin: 10px;
+}
+
+.card-details-form {
+    /* display: flex; */
+    justify-content: center;
+    max-width: auto;
+}
+
+.flex-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -1,6 +1,4 @@
 import './App.css';
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import Login from './screens/Login';
 import Signup from './screens/Signup';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
@@ -13,7 +11,6 @@ import { UserContextProvider } from './context/UserContext';
 import TrainerPerformance from './screens/TrainerPerformance';
 import MemberHealthRecord from './screens/MemberHealthRecord';
 import Facilities from './screens/Facilities';
-import BMIChart from './components/BMIChart';
 import HealthPlan from './screens/HealthPlan';
 import StaffLogin from './screens/StaffLogin';
 import DietPlan from './screens/DietPlan';
@@ -23,11 +20,36 @@ import ProfilePage from './screens/ProfilePage';
 import StaffProfilePage from './screens/StaffProfilePage';
 import PageNotFound from './screens/PageNotFound';
 import GymEquipments from './screens/GymEquipments';
+import PaymentPlans from './screens/PaymentPlans';
+import MySubscriptionsPage from './screens/MySubscriptionsPage';
 import Root from './screens/Root';
 
+// MDB React
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+
+// Font Awesome
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
+// Google
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+// Stripe
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+/************************ Imports complete ************************/
+
+const GOOGLE_CLIENT_ID = '771432891086-pnekaemhkjo6f60ndfu1l8heh7u64c01.apps.googleusercontent.com'
+
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51N4IuESIsW8FsEuEN6OPvDtj95w1XrlO17O9gLaFcrDTRDQWc5CdCCHeqgKznFdcQAGhuHLbzDsFD1NJIlMpFgdW00iQ2mlzNY';
+const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
+
+
 function App() {
+  
   console.log(window.location.pathname);
   return (
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
     <div className="App">
       <UserContextProvider>
 
@@ -71,6 +93,18 @@ function App() {
           <Route exact path="/gym/:gymId/members" element={<GymMembers/>}/>
           <Route exact path="/gym/:gymId/staff" element={<GymStaff/>}/>
 
+          <Route exact path="/my-subscriptions" element={<MySubscriptionsPage/>}/>
+
+          
+          <Route exact path="/payment-plans" element={
+            <Elements stripe={stripePromise}>
+            <PaymentPlans/>
+            </Elements>
+          }/>
+
+          
+
+      
 
           <Route exact path="/" element={<Root/>}/>
           <Route path="*" element={<PageNotFound/>} />
@@ -80,6 +114,7 @@ function App() {
 
       </UserContextProvider>
     </div>
+    </GoogleOAuthProvider>
     
   );
 }
