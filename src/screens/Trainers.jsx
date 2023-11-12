@@ -26,11 +26,14 @@ function Trainers() {
   console.log(trainers);
 
   return trainers.length > 0 ? (
-    <div className="trainer-div">
+    <div id="trainer-div" className="container">
       <h4 className="center mt-3 mb-3">Meet The Team</h4>
-      <div className="row row-cols-1 row-cols-md-3 g-4">
+      <div className="row">
         {trainers.map((trainer, index) => (
-          <div className="col mb-4" key={index}>
+          <div
+            className="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-4"
+            key={index}
+          >
             <div className="card">
               <img src={trainer.image_url} className="card-img-top" alt="..." />
               <div className="card-body">

@@ -1,5 +1,5 @@
 import React from "react";
-import Branches from "./Branches";
+import Branches from "./Gym/Branches";
 
 function Home() {
   return (
