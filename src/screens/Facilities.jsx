@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-import {
-	MDBCard,
-	MDBCardImage,
-	MDBCardBody,
-	MDBCardTitle,
-	MDBCardText,
-	MDBRow,
-	MDBCol,
-} from 'mdb-react-ui-kit';
-
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 function Facilities() {
+  const params = useParams();
+  const { gym_id } = params;
 
-  const params = useParams()
-  const { gym_id } = params
-
-  const user_gym = JSON.parse(localStorage.getItem('user_gym'))
+  const user_gym = JSON.parse(localStorage.getItem("user_gym"));
 
   const [facilities, setFacilities] = useState([]);
 
@@ -27,51 +16,44 @@ function Facilities() {
       try {
         const res = await axios.get(`../../gym/${gym_id}/facilities`);
         setFacilities(res.data);
-      } 
-      catch (err) {
+      } catch (err) {
         console.log(err);
       }
-    }
+    };
 
     getFacilities();
-
   }, []);
 
-  return (
-    facilities.length > 0
-    ?
-    <div className='facilities-div'>
-      <h4>Facilities</h4>
+  console.log(facilities);
 
-      {facilities 
-        && 
-        <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
-        {
-          facilities.map(facility => (
-            <MDBCol>
-            <MDBCard className='h-100'	>
-              <MDBCardImage
+  return facilities.length > 0 ? (
+    <div id="facilities-div" className="container">
+      <h4 className="center mt-3 mb-3">Facilities</h4>
+
+      <div className="row">
+        {facilities.map((facility, index) => (
+          <div className="col-xs-12 col-md-4 mb-4" key={index}>
+            <div className="card h-100">
+              <img
                 src={facility.image_url}
-                alt='...'
-                position='top'
+                className="card-img-top"
+                alt="..."
               />
-              <MDBCardBody>
-                <MDBCardTitle>{facility.name}</MDBCardTitle>
-                <MDBCardText>
-                  <p>Operating Hours: {facility.opening_time} to {facility.closing_time}</p>
-                </MDBCardText>
-
-              </MDBCardBody>
-            </MDBCard>
-            </MDBCol>
-          ))
-        }
-        </MDBRow>
-      }
+              <div className="card-body">
+                <h5 className="card-title">{facility.name}</h5>
+                <p className="card-text">
+                  Operating Hours: {facility.opening_time} to{" "}
+                  {facility.closing_time}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-    :
-    <div className='no-data '>No Facillieis listed by the gym yet.</div>
-  )
+  ) : (
+    <div className="no-data">No Facilities listed by the gym yet.</div>
+  );
 }
 
-export default Facilities
+export default Facilities;
