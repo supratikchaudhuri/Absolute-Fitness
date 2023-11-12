@@ -1,74 +1,60 @@
 body {
-    font-family:Verdana, Geneva, Tahoma, sans-serif !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
 select {
-    border-color: rgb(168, 164, 164);
-    height: 40px;
-    border-radius: 5px;
-    padding: 0 3px;
-    color: rgb(44, 41, 41)
+  border-color: rgb(168, 164, 164);
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 3px;
+  color: rgb(44, 41, 41);
 }
 
-h4 {
-    margin: 20px auto !important;
-    text-align: center;
+.center {
+  text-align: center;
 }
 
 .popup-form {
-    transition: display 2s;
+  transition: display 2s;
 }
 
 .profile-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 45vw;
-    margin: 100px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 45vw;
+  margin: 100px auto;
 }
 
 .profile-div .avatar {
-    max-width: 100px;
+  max-width: 100px;
 }
 
 .no-data {
-    margin: 20px auto;
-    color: red;
-    text-align: center;
-    background-color: rgb(243, 216, 216);
-    max-width: 400px;
-    border-radius: 10px;
-    padding: 20px;
+  margin: 20px auto;
+  color: red;
+  text-align: center;
+  background-color: rgb(243, 216, 216);
+  max-width: 400px;
+  border-radius: 10px;
+  padding: 20px;
 }
-
-.table {
-    margin: auto;
-}
-
-.table td {
-    /* max-width: 35vw; */
-}
-
 
 td img {
-    max-width: 150px;
-    max-height: 150px;
-}
-
-.update-btn-table {
-    /* margin-left: -80px; */
+  max-width: 150px;
+  max-height: 150px;
 }
 
 .plan {
-    margin: 0 40px 20px;
+  margin: 0 40px 20px;
 }
 
 .plan h3 {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .plan h5 {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 /* .cardImage {
@@ -76,186 +62,173 @@ td img {
 } */
 
 .trainerDiv {
-    margin: 40px
+  margin: 40px;
 }
 
 .chart-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 
 .planDiv {
-    margin: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .add-staff-form {
-    padding: 20px;
-    width: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -300px;
-    margin-top: -300px;
-    z-index: 100;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 20px;
+  padding: 20px;
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: -300px;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  border-radius: 20px;
 }
 
 .edit-form-div {
-    padding: 20px;
-    width: 600px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -300px;
-    margin-top: -300px;
-    z-index: 100;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 20px;
+  padding: 20px;
+  width: 600px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: -300px;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  border-radius: 20px;
 }
 
 .memerHealthRecordDiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 20px 30px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 20px 30px;
 }
 
 .memerHealthRecordDiv button {
-    margin-right: 20px;
-}
-
-.branches-div {
-    margin: 20px;
-}
-
-.branches-div button{
-    margin-right: 10px;
+  margin-right: 20px;
 }
 
 .facilities-div {
-    margin: 20px
+  margin: 20px;
 }
 
-.trainer-div{
-    margin: 20px;
+.trainer-div {
+  margin: 20px;
 }
 
-.trainer-div button{
-    margin-right: 10px;
+.trainer-div button {
+  margin-right: 10px;
 }
 
 .health-record-form {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    max-width: 400px !important;
-    z-index: 100 !important;
-    text-align: center !important;
-    margin-left: -200px !important;
-    margin-top: -200px !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  max-width: 400px !important;
+  z-index: 100 !important;
+  text-align: center !important;
+  margin-left: -200px !important;
+  margin-top: -200px !important;
 }
 
 .health-record-form input {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .health-record-form button {
-    max-width: 100px;
-    margin: -20px 10px 10px;
+  max-width: 100px;
+  margin: -20px 10px 10px;
 }
 
 .health-plan-div {
-    /* background-image: linear-gradient(#E4A11B, black, #E4A11B); */
-    padding: 15px;
-    text-align: center;
-    height: 100vh;
-    /* color: white; */
+  padding: 15px;
+  text-align: center;
+  height: 100vh;
 }
 
 .health-plan-div button {
-    margin: 20px;
+  margin: 20px;
 }
 
 .health-plan-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .health-plan-2 {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .health-plan-2 button {
-    max-width: 200px;
+  max-width: 200px;
 }
 
 .health-plan-trainer {
-    margin: auto;
-    max-width: 400px;
+  margin: auto;
+  max-width: 400px;
 }
 
 .health-plan-trainer img {
-    max-width: 400px;
-    height: auto;
-    margin-bottom: 30px;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 30px;
 }
 
 .health-plan-workout {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 
 .health-plan-diet {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 
-.gym-staff-div button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.gym-staff-div button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.gym-staff-div button{
-    margin: auto;
+.gym-staff-div button {
+  margin: auto;
 }
 
 .choose-plans-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 
 .plan-card {
-    margin: 10px;
+  margin: 10px;
 }
 
 .card-details-form {
-    /* display: flex; */
-    justify-content: center;
-    max-width: auto;
+  justify-content: center;
+  max-width: auto;
 }
 
 .flex-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
