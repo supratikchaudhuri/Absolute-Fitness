@@ -1,0 +1,188 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import BMIChart from "../../components/BMIChart";
+
+function MemberHealthRecord() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const [memberHealthRecord, setMemberHealthRecord] = useState([]);
+  const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);
+  const [newHealthRecord, setNewHealthRecord] = useState({
+    height: "",
+    weight: "",
+    dateCalculated: "",
+  });
+
+  const handleChange = (e) => {
+    setNewHealthRecord((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const submitHealthRecord = async () => {
+    if (newHealthRecord.height < 0 || newHealthRecord.weight < 0) {
+      alert("Values cannot be negative");
+      return;
+    }
+    try {
+      const res = await axios.post(`/healthRecord`, {
+        ...newHealthRecord,
+        email: user.email,
+      });
+      getHealthRecords();
+      setShowHealthRecordForm(false);
+    } catch (err) {
+      alert("Invalid values. Please submit legitimate data.");
+    }
+  };
+
+  const getMemberBMIData = (memberHealthRecord) => {
+    memberHealthRecord.map((record) => {
+      const thisDate = new Date(record.date_calculated);
+      record.date =
+        thisDate.getFullYear() +
+        "-" +
+        (thisDate.getMonth() + 1) +
+        "-" +
+        thisDate.getDate();
+
+      delete record["record_id"];
+      delete record["email"];
+      delete record["date_calculated"];
+    });
+
+    return memberHealthRecord;
+  };
+
+  const getHealthRecords = async () => {
+    const res = await axios.get(`/healthRecord/${user.email}`);
+    setMemberHealthRecord(res.data);
+  };
+
+  useEffect(() => {
+    getHealthRecords();
+  }, []);
+
+  const memberHealtRecordDataRender = (
+    <div>
+      <div>
+        <BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart>
+      </div>
+
+      <div>
+        <button
+          className="btn btn-primary"
+          onClick={(e) => {
+            getHealthRecords();
+            setShowHealthRecordForm(true);
+          }}
+          outline
+        >
+          Add Health Record
+        </button>
+      </div>
+    </div>
+  );
+  console.log(memberHealthRecord);
+
+  const noMemberHealthRecordRender = (
+    <div>
+      <p>No health record Found.</p>
+
+      <button
+        className="btn btn-primary "
+        onClick={(e) => setShowHealthRecordForm(true)}
+      >
+        Add health record
+      </button>
+    </div>
+  );
+
+  const healthRecordForm = showHealthRecordForm && (
+    <form
+      className="form-group health-record-form"
+      onSubmit={submitHealthRecord}
+    >
+      <h5>Please enter the following records</h5>
+
+      <div className="mb-3">
+        <label for="height-input" className="form-label">
+          Height in cm
+        </label>
+        <input
+          type="number"
+          className="form-control"
+          id="height-input"
+          name="height"
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="mb-3">
+        <label for="weight-input" className="form-label">
+          Weight in kg
+        </label>
+        <input
+          type="number"
+          className="form-control"
+          id="weight-input"
+          name="weight"
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="date-input" className="form-label">
+          Date
+        </label>
+        <input
+          type="date"
+          className="form-control"
+          id="date-input"
+          max={new Date().toJSON().slice(0, 10)}
+          onChange={handleChange}
+          name="dateCalculated"
+          value={newHealthRecord.date}
+          required
+        />
+      </div>
+
+      <div className="d-flex justify-content-around">
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={(e) => {
+            getHealthRecords();
+            setShowHealthRecordForm(false);
+          }}
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+
+  const dispplayMemberHealthRecord = () => {
+    return (
+      <>
+        {healthRecordForm}
+
+        <div className="memerHealthRecordDiv">
+          {memberHealthRecord.length === 0
+            ? noMemberHealthRecordRender
+            : memberHealtRecordDataRender}
+        </div>
+      </>
+    );
+  };
+
+  return dispplayMemberHealthRecord();
+}
+
+export default MemberHealthRecord;
