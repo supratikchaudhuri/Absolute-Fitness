@@ -10,6 +10,19 @@ select {
   color: rgb(44, 41, 41);
 }
 
+.active {
+  /* make text bold; */
+  font-weight: bold;
+}
+
+.App {
+  margin-top: 75px;
+}
+
+.custom-navbar {
+  padding: 10px 20px !important;
+}
+
 .center {
   text-align: center;
   margin: auto;

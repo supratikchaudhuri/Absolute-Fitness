@@ -50,15 +50,14 @@ function App() {
   console.log(window.location.pathname);
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <div className="App">
-        <UserContextProvider>
-          <BrowserRouter>
-            {window.location.pathname !== "/login" &&
-            window.location.pathname !== "/signup" &&
-            window.location.pathname !== "/staff-login" ? (
-              <Navbar />
-            ) : null}
-
+      <UserContextProvider>
+        <BrowserRouter>
+          {window.location.pathname !== "/login" &&
+          window.location.pathname !== "/signup" &&
+          window.location.pathname !== "/staff-login" ? (
+            <Navbar />
+          ) : null}
+          <div className="App">
             <Routes>
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/staff-login" element={<StaffLogin />} />
@@ -152,9 +151,9 @@ function App() {
               <Route exact path="/" element={<Root />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
-          </BrowserRouter>
-        </UserContextProvider>
-      </div>
+          </div>
+        </BrowserRouter>
+      </UserContextProvider>
     </GoogleOAuthProvider>
   );
 }
