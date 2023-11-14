@@ -1,13 +1,23 @@
 import React from "react";
+import { useJwt } from "react-jwt";
 
 function Navbar() {
-  const user = JSON.parse(localStorage.getItem("user")) || {};
-  console.log(user);
-
   const logout = () => {
     localStorage.clear();
     window.location.href = "/login";
   };
+
+  let user = JSON.parse(localStorage.getItem("user")) || {};
+
+  const { decodedToken, isExpired } = useJwt(user.accessToken);
+  console.log(decodedToken);
+  console.log(isExpired);
+
+  if (decodedToken) {
+    user = { ...user, type: decodedToken.type };
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+  console.log(user);
 
   const path = window.location.pathname;
 

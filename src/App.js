@@ -17,6 +17,7 @@ import GymMembers from "./screens/GymMembers";
 import GymStaff from "./screens/GymStaff";
 import ProfilePage from "./screens/Profile/ProfilePage";
 import StaffProfilePage from "./screens/StaffProfilePage";
+import Dashboard from "./screens/GymServices/Dashboard";
 import PageNotFound from "./screens/PageNotFound";
 import GymEquipments from "./screens/Gym/GymEquipments";
 import PaymentPlans from "./screens/PaymentPlans";
@@ -67,6 +68,8 @@ function App() {
           <Routes>
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/branches" element={<Branches />} />
+
+            <Route exact path="/dashboard" element={<Dashboard />} />
 
             <Route exact path="/gym/:gym_id/trainers" element={<Trainers />} />
             <Route

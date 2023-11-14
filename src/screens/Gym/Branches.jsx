@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function Branches() {
-  const navigate = useNavigate();
-
   const [branches, setBranches] = useState([]);
 
   useEffect(() => {
@@ -38,30 +35,25 @@ function Branches() {
                 <p>Monthly membership fee: ${branch.membership_fee}</p>
 
                 <div className="center">
-                  <button
+                  <a
+                    href={`gym/${branch.gym_id}/facilities`}
                     className="btn btn-primary mt-2"
-                    onClick={(e) =>
-                      navigate(`../gym/${branch.gym_id}/facilities`)
-                    }
                   >
                     View Facilities
-                  </button>
-                  <button
-                    className="btn btn-primary ms-2 mt-2"
-                    onClick={(e) =>
-                      navigate(`../gym/${branch.gym_id}/trainers`)
-                    }
+                  </a>
+                  <a
+                    href={`gym/${branch.gym_id}/trainers`}
+                    className="btn btn-primary mt-2"
                   >
                     View Trainers
-                  </button>
-                  <button
-                    className="btn btn-primary ms-2 mt-2"
-                    onClick={(e) =>
-                      navigate(`../gym/${branch.gym_id}/equipments`)
-                    }
+                  </a>
+                  <a
+                    href={`gym/${branch.gym_id}/equipments`}
+                    className="btn btn-primary mt-2"
                   >
                     View Equipments
-                  </button>
+                  </a>
+                  {}
                 </div>
               </div>
             </div>

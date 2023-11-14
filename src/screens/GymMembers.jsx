@@ -15,7 +15,11 @@ function GymMembers() {
 
   const getMembers = async () => {
     try {
-      const res = await axios.get(`/gym/${user.gym_id}/members`);
+      const res = await axios.get(`/gym/${user.gym_id}/members`, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
       res.data.map((obj) => (obj.dob = obj.dob.substring(0, 10)));
       setMembers(res.data);
     } catch (err) {
@@ -35,7 +39,6 @@ function GymMembers() {
   };
 
   const deleteUser = async (e, email) => {
-    console.log(email);
     try {
       await axios.delete(`/user/${email}`);
       getMembers();
@@ -48,8 +51,6 @@ function GymMembers() {
   useEffect(() => {
     getMembers();
   }, []);
-
-  console.log(members);
 
   const search = (e) => {
     e.preventDefault();
