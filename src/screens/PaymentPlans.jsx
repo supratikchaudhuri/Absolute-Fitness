@@ -59,6 +59,8 @@ function PaymentPlans() {
     getGymMembershipPrices();
   }, []);
 
+  console.log(product);
+
   const subscribe = (priceId) => {
     const { email, name } = JSON.parse(localStorage.getItem("user"));
     createSubscription(name, email, priceId);
@@ -69,6 +71,11 @@ function PaymentPlans() {
       <div className="card-details-form">
         <CardElement />
       </div>
+
+      <stripe-buy-button
+        buy-button-id="buy_btn_1OC7VRSIsW8FsEuEUNqWmQm0"
+        publishable-key="pk_test_51N4IuESIsW8FsEuEN6OPvDtj95w1XrlO17O9gLaFcrDTRDQWc5CdCCHeqgKznFdcQAGhuHLbzDsFD1NJIlMpFgdW00iQ2mlzNY"
+      ></stripe-buy-button>
 
       <div className="choose-plans-div">
         {product.prices &&

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "../../components/Table";
-import { MDBCol, MDBInput, MDBRow, MDBBtn } from "mdb-react-ui-kit";
 
 function GymEquipments() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -33,7 +32,6 @@ function GymEquipments() {
       let updatedRecord = record;
       updatedRecord["image_url"] = <img src={record["image_url"]} />;
       delete updatedRecord.gym_id;
-      // delete updatedRecord.equipment_id
       updatedRecord["last_serviced"] =
         updatedRecord["last_serviced"] &&
         updatedRecord["last_serviced"].substring(0, 10);
@@ -73,44 +71,55 @@ function GymEquipments() {
         updateEquipment();
       }}
     >
-      <MDBRow className="mb-4 w-3">
-        <MDBCol>
-          <MDBInput
-            label="quantity"
+      <div className="mb-4 row w-3">
+        <div className="col">
+          <label htmlFor="quantity" className="form-label">
+            Quantity
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="quantity"
             name="quantity"
             value={updatedEquipment.quantity}
             onChange={handleChange}
           />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput
-            label="Last Serviced"
+        </div>
+        <div className="col">
+          <label htmlFor="last_serviced" className="form-label">
+            Last Serviced
+          </label>
+          <input
             type="date"
-            size="md"
-            onChange={handleChange}
+            className="form-control"
+            id="last_serviced"
             name="last_serviced"
             value={
               updatedEquipment.last_serviced
                 ? updatedEquipment.last_serviced
                 : ""
             }
+            onChange={handleChange}
             max={new Date().toJSON().slice(0, 10)}
           />
-        </MDBCol>
-      </MDBRow>
+        </div>
+      </div>
 
-      <MDBBtn type="submit" className="mb-0" block>
+      <button
+        type="submit"
+        className="btn btn-primary mb-0"
+        style={{ width: "100%" }}
+      >
         Update
-      </MDBBtn>
-      <MDBBtn
+      </button>
+      <button
         type="button"
-        color="danger"
+        className="btn btn-danger mb-0"
         onClick={(e) => setShowEditForm(false)}
-        className="mb-0"
-        block
+        style={{ width: "100%" }}
       >
         Cancel
-      </MDBBtn>
+      </button>
     </form>
   );
 

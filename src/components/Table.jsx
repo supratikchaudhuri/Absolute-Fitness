@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  MDBTable,
-  MDBTableHead,
-  MDBTableBody,
-  MDBIcon,
-} from "mdb-react-ui-kit";
 
 function Table({
   content,
@@ -26,74 +20,74 @@ function Table({
 
   return (
     <>
-      <MDBTable className="table mt-0 table" align="middle">
-        <MDBTableHead light>
-          <tr>
-            {cols.map((item) => (
-              <th scope="col">{item.toUpperCase()}</th>
+      <table
+        className="table mt-0"
+        align="middle"
+        style={{ maxWidth: "1400px", margin: "auto" }}
+      >
+        <thead className="bg-light">
+          <tr className="center ">
+            {cols.map((item, index) => (
+              <th className="active" key={index} scope="col">
+                {item.toUpperCase().replace("_", " ")}
+              </th>
             ))}
             {user.type === "admin" && <th scope="col"></th>}
           </tr>
-        </MDBTableHead>
-        <MDBTableBody>
-          {rows.map((row, idx) => (
-            <tr key={idx}>
-              {row.map((item) => (
-                <td>{item !== null ? item : "--"}</td>
+        </thead>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={rowIndex} className="center">
+              {row.map((item, colIndex) => (
+                <td className="m-auto" key={colIndex}>
+                  {item !== null ? item : "--"}
+                </td>
               ))}
 
-              <div className="update-btn-table">
-                {user.type === "admin" && content === "staff" && (
+              {user.type === "admin" && content === "staff" && (
+                <td>
+                  <i
+                    style={{ marginRight: "30px" }}
+                    className="fas fa-pen icon"
+                    onClick={(e) => {
+                      displayEditForm(true);
+                      setStaffDetails(data[rowIndex]);
+                    }}
+                  ></i>
+                </td>
+              )}
+
+              {user.type === "admin" && content === "equipments" && (
+                <td>
+                  <i
+                    style={{ marginRight: "30px" }}
+                    className="fas fa-pen icon"
+                    onClick={(e) => {
+                      displayEditForm(true);
+                      setEquipments([
+                        {
+                          ...data[rowIndex],
+                          image_url: data[rowIndex].image_url.props.src,
+                        },
+                      ]);
+                    }}
+                  ></i>
+                </td>
+              )}
+
+              {user.type === "admin" &&
+                (content === "staff" || content === "members") && (
                   <td>
-                    <MDBIcon
-                      style={{ marginRight: "30px" }}
-                      className="icon"
-                      fas
-                      icon="pen"
-                      onClick={(e) => {
-                        displayEditForm(true);
-                        setStaffDetails(data[idx]);
-                      }}
-                    />
+                    <i
+                      className="fas fa-trash icon"
+                      onClick={(e) => deleteItem(e, row[0])}
+                    ></i>
                   </td>
                 )}
-
-                {user.type === "admin" && content === "equipments" && (
-                  <td>
-                    <MDBIcon
-                      style={{ marginRight: "30px" }}
-                      className="icon"
-                      fas
-                      icon="pen"
-                      onClick={(e) => {
-                        displayEditForm(true);
-                        setEquipments([
-                          {
-                            ...data[idx],
-                            image_url: data[idx].image_url.props.src,
-                          },
-                        ]);
-                      }}
-                    />
-                  </td>
-                )}
-
-                {user.type === "admin" &&
-                  (content === "staff" || content === "members") && (
-                    <td>
-                      <MDBIcon
-                        className="icon"
-                        fas
-                        icon="trash"
-                        onClick={(e) => deleteItem(e, row[0])}
-                      />
-                    </td>
-                  )}
-              </div>
             </tr>
           ))}
-        </MDBTableBody>
-      </MDBTable>
+        </tbody>
+      </table>
     </>
   );
 }
