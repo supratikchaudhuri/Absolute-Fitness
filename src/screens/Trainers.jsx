@@ -26,9 +26,12 @@ function Trainers() {
   console.log(trainers);
 
   return trainers.length > 0 ? (
-    <div id="trainer-div" className="container">
-      <h4 className="center mt-3 mb-3">Meet The Team</h4>
-      <div className="row">
+    <div
+      id="trainer-div"
+      className="container d-flex flex-column align-items-center"
+    >
+      <h4 className="page-title">Meet The Team</h4>
+      <div className="row mt-3">
         {trainers.map((trainer, index) => (
           <div
             className="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-4"

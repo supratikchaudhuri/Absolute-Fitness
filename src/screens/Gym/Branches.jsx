@@ -18,10 +18,13 @@ function Branches() {
   }, []);
 
   return (
-    <div id="branches-div" className="container">
+    <div
+      id="branches-div"
+      className="container d-flex flex-column align-items-center"
+    >
       <h4 className="page-title">Absolute Fitness Branches</h4>
 
-      <div className="row">
+      <div className="row mt-3">
         {branches.map((branch) => (
           <div className="col-xs-12 col-sm-6 col-md-4 mb-4">
             <div className="card h-100">

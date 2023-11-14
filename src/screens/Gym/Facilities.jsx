@@ -27,10 +27,13 @@ function Facilities() {
   console.log(facilities);
 
   return facilities.length > 0 ? (
-    <div id="facilities-div" className="container">
+    <div
+      id="facilities-div"
+      className="container d-flex flex-column align-items-center"
+    >
       <h4 className="page-title">Facilities</h4>
 
-      <div className="row">
+      <div className="row mt-3">
         {facilities.map((facility, index) => (
           <div className="col-xs-12 col-md-4 mb-4" key={index}>
             <div className="card h-100">
