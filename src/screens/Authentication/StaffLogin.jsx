@@ -6,8 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function StaffLogin() {
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,27 +13,25 @@ function StaffLogin() {
     try {
       localStorage.clear();
       const res = await axios.post("staff/login", { username, password });
-      console.log(res.data);
+      const user = res.data;
 
       try {
-        const res1 = await axios.get(`staff/${username}`);
-        const user = res1.data;
         localStorage.setItem("user", JSON.stringify(user));
         console.log(JSON.parse(localStorage.getItem("user")));
 
-        const res2 = await axios.get(`gym/${user.gym_id}`);
+        const res2 = await axios.get(`gym/${user.gym_id}`, {
+          headers: { Authorization: `Bearer ${user.accessToken}` },
+        });
         const user_gym = res2.data;
         localStorage.setItem("user_gym", JSON.stringify(user_gym));
-        console.log(JSON.parse(localStorage.getItem("user_gym")));
+
+        window.location.href = "/home";
       } catch (err1) {
         alert(err1.response.data.msg);
       }
-
-      navigate("/home");
-      window.location.reload();
     } catch (err) {
       alert(err.response.data.msg || err);
-      setPassword("");
+      //   setPassword("");
     }
   };
 

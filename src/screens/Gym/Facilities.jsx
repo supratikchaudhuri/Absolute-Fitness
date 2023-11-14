@@ -28,7 +28,7 @@ function Facilities() {
 
   return facilities.length > 0 ? (
     <div id="facilities-div" className="container">
-      <h4 className="center mt-3 mb-3">Facilities</h4>
+      <h4 className="page-title">Facilities</h4>
 
       <div className="row">
         {facilities.map((facility, index) => (

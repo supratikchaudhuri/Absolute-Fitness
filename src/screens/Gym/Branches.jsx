@@ -22,11 +22,11 @@ function Branches() {
 
   return (
     <div id="branches-div" className="container">
-      <h4 className="center mt-3 mb-3">Absolute Fitness Branches</h4>
+      <h4 className="page-title">Absolute Fitness Branches</h4>
 
       <div className="row">
         {branches.map((branch) => (
-          <div className="col-xs-12 col-md-4 mb-4">
+          <div className="col-xs-12 col-sm-6 col-md-4 mb-4">
             <div className="card h-100">
               <img src={branch.image_url} className="card-img-top" alt="..." />
 
@@ -37,20 +37,32 @@ function Branches() {
                 <p>{branch.zip}</p>
                 <p>Monthly membership fee: ${branch.membership_fee}</p>
 
-                <button
-                  className="btn btn-primary mt-2"
-                  onClick={(e) =>
-                    navigate(`../gym/${branch.gym_id}/facilities`)
-                  }
-                >
-                  View Facilities
-                </button>
-                <button
-                  className="btn btn-primary ms-2 mt-2"
-                  onClick={(e) => navigate(`../gym/${branch.gym_id}/trainers`)}
-                >
-                  View Trainers
-                </button>
+                <div className="center">
+                  <button
+                    className="btn btn-primary mt-2"
+                    onClick={(e) =>
+                      navigate(`../gym/${branch.gym_id}/facilities`)
+                    }
+                  >
+                    View Facilities
+                  </button>
+                  <button
+                    className="btn btn-primary ms-2 mt-2"
+                    onClick={(e) =>
+                      navigate(`../gym/${branch.gym_id}/trainers`)
+                    }
+                  >
+                    View Trainers
+                  </button>
+                  <button
+                    className="btn btn-primary ms-2 mt-2"
+                    onClick={(e) =>
+                      navigate(`../gym/${branch.gym_id}/equipments`)
+                    }
+                  >
+                    View Equipments
+                  </button>
+                </div>
               </div>
             </div>
           </div>
