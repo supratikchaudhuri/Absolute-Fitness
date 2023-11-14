@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertBox from "../../components/AlertBox";
 
 function HealthPlan() {
   const navigate = useNavigate();
@@ -94,9 +95,10 @@ function HealthPlan() {
       </div>
     </div>
   ) : (
-    <div className="mt-3 col width-100 alert alert-primary">
-      No health plan. Please contact admin to assign a plan
-    </div>
+    <AlertBox
+      message={"No health plan. Please contact admin to assign a plan"}
+      type="primary"
+    />
   );
 }
 

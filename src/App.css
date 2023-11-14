@@ -10,8 +10,21 @@ select {
   color: rgb(44, 41, 41);
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .active {
-  font-weight: bold !important;
+  font-weight: 600 !important;
+}
+
+.nav-active {
+  font-weight: 600 !important;
+}
+
+.alert-box {
+  width: fit-content;
+  margin: auto;
 }
 
 .App {
@@ -47,10 +60,6 @@ td {
   align-items: center;
   max-width: 45vw;
   margin: 100px auto;
-}
-
-.profile-div .avatar {
-  max-width: 100px;
 }
 
 td img {

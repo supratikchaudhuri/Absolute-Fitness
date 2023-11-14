@@ -1,27 +1,61 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
 function Navbar() {
-  const navigate = useNavigate();
-  const [showNavRight, setShowNavRight] = useState(false);
-
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || {};
   console.log(user);
-  const userType = user.type;
 
   const logout = () => {
     localStorage.clear();
-    navigate("/login");
+    window.location.href = "/login";
   };
+
+  const path = window.location.pathname;
+
+  const navBarLink = [
+    {
+      name: "Home",
+      link: "/home",
+    },
+    {
+      name: "Pricing",
+      link: "/pricing",
+    },
+  ];
+
+  const adminLinks = [
+    {
+      name: "Dashboard",
+      link: "/dashboard",
+    },
+  ];
+
+  const trainerLinks = [
+    {
+      name: "Client",
+      link: "/client",
+    },
+  ];
+
+  const customerLinks = [
+    {
+      name: "Health Plan",
+      link: "/health-plan",
+    },
+    {
+      name: "Health Progress",
+      link: "/health-progress",
+    },
+  ];
 
   return (
     <>
       <nav className="custom-navbar fixed-top navbar navbar-dark bg-primary navbar-expand-lg">
-        <a class="navbar-brand" href=".">
-          Ab fit
+        <a className="navbar-brand" href=".">
+          <span>Absolute Fitness</span>{" "}
+          <i className="ms-2 fa-solid fa-dumbbell"></i>
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#af-navbar"
@@ -30,28 +64,77 @@ function Navbar() {
           aria-label="Toggle navigation"
           style={{ border: "1px solid white" }}
         >
-          <span class="navbar-toggler-icon"></span>
+          <i className="fa-solid fa-bars"></i>
         </button>
         <div className="collapse navbar-collapse" id="af-navbar">
           <ul className="navbar-nav">
-            <li className="nav-item active">
-              <a className="nav-link" href=".">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href=".">
-                Features
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href=".">
-                Pricing
-              </a>
-            </li>
+            {/* common links */}
+            {navBarLink.map((item) => {
+              return (
+                <li
+                  className={`nav-item ${
+                    path.includes(item.link) ? "active" : ""
+                  }`}
+                >
+                  <a className="nav-link" href={item.link}>
+                    {item.name}
+                  </a>
+                </li>
+              );
+            })}
+
+            {/* admin links */}
+            {user.type === "admin" &&
+              adminLinks.map((item) => {
+                return (
+                  <li
+                    className={`nav-item ${
+                      path.includes(item.link) ? "active" : ""
+                    }`}
+                  >
+                    <a className="nav-link" href={item.link}>
+                      {item.name}
+                    </a>
+                  </li>
+                );
+              })}
+
+            {/* trainer links */}
+            {user.type === "trainer" &&
+              trainerLinks.map((item) => {
+                return (
+                  <li
+                    className={`nav-item ${
+                      path.includes(item.link) ? "active" : ""
+                    }`}
+                  >
+                    <a className="nav-link" href={item.link}>
+                      {item.name}
+                    </a>
+                  </li>
+                );
+              })}
+
+            {/* customer links */}
+            {user.type === "customer" &&
+              customerLinks.map((item) => {
+                return (
+                  <li
+                    className={`nav-item ${
+                      path.includes(item.link) ? "active" : ""
+                    }`}
+                  >
+                    <a className="nav-link" href={item.link}>
+                      {item.name}
+                    </a>
+                  </li>
+                );
+              })}
+
+            {/* user links */}
           </ul>
           <ul className="navbar-nav ms-auto">
-            <li class="nav-item dropdown">
+            <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="."
@@ -63,17 +146,29 @@ function Navbar() {
               >
                 {user.name}
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href=".">
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="/profile">
                   Profile
                 </a>
-                <a class="dropdown-item" href=".">
-                  Subscriptions
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href=".">
+                {user.type === "customer" && (
+                  <a className="dropdown-item" href="/payment">
+                    My Subscription
+                  </a>
+                )}
+                <div className="dropdown-divider"></div>
+                <p
+                  className="dropdown-item mb-0 pointer"
+                  onClick={(e) => {
+                    var ans = window.confirm(
+                      "Are you sure you want to log out?"
+                    );
+                    if (ans) {
+                      logout();
+                    }
+                  }}
+                >
                   Log Out
-                </a>
+                </p>
               </div>
             </li>
           </ul>

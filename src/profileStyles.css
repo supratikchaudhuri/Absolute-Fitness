@@ -1,0 +1,41 @@
+.profile-details {
+  margin-top: 20px;
+  padding: 0 40px;
+}
+/* .profile-details .bars,
+.profile-details .link {
+  
+} */
+h4 {
+  font-weight: 300;
+  display: inline;
+  font-size: 20px;
+  margin-left: 30px;
+}
+.title {
+  font-weight: 400;
+  font-size: 24px;
+}
+h2 {
+  margin: 10px 0 40px;
+  font-weight: 300;
+  font-size: 30px;
+}
+.main .profile-details .avatar {
+  font-size: 8rem;
+}
+.top {
+  top: 75px;
+}
+.tr-btn {
+  color: rgb(102, 98, 98);
+}
+.tr-btn:hover {
+  color: rgb(102, 98, 98);
+  background-color: rgb(225, 225, 225);
+}
+.avatar {
+  max-width: 300px;
+  font-size: 200px;
+  color: rgb(0, 123, 255);
+}
