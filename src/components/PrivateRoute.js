@@ -8,9 +8,18 @@ const PrivateRoute = ({ redirectPath = "/login", children }) => {
   if (!user.accessToken) {
     return (
       <>
-        <a className="btn btn-primary" href="/login">
-          Please Login to acess
-        </a>
+        <div class="card m-4">
+          <h5 class="card-header">Thanks for trusting Absolute Fitness</h5>
+          <div class="card-body">
+            <h5 class="card-title">Please Log in to enjoy access</h5>
+            <p class="card-text">
+              This service may require subscriptions. Please login to continue.
+            </p>
+            <a href="/login" class="btn btn-primary">
+              Login Here
+            </a>
+          </div>
+        </div>
       </>
     );
   }
