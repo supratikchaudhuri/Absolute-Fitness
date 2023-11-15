@@ -141,7 +141,7 @@ function App() {
             />
 
             <Route element={<PrivateRoute />}>
-              <Route path="/nutrition" element={<NutrionIX />} />
+              <Route index path="/nutrition" element={<NutrionIX />} />
               {/* <Route path="dashboard" element={<Dashboard />} /> */}
             </Route>
 

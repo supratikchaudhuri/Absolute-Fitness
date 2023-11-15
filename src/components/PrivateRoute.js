@@ -3,8 +3,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-const PrivateRoute = ({ redirectPath = "/login", children }) => {
+const PrivateRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user")) || {};
+  console.log(children);
+
   if (!user.accessToken) {
     return (
       <>
@@ -24,7 +26,7 @@ const PrivateRoute = ({ redirectPath = "/login", children }) => {
     );
   }
 
-  return children ? children : <Outlet />;
+  return children || <Outlet />;
 };
 
 export default PrivateRoute;

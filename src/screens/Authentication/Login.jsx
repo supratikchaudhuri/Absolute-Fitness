@@ -13,6 +13,7 @@ function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
@@ -87,13 +88,24 @@ function Login() {
           <label for="password-input" className="form-label mb-2">
             Password
           </label>
-          <input
-            id="password-input"
-            className="form-control form-control mb-4"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
+          <div className="row">
+            <div className="col-11">
+              <input
+                id="password-input"
+                className="form-control form-control mb-4"
+                type={showPassword ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+            </div>
+            <div
+              className="col-1"
+              onClick={(e) => setShowPassword(!showPassword)}
+            >
+              <i class="fa-solid fa-eye"></i>
+            </div>
+          </div>
+
           <p className="center">
             <button
               className=" center btn btn-dark mb-2 px-5"

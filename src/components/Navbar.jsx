@@ -158,7 +158,7 @@ function Navbar() {
             )}
           </ul>
 
-          {user.accessToken && (
+          {user.accessToken ? (
             <ul className="navbar-nav ms-auto">
               <li className="nav-item dropdown">
                 <a
@@ -196,6 +196,14 @@ function Navbar() {
                     Log Out
                   </p>
                 </div>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="/login">
+                  Login
+                </a>
               </li>
             </ul>
           )}

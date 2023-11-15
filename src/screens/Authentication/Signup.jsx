@@ -27,6 +27,7 @@ function Signup() {
   });
 
   const [gymAddressId, setGymAddressId] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     // getting all gym locations
@@ -160,15 +161,25 @@ function Signup() {
               <label for="password-input" className="form-label mb-2">
                 Password
               </label>
-              <input
-                id="password-input"
-                className="form-control form-control mb-4"
-                type="password"
-                name="password"
-                onChange={handleChange}
-                value={userDetails.password}
-                required
-              />
+              <div className="row">
+                <div className="col-11">
+                  <input
+                    id="password-input"
+                    className="form-control form-control mb-4"
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    onChange={handleChange}
+                    value={userDetails.password}
+                    required
+                  />
+                </div>
+                <div
+                  className="col-1"
+                  onClick={(e) => setShowPassword(!showPassword)}
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </div>
+              </div>
             </div>
           </div>
 
