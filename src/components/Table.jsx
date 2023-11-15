@@ -27,11 +27,16 @@ function Table({
       >
         <thead className="bg-light">
           <tr className="center ">
-            {cols.map((item, index) => (
-              <th className="active" key={index} scope="col">
-                {item.toUpperCase().replace("_", " ")}
-              </th>
-            ))}
+            {cols.map(
+              (item, index) => (
+                console.log(item),
+                (
+                  <th className="active" key={index} scope="col">
+                    {item.toUpperCase().replace(/_/g, " ").replace("NF", "")}
+                  </th>
+                )
+              )
+            )}
             {user.type === "admin" && <th scope="col"></th>}
           </tr>
         </thead>

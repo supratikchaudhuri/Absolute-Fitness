@@ -30,6 +30,14 @@ function Navbar() {
       name: "Pricing",
       link: "/pricing",
     },
+    {
+      name: "Check Nutrition",
+      link: "/nutrition",
+    },
+    {
+      name: "Check Excercise",
+      link: "/excercise",
+    },
   ];
 
   const adminLinks = [
@@ -48,8 +56,8 @@ function Navbar() {
 
   const memberLinks = [
     {
-      name: "Health Plan",
-      link: "/health-plan",
+      name: "Health Record",
+      link: "/health-record",
     },
     {
       name: "Health Progress",

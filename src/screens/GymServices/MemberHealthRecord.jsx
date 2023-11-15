@@ -4,6 +4,7 @@ import BMIChart from "../../components/BMIChart";
 
 function MemberHealthRecord() {
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
 
   const [memberHealthRecord, setMemberHealthRecord] = useState([]);
   const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);
@@ -20,16 +21,25 @@ function MemberHealthRecord() {
     }));
   };
 
-  const submitHealthRecord = async () => {
+  const submitHealthRecord = async (e) => {
+    e.preventDefault();
     if (newHealthRecord.height < 0 || newHealthRecord.weight < 0) {
       alert("Values cannot be negative");
       return;
     }
     try {
-      const res = await axios.post(`/healthRecord`, {
-        ...newHealthRecord,
-        email: user.email,
-      });
+      const res = await axios.post(
+        `/healthRecord`,
+        {
+          ...newHealthRecord,
+          email: user.email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+      );
       getHealthRecords();
       setShowHealthRecordForm(false);
     } catch (err) {
@@ -56,7 +66,11 @@ function MemberHealthRecord() {
   };
 
   const getHealthRecords = async () => {
-    const res = await axios.get(`/healthRecord/${user.email}`);
+    const res = await axios.get(`/healthRecord/${user.email}`, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
     setMemberHealthRecord(res.data);
   };
 
@@ -102,7 +116,7 @@ function MemberHealthRecord() {
   const healthRecordForm = showHealthRecordForm && (
     <form
       className="form-group health-record-form"
-      onSubmit={submitHealthRecord}
+      onSubmit={(e) => submitHealthRecord(e)}
     >
       <h5>Please enter the following records</h5>
 

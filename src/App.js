@@ -38,6 +38,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect } from "react";
 import EditProfile from "./screens/Profile/EditProfile";
+import NutrionIX from "./screens/NutrionIX";
+import NUtritionIXExcercise from "./screens/NUtritionIXExcercise";
 
 /************************ Imports complete ************************/
 
@@ -95,7 +97,7 @@ function App() {
             />
             <Route
               exact
-              path="/user/:userId/health-record"
+              path="/health-record"
               element={<MemberHealthRecord />}
             />
             <Route exact path="/health-plan" element={<HealthPlan />} />
@@ -137,6 +139,10 @@ function App() {
                 </Elements>
               }
             />
+
+            <Route exact path="nutrition" element={<NutrionIX />} />
+
+            <Route exact path="/exercise" element={<NUtritionIXExcercise />} />
 
             {/* tema members in root */}
             <Route exact path="/" element={<Root />} />

@@ -40,19 +40,19 @@ function Branches() {
                 <div className="center">
                   <a
                     href={`gym/${branch.gym_id}/facilities`}
-                    className="btn btn-primary mt-2"
+                    className="btn btn-primary mt-2 btn-sm"
                   >
                     View Facilities
                   </a>
                   <a
                     href={`gym/${branch.gym_id}/trainers`}
-                    className="btn btn-primary mt-2"
+                    className="btn btn-primary mt-2 ms-2 btn-sm"
                   >
                     View Trainers
                   </a>
                   <a
                     href={`gym/${branch.gym_id}/equipments`}
-                    className="btn btn-primary mt-2"
+                    className="btn btn-primary mt-2 ms-2 btn-sm"
                   >
                     View Equipments
                   </a>
