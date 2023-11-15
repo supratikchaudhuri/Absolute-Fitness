@@ -1,19 +1,21 @@
-import React from 'react';
-import { Navigate, Route } from 'react-router-dom';
+// https://www.robinwieruch.de/react-router-private-routes/
 
-export default function PrivateRoute({ component: Component, ...rest }) {
-  const user = localStorage.getItem('user');
-  
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        user ? (
-          <Component {...props}></Component>
-        ) : (
-          <Navigate to="/signup" />
-        )
-      }
-    ></Route>
-  );
-}
+import React from "react";
+import { Outlet } from "react-router-dom";
+
+const PrivateRoute = ({ redirectPath = "/login", children }) => {
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  if (!user.accessToken) {
+    return (
+      <>
+        <a className="btn btn-primary" href="/login">
+          Please Login to acess
+        </a>
+      </>
+    );
+  }
+
+  return children ? children : <Outlet />;
+};
+
+export default PrivateRoute;

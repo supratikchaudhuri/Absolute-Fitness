@@ -46,7 +46,8 @@ const NutrionIX = () => {
             key.includes(interestKey)
           );
           if (matchingInterest) {
-            selectedObject[key] = food[key];
+            const newKey = matchingInterest.replace("_", " ");
+            selectedObject[newKey] = food[key];
           }
         });
 
@@ -60,7 +61,7 @@ const NutrionIX = () => {
   };
 
   return (
-    <div className="container">
+    <div className="m-4">
       <form className=" form-control p-3 mb-3" onSubmit={fetchNutritionDate}>
         <label for="query-ta">Enter items: </label>
         <textarea

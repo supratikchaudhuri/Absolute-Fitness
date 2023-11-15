@@ -37,6 +37,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import EditProfile from "./screens/Profile/EditProfile";
 import NutrionIX from "./screens/NutrionIX";
 import NUtritionIXExcercise from "./screens/NUtritionIXExcercise";
+import PrivateRoute from "./components/PrivateRoute";
 
 /************************ Imports complete ************************/
 
@@ -48,9 +49,6 @@ const STRIPE_PUBLISHABLE_KEY =
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 function App() {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  console.log(window.location.pathname);
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <BrowserRouter>
@@ -136,7 +134,16 @@ function App() {
               }
             />
 
-            <Route exact path="nutrition" element={<NutrionIX />} />
+            <Route
+              exact
+              path="/nutrition"
+              element={<PrivateRoute component={NutrionIX} />}
+            />
+
+            <Route element={<PrivateRoute />}>
+              <Route path="/nutrition" element={<NutrionIX />} />
+              {/* <Route path="dashboard" element={<Dashboard />} /> */}
+            </Route>
 
             <Route exact path="/exercise" element={<NUtritionIXExcercise />} />
 
