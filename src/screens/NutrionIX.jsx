@@ -61,17 +61,15 @@ const NutrionIX = () => {
 
   return (
     <div className="container">
-      <form
-        className="center form-control p-3 mb-3"
-        onSubmit={fetchNutritionDate}
-      >
-        {/* <div className="row"> */}
+      <form className=" form-control p-3 mb-3" onSubmit={fetchNutritionDate}>
+        <label for="query-ta">Enter items: </label>
         <textarea
-          className="form-control"
+          id="query-ta"
+          className="form-control mt-1"
           rows="3"
           name="query"
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Enter your food items here"
+          placeholder={`Enter your food items here ${"("}ex: "1 chicken salad, 1 cup orange juice, 2 scoops whey protein)"`}
           required
         >
           {query}
@@ -80,12 +78,11 @@ const NutrionIX = () => {
         <button className="mt-2 btn btn-primary" type="submit">
           Check Nutrition Content
         </button>
-        {/* </div> */}
       </form>
 
       {nutrients && nutrients.length && (
         <>
-          <Table data={nutrients} />
+          <Table data={nutrients} content="nutrition" />
           <AlertBox
             message="Data shown are approximate values. It is not 100% accurate."
             type="warning"

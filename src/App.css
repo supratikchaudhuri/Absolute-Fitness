@@ -41,6 +41,10 @@ td {
   vertical-align: middle;
 }
 
+.bold {
+  font-weight: 600;
+}
+
 .center {
   text-align: center;
   margin: auto;

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Table from "../../components/Table";
+import { useParams } from "react-router-dom";
 
 function GymEquipments() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { gym_id } = useParams();
 
   const [equipments, setEquipments] = useState([]);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -14,7 +15,7 @@ function GymEquipments() {
 
   const getGymEquipments = async () => {
     try {
-      const res = await axios.get(`/gym/${user.gym_id}/equipments`);
+      const res = await axios.get(`/gym/${gym_id}/equipments`);
       setEquipments(processEquipmentData(res.data));
     } catch (err) {
       alert(err);
@@ -37,7 +38,6 @@ function GymEquipments() {
         updatedRecord["last_serviced"].substring(0, 10);
       updatedEquipmentData.push(updatedRecord);
     }
-    console.log(updatedEquipmentData);
     setUpdatedEquipment(updatedEquipmentData[0]);
     return updatedEquipmentData;
   };
@@ -45,7 +45,7 @@ function GymEquipments() {
   const updateEquipment = async () => {
     try {
       const res = await axios.put(
-        `/gym/${user.gym_id}/equipment/${updatedEquipment.equipment_id}`,
+        `/gym/${gym_id}/equipment/${updatedEquipment.equipment_id}`,
         updatedEquipment
       );
       getGymEquipments();

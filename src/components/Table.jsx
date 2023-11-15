@@ -8,7 +8,7 @@ function Table({
   setStaffDetails,
   setEquipments,
 }) {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || {};
 
   const cols = Object.keys(data[0]);
 
@@ -17,6 +17,8 @@ function Table({
     rows.push(Object.values(data[i]));
   }
   console.log(data);
+  console.log(cols);
+  console.log(rows);
 
   return (
     <>
@@ -26,18 +28,16 @@ function Table({
         style={{ maxWidth: "1400px", margin: "auto" }}
       >
         <thead className="bg-light">
-          <tr className="center ">
-            {cols.map(
-              (item, index) => (
-                console.log(item),
-                (
-                  <th className="active" key={index} scope="col">
-                    {item.toUpperCase().replace(/_/g, " ").replace("NF", "")}
-                  </th>
-                )
-              )
-            )}
-            {user.type === "admin" && <th scope="col"></th>}
+          <tr className="center">
+            {cols.map((item, index) => (
+              <th key={index} scope="col">
+                <strong>{item.toUpperCase()}</strong>
+              </th>
+            ))}
+            {user.type === "admin" &&
+              (content === "equipments" || content === "members") && (
+                <th scope="col"></th>
+              )}
           </tr>
         </thead>
         <tbody>
