@@ -38,6 +38,7 @@ import EditProfile from "./screens/Profile/EditProfile";
 import NutrionIX from "./screens/NutrionIX";
 import NUtritionIXExcercise from "./screens/NUtritionIXExcercise";
 import PrivateRoute from "./components/PrivateRoute";
+import Franchise from "./screens/Gym/Franchise";
 
 /************************ Imports complete ************************/
 
@@ -64,6 +65,7 @@ function App() {
 
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/branches" element={<Branches />} />
+            <Route exact path="/gym/:gym_id" element={<Franchise />} />
 
             <Route exact path="/dashboard" element={<Dashboard />} />
 
