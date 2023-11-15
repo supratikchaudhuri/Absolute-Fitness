@@ -15,7 +15,7 @@ select {
 }
 
 .active {
-  font-weight: 600 !important;
+  color: white !important;
 }
 
 .nav-active {

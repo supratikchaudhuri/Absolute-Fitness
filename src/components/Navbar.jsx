@@ -89,12 +89,13 @@ function Navbar() {
             {/* common links */}
             {navBarLink.map((item) => {
               return (
-                <li
-                  className={`nav-item ${
-                    path.includes(item.link) ? "active" : ""
-                  }`}
-                >
-                  <a className="nav-link" href={item.link}>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link ${
+                      path.includes(item.link) ? "active" : ""
+                    }`}
+                    href={item.link}
+                  >
                     {item.name}
                   </a>
                 </li>
@@ -105,12 +106,13 @@ function Navbar() {
             {user.type === "admin" &&
               adminLinks.map((item) => {
                 return (
-                  <li
-                    className={`nav-item ${
-                      path.includes(item.link) ? "active" : ""
-                    }`}
-                  >
-                    <a className="nav-link" href={item.link}>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${
+                        path.includes(item.link) ? "active" : ""
+                      }`}
+                      href={item.link}
+                    >
                       {item.name}
                     </a>
                   </li>
@@ -121,12 +123,13 @@ function Navbar() {
             {user.type === "trainer" &&
               trainerLinks.map((item) => {
                 return (
-                  <li
-                    className={`nav-item ${
-                      path.includes(item.link) ? "active" : ""
-                    }`}
-                  >
-                    <a className="nav-link" href={item.link}>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${
+                        path.includes(item.link) ? "active" : ""
+                      }`}
+                      href={item.link}
+                    >
                       {item.name}
                     </a>
                   </li>
@@ -137,12 +140,13 @@ function Navbar() {
             {user.type === "member" &&
               memberLinks.map((item) => {
                 return (
-                  <li
-                    className={`nav-item ${
-                      path.includes(item.link) ? "active" : ""
-                    }`}
-                  >
-                    <a className="nav-link" href={item.link}>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${
+                        path.includes(item.link) ? "active" : ""
+                      }`}
+                      href={item.link}
+                    >
                       {item.name}
                     </a>
                   </li>
