@@ -17,12 +17,12 @@ function Signup() {
   const navigate = useNavigate();
 
   const [userDetails, setUserDetails] = useState({
-    name: "",
+    name: null,
     phone: null,
-    email: "",
+    email: null,
     password: null,
     dob: null,
-    sex: "",
+    sex: null,
     gymId: -1,
   });
 
@@ -42,11 +42,6 @@ function Signup() {
 
     getAllGyms();
   }, []);
-  //console.log(gymAddressId);  // need to print or above useEffect don't work as expected
-
-  useEffect(() => {
-    console.log(userDetails); //using this cuz setState lagging one step behind
-  }, [userDetails]);
 
   const handleChange = (e) => {
     setUserDetails((o) => ({
@@ -54,37 +49,40 @@ function Signup() {
       [e.target.name]: e.target.value,
     }));
   };
+  console.log(userDetails);
 
-  const signup = async () => {
-    if (
-      validateText(userDetails.name) &&
-      validatemail(userDetails.email) &&
-      validPhone(userDetails.phone) &&
-      userDetails.dob !== "" &&
-      userDetails.sex !== "" &&
-      userDetails.gymId !== -1 &&
-      validatePassword(userDetails.password)
-    ) {
+  const signup = async (e) => {
+    e.preventDefault();
+    console.log(userDetails);
+    // if (
+    //   validateText(userDetails.name) &&
+    //   validatemail(userDetails.email) &&
+    //   validPhone(userDetails.phone) &&
+    //   userDetails.dob !== "" &&
+    //   userDetails.sex !== "" &&
+    //   userDetails.gymId !== -1 &&
+    //   validatePassword(userDetails.password)
+    // ) {
+    try {
+      const res = await axios.post("user/signup", userDetails);
+      console.log(userDetails);
       try {
-        const res = await axios.post("user/signup", userDetails);
-
-        try {
-          const res1 = await axios.get(`user/${userDetails.email}`);
-          const user = res1.data;
-          localStorage.setItem("user", JSON.stringify(user));
-        } catch (err1) {
-          console.log(err1);
-        }
-
-        navigate("/home");
-      } catch (err) {
-        alert(err.response.data.msg);
+        const res1 = await axios.get(`user/${userDetails.email}`);
+        const user = res1.data;
+        localStorage.setItem("user", JSON.stringify(user));
+      } catch (err1) {
+        console.log(err1);
       }
-    } else {
-      alert("Please fill all the fields correctly");
+
+      window.location.href = "/home";
+    } catch (err) {
+      alert(err.response.data.msg);
     }
   };
-  console.log(userDetails);
+  // else {
+  //   alert("Please fill all the fields correctly");
+  // }
+  //   };
 
   return (
     <div className="container">
@@ -98,7 +96,7 @@ function Signup() {
           />
         </div>
 
-        <form className="login-form col-md-8 ms-2">
+        <form className="login-form col-md-8 ms-2" onSubmit={(e) => signup(e)}>
           <div className="d-flex flex-row mt-2 w-100">
             <img
               src={logoImg}
@@ -166,6 +164,7 @@ function Signup() {
                 id="password-input"
                 className="form-control form-control mb-4"
                 type="password"
+                name="password"
                 onChange={handleChange}
                 value={userDetails.password}
                 required
@@ -181,6 +180,7 @@ function Signup() {
               <input
                 id="dob-input"
                 type="date"
+                name="dob"
                 className="form-control mb-2"
                 onChange={handleChange}
                 required
@@ -191,10 +191,18 @@ function Signup() {
                 Sex
               </label>
               <br />
-              <select required className="custom-select w-100" id="sex-input">
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">hijda</option>
+              <select
+                required
+                className="custom-select w-100"
+                id="sex-input"
+                name="sex"
+                onChange={handleChange}
+              >
+                <option value="Male" selected>
+                  Male
+                </option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </div>
           </div>
@@ -203,7 +211,6 @@ function Signup() {
             <button
               className=" center btn btn-dark mb-2 px-5"
               type="submit"
-              onClick={signup}
               style={{ margin: "auto" }}
             >
               Sign up

@@ -14,29 +14,27 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = async () => {
+  const login = async (e) => {
+    e.preventDefault();
     try {
       const res = await axios.post("user/login", { username, password });
-      console.log(res.data);
+      const user = res.data;
+
       try {
-        const res1 = await axios.get(`user/${username}`);
-        const user = res1.data;
         localStorage.setItem("user", JSON.stringify(user));
         console.log(JSON.parse(localStorage.getItem("user")));
 
-        const res2 = await axios.get(`gym/${user.gym_id}`);
+        const res2 = await axios.get(`gym/${user.gym_id}`, {
+          headers: { Authorization: `Bearer ${user.accessToken}` },
+        });
         const user_gym = res2.data;
         localStorage.setItem("user_gym", JSON.stringify(user_gym));
-        console.log(JSON.parse(localStorage.getItem("user_gym")));
+        window.location.href = "/home";
       } catch (err1) {
         console.log(err1);
       }
-
-      navigate("/home");
-      window.location.reload(); // doing this to view navbar
     } catch (err) {
       alert("Invalid username or password.\n Please try again.");
-      setPassword("");
     }
   };
 
@@ -60,7 +58,7 @@ function Login() {
           />
         </div>
 
-        <form className="login-form col-md-8 ms-2">
+        <form className="login-form col-md-8 ms-2" onSubmit={(e) => login(e)}>
           <div className="d-flex flex-row mt-2 w-100">
             <img
               src={logoImg}
@@ -100,7 +98,6 @@ function Login() {
             <button
               className=" center btn btn-dark mb-2 px-5"
               type="submit"
-              onClick={login}
               style={{ margin: "auto" }}
             >
               Login
