@@ -1,7 +1,7 @@
 {
   "name": "client",
   "proxy": "http://127.0.0.1:5001/",
-  "homepage": "http:/localhost:3001/login",
+  "homepage": "http:/localhost:3001/home",
   "secure": false,
   "version": "0.1.0",
   "private": true,

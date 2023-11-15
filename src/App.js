@@ -18,11 +18,9 @@ import GymStaff from "./screens/GymStaff";
 import ProfilePage from "./screens/Profile/ProfilePage";
 import StaffProfilePage from "./screens/StaffProfilePage";
 import Dashboard from "./screens/GymServices/Dashboard";
-import PageNotFound from "./screens/PageNotFound";
 import GymEquipments from "./screens/Gym/GymEquipments";
 import PaymentPlans from "./screens/PaymentPlans";
 import MySubscriptionsPage from "./screens/MySubscriptionsPage";
-import Root from "./screens/Root";
 
 // MDB React
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
@@ -36,7 +34,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // Stripe
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
 import EditProfile from "./screens/Profile/EditProfile";
 import NutrionIX from "./screens/NutrionIX";
 import NUtritionIXExcercise from "./screens/NUtritionIXExcercise";
@@ -57,17 +54,16 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <BrowserRouter>
-        <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/staff-login" element={<StaffLogin />} />
-          <Route exact path="/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
-
-      <BrowserRouter>
-        {user && <Navbar />}
+        {/* <Navbar /> */}
+        {!["/login", "/signup", "/staff-login"].includes(
+          window.location.pathname
+        ) && <Navbar />}
         <div className="App">
           <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/staff-login" element={<StaffLogin />} />
+            <Route exact path="/signup" element={<Signup />} />
+
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/branches" element={<Branches />} />
 
@@ -145,7 +141,7 @@ function App() {
             <Route exact path="/exercise" element={<NUtritionIXExcercise />} />
 
             {/* tema members in root */}
-            <Route exact path="/" element={<Root />} />
+            <Route exact path="/" element={<Navigate to="/home" />} />
             {/* <Route path="*" element={<PageNotFound />} /> */}
           </Routes>
         </div>
