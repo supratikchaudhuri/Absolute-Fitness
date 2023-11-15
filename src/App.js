@@ -98,21 +98,9 @@ function App() {
               path="/user/:userId/health-record"
               element={<MemberHealthRecord />}
             />
-            <Route
-              exact
-              path="/user/:userId/health-plan"
-              element={<HealthPlan />}
-            />
-            <Route
-              exact
-              path="/user/:userId/workout-plan"
-              element={<WorkoutPlan />}
-            />
-            <Route
-              exact
-              path="/user/:userId/diet-plan"
-              element={<DietPlan />}
-            />
+            <Route exact path="/health-plan" element={<HealthPlan />} />
+            <Route exact path="/workout-plan" element={<WorkoutPlan />} />
+            <Route exact path="/diet-plan" element={<DietPlan />} />
 
             <Route
               exact

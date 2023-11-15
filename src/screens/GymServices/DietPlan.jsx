@@ -9,7 +9,9 @@ function DietPlan() {
   useEffect(() => {
     const getMeals = async () => {
       try {
-        const res = await axios.get(`/dietPlan/${user.email}`);
+        const res = await axios.get(`/dietPlan/${user.email}`, {
+          headers: { Authorization: `Bearer ${user.accessToken}` },
+        });
         setMealPlan(res.data);
       } catch (err) {
         console.log(err);

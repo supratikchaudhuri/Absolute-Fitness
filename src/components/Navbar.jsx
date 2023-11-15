@@ -46,7 +46,7 @@ function Navbar() {
     },
   ];
 
-  const customerLinks = [
+  const memberLinks = [
     {
       name: "Health Plan",
       link: "/health-plan",
@@ -126,8 +126,8 @@ function Navbar() {
               })}
 
             {/* customer links */}
-            {user.type === "customer" &&
-              customerLinks.map((item) => {
+            {user.type === "member" &&
+              memberLinks.map((item) => {
                 return (
                   <li
                     className={`nav-item ${

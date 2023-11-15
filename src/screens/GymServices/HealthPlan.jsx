@@ -6,14 +6,15 @@ import AlertBox from "../../components/AlertBox";
 function HealthPlan() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log("emial: " + user.email);
 
   const [userHealthRecord, setUserHealthRecord] = useState(null);
   const [healthPlan, setHealthPlan] = useState(null);
 
   const getHealthRecord = async () => {
     try {
-      const res = await axios.get(`/healthRecord/${user.email}`);
+      const res = await axios.get(`/healthRecord/${user.email}`, {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+      });
       setUserHealthRecord(res.data);
     } catch (err) {
       console.log(err);
@@ -22,7 +23,9 @@ function HealthPlan() {
 
   const getHealthPlan = async () => {
     try {
-      const res = await axios.get(`/healthPlan/${user.email}`);
+      const res = await axios.get(`/healthPlan/${user.email}`, {
+        headers: { Authorization: `Bearer ${user.accessToken}` },
+      });
       setHealthPlan(res.data);
     } catch (err) {
       alert(err.response.data.msg || err);
@@ -66,7 +69,7 @@ function HealthPlan() {
             <p> {healthPlan.workout_description} </p>
             <button
               className="btn btn-primary"
-              onClick={(e) => navigate(`/user/${user.email}/workout-plan`)}
+              onClick={(e) => navigate(`/workout-plan`)}
             >
               {" "}
               View Workouts{" "}
@@ -78,7 +81,7 @@ function HealthPlan() {
             <p> {healthPlan.diet_description} </p>
             <button
               className="btn btn-primary"
-              onClick={(e) => navigate(`/user/${user.email}/diet-plan`)}
+              onClick={(e) => navigate(`/diet-plan`)}
             >
               {" "}
               View Diets{" "}

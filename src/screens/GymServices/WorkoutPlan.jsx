@@ -8,7 +8,9 @@ function WorkoutPlan() {
   useEffect(() => {
     const getWorkouts = async () => {
       try {
-        const res = await axios.get(`/workoutPlan/${user.email}`);
+        const res = await axios.get(`/workoutPlan/${user.email}`, {
+          headers: { Authorization: `Bearer ${user.accessToken}` },
+        });
         console.log(res.data);
         setWorkoutPlan(res.data);
       } catch (err) {
