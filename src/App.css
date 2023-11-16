@@ -205,3 +205,9 @@ td img {
   border: 1px solid #9e9fa1;
   border-radius: 8px;
 }
+
+.card-img-top {
+  width: 100%;
+  max-height: 25vh;
+  object-fit: cover;
+}

@@ -13,10 +13,14 @@ function Trainers() {
   const [showPassword, setShowPassword] = useState(false);
   const [newTrainer, setNewTrainer] = useState({});
 
+  console.log(process.env.REACT_APP_API_BASE_URL);
+
   useEffect(() => {
     const getTrainers = async () => {
       try {
-        const res = await axios.get(`../../gym/${gym_id}/trainers`);
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_BASE_URL}/gym/${gym_id}/trainers`
+        );
         setTrainers(res.data);
       } catch (err) {
         console.log(err);
@@ -39,8 +43,9 @@ function Trainers() {
     e.preventDefault();
 
     try {
+      setTrainers((o) => [...o, newTrainer]);
       const res = await axios.post(
-        `/trainer`,
+        `${process.env.REACT_APP_API_BASE_URL}/trainer`,
         {
           ...newTrainer,
           gymId: gym_id,
@@ -53,12 +58,15 @@ function Trainers() {
         }
       );
       console.log(res.data);
+      setTrainers((o) => [...o, res.data]);
       setNewTrainer({});
       setDisplayAddTrainerForm(false);
     } catch (err) {
       console.log(err);
     }
   };
+
+  console.log(trainers);
 
   const trainerForm = (
     <div className="container mb-4">
@@ -213,15 +221,15 @@ function Trainers() {
           ></textarea>
         </div>
         <div className="mb-3">
-          <label htmlFor="imageUrl" className="form-label">
+          <label for="image_url" className="form-label">
             Image URL (optional)
           </label>
           <input
             type="url"
             className="form-control"
-            id="imageUrl"
-            name="imageUrl"
-            value={newTrainer.imageUrl}
+            id="image_url"
+            name="image_url"
+            value={newTrainer.image_url}
             onChange={handleChange}
           />
         </div>
@@ -311,7 +319,7 @@ function Trainers() {
                 <img
                   src={trainer.image_url}
                   className="card-img-top"
-                  alt="..."
+                  alt="trainer"
                 />
                 <div className="card-body">
                   <h5 className="card-title">{trainer.name}</h5>
