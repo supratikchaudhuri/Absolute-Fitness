@@ -7,22 +7,19 @@ import { useNavigate } from "react-router-dom";
 
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+import { login } from "../../api/authenticate";
 
-function Login() {
+function LoginScreen() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const login = async (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("authentication/login", {
-        username,
-        password,
-      });
-      const user = res.data;
+      const user = await login(username, password);
 
       try {
         localStorage.setItem("user", JSON.stringify(user));
@@ -62,7 +59,10 @@ function Login() {
           />
         </div>
 
-        <form className="login-form col-md-8 ms-2" onSubmit={(e) => login(e)}>
+        <form
+          className="login-form col-md-8 ms-2"
+          onSubmit={(e) => loginUser(e)}
+        >
           <div className="d-flex flex-row mt-2 w-100">
             <img
               src={logoImg}
@@ -143,4 +143,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginScreen;

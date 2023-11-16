@@ -202,20 +202,6 @@ function Trainers() {
             required
           ></textarea>
         </div>
-        <div className="mb-3">
-          <label for="image_url" className="form-label">
-            Image URL (optional)
-          </label>
-          <input
-            type="url"
-            className="form-control"
-            id="image_url"
-            name="image_url"
-            value={newTrainer.image_url}
-            onChange={handleChange}
-          />
-        </div>
-
         <div className="row">
           <div className="col-xs-12 col-md-6">
             <div className="mb-3">
@@ -235,28 +221,17 @@ function Trainers() {
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="mb-3">
-              <label for="password" className="form-label">
-                Staff Account Password
+              <label for="image_url" className="form-label">
+                Image URL (optional)
               </label>
-              <div className="row">
-                <div className="col-11">
-                  <input
-                    id="password"
-                    className="form-control form-control mb-4"
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    onChange={handleChange}
-                    value={newTrainer.password}
-                    required
-                  />
-                </div>
-                <div
-                  className="col-1"
-                  onClick={(e) => setShowPassword(!showPassword)}
-                >
-                  <i class="fa-solid fa-eye"></i>
-                </div>
-              </div>
+              <input
+                type="url"
+                className="form-control"
+                id="image_url"
+                name="image_url"
+                value={newTrainer.image_url}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>

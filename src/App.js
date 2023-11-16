@@ -1,5 +1,5 @@
 import "./App.css";
-import Login from "./screens/Authentication/Login";
+import LoginScreen from "./screens/Authentication/LoginScreen";
 import Signup from "./screens/Authentication/Signup";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./screens/Home";
@@ -59,7 +59,7 @@ function App() {
         ) && <Navbar />}
         <div className="App">
           <Routes>
-            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/login" element={<LoginScreen />} />
             <Route exact path="/staff-login" element={<StaffLogin />} />
             <Route exact path="/signup" element={<Signup />} />
 
