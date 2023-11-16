@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
+import { getGymEquipments, updateGymEquipment } from "../../api/gym";
 
 function GymEquipments() {
   const { gym_id } = useParams();
@@ -13,17 +13,13 @@ function GymEquipments() {
     last_serviced: "",
   });
 
-  const getGymEquipments = async () => {
-    try {
-      const res = await axios.get(`/gym/${gym_id}/equipments`);
-      setEquipments(processEquipmentData(res.data));
-    } catch (err) {
-      alert(err);
-    }
+  const getEquipments = async () => {
+    const res = await getGymEquipments(gym_id);
+    setEquipments(processEquipmentData(res));
   };
 
   useEffect(() => {
-    getGymEquipments();
+    getEquipments();
   }, []);
 
   const processEquipmentData = (equipmentData) => {
@@ -44,11 +40,8 @@ function GymEquipments() {
 
   const updateEquipment = async () => {
     try {
-      const res = await axios.put(
-        `/gym/${gym_id}/equipment/${updatedEquipment.equipment_id}`,
-        updatedEquipment
-      );
-      getGymEquipments();
+      const res = await updateGymEquipment(gym_id, updatedEquipment);
+      getEquipments();
       setShowEditForm(false);
     } catch (err) {
       console.log(err);
@@ -56,7 +49,6 @@ function GymEquipments() {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.name);
     setUpdatedEquipment({
       ...updatedEquipment,
       [e.target.name]: e.target.value,

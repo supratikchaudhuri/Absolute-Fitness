@@ -16,9 +16,6 @@ function Table({
   for (var i = 0; i < data.length; i++) {
     rows.push(Object.values(data[i]));
   }
-  console.log(data);
-  console.log(cols);
-  console.log(rows);
 
   return (
     <>

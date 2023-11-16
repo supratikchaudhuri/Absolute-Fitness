@@ -1,1 +1,3 @@
 all users same profile page
+
+return equipment from server after updating

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getAllGyms } from "../../api/gym";
 
 function Branches() {
   const navigate = useNavigate();
@@ -8,12 +8,8 @@ function Branches() {
 
   useEffect(() => {
     const getBranches = async () => {
-      try {
-        const res = await axios.get("gym/");
-        setBranches(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+      const res = await getAllGyms();
+      setBranches(res);
     };
 
     getBranches();

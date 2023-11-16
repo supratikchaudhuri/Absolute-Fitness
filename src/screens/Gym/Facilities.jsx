@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
 import { useParams } from "react-router-dom";
+import { getGymFacilities } from "../../api/gym";
 
 function Facilities() {
   const params = useParams();
   const { gym_id } = params;
 
-  const user_gym = JSON.parse(localStorage.getItem("user_gym"));
-
   const [facilities, setFacilities] = useState([]);
 
   useEffect(() => {
     const getFacilities = async () => {
-      try {
-        const res = await axios.get(`../../gym/${gym_id}/facilities`);
-        setFacilities(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+      const res = await getGymFacilities(gym_id);
+      setFacilities(res);
     };
 
     getFacilities();

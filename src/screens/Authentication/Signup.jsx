@@ -11,11 +11,8 @@ import {
 
 import img1 from "../../Images/img1.jpg";
 import logoImg from "../../Images/AbsoluteFitnessLogo.jpg";
-import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const navigate = useNavigate();
-
   const [userDetails, setUserDetails] = useState({
     name: null,
     phone: null,

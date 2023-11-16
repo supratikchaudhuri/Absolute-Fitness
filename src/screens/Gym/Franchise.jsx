@@ -5,7 +5,6 @@ const Franchise = () => {
   const { state } = useLocation();
   const gymDetails = state.gymDetails;
 
-  console.log(gymDetails);
   return (
     <div className="container">
       <div className="row">
