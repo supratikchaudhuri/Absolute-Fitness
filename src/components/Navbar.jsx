@@ -40,12 +40,7 @@ function Navbar() {
     },
   ];
 
-  const adminLinks = [
-    {
-      name: "Dashboard",
-      link: "/dashboard",
-    },
-  ];
+  const adminLinks = [];
 
   const trainerLinks = [
     {
