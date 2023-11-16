@@ -23,20 +23,21 @@ function GymStaff() {
       return;
     }
 
-    updatedStaff["staffId"] = updatedStaff["staff_id"];
-    updatedStaff["partTime"] = updatedStaff["part_time"];
-
     const status = await updateStaff(updatedStaff);
+    console.log(status);
     if (status === 200) {
       setStaff(
         staff.map((s) =>
           s.staff_id === updatedStaff.staff_id ? updatedStaff : s
         )
       );
+    } else {
+      alert("Error updating staff");
     }
 
     setShowEditForm(false);
   };
+  console.log(staff);
 
   const deleteGymStaff = async (e, staffId) => {
     if (staffId === user.staff_id) {

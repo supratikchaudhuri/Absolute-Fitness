@@ -1,50 +1,26 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
+import { useParams } from "react-router-dom";
+import { getGymMembers } from "../api/gym";
+import { deleteGymUser } from "../api/user";
 
 function GymMembers() {
-  const user = JSON.parse(localStorage.getItem("user"));
-
+  const { gymId } = useParams();
   const [members, setMembers] = useState([]);
-  const [showEditForm, setShowEditForm] = useState(false);
-
-  const displayEditForm = (e) => {
-    setShowEditForm(true);
-  };
 
   const getMembers = async () => {
-    try {
-      const res = await axios.get(`/gym/${user.gym_id}/members`, {
-        headers: {
-          Authorization: `Bearer ${user.accessToken}`,
-        },
-      });
-      res.data.map((obj) => (obj.dob = obj.dob.substring(0, 10)));
-      setMembers(res.data);
-    } catch (err) {
-      alert(err.response.data.msg || err);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // const res = axios.
-    } catch (err) {
-      alert(err.response.data.msg || err);
-    }
-
-    setShowEditForm(false);
+    const res = await getGymMembers(gymId);
+    setMembers(res);
   };
 
   const deleteUser = async (e, email) => {
-    try {
-      await axios.delete(`/user/${email}`);
-      getMembers();
-      alert("Member successfuly deleted !");
-    } catch (err) {
-      alert(err.response.data.msg || err);
+    const ans = window.confirm("Are you sure you want to delete this member?");
+    if (ans) {
+      const status = await deleteGymUser(email);
+      if (status === 200) {
+        setMembers(members.filter((m) => m.email !== email));
+      }
     }
   };
 
@@ -88,12 +64,7 @@ function GymMembers() {
           </div>
         </div>
       </form>
-      <Table
-        content="members"
-        data={members}
-        deleteItem={deleteUser}
-        displayEditForm={displayEditForm}
-      ></Table>
+      <Table content="members" data={members} deleteItem={deleteUser}></Table>
     </div>
   ) : (
     <AlertBox message={"No member data found"} type="danger" />
