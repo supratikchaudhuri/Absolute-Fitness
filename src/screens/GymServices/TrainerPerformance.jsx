@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BMIChart from "../../components/BMIChart";
+import { getClientHealthRecords } from "../../api/trainer";
 
 function TrainerPerformance() {
   const params = useParams();
@@ -9,18 +9,14 @@ function TrainerPerformance() {
 
   const [clientHealthRecords, setClientHealthRecords] = useState(null);
 
-  const getClientHealthRecords = async () => {
-    try {
-      const res = await axios.get(`/trainer/${staffId}/memberRecords`);
-      setClientHealthRecords(res.data);
-      console.log(res.data);
-    } catch (err) {
-      alert(err.response.data.msg || err);
-    }
+  const getClientHealthRecordsForTrainer = async () => {
+    const res = await getClientHealthRecords(staffId);
+    console.log(res);
+    setClientHealthRecords(res);
   };
 
   useEffect(() => {
-    getClientHealthRecords();
+    getClientHealthRecordsForTrainer();
   }, []);
 
   useEffect(() => {
@@ -87,17 +83,16 @@ function TrainerPerformance() {
         }
       }
     }
-    // console.log(dateWise);
     return dateWiseData;
   };
 
   return clientHealthRecords ? (
-    <div className="">
+    <div className="container center">
       {clientHealthRecords.length >= 1 ? (
         <>
           <h4>
-            This graph displays the progress {}'s clients have made so far since
-            hirirng him
+            This graph displays the progress{}'s clients have made so far since
+            working with him
           </h4>
           <BMIChart
             data={processData(clientHealthRecords)}

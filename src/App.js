@@ -111,11 +111,6 @@ function App() {
               path="/health-record"
               element={<MemberHealthRecord />}
             />
-            <Route
-              exact
-              path="/trainer/:staffId/memberRecords"
-              element={<TrainerPerformance />}
-            />
 
             <Route exact path="/gym/:gymId/members" element={<GymMembers />} />
             <Route exact path="/gym/:gymId/staff" element={<GymStaff />} />
@@ -136,15 +131,14 @@ function App() {
               }
             />
 
-            <Route
-              exact
-              path="/nutrition"
-              element={<PrivateRoute component={NutrionIX} />}
-            />
-
             <Route element={<PrivateRoute />}>
               <Route index path="/nutrition" element={<NutrionIX />} />
-              {/* <Route path="dashboard" element={<Dashboard />} /> */}
+
+              <Route
+                exact
+                path="/trainer/:staffId/memberRecords"
+                element={<TrainerPerformance />}
+              />
             </Route>
 
             <Route exact path="/exercise" element={<NUtritionIXExcercise />} />

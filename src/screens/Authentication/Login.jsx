@@ -18,7 +18,10 @@ function Login() {
   const login = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("login", { username, password });
+      const res = await axios.post("authentication/login", {
+        username,
+        password,
+      });
       const user = res.data;
 
       try {

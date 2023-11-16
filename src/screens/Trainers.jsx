@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { getGymTrainers } from "../api/gym";
+import { addNewTrainer } from "../api/trainer";
 
 function Trainers() {
   const { gym_id } = useParams();
@@ -13,18 +15,10 @@ function Trainers() {
   const [showPassword, setShowPassword] = useState(false);
   const [newTrainer, setNewTrainer] = useState({});
 
-  console.log(process.env.REACT_APP_API_BASE_URL);
-
   useEffect(() => {
     const getTrainers = async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}/gym/${gym_id}/trainers`
-        );
-        setTrainers(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+      const res = await getGymTrainers(gym_id);
+      setTrainers(res);
     };
 
     getTrainers();
@@ -43,22 +37,9 @@ function Trainers() {
     e.preventDefault();
 
     try {
-      setTrainers((o) => [...o, newTrainer]);
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/trainer`,
-        {
-          ...newTrainer,
-          gymId: gym_id,
-          partTime,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-        }
-      );
+      const res = await addNewTrainer(newTrainer, gym_id);
       console.log(res.data);
-      setTrainers((o) => [...o, res.data]);
+      setTrainers((o) => [...o]);
       setNewTrainer({});
       setDisplayAddTrainerForm(false);
     } catch (err) {
@@ -134,6 +115,7 @@ function Trainers() {
                 onChange={handleChange}
                 value={newTrainer.sex}
               >
+                <option value="">Choose...</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>

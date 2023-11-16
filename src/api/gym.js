@@ -45,3 +45,12 @@ export const updateGymEquipment = async (gym_id, updatedEquipment) => {
     console.log(err);
   }
 };
+
+export const getGymTrainers = async (gym_id) => {
+  try {
+    const res = await api.get(`gym/${gym_id}/trainers`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
