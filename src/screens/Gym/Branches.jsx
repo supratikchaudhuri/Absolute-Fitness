@@ -41,33 +41,13 @@ function Branches() {
 
               <div className="card-body">
                 <h5 className="card-title">
-                  <i class="fa-solid fa-location-dot"></i>
+                  <i className="fa-solid fa-location-dot color-red"></i>:{" "}
                   {branch.location}
                 </h5>
                 <p>
-                  <i class="fa-solid fa-phone"></i>: {branch.phone}
+                  <i className="fa-solid fa-phone color-grey"></i>:{" "}
+                  {branch.phone}
                 </p>
-
-                {/* <div className="center">
-                  <a
-                    href={`gym/${branch.gym_id}/facilities`}
-                    className="btn btn-primary mt-2 btn-sm"
-                  >
-                    View Facilities
-                  </a>
-                  <a
-                    href={`gym/${branch.gym_id}/trainers`}
-                    className="btn btn-primary mt-2 ms-2 btn-sm"
-                  >
-                    View Trainers
-                  </a>
-                  <a
-                    href={`gym/${branch.gym_id}/equipments`}
-                    className="btn btn-primary mt-2 ms-2 btn-sm"
-                  >
-                    View Equipments
-                  </a>
-                </div> */}
               </div>
             </div>
           </div>

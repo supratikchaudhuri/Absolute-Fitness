@@ -211,3 +211,15 @@ td img {
   max-height: 25vh;
   object-fit: cover;
 }
+
+.color-red {
+  color: rgb(192, 7, 7);
+}
+
+.color-green {
+  color: green;
+}
+
+.color-grey {
+  color: grey;
+}
