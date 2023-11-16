@@ -54,3 +54,29 @@ export const getGymTrainers = async (gym_id) => {
     console.log(err);
   }
 };
+
+export const getGymStaff = async (gym_id) => {
+  try {
+    const res = await api.get(`gym/${gym_id}/staff`, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getGymMembers = async (gym_id) => {
+  try {
+    const res = await api.get(`gym/${gym_id}/members`, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
