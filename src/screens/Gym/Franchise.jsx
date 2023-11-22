@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Carousel from "../../components/Carousel";
 
 const Franchise = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || {};
   const { state } = useLocation();
   const gymDetails = state.gymDetails;
 

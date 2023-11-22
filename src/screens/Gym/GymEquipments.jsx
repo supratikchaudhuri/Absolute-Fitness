@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
-import { getGymEquipments, updateGymEquipment } from "../../api/gym";
+import {
+  addNewGymEquipment,
+  getGymEquipments,
+  updateGymEquipment,
+} from "../../api/gym";
+import { render } from "@testing-library/react";
 
 function GymEquipments() {
   const { gym_id } = useParams();
 
   const [equipments, setEquipments] = useState([]);
-  const [showEditForm, setShowEditForm] = useState(false);
+  const [showEditEquipmentForm, setShowEditEquipmentForm] = useState(false);
   const [updatedEquipment, setUpdatedEquipment] = useState({
     quantity: "",
     last_serviced: "",
   });
+  const [showNewEquipmentForm, setShowNewEquipmentForm] = useState(false);
+  const [newEquipment, setNewEquipment] = useState({});
 
   const getEquipments = async () => {
     const res = await getGymEquipments(gym_id);
@@ -40,12 +47,39 @@ function GymEquipments() {
 
   const updateEquipment = async () => {
     try {
-      const res = await updateGymEquipment(gym_id, updatedEquipment);
-      getEquipments();
-      setShowEditForm(false);
+      const status = await updateGymEquipment(gym_id, updatedEquipment);
+      if (status === 200) {
+        setEquipments(
+          equipments.map((equipment) => {
+            if (equipment.equipment_id === updatedEquipment.equipment_id) {
+              return updatedEquipment;
+            }
+            return equipment;
+          })
+        );
+      } else {
+        alert("Something went wrong");
+      }
+      setShowEditEquipmentForm(false);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const addNewEquipment = async (e) => {
+    e.preventDefault();
+    const status = await addNewGymEquipment(gym_id, newEquipment);
+    if (status === 200) {
+      setEquipments(
+        equipments.map((equipment) => {
+          if (equipment.equipment_id === newEquipment.equipment_id) {
+            return newEquipment;
+          }
+          return equipment;
+        })
+      );
+    }
+    setShowNewEquipmentForm(false);
   };
 
   const handleChange = (e) => {
@@ -55,7 +89,7 @@ function GymEquipments() {
     });
   };
 
-  const renderEditForm = showEditForm && (
+  const renderEditEquipmentForm = showEditEquipmentForm && (
     <form
       className="m-4 popup-form"
       onSubmit={(e) => {
@@ -107,7 +141,7 @@ function GymEquipments() {
       <button
         type="button"
         className="btn btn-danger mb-0"
-        onClick={(e) => setShowEditForm(false)}
+        onClick={(e) => setShowEditEquipmentForm(false)}
         style={{ width: "100%" }}
       >
         Cancel
@@ -115,14 +149,24 @@ function GymEquipments() {
     </form>
   );
 
+  const renderNewEquipmentForm = showNewEquipmentForm && <></>;
+
   return equipments.length > 0 ? (
-    <div className="euipment-div">
-      {renderEditForm}
+    <div className="container center euipment-div">
+      {renderEditEquipmentForm}
+      {renderNewEquipmentForm}
+      <h4>Gym Equipments</h4>
+      <button
+        className="btn btn-primary float-end mb-3"
+        onCick={(e) => setShowNewEquipmentForm(true)}
+      >
+        Add Equpments
+      </button>
       <Table
         content="equipments"
         data={equipments}
         setEquipments={processEquipmentData}
-        displayEditForm={setShowEditForm}
+        displayEditForm={setShowEditEquipmentForm}
       />
     </div>
   ) : (

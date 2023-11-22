@@ -227,10 +227,10 @@ function Signup() {
           <p className=" center small mb-2 mt-0">Or</p>
 
           <p className="center small mt-2 mb-0 pb-lg-2">
-            Have an account? <a href="login">Login here</a>
+            Have an account? <a href="/login">Login here</a>
           </p>
           <p className="center small mb-5 pb-lg-2">
-            Are you a staff? <a href="staff-login">Login here</a>
+            Are you a staff? <a href="/staff-login">Login here</a>
           </p>
         </form>
       </div>

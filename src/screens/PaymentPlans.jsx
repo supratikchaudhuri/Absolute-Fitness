@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-} from "mdb-react-ui-kit";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+  CardElement,
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import { getProducts } from "../api/stripe";
 
 function PaymentPlans() {
-  const [product, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -52,14 +51,15 @@ function PaymentPlans() {
 
   useEffect(() => {
     const getGymMembershipPrices = async () => {
-      const res = await axios.get("stripe/gym-membership-pricing");
-      setProduct(res.data);
+      const res = await getProducts();
+      console.log(res);
+      setProducts(res);
     };
 
     getGymMembershipPrices();
   }, []);
 
-  console.log(product);
+  console.log(products);
 
   const subscribe = (priceId) => {
     const { email, name } = JSON.parse(localStorage.getItem("user"));
@@ -70,6 +70,7 @@ function PaymentPlans() {
     <>
       <div className="card-details-form">
         <CardElement />
+        {/* <PaymentElement /> */}
       </div>
 
       <stripe-buy-button
@@ -78,17 +79,23 @@ function PaymentPlans() {
       ></stripe-buy-button>
 
       <div className="choose-plans-div">
-        {product.prices &&
-          product.prices.map((price, idx) => {
+        {products &&
+          products.prices &&
+          products.prices.map((price, idx) => {
             return (
-              <MDBCard className="plan-card" key={idx}>
-                <MDBCardBody>
-                  <MDBCardTitle>{price.amount}</MDBCardTitle>
-                  <MDBCardText>{price.nickname}</MDBCardText>
+              <div className="card plan-card" data-key="{idx}">
+                <div className="card-body">
+                  <h5 className="card-title">{price.amount}</h5>
+                  <p className="card-text">{price.nickname}</p>
 
-                  <MDBBtn onClick={() => subscribe(price.id)}>Subscribe</MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => subscribe(price.id)}
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </div>
             );
           })}
       </div>

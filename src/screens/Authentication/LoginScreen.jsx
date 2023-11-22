@@ -132,10 +132,13 @@ function LoginScreen() {
           </div>
 
           <p className="center small mt-2 mb-0 pb-lg-2">
-            Don't have an account? <a href="signup">Signup here</a>
+            Don't have an account? <a href="/signup">Signup here</a>
+          </p>
+          <p className="center small mb-0 pb-lg-2">
+            Are you a staff? <a href="/staff-login">Login here</a>
           </p>
           <p className="center small mb-5 pb-lg-2">
-            Are you a staff? <a href="staff-login">Login here</a>
+            Forgot Password? <a href="/forgot-password">Click here</a>
           </p>
         </form>
       </div>

@@ -29,6 +29,19 @@ export const getGymEquipments = async (gym_id) => {
   }
 };
 
+export const addNewGymEquipment = async (gym_id, newEquipment) => {
+  try {
+    const res = await api.post(`gym/${gym_id}/equipment`, newEquipment, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.status;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const updateGymEquipment = async (gym_id, updatedEquipment) => {
   try {
     const res = await api.put(
@@ -40,7 +53,7 @@ export const updateGymEquipment = async (gym_id, updatedEquipment) => {
         },
       }
     );
-    return res.data;
+    return res.status;
   } catch (err) {
     console.log(err);
   }

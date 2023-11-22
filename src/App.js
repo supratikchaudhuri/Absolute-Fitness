@@ -39,6 +39,8 @@ import NutrionIX from "./screens/NutrionIX";
 import NUtritionIXExcercise from "./screens/NUtritionIXExcercise";
 import PrivateRoute from "./components/PrivateRoute";
 import Franchise from "./screens/Gym/Franchise";
+import ForgotPassword from "./screens/Authentication/ForgotPassword";
+import SetupNewPassword from "./screens/Authentication/SetupNewPassword";
 
 /************************ Imports complete ************************/
 
@@ -50,16 +52,30 @@ const STRIPE_PUBLISHABLE_KEY =
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 function App() {
+  const options = {
+    clientSecret:
+      "sk_test_51N4IuESIsW8FsEuEvTyh0IUSLpgHo7lYJQA47wKLiBGnlUbY3VkH1wpa3TV4XIis5If1fAMPzbuf9wjHd0jo86xe00BWpFtnZG",
+  };
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <BrowserRouter>
-        {/* <Navbar /> */}
-        {!["/login", "/signup", "/staff-login"].includes(
-          window.location.pathname
-        ) && <Navbar />}
+        {![
+          "/login",
+          "/signup",
+          "/staff-login",
+          "/forgot-password",
+          "/resetPassword",
+        ].some((path) => window.location.pathname.includes(path)) && <Navbar />}
+
         <div className="App">
           <Routes>
             <Route exact path="/login" element={<LoginScreen />} />
+            <Route exact path="/forgot-password" element=<ForgotPassword /> />
+            <Route
+              exact
+              path="/user/:username/resetPassword/:token"
+              element=<SetupNewPassword />
+            />
             <Route exact path="/staff-login" element={<StaffLogin />} />
             <Route exact path="/signup" element={<Signup />} />
 
@@ -121,17 +137,17 @@ function App() {
               element={<MySubscriptionsPage />}
             />
 
-            <Route
-              exact
-              path="/payment-plans"
-              element={
-                <Elements stripe={stripePromise}>
-                  <PaymentPlans />
-                </Elements>
-              }
-            />
-
             <Route element={<PrivateRoute />}>
+              <Route
+                exact
+                path="/payment-plans"
+                element={
+                  <Elements stripe={stripePromise} options={options}>
+                    <PaymentPlans />
+                  </Elements>
+                }
+              />
+
               <Route index path="/nutrition" element={<NutrionIX />} />
 
               <Route
