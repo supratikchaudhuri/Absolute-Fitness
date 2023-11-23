@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
+import TreemapChart from "../components/SpiderMap";
 
 const NutrionIX = () => {
   const [query, setQuery] = useState(
@@ -11,13 +12,13 @@ const NutrionIX = () => {
     "food_name",
     "serving",
     "protein",
-    "carbohydtrates",
+    "carbohydrate",
     "saturated_fat",
     "total_fat",
     "calories",
     "cholesterol",
     "sodioum",
-    "fibre",
+    "dietary_fiber",
     "potassium",
   ];
   const [nutrients, setNutrients] = useState(null);
@@ -39,6 +40,7 @@ const NutrionIX = () => {
         }
       );
       const foods = res.data.foods;
+      console.log(foods);
       const selectedData = foods.map((food) => {
         const selectedObject = {};
         Object.keys(food).forEach((key) => {
@@ -90,6 +92,8 @@ const NutrionIX = () => {
           />
         </>
       )}
+
+      <TreemapChart />
     </div>
   );
 };
