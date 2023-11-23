@@ -7,9 +7,9 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
-//https://recharts.org/en-US/api
 function BMIChart({ data, numClients }) {
   console.log(data);
 
@@ -42,45 +42,46 @@ function BMIChart({ data, numClients }) {
   }
 
   return (
-    <div className="chart-div">
-      <LineChart
-        width={1300}
-        height={600}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 10,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis
-          domain={[getMin(data), getMax(data)]}
-          label={{ value: "BMI Score", angle: -90, position: "insideLeft" }}
-        />
-        <Tooltip />
-        <Legend />
+    <div className="chart-div w-100">
+      <ResponsiveContainer width="100%" height={600}>
+        <LineChart
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 10,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis
+            domain={[getMin(data), getMax(data)]}
+            label={{ value: "BMI Score", angle: -90, position: "insideLeft" }}
+          />
+          <Tooltip />
+          <Legend />
 
-        {numClients ? (
-          [...Array(numClients)].map((e, i) => (
+          {numClients ? (
+            [...Array(numClients)].map((e, i) => (
+              <Line
+                key={i}
+                type="monotone"
+                dataKey={"client" + (i + 1)}
+                stroke={randomColor()}
+                activeDot={{ r: 5 }}
+              />
+            ))
+          ) : (
             <Line
               type="monotone"
-              dataKey={"client" + (i + 1)}
-              stroke={randomColor()}
+              dataKey="bmi"
+              stroke={"red"}
               activeDot={{ r: 5 }}
             />
-          ))
-        ) : (
-          <Line
-            type="monotone"
-            dataKey="bmi"
-            stroke={"red"}
-            activeDot={{ r: 5 }}
-          />
-        )}
-      </LineChart>
+          )}
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }

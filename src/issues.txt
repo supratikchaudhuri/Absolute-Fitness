@@ -1,3 +1,8 @@
 all users same profile page
 
 return equipment from server after updating
+
+validate forms
+
+
+health record logs... should be able to deete health record

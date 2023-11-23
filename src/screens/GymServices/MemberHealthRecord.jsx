@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import BMIChart from "../../components/BMIChart";
 
 function MemberHealthRecord() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || {};
   console.log(user);
 
   const [memberHealthRecord, setMemberHealthRecord] = useState([]);
@@ -32,7 +32,7 @@ function MemberHealthRecord() {
         `/healthRecord`,
         {
           ...newHealthRecord,
-          email: user.email,
+          email: user.username,
         },
         {
           headers: {
@@ -66,7 +66,7 @@ function MemberHealthRecord() {
   };
 
   const getHealthRecords = async () => {
-    const res = await axios.get(`/healthRecord/${user.email}`, {
+    const res = await axios.get(`/healthRecord/${user.username}`, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
@@ -79,7 +79,7 @@ function MemberHealthRecord() {
   }, []);
 
   const memberHealtRecordDataRender = (
-    <div>
+    <div className="w-100">
       <div>
         <BMIChart data={getMemberBMIData(memberHealthRecord)}></BMIChart>
       </div>
@@ -93,7 +93,7 @@ function MemberHealthRecord() {
           }}
           outline
         >
-          Add Health Record
+          Submit Health Record
         </button>
       </div>
     </div>
@@ -187,7 +187,7 @@ function MemberHealthRecord() {
       <>
         {healthRecordForm}
 
-        <div className="memerHealthRecordDiv">
+        <div className="container">
           {memberHealthRecord.length === 0
             ? noMemberHealthRecordRender
             : memberHealtRecordDataRender}
