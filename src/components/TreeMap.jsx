@@ -30,7 +30,8 @@ const TreemapChart = ({ dataObj }) => {
     const sortedDataObj = Object.entries(dataObj).sort((a, b) => b[1] - a[1]);
     dataObj = Object.fromEntries(sortedDataObj);
 
-    setChartData({
+    setChartData((prevChart) => ({
+      ...prevChart,
       series: [
         {
           data: Object.entries(dataObj).map(([key, value]) => ({
@@ -39,19 +40,7 @@ const TreemapChart = ({ dataObj }) => {
           })),
         },
       ],
-      options: {
-        legend: {
-          show: false,
-        },
-        chart: {
-          height: 350,
-          type: "treemap",
-        },
-        title: {
-          text: "Nutrition Distribution",
-        },
-      },
-    });
+    }));
   }, [dataObj]);
 
   return (

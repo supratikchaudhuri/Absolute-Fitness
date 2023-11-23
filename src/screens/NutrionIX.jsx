@@ -20,6 +20,7 @@ const NutrionIX = () => {
     "sodium",
     "dietary_fiber",
     "potassium",
+    "sugar",
   ];
 
   const [nutrients, setNutrients] = useState([]);
@@ -30,9 +31,10 @@ const NutrionIX = () => {
     "saturated fat": 0,
     "total fat": 0,
     cholesterol: 0,
-    sodium: 0,
+    // sodium: 0,
     "dietary fiber": 0,
-    potassium: 0,
+    // potassium: 0,
+    sugar: 0,
   };
   const [totalValues, setTotalValues] = useState(initialTotalValues);
 
