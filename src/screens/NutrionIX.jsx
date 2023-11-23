@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
-import TreemapChart from "../components/SpiderMap";
+import TreemapChart from "../components/TreeMap";
 
 const NutrionIX = () => {
   const [query, setQuery] = useState(
@@ -17,14 +17,28 @@ const NutrionIX = () => {
     "total_fat",
     "calories",
     "cholesterol",
-    "sodioum",
+    "sodium",
     "dietary_fiber",
     "potassium",
   ];
-  const [nutrients, setNutrients] = useState(null);
+
+  const [nutrients, setNutrients] = useState([]);
+
+  const initialTotalValues = {
+    protein: 0,
+    carbohydrate: 0,
+    "saturated fat": 0,
+    "total fat": 0,
+    cholesterol: 0,
+    sodium: 0,
+    "dietary fiber": 0,
+    potassium: 0,
+  };
+  const [totalValues, setTotalValues] = useState(initialTotalValues);
 
   const fetchNutritionDate = async (e) => {
     e.preventDefault();
+
     try {
       const res = await axios.post(
         "https://trackapi.nutritionix.com/v2/natural/nutrients",
@@ -39,6 +53,7 @@ const NutrionIX = () => {
           },
         }
       );
+      setTotalValues(initialTotalValues);
       const foods = res.data.foods;
       console.log(foods);
       const selectedData = foods.map((food) => {
@@ -50,6 +65,13 @@ const NutrionIX = () => {
           if (matchingInterest) {
             const newKey = matchingInterest.replace("_", " ");
             selectedObject[newKey] = food[key];
+
+            if (newKey in totalValues && typeof food[key] === "number") {
+              setTotalValues((prevValues) => ({
+                ...prevValues,
+                [newKey]: (prevValues[newKey] || 0) + food[key],
+              }));
+            }
           }
         });
 
@@ -59,8 +81,15 @@ const NutrionIX = () => {
       setNutrients(selectedData);
     } catch (err) {
       alert("No data found");
+      console.log(err);
     }
   };
+
+  useEffect(() => {
+    console.log(totalValues);
+  }, [totalValues]);
+
+  console.log(totalValues);
 
   return (
     <div className="m-4">
@@ -83,7 +112,7 @@ const NutrionIX = () => {
         </button>
       </form>
 
-      {nutrients && nutrients.length && (
+      {nutrients.length > 0 && (
         <>
           <Table data={nutrients} content="nutrition" />
           <AlertBox
@@ -92,8 +121,9 @@ const NutrionIX = () => {
           />
         </>
       )}
-
-      <TreemapChart />
+      {totalValues !== initialTotalValues && (
+        <TreemapChart dataObj={totalValues} />
+      )}
     </div>
   );
 };
