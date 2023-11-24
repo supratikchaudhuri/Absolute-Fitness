@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 import { getGymTrainers } from "../api/gym";
 import { addNewTrainer } from "../api/trainer";
 
@@ -12,7 +11,6 @@ function Trainers() {
   const [trainers, setTrainers] = useState([]);
   const [partTime, setPartTime] = useState(false);
   const [displayAddTrainerForm, setDisplayAddTrainerForm] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [newTrainer, setNewTrainer] = useState({});
 
   useEffect(() => {

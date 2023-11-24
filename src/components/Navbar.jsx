@@ -25,7 +25,7 @@ function Navbar() {
     },
     {
       name: "Pricing",
-      link: "/payment-plans",
+      link: "/pricing-plans",
     },
     {
       name: "Check Nutrition",
@@ -165,7 +165,7 @@ function Navbar() {
                   {user.name}
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="/profile">
+                  <a className="dropdown-item" href="/user/profile">
                     Profile
                   </a>
                   {user.type === "customer" && (

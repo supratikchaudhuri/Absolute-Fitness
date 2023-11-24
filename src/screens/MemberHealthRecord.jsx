@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BMIChart from "../../components/BMIChart";
+import BMIChart from "../components/BMIChart";
 
 function MemberHealthRecord() {
   const user = JSON.parse(localStorage.getItem("user")) || {};
-  console.log(user);
 
   const [memberHealthRecord, setMemberHealthRecord] = useState([]);
   const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);

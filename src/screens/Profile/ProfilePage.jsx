@@ -63,8 +63,7 @@ function ProfilePage() {
           <div className="col-xs-12 col-md-8">
             <h2 style={{ "font-weight": 300 }}>{user.name}</h2>
 
-            <h3 className="title">Contact</h3>
-            <p>No regitered services</p>
+            <p>Phone: {user.phone}</p>
 
             <h3 className="title">Biography</h3>
             <p>Student, SWE, Actively seeking Internships</p>
