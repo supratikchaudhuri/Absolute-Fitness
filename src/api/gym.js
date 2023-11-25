@@ -11,6 +11,19 @@ export const getAllGyms = async () => {
   }
 };
 
+export const addGym = async (gymDetails) => {
+  try {
+    const res = await api.post("gym/addNewGym", gymDetails, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getGymFacilities = async (gym_id) => {
   try {
     const res = await api.get(`gym/${gym_id}/facilities`);

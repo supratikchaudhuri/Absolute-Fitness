@@ -16,14 +16,10 @@ import DietPlan from "./screens/GymServices/DietPlan";
 import GymMembers from "./screens/GymMembers";
 import GymStaff from "./screens/GymStaff";
 import ProfilePage from "./screens/Profile/ProfilePage";
-import StaffProfilePage from "./screens/StaffProfilePage";
 import Dashboard from "./screens/GymServices/Dashboard";
 import GymEquipments from "./screens/Gym/GymEquipments";
 import MembershipPricingPlans from "./screens/Pricing/MembershipPricing";
 import MySubscriptionsPage from "./screens/MySubscriptionsPage";
-
-// MDB React
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 // Font Awesome
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -36,11 +32,13 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import EditProfile from "./screens/Profile/EditProfile";
 import NutrionIX from "./screens/NutrionIX";
-import NUtritionIXExcercise from "./screens/NUtritionIXExcercise";
 import PrivateRoute from "./components/PrivateRoute";
 import Franchise from "./screens/Gym/Franchise";
 import ForgotPassword from "./screens/Authentication/ForgotPassword";
 import SetupNewPassword from "./screens/Authentication/SetupNewPassword";
+import SubscriberRoute from "./components/SubscriberRoute";
+import OwnerRoute from "./components/OwnerRoute";
+import AddGymBranch from "./screens/Gym/AddGymBranch";
 
 /************************ Imports complete ************************/
 
@@ -114,12 +112,6 @@ function App() {
 
             <Route
               exact
-              path="/staff/:staff_id/profile"
-              element={<StaffProfilePage />}
-            />
-
-            <Route
-              exact
               path="/health-record"
               element={<MemberHealthRecord />}
             />
@@ -144,16 +136,23 @@ function App() {
                 }
               />
 
-              <Route index path="/nutrition" element={<NutrionIX />} />
+              {/* <Route index path="/nutrition" element={<NutrionIX />} /> */}
 
               <Route
                 exact
                 path="/trainer/:staffId/memberRecords"
                 element={<TrainerPerformance />}
               />
-            </Route>
 
-            <Route exact path="/exercise" element={<NUtritionIXExcercise />} />
+              {/* Route for Subscribers */}
+              <Route element={<SubscriberRoute />}>
+                <Route exact path="/nutrition" element={<NutrionIX />} />
+              </Route>
+
+              {/* Route for Owners */}
+              <Route element={<OwnerRoute />}></Route>
+              <Route exact path="/gym/addGym" element={<AddGymBranch />} />
+            </Route>
 
             {/* tema members in root */}
             <Route exact path="/" element={<Navigate to="/home" />} />

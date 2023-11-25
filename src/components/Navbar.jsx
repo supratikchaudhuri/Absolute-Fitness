@@ -31,10 +31,6 @@ function Navbar() {
       name: "Check Nutrition",
       link: "/nutrition",
     },
-    {
-      name: "Check Excercise",
-      link: "/excercise",
-    },
   ];
 
   const adminLinks = [];
