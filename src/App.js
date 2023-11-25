@@ -39,6 +39,7 @@ import SetupNewPassword from "./screens/Authentication/SetupNewPassword";
 import SubscriberRoute from "./components/SubscriberRoute";
 import OwnerRoute from "./components/OwnerRoute";
 import AddGymBranch from "./screens/Gym/AddGymBranch";
+import PaymentSuccessFul from "./screens/Pricing/PaymentSuccessFul";
 
 /************************ Imports complete ************************/
 
@@ -148,6 +149,11 @@ function App() {
               <Route element={<SubscriberRoute />}>
                 <Route exact path="/nutrition" element={<NutrionIX />} />
               </Route>
+              <Route
+                exact
+                path="/paymentSuccessFull"
+                element={<PaymentSuccessFul />}
+              />
 
               {/* Route for Owners */}
               <Route element={<OwnerRoute />}></Route>
