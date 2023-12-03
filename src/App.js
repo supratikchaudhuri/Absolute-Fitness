@@ -96,21 +96,6 @@ function App() {
               element={<GymEquipments />}
             />
 
-            <Route exact path="/user/profile" element={<ProfilePage />} />
-            <Route
-              exact
-              path="/user/:userId/edit-profile"
-              element={<EditProfile />}
-            />
-            <Route
-              exact
-              path="/health-record"
-              element={<MemberHealthRecord />}
-            />
-            <Route exact path="/health-plan" element={<HealthPlan />} />
-            <Route exact path="/workout-plan" element={<WorkoutPlan />} />
-            <Route exact path="/diet-plan" element={<DietPlan />} />
-
             <Route
               exact
               path="/health-record"
@@ -136,6 +121,21 @@ function App() {
                   </Elements>
                 }
               />
+
+              <Route exact path="/user/profile" element={<ProfilePage />} />
+              <Route
+                exact
+                path="/user/:userId/edit-profile"
+                element={<EditProfile />}
+              />
+              <Route
+                exact
+                path="/health-record"
+                element={<MemberHealthRecord />}
+              />
+              <Route exact path="/health-plan" element={<HealthPlan />} />
+              <Route exact path="/workout-plan" element={<WorkoutPlan />} />
+              <Route exact path="/diet-plan" element={<DietPlan />} />
 
               {/* <Route index path="/nutrition" element={<NutrionIX />} /> */}
 

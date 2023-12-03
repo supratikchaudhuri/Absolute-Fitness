@@ -11,16 +11,20 @@ export const getAllGyms = async () => {
   }
 };
 
-export const addGym = async (gymDetails) => {
+export const addGym = async (gymDetails, adminDetails) => {
   try {
-    const res = await api.post("gym/addNewGym", gymDetails, {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    });
-    return res;
+    const res = await api.post(
+      "gym/",
+      { gymDetails, adminDetails },
+      {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      }
+    );
+    return { status: res.status, data: res.data };
   } catch (err) {
-    console.log(err);
+    return { status: err.response.status, data: err.response.data };
   }
 };
 

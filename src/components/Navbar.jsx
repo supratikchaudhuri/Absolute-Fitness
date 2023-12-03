@@ -48,8 +48,8 @@ function Navbar() {
       link: "/health-record",
     },
     {
-      name: "Health Progress",
-      link: "/health-progress",
+      name: "Health Plan",
+      link: "/health-plan",
     },
     { name: "Workout Plan", link: "/workout-plan" },
     { name: "Diet Plan", link: "/diet-plan" },
