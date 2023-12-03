@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function WorkoutPlan() {
   const [workoutPlan, setWorkoutPlan] = useState(null);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || null;
 
   useEffect(() => {
     const getWorkouts = async () => {
@@ -24,9 +24,9 @@ function WorkoutPlan() {
 
   return (
     workoutPlan && (
-      <div className="workout-plan plan">
-        <h4 className="center">{workoutPlan.description}</h4>
-        <h5>TOday's exceerecises</h5>
+      <div className="container d-flex flex-column align-items-center">
+        <h4 className="page-title mt-2">Today's exceerecises</h4>
+        <h5 className=" center mt-2">{workoutPlan.description}</h5>
 
         <div className="workouts-div row">
           {workoutPlan.excercises.map((exc, index) => (

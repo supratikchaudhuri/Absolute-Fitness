@@ -9,7 +9,7 @@ function Navbar() {
 
   let user = JSON.parse(localStorage.getItem("user")) || {};
 
-  const { decodedToken, isExpired } = useJwt(user.accessToken);
+  const { decodedToken } = useJwt(user.accessToken);
 
   if (decodedToken) {
     user = { ...user, type: decodedToken.type };
@@ -51,6 +51,8 @@ function Navbar() {
       name: "Health Progress",
       link: "/health-progress",
     },
+    { name: "Workout Plan", link: "/workout-plan" },
+    { name: "Diet Plan", link: "/diet-plan" },
   ];
 
   return (

@@ -23,10 +23,10 @@ function DietPlan() {
 
   return (
     mealPlan && (
-      <div className="meal-plan plan ">
-        <h4 className="center">{mealPlan.description}</h4>
+      <div className="container d-flex flex-column align-items-center">
+        <h4 className="page-title">{mealPlan.description}</h4>
         <div className="workout-plan mt-3">
-          <h5>Today's Meals</h5>
+          <h5 className="center">Today's Meals</h5>
 
           <div className="meals-div row">
             {mealPlan.meals.map((meal, index) => (

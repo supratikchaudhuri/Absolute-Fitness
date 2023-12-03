@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
 
 import {
@@ -11,6 +10,7 @@ import {
 
 import img1 from "../../Images/img1.jpg";
 import logoImg from "../../Images/AbsoluteFitnessLogo.jpg";
+import { signup } from "../../api/user";
 
 function Signup() {
   const [userDetails, setUserDetails] = useState({
@@ -32,7 +32,7 @@ function Signup() {
       const res = await axios.get("gym/");
       setGyms(res.data);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   };
 
@@ -48,7 +48,7 @@ function Signup() {
   };
   console.log(userDetails);
 
-  const signup = async (e) => {
+  const signupMethod = async (e) => {
     e.preventDefault();
     console.log(userDetails);
     // if (
@@ -61,17 +61,10 @@ function Signup() {
     //   validatePassword(userDetails.password)
     // ) {
     try {
-      const res = await axios.post("user/signup", userDetails);
-      console.log(res);
-
-      if (res.status === 200) {
-        localStorage.setItem("user", res.data);
-        window.location.href = "/home";
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
+      const status = await signup(userDetails);
+      if (status === 200) window.location.href = "/home";
     } catch (err) {
-      alert(err.response.data.msg);
+      throw err;
     }
   };
   // else {
@@ -91,7 +84,10 @@ function Signup() {
           />
         </div>
 
-        <form className="login-form col-md-8 ms-2" onSubmit={(e) => signup(e)}>
+        <form
+          className="login-form col-md-8 ms-2"
+          onSubmit={(e) => signupMethod(e)}
+        >
           <div className="d-flex flex-row mt-2 w-100">
             <img
               src={logoImg}

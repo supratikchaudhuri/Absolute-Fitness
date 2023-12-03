@@ -6,9 +6,10 @@ import {
   getGymEquipments,
   updateGymEquipment,
 } from "../../api/gym";
-import { render } from "@testing-library/react";
 
+// TODO: gym equipments add delete, etc
 function GymEquipments() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const { gym_id } = useParams();
 
   const [equipments, setEquipments] = useState([]);
@@ -156,12 +157,15 @@ function GymEquipments() {
       {renderEditEquipmentForm}
       {renderNewEquipmentForm}
       <h4>Gym Equipments</h4>
-      <button
-        className="btn btn-primary float-end mb-3"
-        onCick={(e) => setShowNewEquipmentForm(true)}
-      >
-        Add Equpments
-      </button>
+      {user.type === "staff" ||
+        (user.type === "admin" && (
+          <button
+            className="btn btn-primary float-end mb-3"
+            onCick={(e) => setShowNewEquipmentForm(true)}
+          >
+            Add Equpments
+          </button>
+        ))}
       <Table
         content="equipments"
         data={equipments}

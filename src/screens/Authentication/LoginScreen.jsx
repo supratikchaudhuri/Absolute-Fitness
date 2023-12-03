@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import img1 from "../../Images/img1.jpg";
 import logoImg from "../../Images/AbsoluteFitnessLogo.jpg";
-import axios from "axios";
-
 import { login } from "../../api/authenticate";
 
 function LoginScreen() {
@@ -14,10 +12,8 @@ function LoginScreen() {
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const user = await login(username, password);
-      localStorage.setItem("user", JSON.stringify(user));
-      console.log(JSON.parse(localStorage.getItem("user")));
-      window.location.href = "/home";
+      const status = await login(username, password);
+      if (status === 200) window.location.href = "/home";
     } catch (err) {
       alert("Invalid username or password.\n Please try again.");
     }
