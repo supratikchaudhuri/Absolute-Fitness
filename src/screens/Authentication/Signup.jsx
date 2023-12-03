@@ -23,21 +23,20 @@ function Signup() {
     gymId: -1,
   });
 
-  const [gymAddressId, setGymAddressId] = useState([]);
+  //   TODO: input validation in signup / login
+  const [gyms, setGyms] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
 
-  useEffect(() => {
-    // getting all gym locations
-    const getAllGyms = async () => {
-      try {
-        const res = await axios.get("gym/");
-        const gymData = res.data;
-        setGymAddressId(gymData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const getAllGyms = async () => {
+    try {
+      const res = await axios.get("gym/");
+      setGyms(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  useEffect(() => {
     getAllGyms();
   }, []);
 
@@ -63,16 +62,14 @@ function Signup() {
     // ) {
     try {
       const res = await axios.post("user/signup", userDetails);
-      console.log(userDetails);
-      try {
-        const res1 = await axios.get(`user/${userDetails.email}`);
-        const user = res1.data;
-        localStorage.setItem("user", JSON.stringify(user));
-      } catch (err1) {
-        console.log(err1);
-      }
+      console.log(res);
 
-      window.location.href = "/home";
+      if (res.status === 200) {
+        localStorage.setItem("user", res.data);
+        window.location.href = "/home";
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
     } catch (err) {
       alert(err.response.data.msg);
     }
@@ -181,7 +178,7 @@ function Signup() {
           </div>
 
           <div className="row">
-            <div className="col-xs-12 col-md-6">
+            <div className="col-xs-12 col-md-6 mb-3">
               <label for="dob-input" className="form-label mb-2">
                 Date of Birth
               </label>
@@ -204,13 +201,44 @@ function Signup() {
                 className="custom-select w-100"
                 id="sex-input"
                 name="sex"
-                onChange={handleChange}
+                onChange={(e) =>
+                  setUserDetails((o) => ({
+                    ...o,
+                    sex: e.target.value,
+                  }))
+                }
               >
-                <option value="Male" selected>
-                  Male
-                </option>
+                <option>Choose your sex</option>
+                <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col col-xs-12">
+              <label for="gym-input" className="form-label mb-2">
+                Choose your gym
+              </label>
+              <select
+                required
+                className="custom-select w-100"
+                id="gym-input"
+                name="gymId"
+                onChange={(e) =>
+                  setUserDetails((o) => ({
+                    ...o,
+                    gymId: parseInt(e.target.value, 10),
+                  }))
+                }
+              >
+                <option>Choose your gym</option>
+                {gyms.map((gym) => (
+                  <option key={gym.gym_id} value={gym.gym_id}>
+                    {gym.branch || `Zip: ${gym.pincode}`} Branch
+                  </option>
+                ))}
               </select>
             </div>
           </div>

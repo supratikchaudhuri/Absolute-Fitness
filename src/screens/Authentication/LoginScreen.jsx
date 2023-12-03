@@ -3,15 +3,10 @@ import React, { useState } from "react";
 import img1 from "../../Images/img1.jpg";
 import logoImg from "../../Images/AbsoluteFitnessLogo.jpg";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 import { login } from "../../api/authenticate";
 
 function LoginScreen() {
-  const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -20,31 +15,12 @@ function LoginScreen() {
     e.preventDefault();
     try {
       const user = await login(username, password);
-
-      try {
-        localStorage.setItem("user", JSON.stringify(user));
-        console.log(JSON.parse(localStorage.getItem("user")));
-
-        const res2 = await axios.get(`gym/${user.gym_id}`, {
-          headers: { Authorization: `Bearer ${user.accessToken}` },
-        });
-        const user_gym = res2.data;
-        localStorage.setItem("user_gym", JSON.stringify(user_gym));
-        window.location.href = "/home";
-      } catch (err1) {
-        console.log(err1);
-      }
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log(JSON.parse(localStorage.getItem("user")));
+      window.location.href = "/home";
     } catch (err) {
       alert("Invalid username or password.\n Please try again.");
     }
-  };
-
-  const GoogleSuccess = (res) => {
-    //store credentials in th background
-    const { email, name, picture } = jwt_decode(res.credential);
-    localStorage.setItem("user", JSON.stringify({ picture, name, email }));
-    navigate("/home");
-    window.location.reload();
   };
 
   return (
@@ -119,17 +95,6 @@ function LoginScreen() {
             </button>
           </p>
           <p className=" center small mb-2 mt-0">Or</p>
-
-          <div className="center">
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                GoogleSuccess(credentialResponse);
-              }}
-              onError={() => {
-                alert("Login with Google failed\n Please try again");
-              }}
-            />
-          </div>
 
           <p className="center small mt-2 mb-0 pb-lg-2">
             Don't have an account? <a href="/signup">Signup here</a>

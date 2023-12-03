@@ -146,9 +146,8 @@ function App() {
               />
 
               {/* Route for Subscribers */}
-              <Route element={<SubscriberRoute />}>
-                <Route exact path="/nutrition" element={<NutrionIX />} />
-              </Route>
+              <Route exact path="/nutrition" element={<NutrionIX />} />
+              <Route element={<SubscriberRoute />}></Route>
               <Route
                 exact
                 path="/paymentSuccessFull"
