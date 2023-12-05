@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getGymTrainers } from "../api/gym";
 import { addNewTrainer } from "../api/trainer";
+import AlertBox from "../components/AlertBox";
 
 function Trainers() {
   const { gym_id } = useParams();
@@ -300,7 +301,7 @@ function Trainers() {
       </div>
     </>
   ) : (
-    <div className="no-data">No Trainers Data Found.</div>
+    <AlertBox type="warning" message="No Trainers listed by the gym yet." />
   );
 }
 

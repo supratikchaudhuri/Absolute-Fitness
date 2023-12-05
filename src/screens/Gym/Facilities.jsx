@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getGymFacilities } from "../../api/gym";
+import AlertBox from "../../components/AlertBox";
 
 function Facilities() {
   const params = useParams();
@@ -48,7 +49,7 @@ function Facilities() {
       </div>
     </div>
   ) : (
-    <div className="no-data">No Facilities listed by the gym yet.</div>
+    <AlertBox type="warning" message="No Facilities listed by the gym yet." />
   );
 }
 

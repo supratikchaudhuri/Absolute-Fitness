@@ -40,7 +40,7 @@ const Franchise = () => {
             View Equipments
           </a>
 
-          {user.type === "admin" && (
+          {(user.type === "admin" || user.type === "root") && (
             <>
               <a
                 href={`/gym/${gymDetails.gym_id}/members`}

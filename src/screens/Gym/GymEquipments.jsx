@@ -6,6 +6,7 @@ import {
   getGymEquipments,
   updateGymEquipment,
 } from "../../api/gym";
+import AlertBox from "../../components/AlertBox";
 
 // TODO: gym equipments add delete, etc
 function GymEquipments() {
@@ -174,7 +175,7 @@ function GymEquipments() {
       />
     </div>
   ) : (
-    <div className="no-data">No equipment data found</div>
+    <AlertBox type="warning" message="No Equipments listed by the gym yet." />
   );
 }
 

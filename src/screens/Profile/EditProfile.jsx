@@ -13,7 +13,7 @@ const EditProfile = () => {
     const status = await updateUser(updatedUser);
     if (status === 200) {
       alert("Profile Updated Successfully");
-      window.location.href = "/profile";
+      window.location.href = "/user/profile";
     } else {
       alert("Something went wrong");
     }

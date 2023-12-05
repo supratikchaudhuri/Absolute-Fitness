@@ -55,6 +55,21 @@ function Navbar() {
     { name: "Diet Plan", link: "/diet-plan" },
   ];
 
+  //   const rootLinks = [
+  //     {
+  //       name: "Trainers",
+  //       link: "/trainer",
+  //     },
+  //     {
+  //       name: "Customers",
+  //       link: "/customer",
+  //     },
+  //     {
+  //       name: "Staff",
+  //       link: "/staff",
+  //     },
+  //   ];
+
   return (
     <>
       <nav className="custom-navbar fixed-top navbar navbar-dark bg-primary navbar-expand-lg">
