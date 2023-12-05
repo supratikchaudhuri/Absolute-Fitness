@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertBox from "../../components/AlertBox";
+import { getHealthPlanForUser } from "../../api/healthPlan";
+import { getHealthRecordForUser } from "../../api/healthRecord";
 
 function HealthPlan() {
   const navigate = useNavigate();
@@ -11,25 +13,13 @@ function HealthPlan() {
   const [healthPlan, setHealthPlan] = useState(null);
 
   const getHealthRecord = async () => {
-    try {
-      const res = await axios.get(`/healthRecord/${user.email}`, {
-        headers: { Authorization: `Bearer ${user.accessToken}` },
-      });
-      setUserHealthRecord(res.data);
-    } catch (err) {
-      console.log(err);
-    }
+    const data = await getHealthRecordForUser(user.username);
+    setUserHealthRecord(data);
   };
 
   const getHealthPlan = async () => {
-    try {
-      const res = await axios.get(`/healthPlan/${user.email}`, {
-        headers: { Authorization: `Bearer ${user.accessToken}` },
-      });
-      setHealthPlan(res.data);
-    } catch (err) {
-      alert(err.response.data.msg || err);
-    }
+    const data = await getHealthPlanForUser(user.username);
+    setHealthPlan(data);
   };
 
   useEffect(() => {
@@ -41,7 +31,7 @@ function HealthPlan() {
   console.log(userHealthRecord);
 
   return healthPlan ? (
-    <div className="health-plan-div mb-4">
+    <div className="health-plan-div">
       <h1>Change layout looks shit</h1>
       {userHealthRecord && userHealthRecord.length > 0 && (
         <>

@@ -1,25 +1,19 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { getWorkoutPlanForUser } from "../../api/workoutPlan";
 
 function WorkoutPlan() {
   const [workoutPlan, setWorkoutPlan] = useState(null);
   const user = JSON.parse(localStorage.getItem("user")) || null;
 
-  useEffect(() => {
-    const getWorkouts = async () => {
-      try {
-        const res = await axios.get(`/workoutPlan/${user.email}`, {
-          headers: { Authorization: `Bearer ${user.accessToken}` },
-        });
-        console.log(res.data);
-        setWorkoutPlan(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const getWorkouts = async () => {
+    const data = await getWorkoutPlanForUser(user.username);
+    setWorkoutPlan(data);
+  };
 
+  useEffect(() => {
     getWorkouts();
   }, []);
+
   console.log(workoutPlan);
 
   return (

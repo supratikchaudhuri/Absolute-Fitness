@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
+import { getDietPlanForUser } from "../../api/dietPlan";
 
 function DietPlan() {
   const [mealPlan, setMealPlan] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    const getMeals = async () => {
-      try {
-        const res = await axios.get(`/dietPlan/${user.email}`, {
-          headers: { Authorization: `Bearer ${user.accessToken}` },
-        });
-        setMealPlan(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const getMeals = async () => {
+    const data = await getDietPlanForUser(user.username);
+    setMealPlan(data);
+  };
 
+  useEffect(() => {
     getMeals();
   }, []);
 
