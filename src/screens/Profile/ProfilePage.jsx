@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import "../../profileStyles.css";
+import AlertBox from "../../components/AlertBox";
+import { getGym } from "../../api/gym";
 
 function ProfilePage() {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
 
+  //   TODO: show paying customer or not
   const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedProfile, setUpdatedProfile] = useState({
-    ...user,
-    ["password"]: null,
-  });
+  const [updatedProfile, setUpdatedProfile] = useState(user);
+  const [userGym, setUserGym] = useState(null);
+
+  const fetchUserGym = async () => {
+    const gym = await getGym(user.gym_id);
+    setUserGym(gym);
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchUserGym();
+    }
+  }, []);
+
+  console.log(userGym);
 
   const handleChange = (e) => {
     setUpdatedProfile({
@@ -49,25 +62,69 @@ function ProfilePage() {
     <>
       <div className="col profile-details">
         <div className="row">
-          <div className="col-xs-12 col-md-4 width-auto fit-content mb-3">
-            <i className="fa fa-user avatar mb-3" aria-hidden="true"></i>
-            <br />
-            <a href="edit-profile" className="float-end">
-              <button className="btn btn-outline-primary ">
-                <i className="fa fa-pencil" aria-hidden="true"></i>
-                <span className="ms-2">Edit Profile</span>
-              </button>
-            </a>
-          </div>
+          {!user ? (
+            <AlertBox
+              type="danger"
+              message="Please login to view user details"
+            />
+          ) : (
+            <>
+              <div className="col-xs-12 col-md-4 width-auto fit-content mb-3">
+                <i className="fa fa-user avatar mb-3" aria-hidden="true"></i>
+                <br />
+              </div>
 
-          <div className="col-xs-12 col-md-8">
-            <h2 style={{ "font-weight": 300 }}>{user.name}</h2>
+              <div className="col-xs-12 col-md-8 ms-auto">
+                <h2 style={{ "font-weight": 300 }}>{user.name}</h2>
 
-            <p>Phone: {user.phone}</p>
+                <p>
+                  <strong>Email: </strong>
+                  {user.username}
+                </p>
+                <p>
+                  <strong>Phone: </strong>
+                  {user.phone}
+                </p>
+                <p>
+                  <strong>Sex: </strong>
+                  {user.sex}
+                </p>
+                <p>
+                  <strong>Date of Birth: </strong>
+                  {user.dob}
+                </p>
 
-            <h3 className="title">Biography</h3>
-            <p>Student, SWE, Actively seeking Internships</p>
-          </div>
+                <p>
+                  <strong>User Type: </strong>
+                  {user.type}
+                </p>
+
+                <a href="edit-profile" className="btn btn-outline-primary">
+                  <i className="fa fa-pencil" aria-hidden="true"></i>
+                  <span className="ms-2">Edit Profile</span>
+                </a>
+              </div>
+            </>
+          )}
+
+          {userGym && (
+            <div className="col-xs-12 col-md-12 ms-auto">
+              <h2 style={{ "font-weight": 300 }}>Gym Details</h2>
+
+              <p>
+                <strong>Gym Name: </strong>
+                {userGym.branch}
+              </p>
+              <p>
+                <strong>Gym Address: </strong>
+                {userGym.location}
+              </p>
+              <p>
+                <strong>Gym Phone: </strong>
+                {userGym.phone}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </>

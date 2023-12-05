@@ -9,6 +9,7 @@ function LoginScreen() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  //   TODO:check wrong password error here and signup
   const loginUser = async (e) => {
     e.preventDefault();
     try {

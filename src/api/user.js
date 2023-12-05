@@ -14,6 +14,24 @@ export const signup = async (userDetails) => {
   }
 };
 
+export const updateUser = async (userDetails) => {
+  try {
+    console.log(userDetails);
+    const res = await api.put(`user/${userDetails.username}`, userDetails, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    if (res.status === 200) {
+      localStorage.setItem("user", JSON.stringify(res.data));
+    }
+    return res.status;
+  } catch (err) {
+    console.log(err);
+    return err.response.status;
+  }
+};
+
 export const deleteGymUser = async (userId) => {
   try {
     const res = await api.delete(`user/${userId}`, {

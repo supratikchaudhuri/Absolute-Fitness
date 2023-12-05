@@ -5,7 +5,6 @@ import { Outlet } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user")) || {};
-  console.log(children);
 
   if (!user.accessToken) {
     return (

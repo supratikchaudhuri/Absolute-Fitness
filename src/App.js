@@ -51,10 +51,6 @@ const STRIPE_PUBLISHABLE_KEY =
 const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY);
 
 function App() {
-  //   const options = {
-  //     clientSecret:
-  //       "sk_test_51N4IuESIsW8FsEuEvTyh0IUSLpgHo7lYJQA47wKLiBGnlUbY3VkH1wpa3TV4XIis5If1fAMPzbuf9wjHd0jo86xe00BWpFtnZG",
-  //   };
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <BrowserRouter>
@@ -125,9 +121,10 @@ function App() {
               <Route exact path="/user/profile" element={<ProfilePage />} />
               <Route
                 exact
-                path="/user/:userId/edit-profile"
+                path="/user/edit-profile"
                 element={<EditProfile />}
               />
+
               <Route
                 exact
                 path="/health-record"

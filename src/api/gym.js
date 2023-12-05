@@ -11,6 +11,19 @@ export const getAllGyms = async () => {
   }
 };
 
+export const getGym = async (gym_id) => {
+  try {
+    const res = await api.get(`gym/${gym_id}`, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const addGym = async (gymDetails, adminDetails) => {
   try {
     const res = await api.post(
