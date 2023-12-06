@@ -28,7 +28,7 @@ export const addGym = async (gymDetails, adminDetails) => {
   try {
     const res = await api.post(
       "gym/",
-      { gymDetails, adminDetails },
+      { gym: gymDetails, admin: adminDetails },
       {
         headers: {
           Authorization: `Bearer ${user.accessToken}`,

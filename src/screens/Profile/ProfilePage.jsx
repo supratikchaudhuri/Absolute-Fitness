@@ -107,7 +107,7 @@ function ProfilePage() {
             </>
           )}
 
-          {userGym && (
+          {user && user.type !== "root" && userGym && (
             <div className="col-xs-12 col-md-12 ms-auto">
               <h2 style={{ "font-weight": 300 }}>Gym Details</h2>
 
