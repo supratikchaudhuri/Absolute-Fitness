@@ -11,7 +11,6 @@ import TrainerPerformance from "./screens/GymServices/TrainerPerformance";
 import MemberHealthRecord from "./screens/MemberHealthRecord";
 import Facilities from "./screens/Gym/Facilities";
 import HealthPlan from "./screens/GymServices/HealthPlan";
-import StaffLogin from "./screens/Authentication/StaffLogin";
 import DietPlan from "./screens/GymServices/DietPlan";
 import GymMembers from "./screens/GymMembers";
 import GymStaff from "./screens/GymStaff";
@@ -72,7 +71,6 @@ function App() {
               path="/user/:username/resetPassword/:token"
               element=<SetupNewPassword />
             />
-            <Route exact path="/staff-login" element={<StaffLogin />} />
             <Route exact path="/signup" element={<Signup />} />
 
             <Route
