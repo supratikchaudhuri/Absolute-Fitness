@@ -63,6 +63,7 @@ function Trainers() {
                 className="form-control"
                 id="name"
                 name="name"
+                placeholder="Christopher Bumstead"
                 value={newTrainer.name}
                 onChange={handleChange}
                 required
@@ -79,6 +80,7 @@ function Trainers() {
                 className="form-control"
                 id="phone"
                 name="phone"
+                placeholder="9876543210"
                 value={newTrainer.phone}
                 onChange={handleChange}
                 required
@@ -135,6 +137,7 @@ function Trainers() {
                 id="speciality"
                 name="speciality"
                 value={newTrainer.speciality}
+                placeholder="Bodybuilding, Weight Loss, etc."
                 onChange={handleChange}
                 required
               />
@@ -150,6 +153,7 @@ function Trainers() {
                 className="form-control"
                 id="experience"
                 name="yearsOfExp"
+                placeholder="5"
                 value={newTrainer.yearsOfExp}
                 onChange={handleChange}
                 required
@@ -168,22 +172,28 @@ function Trainers() {
                 name="salary"
                 value={newTrainer.salary}
                 onChange={handleChange}
+                placeholder="10000"
                 required
               />
             </div>
           </div>
           <div className="col-xs-12 col-md-6 col-lg-3 m-auto">
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value={partTime}
-                id="part-time"
-                onChange={(e) => setPartTime(!partTime)}
-              />
               <label class="form-check-label" for="part-time">
                 Part Time
               </label>
+              {/* TODO onchange */}
+              <select
+                required
+                className="custom-select w-100"
+                id="part-time"
+                name="part_time"
+              >
+                <option value="0">Part Time</option>
+                <option value="1" selected>
+                  Full Time
+                </option>
+              </select>
             </div>
           </div>
         </div>
@@ -212,6 +222,7 @@ function Trainers() {
                 className="form-control"
                 id="staff-id"
                 name="staffId"
+                placeholder="johdoe@af.com"
                 value={newTrainer.staffId}
                 onChange={handleChange}
                 required

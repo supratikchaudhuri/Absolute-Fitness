@@ -32,7 +32,7 @@ function HealthPlan() {
 
   return healthPlan ? (
     <div className="health-plan-div">
-      <h1>Change layout looks shit</h1>
+      <h4 className="page-title">Your Health Plan</h4>
       {userHealthRecord && userHealthRecord.length > 0 && (
         <>
           <p>
@@ -42,13 +42,13 @@ function HealthPlan() {
           </p>
         </>
       )}
-      <div className="health-plan-trainer">
+      <div className="health-plan-trainer mt-2">
         <p>
           Your trainer is{" "}
           {healthPlan.trainer_name ? healthPlan.trainer_name : "not assigned"}
         </p>
 
-        <img src={healthPlan.trainer_url} />
+        <img src={healthPlan.trainer_url} alt="" />
 
         <p>About your health plan: {healthPlan.health_plan_description}</p>
       </div>

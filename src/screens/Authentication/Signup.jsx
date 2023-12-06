@@ -112,6 +112,7 @@ function Signup() {
                 type="text"
                 onChange={handleChange}
                 name="name"
+                placeholder="James Wiliams"
                 value={userDetails.name}
                 required
               />
@@ -127,6 +128,7 @@ function Signup() {
                 onChange={handleChange}
                 name="phone"
                 value={userDetails.phone}
+                placeholder="9876543210"
                 required
               />
             </div>
@@ -143,6 +145,7 @@ function Signup() {
                 type="email"
                 onChange={handleChange}
                 name="email"
+                placeholder="Jame@gmail.com"
                 value={userDetails.email}
                 required
               />

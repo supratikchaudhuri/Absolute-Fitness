@@ -58,6 +58,7 @@ function LoginScreen() {
             type="email"
             onChange={(e) => setUsername(e.target.value)}
             name="username"
+            required
             value={username}
           />
 
@@ -70,6 +71,7 @@ function LoginScreen() {
                 id="password-input"
                 className="form-control form-control mb-4"
                 type={showPassword ? "text" : "password"}
+                required
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />

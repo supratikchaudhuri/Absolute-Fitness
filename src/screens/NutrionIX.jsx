@@ -30,7 +30,7 @@ const NutrionIX = () => {
     carbohydrate: 0,
     "saturated fat": 0,
     "total fat": 0,
-    cholesterol: 0,
+    // cholesterol: 0,
     // sodium: 0,
     "dietary fiber": 0,
     // potassium: 0,

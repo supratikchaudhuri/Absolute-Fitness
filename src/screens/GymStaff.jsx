@@ -85,26 +85,32 @@ function GymStaff() {
               id="staffID"
               name="staff_id"
               value={staffDetails.staff_id}
+              placeholder="Immutable"
               disabled
+              required
             />
           </div>
           <div className="col">
             <label htmlFor="partTime" className="form-label">
-              Part Time
+              Employment Type
             </label>
-            <input
-              type="text"
-              className="form-control"
+            <select
+              required
+              className="custom-select w-100"
               id="partTime"
               name="part_time"
-              value={staffDetails.part_time}
               onChange={(e) =>
                 setStaffDetails({
                   ...staffDetails,
                   [e.target.name]: e.target.value,
                 })
               }
-            />
+            >
+              <option value="0">Part Time</option>
+              <option value="1" selected>
+                Full Time
+              </option>
+            </select>
           </div>
           <div className="col">
             <label htmlFor="salary" className="form-label">
@@ -112,10 +118,12 @@ function GymStaff() {
             </label>
             <input
               type="text"
+              required
               className="form-control"
               id="salary"
               name="salary"
               value={staffDetails.salary}
+              placeholder="10000"
               onChange={(e) =>
                 setStaffDetails({
                   ...staffDetails,
@@ -133,10 +141,12 @@ function GymStaff() {
             </label>
             <input
               type="text"
+              required
               className="form-control"
               id="firstName"
               name="name"
               value={staffDetails.name}
+              placeholder="John"
               onChange={(e) =>
                 setStaffDetails({
                   ...staffDetails,
@@ -151,10 +161,12 @@ function GymStaff() {
             </label>
             <input
               type="text"
+              required
               className="form-control"
               id="phone"
               name="phone"
               value={staffDetails.phone}
+              placeholder="9876543210"
               onChange={(e) =>
                 setStaffDetails({
                   ...staffDetails,
@@ -172,9 +184,11 @@ function GymStaff() {
           <textarea
             className="form-control"
             id="description"
+            required
             rows="3"
             name="description"
             value={staffDetails.description}
+            placeholder="Job Description"
             onChange={(e) =>
               setStaffDetails({
                 ...staffDetails,

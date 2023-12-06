@@ -75,6 +75,7 @@ const AddGymBranch = () => {
                   className="form-control mb-2"
                   id="name"
                   name="branch"
+                  placeholder="Hamptons"
                   value={gymDetails.branch}
                   onChange={(e) =>
                     setGymDetails({ ...gymDetails, branch: e.target.value })

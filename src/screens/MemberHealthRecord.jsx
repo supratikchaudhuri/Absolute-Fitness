@@ -128,6 +128,7 @@ function MemberHealthRecord() {
           className="form-control"
           id="height-input"
           name="height"
+          placeholder="Enter height in cm"
           onChange={handleChange}
           required
         />
@@ -142,6 +143,7 @@ function MemberHealthRecord() {
           className="form-control"
           id="weight-input"
           name="weight"
+          placeholder="Enter weight in kg"
           onChange={handleChange}
           required
         />

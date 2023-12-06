@@ -111,6 +111,7 @@ function GymEquipments() {
             name="quantity"
             value={updatedEquipment.quantity}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="col">
@@ -122,6 +123,7 @@ function GymEquipments() {
             className="form-control"
             id="last_serviced"
             name="last_serviced"
+            required
             value={
               updatedEquipment.last_serviced
                 ? updatedEquipment.last_serviced

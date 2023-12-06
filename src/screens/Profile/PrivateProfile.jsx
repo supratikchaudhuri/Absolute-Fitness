@@ -5,7 +5,7 @@ import "../../profileStyles.css";
 import AlertBox from "../../components/AlertBox";
 import { getGym } from "../../api/gym";
 
-function ProfilePage() {
+function PrivateProfile() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   //   TODO: show paying customer or not
@@ -28,7 +28,7 @@ function ProfilePage() {
 
   return (
     <>
-      <div className="col profile-details">
+      <div className="container col profile-details">
         <div className="row">
           {!user ? (
             <AlertBox
@@ -37,12 +37,16 @@ function ProfilePage() {
             />
           ) : (
             <>
-              <div className="col-xs-12 col-md-4 width-auto fit-content mb-3">
-                <i className="fa fa-user avatar mb-3" aria-hidden="true"></i>
+              <div className="col-sm-12 col-md-2 fit-content mb-3 mt-5">
+                <div></div>
+                <i
+                  className="ms-auto fa fa-user avatar mb-3"
+                  aria-hidden="true"
+                ></i>
                 <br />
               </div>
 
-              <div className="col-xs-12 col-md-8 ms-auto">
+              <div className="col-sm-12 col-md-10 ms-auto">
                 <h2 style={{ fontWeight: "bold", marginBottom: "10px" }}>
                   {user.name}
                 </h2>
@@ -64,6 +68,15 @@ function ProfilePage() {
                   <strong>User Type:</strong> {user.type}
                 </p>
 
+                {user.type !== "root" && userGym && (
+                  <>
+                    <p>
+                      <strong>Gym:</strong>{" "}
+                      <a href={`/gym/${userGym.gym_id}`}>{userGym.branch}</a>
+                    </p>
+                  </>
+                )}
+
                 <a href="edit-profile" className="btn btn-primary">
                   <i className="fa fa-pencil" aria-hidden="true"></i>
                   <span className="ms-2">Edit Profile</span>
@@ -71,29 +84,10 @@ function ProfilePage() {
               </div>
             </>
           )}
-
-          {user && user.type !== "root" && userGym && (
-            <div className="col-xs-12 col-md-12 ms-auto">
-              <h2 style={{ fontWeight: "bold", marginBottom: "10px" }}>
-                User's Gym
-              </h2>
-
-              <p>
-                <strong>Gym:</strong>{" "}
-                <a href={`/gym/${userGym.gym_id}`}>{userGym.branch}</a>
-              </p>
-              <p>
-                <strong>Gym Address:</strong> {userGym.location}
-              </p>
-              <p>
-                <strong>Gym Phone:</strong> {userGym.phone}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </>
   );
 }
 
-export default ProfilePage;
+export default PrivateProfile;

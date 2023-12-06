@@ -71,6 +71,7 @@ const SetupNewPassword = () => {
                 type={showPassword ? "text" : "password"}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter New Password"
+                required
                 value={password}
               />
             </div>
@@ -94,6 +95,7 @@ const SetupNewPassword = () => {
                 type={showConfirmPassword ? "text" : "password"}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 value={confirmPassword}
+                required
               />
             </div>
             <div

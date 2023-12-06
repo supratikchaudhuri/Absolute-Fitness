@@ -52,6 +52,7 @@ const ForgotPassword = () => {
             type="email"
             onChange={(e) => setUsername(e.target.value)}
             name="username"
+            required
             value={username}
           />
 

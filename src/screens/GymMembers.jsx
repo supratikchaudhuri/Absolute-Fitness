@@ -27,7 +27,7 @@ function GymMembers() {
   useEffect(() => {
     getMembers();
   }, []);
-
+  // TODO: add customer type
   const search = (e) => {
     e.preventDefault();
     const input = document.querySelector("input").value;
@@ -38,36 +38,40 @@ function GymMembers() {
         return (
           member.name.toLowerCase().includes(input.toLowerCase()) ||
           member.email.toLowerCase().includes(input.toLowerCase()) ||
-          member.phone.toLowerCase().includes(input.toLowerCase())
+          member.phone.toLowerCase().includes(input.toLowerCase()) ||
+          member.dob.toLowerCase().includes(input.toLowerCase()) ||
+          member.sex.toLowerCase().includes(input.toLowerCase())
         );
       });
       setMembers(filteredMembers);
     }
   };
 
-  return members.length > 0 ? (
+  return (
     <div className="gym-members-div">
-      <form class="form-inline mb-3" onSubmit={search}>
+      <form className="form-inline mb-3" onSubmit={search}>
         <div className="row mx-auto">
           <div className="col">
             <input
-              class="form-control"
+              className="form-control"
               type="search"
               placeholder="Search name, email or phone"
               aria-label="Search"
             />
           </div>
           <div className="col ms-auto">
-            <button class="btn btn-outline-success" type="submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
+            <button className="btn btn-outline-success" type="submit">
+              <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
         </div>
       </form>
-      <Table content="members" data={members} deleteItem={deleteUser}></Table>
+      {members.length > 0 ? (
+        <Table content="members" data={members} deleteItem={deleteUser}></Table>
+      ) : (
+        <AlertBox message={"No member data found"} type="danger" />
+      )}
     </div>
-  ) : (
-    <AlertBox message={"No member data found"} type="danger" />
   );
 }
 

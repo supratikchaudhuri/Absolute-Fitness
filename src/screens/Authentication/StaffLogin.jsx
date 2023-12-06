@@ -70,6 +70,7 @@ function StaffLogin() {
             type="email"
             onChange={(e) => setUsername(e.target.value)}
             name="username"
+            placeholder="staff"
             value={username}
           />
 

@@ -15,7 +15,7 @@ import StaffLogin from "./screens/Authentication/StaffLogin";
 import DietPlan from "./screens/GymServices/DietPlan";
 import GymMembers from "./screens/GymMembers";
 import GymStaff from "./screens/GymStaff";
-import ProfilePage from "./screens/Profile/ProfilePage";
+import PrivateProfile from "./screens/Profile/PrivateProfile";
 import Dashboard from "./screens/GymServices/Dashboard";
 import GymEquipments from "./screens/Gym/GymEquipments";
 import MembershipPricingPlans from "./screens/Pricing/MembershipPricing";
@@ -40,7 +40,7 @@ import SubscriberRoute from "./components/SubscriberRoute";
 import OwnerRoute from "./components/OwnerRoute";
 import AddGymBranch from "./screens/Gym/AddGymBranch";
 import PaymentSuccessFul from "./screens/Pricing/PaymentSuccessFul";
-import GlobalProfilePage from "./screens/Profile/GlobalProfilePage";
+import PublicProfile from "./screens/Profile/PublicProfile";
 
 /************************ Imports complete ************************/
 
@@ -78,7 +78,7 @@ function App() {
             <Route
               exact
               path="/user/profile/:username"
-              element={<GlobalProfilePage />}
+              element={<PublicProfile />}
             />
 
             <Route exact path="/home" element={<Home />} />
@@ -125,7 +125,7 @@ function App() {
                 }
               />
 
-              <Route exact path="/user/profile" element={<ProfilePage />} />
+              <Route exact path="/user/profile" element={<PrivateProfile />} />
               <Route
                 exact
                 path="/user/edit-profile"

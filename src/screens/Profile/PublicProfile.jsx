@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import AlertBox from "../../components/AlertBox";
 import { getUser } from "../../api/user";
 
-const GlobalProfilePage = () => {
+const PublicProfile = () => {
   const { username } = useParams();
   const [profile, setProfile] = useState(null);
 
@@ -30,4 +30,4 @@ const GlobalProfilePage = () => {
   );
 };
 
-export default GlobalProfilePage;
+export default PublicProfile;
