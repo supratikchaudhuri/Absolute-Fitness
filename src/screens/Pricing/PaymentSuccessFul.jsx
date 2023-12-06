@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import gif from "../../Images/doggoGif.gif";
+import { useParams } from "react-router-dom";
+import { paymentSuccessful } from "../../api/user";
 
 const PaymentSuccessFul = () => {
+  const { token: paymentToken } = useParams();
+
+  const paymentSuccessfulByUser = async (paymentToken) => {
+    await paymentSuccessful(paymentToken);
+  };
+
   useEffect(() => {
-    const res = { accessToken: "dummy" };
-    const newAccessToken = res.accessToken;
-    // localStorage.setItem(
-    //   "user",
-    //   JSON.stringify({ ...res, accessToken: newAccessToken })
-    // );
+    paymentSuccessfulByUser();
   }, []);
   return (
     <div className="container ">

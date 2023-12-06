@@ -8,8 +8,12 @@ function Navbar() {
   };
 
   let user = JSON.parse(localStorage.getItem("user")) || {};
+  console.log("user fetched");
 
   const { decodedToken } = useJwt(user.accessToken);
+
+  console.log("decoded token fetched");
+  console.log(decodedToken);
 
   if (decodedToken) {
     user = { ...user, type: decodedToken.type };

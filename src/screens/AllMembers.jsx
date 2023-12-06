@@ -18,6 +18,7 @@ const AllUsers = () => {
   return (
     <div className="container center">
       <h4>Absolute Fitness Users</h4>
+      <h6>Got {users.length} users</h6>
       {users.length ? (
         <Table
           content="members"

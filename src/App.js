@@ -137,9 +137,6 @@ function App() {
                 path="/health-record"
                 element={<MemberHealthRecord />}
               />
-              <Route exact path="/health-plan" element={<HealthPlan />} />
-              <Route exact path="/workout-plan" element={<WorkoutPlan />} />
-              <Route exact path="/diet-plan" element={<DietPlan />} />
 
               {/* <Route index path="/nutrition" element={<NutrionIX />} /> */}
 
@@ -150,11 +147,15 @@ function App() {
               />
 
               {/* Route for Subscribers */}
-              <Route exact path="/nutrition" element={<NutrionIX />} />
-              <Route element={<SubscriberRoute />}></Route>
+              <Route element={<SubscriberRoute />}>
+                <Route exact path="/health-plan" element={<HealthPlan />} />
+                <Route exact path="/workout-plan" element={<WorkoutPlan />} />
+                <Route exact path="/diet-plan" element={<DietPlan />} />
+                <Route exact path="/nutrition" element={<NutrionIX />} />
+              </Route>
               <Route
                 exact
-                path="/paymentSuccessFull"
+                path="/payment-success"
                 element={<PaymentSuccessFul />}
               />
 

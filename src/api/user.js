@@ -66,3 +66,24 @@ export const deleteGymUser = async (userId) => {
     console.log(err);
   }
 };
+
+export const paymentSuccessful = async (paymentToken) => {
+  try {
+    const res = await api.post("user/payment", paymentToken, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+
+    const accessToken = res.data.accessToken;
+    console.log(user.accessToken === accessToken);
+    user = { ...user, accessToken };
+    if (res.status === 200) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+    user = localStorage.getItem("user");
+    console.log(user.accessToken === accessToken);
+  } catch (err) {
+    console.log(err);
+  }
+};
