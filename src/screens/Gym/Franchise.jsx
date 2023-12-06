@@ -1,13 +1,24 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Carousel from "../../components/Carousel";
+import { useParams } from "react-router-dom";
+import { getGym } from "../../api/gym";
+import AlertBox from "../../components/AlertBox";
 
 const Franchise = () => {
   const user = JSON.parse(localStorage.getItem("user")) || {};
-  const { state } = useLocation();
-  const gymDetails = state.gymDetails;
+  const { gym_id } = useParams();
+  const [gymDetails, setGymDetails] = useState(null);
 
-  return (
+  const fetchGym = async () => {
+    const res = await getGym(gym_id);
+    setGymDetails(res);
+  };
+
+  useEffect(() => {
+    fetchGym();
+  }, []);
+
+  return gymDetails ? (
     <div className="container center">
       <h4>Gym Gallery</h4>
       <Carousel images={gymDetails.image_urls} />
@@ -59,6 +70,8 @@ const Franchise = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <AlertBox type="danger" message="Gym not found" />
   );
 };
 

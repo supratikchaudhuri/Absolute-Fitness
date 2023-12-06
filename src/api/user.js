@@ -14,6 +14,15 @@ export const signup = async (userDetails) => {
   }
 };
 
+export const getUser = async (username) => {
+  try {
+    const res = await api.get(`user/${username}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const updateUser = async (userDetails) => {
   try {
     console.log(userDetails);

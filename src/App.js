@@ -40,6 +40,7 @@ import SubscriberRoute from "./components/SubscriberRoute";
 import OwnerRoute from "./components/OwnerRoute";
 import AddGymBranch from "./screens/Gym/AddGymBranch";
 import PaymentSuccessFul from "./screens/Pricing/PaymentSuccessFul";
+import GlobalProfilePage from "./screens/Profile/GlobalProfilePage";
 
 /************************ Imports complete ************************/
 
@@ -73,6 +74,12 @@ function App() {
             />
             <Route exact path="/staff-login" element={<StaffLogin />} />
             <Route exact path="/signup" element={<Signup />} />
+
+            <Route
+              exact
+              path="/user/profile/:username"
+              element={<GlobalProfilePage />}
+            />
 
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/branches" element={<Branches />} />

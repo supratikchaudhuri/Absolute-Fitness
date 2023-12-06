@@ -55,20 +55,20 @@ function Navbar() {
     { name: "Diet Plan", link: "/diet-plan" },
   ];
 
-  //   const rootLinks = [
-  //     {
-  //       name: "Trainers",
-  //       link: "/trainer",
-  //     },
-  //     {
-  //       name: "Customers",
-  //       link: "/customer",
-  //     },
-  //     {
-  //       name: "Staff",
-  //       link: "/staff",
-  //     },
-  //   ];
+  const rootLinks = [
+    {
+      name: "Trainers",
+      link: "/trainer",
+    },
+    {
+      name: "Customers",
+      link: "/customer",
+    },
+    {
+      name: "Staff",
+      link: "/staff",
+    },
+  ];
 
   return (
     <>

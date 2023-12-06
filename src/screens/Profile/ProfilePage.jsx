@@ -9,8 +9,8 @@ function ProfilePage() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   //   TODO: show paying customer or not
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [updatedProfile, setUpdatedProfile] = useState(user);
+  // TODO: aesthetic page, add more details paying cutomer or not, (maybe add healt record here?)
+  //    TODO: global profile less info
   const [userGym, setUserGym] = useState(null);
 
   const fetchUserGym = async () => {
@@ -25,38 +25,6 @@ function ProfilePage() {
   }, []);
 
   console.log(userGym);
-
-  const handleChange = (e) => {
-    setUpdatedProfile({
-      ...updatedProfile,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(updatedProfile);
-    if (updatedProfile["phone"].length !== 10) {
-      alert("phone needs to be 10 digits long");
-      return;
-    }
-    try {
-      if (user.type === "member") {
-        const res = await axios.put(`/user/${user.email}`, {
-          ...updatedProfile,
-          ["gymId"]: user.gym_id,
-        });
-        let newProfile = updatedProfile;
-        delete newProfile.password;
-        console.log(newProfile);
-        localStorage.setItem("user", JSON.stringify(newProfile));
-        setShowEditForm(false);
-        alert("Profile Updated Successfully !");
-      }
-    } catch (err) {
-      alert(err.response.data.msg || err);
-    }
-  };
 
   return (
     <>
@@ -75,31 +43,28 @@ function ProfilePage() {
               </div>
 
               <div className="col-xs-12 col-md-8 ms-auto">
-                <h2 style={{ "font-weight": 300 }}>{user.name}</h2>
+                <h2 style={{ fontWeight: "bold", marginBottom: "10px" }}>
+                  {user.name}
+                </h2>
 
                 <p>
-                  <strong>Email: </strong>
-                  {user.username}
+                  <strong>Email:</strong> {user.username}
                 </p>
                 <p>
-                  <strong>Phone: </strong>
-                  {user.phone}
+                  <strong>Phone:</strong> {user.phone}
                 </p>
                 <p>
-                  <strong>Sex: </strong>
-                  {user.sex}
+                  <strong>Sex:</strong> {user.sex}
                 </p>
                 <p>
-                  <strong>Date of Birth: </strong>
-                  {user.dob}
+                  <strong>Date of Birth:</strong> {user.dob}
                 </p>
 
                 <p>
-                  <strong>User Type: </strong>
-                  {user.type}
+                  <strong>User Type:</strong> {user.type}
                 </p>
 
-                <a href="edit-profile" className="btn btn-outline-primary">
+                <a href="edit-profile" className="btn btn-primary">
                   <i className="fa fa-pencil" aria-hidden="true"></i>
                   <span className="ms-2">Edit Profile</span>
                 </a>
@@ -109,19 +74,19 @@ function ProfilePage() {
 
           {user && user.type !== "root" && userGym && (
             <div className="col-xs-12 col-md-12 ms-auto">
-              <h2 style={{ "font-weight": 300 }}>Gym Details</h2>
+              <h2 style={{ fontWeight: "bold", marginBottom: "10px" }}>
+                User's Gym
+              </h2>
 
               <p>
-                <strong>Gym Name: </strong>
-                {userGym.branch}
+                <strong>Gym:</strong>{" "}
+                <a href={`/gym/${userGym.gym_id}`}>{userGym.branch}</a>
               </p>
               <p>
-                <strong>Gym Address: </strong>
-                {userGym.location}
+                <strong>Gym Address:</strong> {userGym.location}
               </p>
               <p>
-                <strong>Gym Phone: </strong>
-                {userGym.phone}
+                <strong>Gym Phone:</strong> {userGym.phone}
               </p>
             </div>
           )}

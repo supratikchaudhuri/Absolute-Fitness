@@ -16,10 +16,6 @@ function Branches() {
     getBranches();
   }, []);
 
-  const navigateToFranchise = (branch) => {
-    navigate(`/gym/${branch.gym_id}`, { state: { gymDetails: branch } });
-  };
-
   return (
     <>
       <div id="branches-div" className="container center ">
@@ -33,7 +29,7 @@ function Branches() {
           {branches.map((branch) => (
             <div
               className="col-xs-12 col-sm-6 col-md-4 mb-4 pointer"
-              onClick={(e) => navigateToFranchise(branch)}
+              onClick={() => navigate(`/gym/${branch.gym_id}`)}
             >
               <div className="card h-100">
                 <img
