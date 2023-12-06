@@ -7,6 +7,8 @@ function Table({
   displayEditForm,
   setStaffDetails,
   setEquipments,
+  firstItemLink,
+  firstItemPath,
 }) {
   const user = JSON.parse(localStorage.getItem("user")) || {};
 
@@ -42,7 +44,18 @@ function Table({
             <tr key={rowIndex} className="center">
               {row.map((item, colIndex) => (
                 <td className="m-auto" key={colIndex}>
-                  {item !== null ? item : "--"}
+                  {colIndex === 0 && firstItemLink ? (
+                    <>
+                      {item} {"   "}
+                      <a href={`${firstItemPath.path}/${item}`}>
+                        {firstItemPath.name}
+                      </a>
+                    </>
+                  ) : item !== null ? (
+                    item
+                  ) : (
+                    "--"
+                  )}
                 </td>
               ))}
 
@@ -90,6 +103,7 @@ function Table({
           ))}
         </tbody>
       </table>
+      ;
     </>
   );
 }

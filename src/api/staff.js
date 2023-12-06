@@ -35,3 +35,16 @@ export const deleteStaff = async (staffId) => {
     console.log(err);
   }
 };
+
+export const getAllStaffs = async () => {
+  try {
+    const res = await api.get("staff/", {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -40,6 +40,8 @@ import OwnerRoute from "./components/OwnerRoute";
 import AddGymBranch from "./screens/Gym/AddGymBranch";
 import PaymentSuccessFul from "./screens/Pricing/PaymentSuccessFul";
 import PublicProfile from "./screens/Profile/PublicProfile";
+import AllMembers from "./screens/AllMembers";
+import AllStaff from "./screens/AllStaff";
 
 /************************ Imports complete ************************/
 
@@ -156,8 +158,11 @@ function App() {
                 element={<PaymentSuccessFul />}
               />
 
-              {/* Route for Owners */}
-              <Route element={<OwnerRoute />}></Route>
+              {/* Route for Root */}
+              <Route element={<OwnerRoute />}>
+                <Route exact path="/all-members" element={<AllMembers />} />
+                <Route exact path="/all-staff" element={<AllStaff />} />
+              </Route>
               <Route exact path="/gym/addGym" element={<AddGymBranch />} />
             </Route>
 

@@ -7,7 +7,7 @@ const SubscriberRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user")) || {};
   console.log(children);
 
-  if (!user.accessToken || !user.isSubscribed) {
+  if (!user.accessToken || !user.subscribed) {
     return (
       <>
         <div class="card m-4">

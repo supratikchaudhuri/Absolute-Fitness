@@ -8,7 +8,7 @@ const OwnerRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user")) || {};
   console.log(children);
 
-  if (!user.accessToken || !user.isSubscribed) {
+  if (!user.type === "root") {
     return (
       <>
         <AlertBox

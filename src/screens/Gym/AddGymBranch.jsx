@@ -60,8 +60,7 @@ const AddGymBranch = () => {
         <form
           className="m-4 popup-form"
           onSubmit={(e) => {
-            e.preventDefault();
-            addBranchFn();
+            addBranchFn(e);
           }}
         >
           <div className="row">
@@ -221,7 +220,7 @@ const AddGymBranch = () => {
                 Admin Salary($)*
               </label>
               <input
-                type="email"
+                type="number"
                 className="form-control mb-2"
                 id="admin-salary"
                 name="admin-salary"
@@ -276,22 +275,38 @@ const AddGymBranch = () => {
                   <option value="Other">Other</option>
                 </select>
               </div>
+              <div className="col">
+                <label htmlFor="admin-phone" className="form-label">
+                  Admin Phone*
+                </label>
+                <input
+                  type="number"
+                  className="form-control mb-2"
+                  id="admin-phone"
+                  name="admin-phone"
+                  value={adminDetails.phone}
+                  onChange={(e) =>
+                    setAdminDetails({ ...adminDetails, phone: e.target.value })
+                  }
+                  required
+                />
+              </div>
             </div>
 
-            <div className="col-xs-12 col-md-4">
-              <label htmlFor="admin-password" className="form-label">
-                Admin Password*
+            <div className="row">
+              <label className="form-label" htmlFor="admin-desc">
+                Admin Job Decription*
               </label>
-              <input
-                type="password"
-                className="form-control mb-2"
-                id="admin-password"
-                name="admin-password"
-                value={adminDetails.password}
+              <textarea
+                className="form-control"
+                id="admin-desc"
+                name="description"
+                rows="2"
+                value={adminDetails.description}
                 onChange={(e) =>
                   setAdminDetails({
                     ...adminDetails,
-                    password: e.target.value,
+                    description: e.target.value,
                   })
                 }
                 required

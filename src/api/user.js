@@ -14,6 +14,19 @@ export const signup = async (userDetails) => {
   }
 };
 
+export const getAllUsers = async () => {
+  try {
+    const res = await api.get("user/", {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getUser = async (username) => {
   try {
     const res = await api.get(`user/${username}`);

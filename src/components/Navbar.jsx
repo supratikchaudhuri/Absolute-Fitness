@@ -57,16 +57,12 @@ function Navbar() {
 
   const rootLinks = [
     {
-      name: "Trainers",
-      link: "/trainer",
-    },
-    {
-      name: "Customers",
-      link: "/customer",
+      name: "Members",
+      link: "/all-members",
     },
     {
       name: "Staff",
-      link: "/staff",
+      link: "/all-staff",
     },
   ];
 
@@ -146,6 +142,23 @@ function Navbar() {
                 {/* customer links */}
                 {user.type === "member" &&
                   memberLinks.map((item) => {
+                    return (
+                      <li className="nav-item">
+                        <a
+                          className={`nav-link ${
+                            path.includes(item.link) ? "active" : ""
+                          }`}
+                          href={item.link}
+                        >
+                          {item.name}
+                        </a>
+                      </li>
+                    );
+                  })}
+
+                {/* root links */}
+                {user.type === "root" &&
+                  rootLinks.map((item) => {
                     return (
                       <li className="nav-item">
                         <a
