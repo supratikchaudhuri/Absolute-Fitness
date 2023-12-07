@@ -1,20 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  CardElement,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
 import { createCheckoutSession, getProductWithPricing } from "../../api/stripe";
 import AlertBox from "../../components/AlertBox";
 
 function MembershipPricingPlans() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const [productPrices, setProductPrices] = useState([]);
-  const stripe = useStripe();
-  const elements = useElements();
-
-  //
 
   useEffect(() => {
     const getGymMembershipPrices = async () => {
@@ -33,22 +23,22 @@ function MembershipPricingPlans() {
     const res = await createCheckoutSession(priceId);
     console.log(res);
     const checkout_url = res.data;
-    // redirct to checkout page
     window.location.href = checkout_url;
   };
 
-  return (
+  return user.subscribed ? (
+    <AlertBox
+      type="success"
+      message="Congratulations, you're already subscribed"
+    />
+  ) : (
     <>
       <AlertBox
-        message="This is a test envioronment. No real money would be deducted from your account"
+        message="This is a test environment. No real money would be deducted from your account"
         type="warning"
         anchor={{ name: "More info", href: "https://google.com" }}
       />
-
       <div className="container mt-2">
-        {/* <button className="btn btn-success float-end">
-          Add New Subscripption
-        </button> */}
         <h1 className="text-center mb-4">Pricing Plans</h1>
         <div className="row">
           {productPrices.prices &&
