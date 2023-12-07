@@ -20,9 +20,15 @@ const Franchise = () => {
 
   return gymDetails ? (
     <div className="container center">
-      <a className="btn btn-warning float-end" href={`/gym/edit-gym/${gym_id}`}>
-        <i className="fa-solid fa-pen-to-square"></i> Gym
-      </a>
+      {user.type === "root" ||
+        (user.type === "admin" && user.gym_id == gym_id && (
+          <a
+            className="btn btn-warning float-end"
+            href={`/gym/edit-gym/${gym_id}`}
+          >
+            <i className="fa-solid fa-pen-to-square"></i> Gym
+          </a>
+        ))}
       <h4>Gym Gallery</h4>
       <Carousel images={gymDetails.image_urls} />
 

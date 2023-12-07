@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BMIChart from "../components/BMIChart";
 import { addHealthRecord, getHealthRecordForUser } from "../api/healthRecord";
@@ -32,9 +31,9 @@ function MemberHealthRecord() {
       ...newHealthRecord,
       email: user.email,
     });
-    console.log(status);
+    console.log(newHealthRecord);
     if (status === 200) {
-      setMemberHealthRecord([...memberHealthRecord, [newHealthRecord]]);
+      getHealthRecords();
       setShowHealthRecordForm(false);
     }
   };
@@ -120,7 +119,9 @@ function MemberHealthRecord() {
           id="height-input"
           name="height"
           placeholder="Enter height in cm"
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewHealthRecord({ ...newHealthRecord, height: e.target.value })
+          }
           required
         />
       </div>
@@ -135,7 +136,9 @@ function MemberHealthRecord() {
           id="weight-input"
           name="weight"
           placeholder="Enter weight in kg"
-          onChange={handleChange}
+          onChange={(e) =>
+            setNewHealthRecord({ ...newHealthRecord, weight: e.target.value })
+          }
           required
         />
       </div>
@@ -149,9 +152,13 @@ function MemberHealthRecord() {
           className="form-control"
           id="date-input"
           max={new Date().toJSON().slice(0, 10)}
-          onChange={handleChange}
           name="dateCalculated"
-          value={newHealthRecord.date}
+          onChange={(e) =>
+            setNewHealthRecord({
+              ...newHealthRecord,
+              dateCalculated: e.target.value,
+            })
+          }
           required
         />
       </div>

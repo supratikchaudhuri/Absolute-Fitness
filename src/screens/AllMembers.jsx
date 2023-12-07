@@ -51,7 +51,7 @@ const AllUsers = () => {
                     {colIndex === 0 ? (
                       <>
                         {item} {"   "}
-                        <a href={`user/profile/${item}`}>Profile</a>
+                        <a href={`/user/public/profile/${item}`}>Profile</a>
                       </>
                     ) : item !== null ? (
                       item
