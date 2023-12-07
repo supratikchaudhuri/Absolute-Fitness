@@ -296,7 +296,8 @@ function Trainers() {
                       </button>
                     </Link>
 
-                    {(user.type === "root" || user.type === "admin") && (
+                    {(user.type === "root" ||
+                      (user.type === "admin" && user.gym_id == gym_id)) && (
                       <i
                         className="ms-auto fas fa-trash-alt icon text-danger"
                         onClick={(e) => deleteTrainer(e, trainer.staff_id)}

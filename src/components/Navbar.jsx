@@ -73,6 +73,10 @@ function Navbar() {
       name: "Staff",
       link: "/all-staff",
     },
+    {
+      name: "Dashboard",
+      link: "/dashboard",
+    },
   ];
 
   return (

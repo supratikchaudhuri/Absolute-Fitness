@@ -15,47 +15,36 @@ function GymEquipments() {
   const { gym_id } = useParams();
 
   const [equipments, setEquipments] = useState([]);
-  const [showEditEquipmentForm, setShowEditEquipmentForm] = useState(false);
-  const [updatedEquipment, setUpdatedEquipment] = useState({
-    quantity: "",
-    last_serviced: "",
-  });
-  const [showNewEquipmentForm, setShowNewEquipmentForm] = useState(false);
+  const [showEquipmentForm, setShowEquipmentForm] = useState(false);
+  const [formType, setFormType] = useState(false);
+  const [equipmentDetails, setEquipmentDetails] = useState(null);
   //   const [newEquipment, setNewEquipment] = useState({});
 
   const getEquipments = async () => {
     const res = await getGymEquipments(gym_id);
-    setEquipments(processEquipmentData(res));
+    for (let i = 0; i < res.length; i++) {
+      if (res[i].image_url) {
+        res[i].image = <img src={`${res[i].image_url}`} alt="equipment" />;
+        delete res[i].image_url;
+      }
+    }
+    setEquipments(res);
   };
 
   useEffect(() => {
     getEquipments();
   }, []);
 
-  const processEquipmentData = (equipmentData) => {
-    let updatedEquipmentData = [];
-    for (let i = 0; i < equipmentData.length; i++) {
-      let record = equipmentData[i];
-      let updatedRecord = record;
-      updatedRecord["image_url"] = <img src={record["image_url"]} />;
-      delete updatedRecord.gym_id;
-      updatedRecord["last_serviced"] =
-        updatedRecord["last_serviced"] &&
-        updatedRecord["last_serviced"].substring(0, 10);
-      updatedEquipmentData.push(updatedRecord);
-    }
-    setUpdatedEquipment(updatedEquipmentData[0]);
-    return updatedEquipmentData;
-  };
+  console.log(equipments);
 
   const updateEquipment = async () => {
     try {
-      const status = await updateGymEquipment(gym_id, updatedEquipment);
+      const status = await updateGymEquipment(gym_id, equipmentDetails);
       if (status === 200) {
         setEquipments(
           equipments.map((equipment) => {
-            if (equipment.equipment_id === updatedEquipment.equipment_id) {
-              return updatedEquipment;
+            if (equipment.equipment_id === equipmentDetails.equipment_id) {
+              return equipmentDetails;
             }
             return equipment;
           })
@@ -63,7 +52,7 @@ function GymEquipments() {
       } else {
         alert("Something went wrong");
       }
-      setShowEditEquipmentForm(false);
+      setShowEquipmentForm(false);
     } catch (err) {
       console.log(err);
     }
@@ -98,14 +87,9 @@ function GymEquipments() {
   //     setShowNewEquipmentForm(false);
   //   };
 
-  const handleChange = (e) => {
-    setUpdatedEquipment({
-      ...updatedEquipment,
-      [e.target.name]: e.target.value,
-    });
-  };
+  console.log(equipments);
 
-  const renderEditEquipmentForm = showEditEquipmentForm && (
+  const renderEditEquipmentForm = showEquipmentForm && (
     <form
       className="m-4 popup-form"
       onSubmit={(e) => {
@@ -123,8 +107,13 @@ function GymEquipments() {
             className="form-control"
             id="quantity"
             name="quantity"
-            value={updatedEquipment.quantity}
-            onChange={handleChange}
+            value={equipmentDetails.quantity}
+            onChange={(e) =>
+              setEquipmentDetails({
+                ...equipmentDetails,
+                quantity: e.target.value,
+              })
+            }
             required
           />
         </div>
@@ -138,13 +127,14 @@ function GymEquipments() {
             id="last_serviced"
             name="last_serviced"
             required
-            value={
-              updatedEquipment.last_serviced
-                ? updatedEquipment.last_serviced
-                : ""
+            value={equipmentDetails.last_serviced}
+            onChange={(e) =>
+              setEquipmentDetails({
+                ...equipmentDetails,
+                last_serviced: e.target.value,
+              })
             }
-            onChange={handleChange}
-            max={new Date().toJSON().slice(0, 10)}
+            // max={new Date().toJSON().slice(0, 10)}
           />
         </div>
       </div>
@@ -154,12 +144,12 @@ function GymEquipments() {
         className="btn btn-primary mb-0"
         style={{ width: "100%" }}
       >
-        Update
+        {formType === "ADD" ? "Add" : "Update"}
       </button>
       <button
         type="button"
         className="btn btn-danger mb-0"
-        onClick={(e) => setShowEditEquipmentForm(false)}
+        onClick={(e) => setShowEquipmentForm(false)}
         style={{ width: "100%" }}
       >
         Cancel
@@ -167,14 +157,14 @@ function GymEquipments() {
     </form>
   );
 
-  const renderNewEquipmentForm = showNewEquipmentForm && <></>;
+  const renderNewEquipmentForm = showEquipmentForm && <></>;
 
   return equipments.length > 0 ? (
     <div className="container center euipment-div">
       {renderEditEquipmentForm}
       {renderNewEquipmentForm}
       <h4>Gym Equipments</h4>
-      {user.type === "staff" ||
+      {/* {user.type === "staff" ||
         (user.type === "admin" && (
           <button
             className="btn btn-primary float-end mb-3"
@@ -182,14 +172,66 @@ function GymEquipments() {
           >
             Add Equpments
           </button>
-        ))}
-      <Table
+        ))} */}
+      {/* <Table
         content="equipments"
         data={equipments}
         setEquipments={processEquipmentData}
         displayEditForm={setShowEditEquipmentForm}
         deleteEquipment={deleteEquipment}
-      />
+      /> */}
+
+      <table
+        className="table mt-0"
+        align="middle"
+        style={{ maxWidth: "1400px", margin: "auto" }}
+      >
+        <thead className="bg-light">
+          <tr className="center">
+            {Object.keys(equipments[0]).map((item, index) => (
+              <th key={index} scope="col">
+                <strong>{item.toUpperCase()}</strong>
+              </th>
+            ))}
+            {(user.type === "admin" || user.type === "root") && (
+              <th scope="col"></th>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {equipments
+            .map((equipment) => Object.values(equipment))
+            .map((row, rowIndex) => (
+              <tr key={rowIndex} className="center">
+                {row.map((item, colIndex) => (
+                  <td className="m-auto" key={colIndex}>
+                    {item}
+                  </td>
+                ))}
+
+                {((user.type === "admin" && user.gym_id == gym_id) ||
+                  user.type === "root") && (
+                  <td>
+                    <i
+                      style={{ marginRight: "30px" }}
+                      className="fas fa-pen icon"
+                      onClick={(e) => {
+                        setFormType("EDIT");
+                        setShowEquipmentForm(true);
+                        setEquipmentDetails(equipments[rowIndex]);
+                      }}
+                    ></i>
+
+                    <i
+                      className="fas fa-trash ms-2 icon"
+                      onClick={(e) => deleteEquipment(e, row[0])}
+                    ></i>
+                  </td>
+                )}
+              </tr>
+            ))}
+        </tbody>
+      </table>
     </div>
   ) : (
     <AlertBox type="warning" message="No Equipments listed by the gym yet." />
