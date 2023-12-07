@@ -9,6 +9,9 @@ import {
   Legend,
   Label,
   ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
 import { getAllGyms } from "../api/gym";
 import { getAllUsers } from "../api/user";
@@ -40,10 +43,27 @@ const Dashboard = () => {
     fetchStaffs();
   }, []);
 
+  const getRandomColor = () => {
+    const colors = [
+      "#D73B1A",
+      "#D7C61A",
+      "#20D71A",
+      "#1AC8D7",
+      "#1AD76C",
+      "#1AA4D7",
+      "#1A2FD7",
+      "#631AD7",
+      "#D10BE6",
+      "#E60BAC",
+      "#E60B2E",
+      "#899B05",
+      "#059A9B",
+      "#09F2F3",
+    ];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
+
   const getSubscribedCount = (gymId) => {
-    console.log(
-      users.filter((user) => user.subscribed && user.gym_id === gymId)
-    );
     return users.filter((user) => user.subscribed && user.gym_id === gymId)
       .length;
   };
@@ -53,11 +73,8 @@ const Dashboard = () => {
       .length;
   };
 
-  console.log(gyms);
-  console.log(users);
-
   const subscribedVsNonSubscribedData = gyms.map((gym) => ({
-    gym_id: gym.gym_id, // Fix: use gym.gym_id instead of gym.id
+    gym_id: gym.gym_id,
     subscribed: getSubscribedCount(gym.gym_id),
     nonSubscribed: getNonSubscribedCount(gym.gym_id),
   }));
@@ -67,12 +84,10 @@ const Dashboard = () => {
       {value}
     </text>
   );
-  console.log(subscribedVsNonSubscribedData);
+
   return (
     <div className="container center">
       <h4>Analytics Dashboard</h4>
-
-      {/* Stacked Bar Chart */}
       <h6>Subscribed vs Non-Subscribed Users in Each Gym</h6>
       <ResponsiveContainer width="100%" height={600}>
         <BarChart width={600} height={400} data={subscribedVsNonSubscribedData}>
@@ -106,6 +121,43 @@ const Dashboard = () => {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+
+      {/* Pie Charts for User to Trainer Distribution */}
+      {gyms.map((gym) => {
+        const gymUsers = users.filter((user) => user.gym_id === gym.gym_id);
+        const gymStaffs = staffs.filter((staff) => staff.gym_id === gym.gym_id);
+
+        const userDistributionData = [
+          { name: "Users", value: gymUsers.length },
+          { name: "Trainers", value: gymStaffs.length },
+        ];
+
+        return (
+          <div key={gym.gym_id}>
+            <h6>{`User to Trainer Distribution for Gym ${gym.gym_id}`}</h6>
+            <ResponsiveContainer width="100%" height={400}>
+              <PieChart>
+                <Pie
+                  dataKey="value"
+                  isAnimationActive={true}
+                  data={userDistributionData}
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  fill="#8884d8"
+                  label
+                >
+                  {userDistributionData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={getRandomColor()} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        );
+      })}
     </div>
   );
 };
