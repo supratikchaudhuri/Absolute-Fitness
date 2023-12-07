@@ -6,12 +6,17 @@ import { getGymMembers } from "../api/gym";
 import { deleteGymUser } from "../api/user";
 
 function GymMembers() {
+  const user = JSON.parse(localStorage.getItem("user"));
   const { gymId } = useParams();
   const [members, setMembers] = useState([]);
+  const [cols, setCols] = useState([]);
+  const [rows, setRows] = useState([]);
 
   const getMembers = async () => {
     const res = await getGymMembers(gymId);
     setMembers(res);
+    setCols(Object.keys(res[0]));
+    setRows(res.map((row) => Object.values(row)));
   };
 
   const deleteUser = async (e, email) => {
@@ -67,7 +72,53 @@ function GymMembers() {
         </div>
       </form>
       {members.length > 0 ? (
-        <Table content="members" data={members} deleteItem={deleteUser}></Table>
+        <table
+          className="table mt-0"
+          align="middle"
+          style={{ maxWidth: "1400px", margin: "auto" }}
+        >
+          <thead className="bg-light">
+            <tr className="center">
+              {cols.map((item, index) => (
+                <th key={index} scope="col">
+                  <strong>{item.toUpperCase()}</strong>
+                </th>
+              ))}
+              {(user.type === "admin" || user.type === "root") && (
+                <th scope="col">Actions</th>
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, rowIndex) => (
+              <tr key={rowIndex} className="center">
+                {row.map((item, colIndex) => (
+                  <td className="m-auto" key={colIndex}>
+                    {colIndex === 0 ? (
+                      <>
+                        {item} {"   "}
+                        <a href={`user/profile/${item}`}>Profile</a>
+                      </>
+                    ) : item !== null ? (
+                      item
+                    ) : (
+                      "--"
+                    )}
+                  </td>
+                ))}
+
+                {(user.type === "admin" || user.type === "root") && (
+                  <td>
+                    <i
+                      className="fas fa-trash icon"
+                      onClick={(e) => deleteUser(e, row[0])}
+                    ></i>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <AlertBox message={"No member data found"} type="danger" />
       )}
