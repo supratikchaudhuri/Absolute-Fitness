@@ -17,7 +17,7 @@ const SubscriberRoute = ({ children }) => {
           <h5 class="card-header">Thanks for trusting Absolute Fitness</h5>
           <div class="card-body">
             <h5 class="card-title">
-              Please subscribe to any memebership plans to unlick this feature
+              Please subscribe to any memebership plans to unlock this feature
             </h5>
 
             <a href="/pricing-plans" class="btn btn-primary">

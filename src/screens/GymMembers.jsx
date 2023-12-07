@@ -8,8 +8,7 @@ function GymMembers() {
   const user = JSON.parse(localStorage.getItem("user"));
   const { gymId } = useParams();
   const [members, setMembers] = useState([]);
-  const [cols, setCols] = useState([]);
-  const [rows, setRows] = useState([]);
+  const [filteredMembers, setFilteredMembers] = useState([]);
   const [subscribedOnly, setSubscribedOnly] = useState(false);
 
   console.log(members);
@@ -23,10 +22,7 @@ function GymMembers() {
     }
 
     setMembers(res);
-    if (ResizeObserver.length) {
-      setCols(Object.keys(res[0]));
-      setRows(res.map((row) => Object.values(row)));
-    }
+    setFilteredMembers(res);
   };
 
   const deleteUser = async (e, email) => {
@@ -50,7 +46,7 @@ function GymMembers() {
     if (input === "" && !subscribedOnly) {
       getMembers();
     } else {
-      const filteredMembers = members.filter((member) => {
+      const newFilteredMembers = members.filter((member) => {
         return (
           (input === "" ||
             member.name.toLowerCase().includes(input.toLowerCase()) ||
@@ -61,8 +57,7 @@ function GymMembers() {
           (!subscribedOnly || (subscribedOnly && member.subscribed === "Yes"))
         );
       });
-
-      setRows(filteredMembers.map((row) => Object.values(row)));
+      setFilteredMembers(newFilteredMembers);
     }
   };
 
@@ -106,14 +101,10 @@ function GymMembers() {
       </form>
 
       {members.length > 0 ? (
-        <table
-          className="table mt-0"
-          align="middle"
-          style={{ maxWidth: "1400px", margin: "auto" }}
-        >
+        <table className="table mt-0" align="middle">
           <thead className="bg-light">
             <tr className="center">
-              {cols.map((item, index) => (
+              {Object.keys(members[0]).map((item, index) => (
                 <th key={index} scope="col">
                   <strong>{item.toUpperCase()}</strong>
                 </th>
@@ -124,33 +115,35 @@ function GymMembers() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr key={rowIndex} className="center">
-                {row.map((item, colIndex) => (
-                  <td className="m-auto" key={colIndex}>
-                    {colIndex === 0 ? (
-                      <>
-                        {item} {"   "}
-                        <a href={`/user/profile/${item}`}>Profile</a>
-                      </>
-                    ) : item !== null ? (
-                      item
-                    ) : (
-                      "--"
-                    )}
-                  </td>
-                ))}
+            {filteredMembers
+              .map((member) => Object.values(member))
+              .map((row, rowIndex) => (
+                <tr key={rowIndex} className="center">
+                  {row.map((item, colIndex) => (
+                    <td className="m-auto" key={colIndex}>
+                      {colIndex === 0 ? (
+                        <>
+                          {item} {"   "}
+                          <a href={`/user/profile/${item}`}>Profile</a>
+                        </>
+                      ) : item !== null ? (
+                        item
+                      ) : (
+                        "--"
+                      )}
+                    </td>
+                  ))}
 
-                {(user.type === "admin" || user.type === "root") && (
-                  <td>
-                    <i
-                      className="fas fa-trash icon"
-                      onClick={(e) => deleteUser(e, row[0])}
-                    ></i>
-                  </td>
-                )}
-              </tr>
-            ))}
+                  {(user.type === "admin" || user.type === "root") && (
+                    <td>
+                      <i
+                        className="fas fa-trash icon"
+                        onClick={(e) => deleteUser(e, row[0])}
+                      ></i>
+                    </td>
+                  )}
+                </tr>
+              ))}
           </tbody>
         </table>
       ) : (
