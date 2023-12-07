@@ -26,7 +26,12 @@ function MembershipPricingPlans() {
     window.location.href = checkout_url;
   };
 
-  return user.subscribed ? (
+  return user.type === "root" || user.type === "admin" ? (
+    <AlertBox
+      message="Admins and owners don't need to subscribe"
+      type="primary"
+    />
+  ) : user.subscribed ? (
     <AlertBox
       type="success"
       message="Congratulations, you're already subscribed"

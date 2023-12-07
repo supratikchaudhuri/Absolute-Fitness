@@ -78,7 +78,7 @@ function Navbar() {
   return (
     <>
       <nav className="custom-navbar fixed-top navbar navbar-dark bg-primary navbar-expand-lg">
-        <a className="navbar-brand" href=".">
+        <a className="navbar-brand" href="/">
           <span>Absolute Fitness</span>{" "}
           <i className="ms-2 fa-solid fa-dumbbell"></i>
         </a>
