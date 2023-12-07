@@ -107,10 +107,13 @@ function GymStaff() {
                                 id="staffID"
                                 name="staff_id"
                                 value={staffDetails.staff_id}
-                                disabled
-                                // onChange={(e) =>
-                                //   setStaffDetails({ ...staffDetails, staff_id: e.target.value })
-                                // }
+                                disabled={formType === "EDIT"}
+                                onChange={(e) =>
+                                    setStaffDetails({
+                                        ...staffDetails,
+                                        staff_id: e.target.value,
+                                    })
+                                }
                                 placeholder="abc@af.com"
                                 required
                             />
@@ -359,6 +362,7 @@ function GymStaff() {
                                                     className="fas fa-pen icon"
                                                     onClick={(e) => {
                                                         displayEditForm(true);
+                                                        setFormType("EDIT");
                                                         setStaffDetails(
                                                             staffs[rowIndex]
                                                         );
