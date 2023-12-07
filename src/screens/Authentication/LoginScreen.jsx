@@ -9,12 +9,12 @@ function LoginScreen() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  //   TODO:check wrong password error here and signup
   const loginUser = async (e) => {
     e.preventDefault();
     try {
       const status = await login(username, password);
       if (status === 200) window.location.href = "/home";
+      else alert("Invalid username or password.\n Please try again.");
     } catch (err) {
       alert("Invalid username or password.\n Please try again.");
     }

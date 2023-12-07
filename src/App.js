@@ -42,6 +42,7 @@ import PaymentSuccessFul from "./screens/Pricing/PaymentSuccessFul";
 import PublicProfile from "./screens/Profile/PublicProfile";
 import AllMembers from "./screens/AllMembers";
 import AllStaff from "./screens/AllStaff";
+import EditGym from "./screens/Gym/EditGym";
 
 /************************ Imports complete ************************/
 
@@ -84,6 +85,7 @@ function App() {
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/branches" element={<Branches />} />
             <Route exact path="/gym/:gym_id" element={<Franchise />} />
+            <Route exact path="/gym/edit-gym/:gym_id" element={<EditGym />} />
 
             <Route exact path="/dashboard" element={<Dashboard />} />
 

@@ -123,3 +123,17 @@ export const getGymMembers = async (gym_id) => {
     console.log(err);
   }
 };
+
+export const updateGymBranch = async (updatedGym) => {
+  try {
+    console.log(updatedGym);
+    const res = await api.put(`gym/${updatedGym.gym_id}`, updatedGym, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.status;
+  } catch (err) {
+    console.log(err);
+  }
+};
