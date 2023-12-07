@@ -15,8 +15,10 @@ function GymMembers() {
   const getMembers = async () => {
     const res = await getGymMembers(gymId);
     setMembers(res);
-    setCols(Object.keys(res[0]));
-    setRows(res.map((row) => Object.values(row)));
+    if (ResizeObserver.length) {
+      setCols(Object.keys(res[0]));
+      setRows(res.map((row) => Object.values(row)));
+    }
   };
 
   const deleteUser = async (e, email) => {

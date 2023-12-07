@@ -82,8 +82,10 @@ const NutrionIX = () => {
       });
 
       setNutrients(selectedData);
-      setCols(Object.keys(selectedData[0]));
-      setRows(selectedData.map((row) => Object.values(row)));
+      if (selectedData.length) {
+        setCols(Object.keys(selectedData[0]));
+        setRows(selectedData.map((row) => Object.values(row)));
+      }
     } catch (err) {
       alert("No data found");
       console.log(err);

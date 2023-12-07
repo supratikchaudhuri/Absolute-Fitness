@@ -12,8 +12,10 @@ const AllUsers = () => {
   const fetchAllUsers = async () => {
     const res = await getAllUsers();
     setUsers(res);
-    setCols(Object.keys(res[0]));
-    setRows(res.map((row) => Object.values(row)));
+    if (res.length) {
+      setCols(Object.keys(res[0]));
+      setRows(res.map((row) => Object.values(row)));
+    }
   };
   console.log(users);
   useEffect(() => {
