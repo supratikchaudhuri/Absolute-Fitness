@@ -66,7 +66,7 @@ function GymMembers() {
   }, [subscribedOnly]);
 
   return (
-    <div className="gym-members-div">
+    <div className="container">
       <form className="form-inline mb-3" onSubmit={handleFormSubmit}>
         <div className="d-flex align-items-center">
           <div className="col-xs-12">
