@@ -8,7 +8,7 @@ function GymStaff() {
   const { gymId } = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const [staffs, setStaffs] = useState([]);
+  const [staffs, setStaffs] = useState(null);
   const [cols, setCols] = useState([]);
   const [rows, setRows] = useState([]);
 
@@ -20,7 +20,6 @@ function GymStaff() {
   };
 
   const updateGymStaff = async (updatedStaff) => {
-    console.log(updatedStaff);
     if (updatedStaff && updatedStaff.phone.length !== 10) {
       alert("Phone needs to be 10 digits long");
       return;
@@ -28,18 +27,24 @@ function GymStaff() {
 
     const status = await updateStaff(updatedStaff);
     console.log(status);
+
     if (status === 200) {
-      setStaffs(
-        staffs.map((s) =>
+      setStaffs((prevStaffs) =>
+        prevStaffs.map((s) =>
           s.staff_id === updatedStaff.staff_id ? updatedStaff : s
         )
       );
+      console.log("Staffs Updated:", staffs);
     } else {
       alert("Error updating staff");
     }
 
     setShowEditForm(false);
   };
+
+  useEffect(() => {
+    console.log("Staffs Updated:", staffs);
+  }, [staffs]);
 
   const deleteGymStaff = async (e, staffId) => {
     if (staffId === user.staff_id) {
@@ -62,8 +67,10 @@ function GymStaff() {
     const res = await getGymStaff(gymId);
     setStaffs(res);
     // table columns and rows
-    setCols(Object.keys(res[0]));
-    setRows(res.map((staff) => Object.values(staff)));
+    if (res.length) {
+      setCols(Object.keys(res[0]));
+      setRows(res.map((staff) => Object.values(staff)));
+    }
   };
 
   useEffect(() => {
@@ -229,7 +236,7 @@ function GymStaff() {
 
   return (
     <>
-      {staffs.length > 0 ? (
+      {staffs && staffs.length > 0 ? (
         <div className=" container gym-staff-div center">
           {renderEditForm}
           <button

@@ -29,7 +29,11 @@ export const getAllUsers = async () => {
 
 export const getUser = async (username) => {
   try {
-    const res = await api.get(`user/${username}`);
+    const res = await api.get(`user/${username}`, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
     return res.data;
   } catch (err) {
     console.log(err);

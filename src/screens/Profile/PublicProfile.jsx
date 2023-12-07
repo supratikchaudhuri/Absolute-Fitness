@@ -7,6 +7,7 @@ const PublicProfile = () => {
   const { username } = useParams();
   const [profile, setProfile] = useState(null);
 
+  //   TODO: change layout
   const getProfile = async () => {
     const res = await getUser(username);
     setProfile(res);

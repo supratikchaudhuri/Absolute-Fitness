@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 import { getGymTrainers } from "../api/gym";
-import { addNewTrainer, deleteTrainerFromGym } from "../api/trainer";
+import { addNewTrainer } from "../api/trainer";
 import AlertBox from "../components/AlertBox";
 import { deleteStaff } from "../api/staff";
 
@@ -11,7 +11,6 @@ function Trainers() {
   const user = JSON.parse(localStorage.getItem("user")) || {};
 
   const [trainers, setTrainers] = useState([]);
-  const [partTime, setPartTime] = useState(false);
   const [displayAddTrainerForm, setDisplayAddTrainerForm] = useState(false);
   const [newTrainer, setNewTrainer] = useState({});
 
