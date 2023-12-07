@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { updateUser } from "../../api/user";
+import { updateStaff } from "../../api/staff";
 
 const EditProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -7,8 +8,11 @@ const EditProfile = () => {
 
   const updateProfileFn = async (e) => {
     e.preventDefault();
+    let status;
 
-    const status = await updateUser(updatedUser);
+    if (user.type === "member") status = await updateUser(updatedUser);
+    else status = await updateStaff(updatedUser);
+
     if (status === 200) {
       alert("Profile Updated Successfully");
       window.location.href = "/user/profile";
