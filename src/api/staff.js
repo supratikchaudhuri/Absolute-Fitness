@@ -49,6 +49,7 @@ export const deleteStaff = async (staffId) => {
         });
         return res.status;
     } catch (err) {
+        alert(err.response.data.msg);
         console.log(err);
     }
 };
