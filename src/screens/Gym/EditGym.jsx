@@ -182,6 +182,9 @@ const EditGym = () => {
             </button>
             <br />
             <button className="mt-3 btn btn-primary">Update Gym</button>
+            <a className="mt-3 btn btn-danger ms-2" href={`/gym/${gym_id}`}>
+              Cancel Update
+            </a>
           </form>
         </>
       ) : (

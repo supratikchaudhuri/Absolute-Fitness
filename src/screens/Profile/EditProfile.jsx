@@ -4,8 +4,6 @@ import { updateUser } from "../../api/user";
 const EditProfile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [updatedUser, setUpdatedUser] = useState(user);
-  console.log(user);
-  console.log(updatedUser);
 
   const updateProfileFn = async (e) => {
     e.preventDefault();
@@ -39,7 +37,7 @@ const EditProfile = () => {
                 placeholder="Dainel"
                 value={updatedUser.name}
                 onChange={(e) =>
-                  setUpdatedUser({ ...updatedUser, name: e.target.value })
+                  setUpdatedUser((o) => ({ ...o, name: e.target.value }))
                 }
               />
             </div>
@@ -55,7 +53,7 @@ const EditProfile = () => {
                 placeholder="98XXXXXX8756"
                 value={updatedUser.phone}
                 onChange={(e) =>
-                  setUpdatedUser({ ...updatedUser, phone: e.target.value })
+                  setUpdatedUser((o) => ({ ...o, phone: e.target.value }))
                 }
               />
             </div>
@@ -71,7 +69,7 @@ const EditProfile = () => {
                 placeholder="xyz@gmail.com"
                 value={updatedUser.username}
                 onChange={(e) =>
-                  setUpdatedUser({ ...updatedUser, username: e.target.value })
+                  setUpdatedUser((o) => ({ ...o, username: e.target.value }))
                 }
               />
             </div>
@@ -86,7 +84,7 @@ const EditProfile = () => {
                 className="form-control"
                 value={updatedUser.dob}
                 onChange={(e) =>
-                  setUpdatedUser({ ...updatedUser, dob: e.target.value })
+                  setUpdatedUser((o) => ({ ...o, dob: e.target.value }))
                 }
               />
             </div>
@@ -97,11 +95,13 @@ const EditProfile = () => {
                 change it)
               </label>
               <input
-                type="text"
+                type="password"
                 id="password"
                 className="form-control"
                 value={updatedUser.password}
-                onChange={(e) => setUpdatedUser({ password: e.target.value })}
+                onChange={(e) =>
+                  setUpdatedUser((o) => ({ ...o, password: e.target.value }))
+                }
               />
             </div>
 

@@ -38,12 +38,22 @@ export const getUser = async (username) => {
 
 export const updateUser = async (userDetails) => {
   try {
+    let res;
     console.log(userDetails);
-    const res = await api.put(`user/${userDetails.username}`, userDetails, {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    });
+    if (userDetails.type === "member") {
+      res = await api.put(`user/${userDetails.username}`, userDetails, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+    } else {
+      res = await api.put(`staff/${userDetails.username}`, userDetails, {
+        headers: {
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      });
+    }
+
     if (res.status === 200) {
       localStorage.setItem("user", JSON.stringify(res.data));
     }
