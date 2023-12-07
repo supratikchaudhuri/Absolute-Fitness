@@ -8,15 +8,15 @@ function Navbar() {
   };
 
   let user = JSON.parse(localStorage.getItem("user")) || {};
-  console.log("user fetched");
 
   const { decodedToken } = useJwt(user.accessToken);
 
-  console.log("decoded token fetched");
-  console.log(decodedToken);
-
   if (decodedToken) {
-    user = { ...user, type: decodedToken.type };
+    user = {
+      ...user,
+      type: decodedToken.type,
+      subscribed: decodedToken.subscribed || false,
+    };
     localStorage.setItem("user", JSON.stringify(user));
   }
 
@@ -37,7 +37,12 @@ function Navbar() {
     },
   ];
 
-  const adminLinks = [];
+  const adminLinks = [
+    {
+      name: "My Gym",
+      link: `/gym/${user.gym_id}`,
+    },
+  ];
 
   const trainerLinks = [
     {
