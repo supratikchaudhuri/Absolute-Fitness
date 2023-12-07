@@ -4,7 +4,7 @@ import { addHealthRecord, getHealthRecordForUser } from "../api/healthRecord";
 
 function MemberHealthRecord() {
   const user = JSON.parse(localStorage.getItem("user")) || {};
-
+  console.log(user);
   const [memberHealthRecord, setMemberHealthRecord] = useState([]);
   const [showHealthRecordForm, setShowHealthRecordForm] = useState(false);
   const [newHealthRecord, setNewHealthRecord] = useState({
@@ -12,13 +12,6 @@ function MemberHealthRecord() {
     weight: "",
     dateCalculated: "",
   });
-
-  const handleChange = (e) => {
-    setNewHealthRecord((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
 
   const submitHealthRecord = async (e) => {
     e.preventDefault();
@@ -29,7 +22,7 @@ function MemberHealthRecord() {
 
     const status = await addHealthRecord({
       ...newHealthRecord,
-      email: user.email,
+      email: user.username,
     });
     console.log(newHealthRecord);
     if (status === 200) {
@@ -59,7 +52,7 @@ function MemberHealthRecord() {
   };
 
   const getHealthRecords = async () => {
-    const res = await getHealthRecordForUser(user.email);
+    const res = await getHealthRecordForUser(user.username);
     setMemberHealthRecord(res);
   };
 
