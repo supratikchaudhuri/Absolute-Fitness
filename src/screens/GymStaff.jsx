@@ -23,7 +23,13 @@ function GymStaff() {
   const addGymStaff = async () => {
     const status = await addStaff(staffDetails);
     if (status === 200) {
-      setStaffs([...staffs, staffDetails]);
+      const newStaffMember = Object.keys(staffs[0]).reduce(
+        (acc, key) => ({ ...acc, [key]: staffDetails[key] || "" }),
+        {}
+      );
+      setStaffs([...staffs, newStaffMember]);
+      setStaffDetails({ gym_id: gymId });
+      setShowForm(false);
     } else {
       alert("Error adding new staff");
     }
@@ -160,7 +166,6 @@ function GymStaff() {
                 id="employee-type"
                 name="type"
                 value={staffDetails.type}
-                defaultValue={staffDetails.type || "staff"} // Use defaultValue conditionally
                 onChange={(e) =>
                   setStaffDetails({
                     ...staffDetails,
@@ -168,7 +173,9 @@ function GymStaff() {
                   })
                 }
               >
-                <option value={null}>Choose...</option>
+                <option selected value={null}>
+                  Choose...
+                </option>
                 <option value="staff">Staff</option>
                 {user.type === "root" && <option value="admin">Admin</option>}
               </select>
