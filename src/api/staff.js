@@ -16,12 +16,17 @@ export const addStaff = async (staffDetails) => {
 };
 
 export const updateStaff = async (updatedStaff) => {
+    const staffId =
+        updatedStaff.username ||
+        updatedStaff.staffId ||
+        updatedStaff.staff_id ||
+        updatedStaff.email;
     try {
         const res = await api.put(
-            `staff/${updatedStaff.username}`,
+            `staff/${staffId}`,
             {
                 ...updatedStaff,
-                staffId: updatedStaff.username,
+                staffId,
             },
             {
                 headers: {
