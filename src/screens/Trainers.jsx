@@ -187,25 +187,6 @@ function Trainers() {
               />
             </div>
           </div>
-          <div className="col-xs-12 col-md-6 col-lg-3 m-auto">
-            <div class="form-check">
-              <label class="form-check-label" for="part-time">
-                Part Time
-              </label>
-              {/* TODO onchange */}
-              <select
-                required
-                className="custom-select w-100"
-                id="part-time"
-                name="part_time"
-              >
-                <option value="0">Part Time</option>
-                <option value="1" selected>
-                  Full Time
-                </option>
-              </select>
-            </div>
-          </div>
         </div>
 
         <div className="mb-3">

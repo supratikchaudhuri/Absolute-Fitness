@@ -77,9 +77,9 @@ function PrivateProfile() {
                   </>
                 )}
 
-                <a href="edit-profile" className="btn btn-primary">
+                <a href="edit-profile" className="btn btn-outline-primary">
                   <i className="fa fa-pencil" aria-hidden="true"></i>
-                  <span className="ms-2">Edit Profile</span>
+                  <span className="ms-2"> Profile</span>
                 </a>
               </div>
             </>

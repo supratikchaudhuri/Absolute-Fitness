@@ -94,28 +94,7 @@ function GymStaff() {
               required
             />
           </div>
-          <div className="col">
-            <label htmlFor="partTime" className="form-label">
-              Employment Type*
-            </label>
-            <select
-              required
-              className="custom-select w-100"
-              id="partTime"
-              name="part_time"
-              onChange={(e) =>
-                setStaffDetails({
-                  ...staffDetails,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            >
-              <option value={0}>Part Time</option>
-              <option value={1} selected>
-                Full Time
-              </option>
-            </select>
-          </div>
+
           <div className="col">
             <label htmlFor="salary" className="form-label">
               Salary*

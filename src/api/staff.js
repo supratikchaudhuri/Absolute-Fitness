@@ -9,7 +9,6 @@ export const updateStaff = async (updatedStaff) => {
       {
         ...updatedStaff,
         staffId: updatedStaff.staff_id,
-        partTime: updatedStaff.part_time,
       },
       {
         headers: {
