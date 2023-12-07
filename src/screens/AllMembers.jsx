@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllUsers } from "../api/user";
 import AlertBox from "../components/AlertBox";
-import Table from "../components/Table";
 
 const AllUsers = () => {
   const user = JSON.parse(localStorage.getItem("user"));

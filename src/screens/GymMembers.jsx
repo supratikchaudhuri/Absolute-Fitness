@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
 import { useParams } from "react-router-dom";
 import { getGymMembers } from "../api/gym";
@@ -11,9 +10,18 @@ function GymMembers() {
   const [members, setMembers] = useState([]);
   const [cols, setCols] = useState([]);
   const [rows, setRows] = useState([]);
+  const [subscribedOnly, setSubscribedOnly] = useState(false);
+
+  console.log(members);
 
   const getMembers = async () => {
     const res = await getGymMembers(gymId);
+
+    for (let i = 0; i < res.length; i++) {
+      res[i].dob = res[i].dob.substring(0, 10);
+      res[i].subscribed = res[i].subscribed ? "Yes" : "No";
+    }
+
     setMembers(res);
     if (ResizeObserver.length) {
       setCols(Object.keys(res[0]));
@@ -31,41 +39,64 @@ function GymMembers() {
     }
   };
 
-  useEffect(() => {
-    getMembers();
-  }, []);
-  // TODO: add customer type
-  const search = (e) => {
+  const handleCheckboxChange = (e) => {
+    setSubscribedOnly(e.target.checked);
+  };
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     const input = document.querySelector("input").value;
-    if (input === "") {
+
+    if (input === "" && !subscribedOnly) {
       getMembers();
     } else {
       const filteredMembers = members.filter((member) => {
         return (
-          member.name.toLowerCase().includes(input.toLowerCase()) ||
-          member.email.toLowerCase().includes(input.toLowerCase()) ||
-          member.phone.toLowerCase().includes(input.toLowerCase()) ||
-          member.dob.toLowerCase().includes(input.toLowerCase()) ||
-          member.sex.toLowerCase().includes(input.toLowerCase())
+          (input === "" ||
+            member.name.toLowerCase().includes(input.toLowerCase()) ||
+            member.email.toLowerCase().includes(input.toLowerCase()) ||
+            member.phone.toLowerCase().includes(input.toLowerCase()) ||
+            member.dob.toLowerCase().includes(input.toLowerCase()) ||
+            member.sex.toLowerCase().includes(input.toLowerCase())) &&
+          (!subscribedOnly || (subscribedOnly && member.subscribed === "Yes"))
         );
       });
-      setMembers(filteredMembers);
+
+      setRows(filteredMembers.map((row) => Object.values(row)));
     }
   };
 
+  useEffect(() => {
+    getMembers();
+  }, [subscribedOnly]);
+
   return (
     <div className="gym-members-div">
-      <form className="form-inline mb-3" onSubmit={search}>
-        <div className="row mx-auto">
-          <div className="col">
+      <form className="form-inline mb-3" onSubmit={handleFormSubmit}>
+        <div className="d-flex align-items-center">
+          <div className="col-xs-12">
             <input
-              className="form-control"
+              className="form-control col-xs-12"
               type="search"
               placeholder="Search name, email or phone"
               aria-label="Search"
             />
           </div>
+
+          <div className="col-xs-12">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={subscribedOnly}
+              onChange={handleCheckboxChange}
+              id="subscribedOnly"
+            />
+
+            <label className="ms-2 form-check-label" htmlFor="subscribedOnly">
+              Subscribers
+            </label>
+          </div>
+
           <div className="col ms-auto">
             <button className="btn btn-outline-success" type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
@@ -73,6 +104,7 @@ function GymMembers() {
           </div>
         </div>
       </form>
+
       {members.length > 0 ? (
         <table
           className="table mt-0"
@@ -99,7 +131,7 @@ function GymMembers() {
                     {colIndex === 0 ? (
                       <>
                         {item} {"   "}
-                        <a href={`user/profile/${item}`}>Profile</a>
+                        <a href={`/user/profile/${item}`}>Profile</a>
                       </>
                     ) : item !== null ? (
                       item

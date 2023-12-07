@@ -29,22 +29,25 @@ function GymStaff() {
     console.log(status);
 
     if (status === 200) {
-      setStaffs((prevStaffs) =>
-        prevStaffs.map((s) =>
+      setStaffs(
+        staffs.map((s) =>
           s.staff_id === updatedStaff.staff_id ? updatedStaff : s
         )
       );
-      console.log("Staffs Updated:", staffs);
+      const staffValues = Object.values(updatedStaff);
+      setRows(
+        staffs.map((sv) =>
+          sv.staff_id === updatedStaff.staff_id
+            ? staffValues
+            : Object.values(sv)
+        )
+      );
     } else {
       alert("Error updating staff");
     }
 
     setShowEditForm(false);
   };
-
-  useEffect(() => {
-    console.log("Staffs Updated:", staffs);
-  }, [staffs]);
 
   const deleteGymStaff = async (e, staffId) => {
     if (staffId === user.staff_id) {
@@ -58,6 +61,14 @@ function GymStaff() {
 
       if (status === 200) {
         setStaffs(staffs.filter((s) => s.staff_id !== staffId));
+        // Update cols and rows after staff is deleted
+        if (staffs.length > 1) {
+          setCols(Object.keys(staffs[0]));
+          setRows(rows.filter((row) => row[0] !== staffId));
+        } else {
+          setCols([]);
+          setRows([]);
+        }
         alert("Staff deleted successfully");
       }
     }
@@ -284,7 +295,7 @@ function GymStaff() {
                       ></i>
 
                       <i
-                        className="fas fa-trash ms-2"
+                        className="fas fa-trash icon ms-2"
                         onClick={(e) => deleteGymStaff(e, row[0])}
                       ></i>
                     </td>
