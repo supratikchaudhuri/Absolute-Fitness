@@ -26,12 +26,7 @@ function MembershipPricingPlans() {
     window.location.href = checkout_url;
   };
 
-  return user.type === "root" || user.type === "admin" ? (
-    <AlertBox
-      message="Admins and owners don't need to subscribe"
-      type="primary"
-    />
-  ) : user.subscribed ? (
+  return user.subscribed ? (
     <AlertBox
       type="success"
       message="Congratulations, you're already subscribed"
@@ -69,12 +64,14 @@ function MembershipPricingPlans() {
                           : " One Time Payment"}
                       </h2>
                       <p className="card-text">{price.nickname} adasdas</p>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => subscribe(price.id)}
-                      >
-                        Choose Plan
-                      </button>
+                      {user.type === "member" && (
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => subscribe(price.id)}
+                        >
+                          Choose Plan
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

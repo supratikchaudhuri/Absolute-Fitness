@@ -27,6 +27,7 @@ const Franchise = () => {
       <Carousel images={gymDetails.image_urls} />
 
       <div>
+        <p>Branch: {gymDetails.branch}</p>
         <p>
           <i class="fa-solid fa-phone"></i>: {gymDetails.phone}
         </p>
