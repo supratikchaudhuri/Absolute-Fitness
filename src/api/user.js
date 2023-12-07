@@ -47,7 +47,7 @@ export const updateUser = async (userDetails) => {
     });
 
     if (res.status === 200) {
-      localStorage.setItem("user", JSON.stringify(res.data));
+      localStorage.setItem("user", JSON.stringify({ ...user, ...res.data }));
     }
     return res.status;
   } catch (err) {
