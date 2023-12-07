@@ -78,7 +78,7 @@ function App() {
 
             <Route
               exact
-              path="/user/profile/:username"
+              path="/user/public/profile/:username"
               element={<PublicProfile />}
             />
 
@@ -127,10 +127,14 @@ function App() {
                 }
               />
 
-              <Route exact path="/user/profile" element={<PrivateProfile />} />
               <Route
                 exact
-                path="/user/edit-profile"
+                path="/user/private/profile"
+                element={<PrivateProfile />}
+              />
+              <Route
+                exact
+                path="/user/private/edit-profile"
                 element={<EditProfile />}
               />
 

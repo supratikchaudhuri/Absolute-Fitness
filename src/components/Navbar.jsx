@@ -204,7 +204,7 @@ function Navbar() {
                   {user.name}
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="/user/profile">
+                  <a className="dropdown-item" href="/user/private/profile">
                     Profile
                   </a>
                   {user.type === "customer" && (
