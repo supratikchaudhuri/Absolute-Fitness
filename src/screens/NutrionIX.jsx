@@ -22,8 +22,9 @@ const NutrionIX = () => {
     "potassium",
     "sugar",
   ];
-
   const [nutrients, setNutrients] = useState([]);
+  const [cols, setCols] = useState([]);
+  const [rows, setRows] = useState([]);
 
   const initialTotalValues = {
     protein: 0,
@@ -81,6 +82,8 @@ const NutrionIX = () => {
       });
 
       setNutrients(selectedData);
+      setCols(Object.keys(selectedData[0]));
+      setRows(selectedData.map((row) => Object.values(row)));
     } catch (err) {
       alert("No data found");
       console.log(err);
@@ -116,7 +119,32 @@ const NutrionIX = () => {
 
       {nutrients.length > 0 && (
         <>
-          <Table data={nutrients} content="nutrition" />
+          <table
+            className="table mt-0"
+            align="middle"
+            style={{ maxWidth: "1400px", margin: "auto" }}
+          >
+            <thead className="bg-light">
+              <tr className="center">
+                {cols.map((item, index) => (
+                  <th key={index} scope="col">
+                    <strong>{item.toUpperCase()}</strong>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={rowIndex} className="center">
+                  {row.map((item, colIndex) => (
+                    <td className="m-auto" key={colIndex}>
+                      {item !== null ? item : "--"}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <AlertBox
             message="Data shown are approximate values. It is not 100% accurate."
             type="warning"
