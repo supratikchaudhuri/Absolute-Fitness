@@ -179,6 +179,33 @@ function GymStaff() {
               }
             />
           </div>
+
+          <div className="col">
+            {user.type === "root" && (
+              <>
+                <label className="form-label" htmlFor="employee-type">
+                  Employee Type*
+                </label>
+                <select
+                  required
+                  className="custom-select w-100"
+                  id="employee-type"
+                  name="type"
+                  value={staffDetails.type}
+                  onChange={(e) =>
+                    setStaffDetails({
+                      ...staffDetails,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                >
+                  <option value="staff">Staff</option>
+                  <option value="trainer">Trainer</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </>
+            )}
+          </div>
         </div>
 
         <div className="mb-4">
@@ -271,7 +298,7 @@ function GymStaff() {
                       ></i>
 
                       <i
-                        className="fas fa-trash icon ms-2"
+                        className="fas fa-trash ms-2"
                         onClick={(e) => deleteGymStaff(e, row[0])}
                       ></i>
                     </td>
