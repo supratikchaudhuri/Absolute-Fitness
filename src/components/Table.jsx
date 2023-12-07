@@ -93,24 +93,6 @@ function Table({
                 </td>
               )}
 
-              {/* {user.type === "admin" && content === "staffs" && (
-                <td>
-                  <i
-                    style={{ marginRight: "30px" }}
-                    className="fas fa-pen icon"
-                    onClick={(e) => {
-                      displayEditForm(true);
-                      setEquipments([
-                        {
-                          ...data[rowIndex],
-                          image_url: data[rowIndex].image_url.props.src,
-                        },
-                      ]);
-                    }}
-                  ></i>
-                </td>
-              )} */}
-
               {(user.type === "admin" || user.type === "root") &&
                 (content === "staffs" || content === "members") && (
                   <td>

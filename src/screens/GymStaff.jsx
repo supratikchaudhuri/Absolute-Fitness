@@ -60,11 +60,9 @@ function GymStaff() {
   const getStaff = async () => {
     const res = await getGymStaff(gymId);
     setStaffs(res);
-
     // table columns and rows
     setCols(Object.keys(res[0]));
-    const _rows = res.map((staff) => Object.values(staff));
-    setRows(_rows);
+    setRows(res.map((staff) => Object.values(staff)));
   };
 
   useEffect(() => {
