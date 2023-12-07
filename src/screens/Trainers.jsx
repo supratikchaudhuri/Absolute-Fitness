@@ -39,7 +39,7 @@ function Trainers() {
       const { status, data } = await addNewTrainer(newTrainer, gym_id);
       console.log(data);
       if (status === 200) {
-        setTrainers([...trainers, data]);
+        setTrainers([...trainers, newTrainer]);
         setDisplayAddTrainerForm(false);
       } else {
         alert("Error adding trainer");
