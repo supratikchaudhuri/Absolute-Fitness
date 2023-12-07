@@ -15,10 +15,10 @@ import DietPlan from "./screens/GymServices/DietPlan";
 import GymMembers from "./screens/GymMembers";
 import GymStaff from "./screens/GymStaff";
 import PrivateProfile from "./screens/Profile/PrivateProfile";
-import Dashboard from "./screens/GymServices/Dashboard";
 import GymEquipments from "./screens/Gym/GymEquipments";
 import MembershipPricingPlans from "./screens/Pricing/MembershipPricing";
 import MySubscriptionsPage from "./screens/MySubscriptionsPage";
+import Dashboard from "./screens/Dashboard";
 
 // Font Awesome
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -165,6 +165,7 @@ function App() {
               <Route element={<OwnerRoute />}>
                 <Route exact path="/all-members" element={<AllMembers />} />
                 <Route exact path="/all-staff" element={<AllStaff />} />
+                <Route exact path="/dashboard" element={<Dashboard />} />
               </Route>
               <Route exact path="/gym/addGym" element={<AddGymBranch />} />
             </Route>
