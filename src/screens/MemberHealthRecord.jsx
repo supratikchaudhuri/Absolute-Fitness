@@ -27,14 +27,19 @@ function MemberHealthRecord() {
       alert("Values cannot be negative");
       return;
     }
-    try {
-      const status = addHealthRecord({ ...newHealthRecord, email: user.email });
-      getHealthRecords();
+
+    const status = await addHealthRecord({
+      ...newHealthRecord,
+      email: user.email,
+    });
+    console.log(status);
+    if (status === 200) {
+      setMemberHealthRecord([...memberHealthRecord, [newHealthRecord]]);
       setShowHealthRecordForm(false);
-    } catch (err) {
-      alert("Invalid values. Please submit legitimate data.");
     }
   };
+
+  console.log(memberHealthRecord);
 
   const getMemberBMIData = (memberHealthRecord) => {
     memberHealthRecord.map((record) => {
@@ -56,7 +61,7 @@ function MemberHealthRecord() {
 
   const getHealthRecords = async () => {
     const res = await getHealthRecordForUser(user.email);
-    setMemberHealthRecord(res.data);
+    setMemberHealthRecord(res);
   };
 
   useEffect(() => {
