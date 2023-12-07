@@ -89,6 +89,19 @@ export const updateGymEquipment = async (gym_id, updatedEquipment) => {
   }
 };
 
+export const deleteGymEquipment = async (gym_id, equipment_id) => {
+  try {
+    const res = await api.delete(`gym/${gym_id}/equipment/${equipment_id}`, {
+      headers: {
+        Authorization: `Bearer ${user.accessToken}`,
+      },
+    });
+    return res.status;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getGymTrainers = async (gym_id) => {
   try {
     const res = await api.get(`gym/${gym_id}/trainers`);

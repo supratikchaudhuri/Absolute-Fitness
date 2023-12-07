@@ -7,6 +7,7 @@ function Table({
   displayEditForm,
   setStaffDetails,
   setEquipments,
+  deleteEquipment,
   firstItemLink,
   firstItemPath,
 }) {
@@ -35,10 +36,8 @@ function Table({
                 <strong>{item.toUpperCase()}</strong>
               </th>
             ))}
-            {user.type === "admin" &&
-              (content === "equipments" ||
-                content === "members" ||
-                content === "staffs") && <th scope="col"></th>}
+            {(user.type === "admin" || user.type === "root") &&
+              content === "equipments" && <th scope="col"></th>}
           </tr>
         </thead>
         <tbody>
@@ -62,43 +61,25 @@ function Table({
               ))}
 
               {(user.type === "admin" || user.type === "root") &&
-                content === "staffs" && (
+                content === "equipments" && (
                   <td>
                     <i
                       style={{ marginRight: "30px" }}
                       className="fas fa-pen icon"
                       onClick={(e) => {
                         displayEditForm(true);
-                        setStaffDetails(data[rowIndex]);
+                        setEquipments([
+                          {
+                            ...data[rowIndex],
+                            image_url: data[rowIndex].image_url.props.src,
+                          },
+                        ]);
                       }}
                     ></i>
-                  </td>
-                )}
 
-              {user.type === "admin" && content === "equipments" && (
-                <td>
-                  <i
-                    style={{ marginRight: "30px" }}
-                    className="fas fa-pen icon"
-                    onClick={(e) => {
-                      displayEditForm(true);
-                      setEquipments([
-                        {
-                          ...data[rowIndex],
-                          image_url: data[rowIndex].image_url.props.src,
-                        },
-                      ]);
-                    }}
-                  ></i>
-                </td>
-              )}
-
-              {(user.type === "admin" || user.type === "root") &&
-                (content === "staffs" || content === "members") && (
-                  <td>
                     <i
-                      className="fas fa-trash icon"
-                      onClick={(e) => deleteItem(e, row[0])}
+                      className="fas fa-trash ms-2 icon"
+                      onClick={(e) => deleteEquipment(e, row[0])}
                     ></i>
                   </td>
                 )}

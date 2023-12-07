@@ -3,6 +3,7 @@ import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
 import {
   addNewGymEquipment,
+  deleteGymEquipment,
   getGymEquipments,
   updateGymEquipment,
 } from "../../api/gym";
@@ -20,7 +21,7 @@ function GymEquipments() {
     last_serviced: "",
   });
   const [showNewEquipmentForm, setShowNewEquipmentForm] = useState(false);
-  const [newEquipment, setNewEquipment] = useState({});
+  //   const [newEquipment, setNewEquipment] = useState({});
 
   const getEquipments = async () => {
     const res = await getGymEquipments(gym_id);
@@ -68,21 +69,34 @@ function GymEquipments() {
     }
   };
 
-  const addNewEquipment = async (e) => {
-    e.preventDefault();
-    const status = await addNewGymEquipment(gym_id, newEquipment);
-    if (status === 200) {
-      setEquipments(
-        equipments.map((equipment) => {
-          if (equipment.equipment_id === newEquipment.equipment_id) {
-            return newEquipment;
-          }
-          return equipment;
-        })
-      );
+  const deleteEquipment = async (e, equipmentId) => {
+    const ans = window.confirm(
+      "Are you sure you want to delete this equipment?"
+    );
+    if (ans) {
+      const status = await deleteGymEquipment(gym_id, equipmentId);
+      if (status === 200) {
+        setEquipments(equipments.filter((e) => e.equipment_id !== equipmentId));
+        alert("Equipment deleted successfully");
+      }
     }
-    setShowNewEquipmentForm(false);
   };
+
+  //   const addNewEquipment = async (e) => {
+  //     e.preventDefault();
+  //     const status = await addNewGymEquipment(gym_id, newEquipment);
+  //     if (status === 200) {
+  //       setEquipments(
+  //         equipments.map((equipment) => {
+  //           if (equipment.equipment_id === newEquipment.equipment_id) {
+  //             return newEquipment;
+  //           }
+  //           return equipment;
+  //         })
+  //       );
+  //     }
+  //     setShowNewEquipmentForm(false);
+  //   };
 
   const handleChange = (e) => {
     setUpdatedEquipment({
@@ -174,6 +188,7 @@ function GymEquipments() {
         data={equipments}
         setEquipments={processEquipmentData}
         displayEditForm={setShowEditEquipmentForm}
+        deleteEquipment={deleteEquipment}
       />
     </div>
   ) : (
