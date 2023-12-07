@@ -24,8 +24,8 @@ function Navbar() {
 
   const navBarLink = [
     {
-      name: "Home",
-      link: "/home",
+      name: "Gyms",
+      link: "/gyms",
     },
     {
       name: "Pricing",

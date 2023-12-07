@@ -5,9 +5,12 @@ import { Outlet } from "react-router-dom";
 
 const SubscriberRoute = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("user")) || {};
-  console.log(children);
-
-  if (!user.accessToken || !user.subscribed) {
+  console.log(user);
+  if (
+    !user.type === "root" ||
+    !user.type === "admin" ||
+    (user.type === "member" && !user.subscribed)
+  ) {
     return (
       <>
         <div class="card m-4">

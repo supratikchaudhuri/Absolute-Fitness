@@ -83,7 +83,7 @@ function App() {
             />
 
             <Route exact path="/home" element={<Home />} />
-            <Route exact path="/branches" element={<Branches />} />
+            <Route exact path="/gyms" element={<Branches />} />
             <Route exact path="/gym/:gym_id" element={<Franchise />} />
             <Route exact path="/gym/edit-gym/:gym_id" element={<EditGym />} />
 

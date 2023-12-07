@@ -37,19 +37,19 @@ const Franchise = () => {
         <div className="center">
           <a
             href={`/gym/${gymDetails.gym_id}/facilities`}
-            className="btn btn-primary mt-2 btn-sm"
+            className="btn btn-outline-primary mt-2 btn-sm"
           >
             View Facilities
           </a>
           <a
             href={`/gym/${gymDetails.gym_id}/trainers`}
-            className="btn btn-primary mt-2 ms-2 btn-sm"
+            className="btn btn-outline-primary mt-2 ms-2 btn-sm"
           >
             View Trainers
           </a>
           <a
             href={`/gym/${gymDetails.gym_id}/equipments`}
-            className="btn btn-primary mt-2 ms-2 btn-sm"
+            className="btn btn-outline-primary mt-2 ms-2 btn-sm"
           >
             View Equipments
           </a>
@@ -59,13 +59,13 @@ const Franchise = () => {
             <>
               <a
                 href={`/gym/${gymDetails.gym_id}/members`}
-                className="btn btn-primary mt-2 ms-2 btn-sm"
+                className="btn btn-outline-primary mt-2 ms-2 btn-sm"
               >
                 View Members
               </a>
               <a
                 href={`/gym/${gymDetails.gym_id}/staff`}
-                className="btn btn-primary mt-2 ms-2 btn-sm"
+                className="btn btn-outline-primary mt-2 ms-2 btn-sm"
               >
                 View Staff
               </a>

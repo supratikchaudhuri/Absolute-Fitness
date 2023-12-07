@@ -19,6 +19,8 @@ function Table({
     rows.push(Object.values(data[i]));
   }
 
+  console.log(setStaffDetails);
+
   return (
     <>
       <table
@@ -34,9 +36,9 @@ function Table({
               </th>
             ))}
             {user.type === "admin" &&
-              (content === "equipments" || content === "members") && (
-                <th scope="col"></th>
-              )}
+              (content === "equipments" ||
+                content === "members" ||
+                content === "staffs") && <th scope="col"></th>}
           </tr>
         </thead>
         <tbody>
@@ -59,18 +61,19 @@ function Table({
                 </td>
               ))}
 
-              {user.type === "admin" && content === "staff" && (
-                <td>
-                  <i
-                    style={{ marginRight: "30px" }}
-                    className="fas fa-pen icon"
-                    onClick={(e) => {
-                      displayEditForm(true);
-                      setStaffDetails(data[rowIndex]);
-                    }}
-                  ></i>
-                </td>
-              )}
+              {(user.type === "admin" || user.type === "root") &&
+                content === "staffs" && (
+                  <td>
+                    <i
+                      style={{ marginRight: "30px" }}
+                      className="fas fa-pen icon"
+                      onClick={(e) => {
+                        displayEditForm(true);
+                        setStaffDetails(data[rowIndex]);
+                      }}
+                    ></i>
+                  </td>
+                )}
 
               {user.type === "admin" && content === "equipments" && (
                 <td>
@@ -90,8 +93,26 @@ function Table({
                 </td>
               )}
 
-              {user.type === "admin" &&
-                (content === "staff" || content === "members") && (
+              {/* {user.type === "admin" && content === "staffs" && (
+                <td>
+                  <i
+                    style={{ marginRight: "30px" }}
+                    className="fas fa-pen icon"
+                    onClick={(e) => {
+                      displayEditForm(true);
+                      setEquipments([
+                        {
+                          ...data[rowIndex],
+                          image_url: data[rowIndex].image_url.props.src,
+                        },
+                      ]);
+                    }}
+                  ></i>
+                </td>
+              )} */}
+
+              {(user.type === "admin" || user.type === "root") &&
+                (content === "staffs" || content === "members") && (
                   <td>
                     <i
                       className="fas fa-trash icon"

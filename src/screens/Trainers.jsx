@@ -249,6 +249,7 @@ function Trainers() {
         <button type="submit" className="btn btn-primary">
           Add Trainer
         </button>
+
         <button
           type="button"
           className="btn btn-danger ms-2"
@@ -268,7 +269,7 @@ function Trainers() {
         className="container d-flex flex-column align-items-center"
       >
         <h4 className="page-title">Meet The Team</h4>
-        {user.accessToken && user.type === "admin" && (
+        {(user.type === "root" || user.type === "admin") && (
           <button
             className="btn btn-primary ms-auto"
             onClick={(e) => setDisplayAddTrainerForm(true)}

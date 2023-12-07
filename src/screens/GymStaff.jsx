@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
 import { getGymStaff } from "../api/gym";
 import { useParams } from "react-router-dom";
@@ -9,9 +8,12 @@ function GymStaff() {
   const { gymId } = useParams();
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const [staff, setStaff] = useState([]);
+  const [staffs, setStaffs] = useState([]);
+  const [cols, setCols] = useState([]);
+  const [rows, setRows] = useState([]);
+
   const [showEditForm, setShowEditForm] = useState(false);
-  const [staffDetails, setStaffDetails] = useState(null);
+  const [staffDetails, setStaffDetails] = useState({});
 
   const displayEditForm = (e) => {
     setShowEditForm(true);
@@ -26,8 +28,8 @@ function GymStaff() {
     const status = await updateStaff(updatedStaff);
     console.log(status);
     if (status === 200) {
-      setStaff(
-        staff.map((s) =>
+      setStaffs(
+        staffs.map((s) =>
           s.staff_id === updatedStaff.staff_id ? updatedStaff : s
         )
       );
@@ -37,36 +39,40 @@ function GymStaff() {
 
     setShowEditForm(false);
   };
-  console.log(staff);
 
   const deleteGymStaff = async (e, staffId) => {
     if (staffId === user.staff_id) {
       alert("You cannot delete yourself!");
       return;
     }
+
     const ans = window.confirm("Are you sure you want to delete this staff?");
     if (ans) {
       const status = await deleteStaff(staffId);
+
       if (status === 200) {
-        setStaff(staff.filter((s) => s.staff_id !== staffId));
+        setStaffs(staffs.filter((s) => s.staff_id !== staffId));
+        alert("Staff deleted successfully");
       }
     }
   };
 
   const getStaff = async () => {
     const res = await getGymStaff(gymId);
-    setStaff(res);
+    setStaffs(res);
+
+    // table columns and rows
+    setCols(Object.keys(res[0]));
+    const _rows = res.map((staff) => Object.values(staff));
+    setRows(_rows);
   };
 
   useEffect(() => {
     getStaff();
   }, []);
 
-  const renderEditForm = staffDetails && (
-    <div
-      className="edit-form-div"
-      style={{ display: showEditForm ? "inline" : "none" }}
-    >
+  const renderEditForm = showEditForm && (
+    <div className="edit-form-div">
       <form
         className="m-4 popup-form"
         onSubmit={(e) => {
@@ -77,14 +83,14 @@ function GymStaff() {
         <div className="mb-4 row">
           <div className="col">
             <label htmlFor="staffID" className="form-label">
-              ID
+              Email*
             </label>
             <input
               type="text"
               className="form-control"
               id="staffID"
               name="staff_id"
-              value={staffDetails.staff_id}
+              value={staffDetails.username}
               placeholder="Immutable"
               disabled
               required
@@ -92,7 +98,7 @@ function GymStaff() {
           </div>
           <div className="col">
             <label htmlFor="partTime" className="form-label">
-              Employment Type
+              Employment Type*
             </label>
             <select
               required
@@ -114,7 +120,7 @@ function GymStaff() {
           </div>
           <div className="col">
             <label htmlFor="salary" className="form-label">
-              Salary
+              Salary*
             </label>
             <input
               type="text"
@@ -137,7 +143,7 @@ function GymStaff() {
         <div className="mb-4 row">
           <div className="col">
             <label htmlFor="firstName" className="form-label">
-              First name
+              Name*
             </label>
             <input
               type="text"
@@ -157,7 +163,7 @@ function GymStaff() {
           </div>
           <div className="col">
             <label htmlFor="phone" className="form-label">
-              Phone
+              Phone*
             </label>
             <input
               type="text"
@@ -179,7 +185,7 @@ function GymStaff() {
 
         <div className="mb-4">
           <label htmlFor="description" className="form-label">
-            Job Description
+            Job Description*
           </label>
           <textarea
             className="form-control"
@@ -219,19 +225,63 @@ function GymStaff() {
 
   return (
     <>
-      {staff.length > 0 ? (
-        <div className="gym-staff-div center">
+      {staffs.length > 0 ? (
+        <div className=" container gym-staff-div center">
           {renderEditForm}
-
+          <button
+            className="btn btn-outline-primary float-end"
+            onClick={(e) => setShowEditForm(true)}
+          >
+            Add Staff
+          </button>
           <h4>Gym Staff</h4>
-          <Table
-            content="staff"
-            data={staff}
-            deleteItem={deleteGymStaff}
-            displayEditForm={displayEditForm}
-            renderEditForm={renderEditForm}
-            setStaffDetails={setStaffDetails}
-          ></Table>
+
+          <table
+            className="table mt-2"
+            align="middle"
+            style={{ maxWidth: "1400px", margin: "auto" }}
+          >
+            <thead className="bg-light">
+              <tr className="center">
+                {cols.map((item, index) => (
+                  <th key={index} scope="col">
+                    <strong>{item.replace("_", " ").toUpperCase()}</strong>
+                  </th>
+                ))}
+                {(user.type === "admin" || user.type === "root") && (
+                  <th scope="col">Actions</th>
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={rowIndex} className="center">
+                  {row.map((item, colIndex) => (
+                    <td className="m-auto" key={colIndex}>
+                      {item}
+                    </td>
+                  ))}
+
+                  {(user.type === "admin" || user.type === "root") && (
+                    <td className="d-flex justify-content-between align-items-center">
+                      <i
+                        className="fas fa-pen icon"
+                        onClick={(e) => {
+                          displayEditForm(true);
+                          setStaffDetails(staffs[rowIndex]);
+                        }}
+                      ></i>
+
+                      <i
+                        className="fas fa-trash icon ms-2"
+                        onClick={(e) => deleteGymStaff(e, row[0])}
+                      ></i>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       ) : (
         <AlertBox message="No Staff found" type="danger" />
