@@ -43,25 +43,22 @@ const Dashboard = () => {
     fetchStaffs();
   }, []);
 
-  const getRandomColor = () => {
-    const colors = [
-      "#D73B1A",
-      "#D7C61A",
-      "#20D71A",
-      "#1AC8D7",
-      "#1AD76C",
-      "#1AA4D7",
-      "#1A2FD7",
-      "#631AD7",
-      "#D10BE6",
-      "#E60BAC",
-      "#E60B2E",
-      "#899B05",
-      "#059A9B",
-      "#09F2F3",
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
+  const colors = [
+    "#D73B1A",
+    "#D7C61A",
+    "#20D71A",
+    "#1AC8D7",
+    "#1AD76C",
+    "#1AA4D7",
+    "#1A2FD7",
+    "#631AD7",
+    "#D10BE6",
+    "#E60BAC",
+    "#E60B2E",
+    "#899B05",
+    "#059A9B",
+    "#09F2F3",
+  ];
 
   const getSubscribedCount = (gymId) => {
     return users.filter((user) => user.subscribed && user.gym_id === gymId)
@@ -122,8 +119,12 @@ const Dashboard = () => {
         </BarChart>
       </ResponsiveContainer>
 
+      <br />
+      <br />
+      <br />
+
       {/* Pie Charts for User to Trainer Distribution */}
-      {gyms.map((gym) => {
+      {gyms.map((gym, idx) => {
         const gymUsers = users.filter((user) => user.gym_id === gym.gym_id);
         const gymStaffs = staffs.filter((staff) => staff.gym_id === gym.gym_id);
 
@@ -131,6 +132,8 @@ const Dashboard = () => {
           { name: "Users", value: gymUsers.length },
           { name: "Trainers", value: gymStaffs.length },
         ];
+
+        console.log(userDistributionData);
 
         return (
           <div key={gym.gym_id}>
@@ -144,11 +147,14 @@ const Dashboard = () => {
                   cx="50%"
                   cy="50%"
                   outerRadius={80}
-                  fill="#8884d8"
+                  //   fill="#059A9B"
                   label
                 >
                   {userDistributionData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={getRandomColor()} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={colors[index % colors.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
