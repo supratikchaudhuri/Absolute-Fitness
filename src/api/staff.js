@@ -4,7 +4,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 export const addStaff = async (staffDetails) => {
   try {
-    const res = await api.put(`staff/signup`, staffDetails, {
+    const res = await api.post(`staff/signup`, staffDetails, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },

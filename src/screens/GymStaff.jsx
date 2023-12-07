@@ -9,21 +9,21 @@ function GymStaff() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [staffs, setStaffs] = useState(null);
-  const [cols, setCols] = useState([]);
-  const [rows, setRows] = useState([]);
 
   const [showForm, setShowForm] = useState(false);
-  const [staffDetails, setStaffDetails] = useState({});
+  const [staffDetails, setStaffDetails] = useState({ gym_id: gymId });
   const [formType, setFormType] = useState("EDIT");
 
   const displayEditForm = (e) => {
     setShowForm(true);
   };
 
+  console.log(staffDetails);
+
   const addGymStaff = async () => {
     const status = await addStaff(staffDetails);
     if (status === 200) {
-      setStaffs({ ...staffs, staffDetails });
+      setStaffs([...staffs, staffDetails]);
     } else {
       alert("Error adding new staff");
     }
@@ -42,14 +42,6 @@ function GymStaff() {
       setStaffs(
         staffs.map((s) =>
           s.staff_id === staffDetails.staff_id ? staffDetails : s
-        )
-      );
-      const staffValues = Object.values(staffDetails);
-      setRows(
-        staffs.map((sv) =>
-          sv.staff_id === staffDetails.staff_id
-            ? staffValues
-            : Object.values(sv)
         )
       );
     } else {
@@ -72,13 +64,6 @@ function GymStaff() {
       if (status === 200) {
         setStaffs(staffs.filter((s) => s.staff_id !== staffId));
         // Update cols and rows after staff is deleted
-        if (staffs.length > 1) {
-          setCols(Object.keys(staffs[0]));
-          setRows(rows.filter((row) => row[0] !== staffId));
-        } else {
-          setCols([]);
-          setRows([]);
-        }
         alert("Staff deleted successfully");
       }
     }
@@ -87,11 +72,6 @@ function GymStaff() {
   const getStaff = async () => {
     const res = await getGymStaff(gymId);
     setStaffs(res);
-    // table columns and rows
-    if (res.length) {
-      setCols(Object.keys(res[0]));
-      setRows(res.map((staff) => Object.values(staff)));
-    }
   };
 
   useEffect(() => {
@@ -107,114 +87,160 @@ function GymStaff() {
           formType === "ADD" ? addGymStaff() : updateGymStaff();
         }}
       >
-        <div className="mb-4 row">
-          <div className="col">
-            <label htmlFor="staffID" className="form-label">
-              Email*
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="staffID"
-              name="staff_id"
-              value={staffDetails.staff_id}
-              placeholder="abc@af.com"
-              required
-            />
+        <div className="mb-2 row">
+          <div className="row mb-2">
+            <div className="col">
+              <label htmlFor="staffID" className="form-label">
+                Email*
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="staffID"
+                name="staff_id"
+                value={staffDetails.staff_id}
+                onChange={(e) =>
+                  setStaffDetails({ ...staffDetails, staff_id: e.target.value })
+                }
+                placeholder="abc@af.com"
+                required
+              />
+            </div>
           </div>
 
-          <div className="col">
-            <label htmlFor="salary" className="form-label">
-              Salary*
-            </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              id="salary"
-              name="salary"
-              value={staffDetails.salary}
-              placeholder="10000"
-              onChange={(e) =>
-                setStaffDetails({
-                  ...staffDetails,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
+          <div className="mb-2 row">
+            <div className="col">
+              <label htmlFor="firstName" className="form-label">
+                Name*
+              </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                id="firstName"
+                name="name"
+                value={staffDetails.name}
+                placeholder="John"
+                onChange={(e) =>
+                  setStaffDetails({
+                    ...staffDetails,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="phone" className="form-label">
+                Phone*
+              </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                id="phone"
+                name="phone"
+                value={staffDetails.phone}
+                placeholder="9876543210"
+                onChange={(e) =>
+                  setStaffDetails({
+                    ...staffDetails,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className="col">
+              <label className="form-label" htmlFor="employee-type">
+                Employee Type*
+              </label>
+              <select
+                required
+                className="custom-select w-100"
+                id="employee-type"
+                name="type"
+                value={staffDetails.type}
+                defaultValue={staffDetails.type || "staff"} // Use defaultValue conditionally
+                onChange={(e) =>
+                  setStaffDetails({
+                    ...staffDetails,
+                    type: e.target.value,
+                  })
+                }
+              >
+                <option value={null}>Choose...</option>
+                <option value="staff">Staff</option>
+                {user.type === "root" && <option value="admin">Admin</option>}
+              </select>
+            </div>
+          </div>
+
+          <div className="row mb-2">
+            <div className="col">
+              <label for="sex" className="form-label">
+                Sex
+              </label>
+              <select
+                required
+                className="custom-select w-100"
+                id="sex"
+                name="sex"
+                value={staffDetails.sex}
+                onChange={(e) =>
+                  setStaffDetails({ ...staffDetails, sex: e.target.value })
+                }
+              >
+                <option value={null}>Choose...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div className="col">
+              <label htmlFor="salary" className="form-label">
+                Salary*
+              </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                id="salary"
+                name="salary"
+                value={staffDetails.salary}
+                placeholder="10000"
+                onChange={(e) =>
+                  setStaffDetails({
+                    ...staffDetails,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              />
+            </div>
+
+            <div className="col">
+              <label htmlFor="dob" className="form-label">
+                Date Of Birth*
+              </label>
+              <input
+                type="date"
+                required
+                className="form-control"
+                id="dob"
+                name="dob"
+                value={staffDetails.dob}
+                onChange={(e) =>
+                  setStaffDetails({
+                    ...staffDetails,
+                    dob: e.target.value,
+                  })
+                }
+              />
+            </div>
           </div>
         </div>
 
-        <div className="mb-4 row">
-          <div className="col">
-            <label htmlFor="firstName" className="form-label">
-              Name*
-            </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              id="firstName"
-              name="name"
-              value={staffDetails.name}
-              placeholder="John"
-              onChange={(e) =>
-                setStaffDetails({
-                  ...staffDetails,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
-          </div>
-          <div className="col">
-            <label htmlFor="phone" className="form-label">
-              Phone*
-            </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              id="phone"
-              name="phone"
-              value={staffDetails.phone}
-              placeholder="9876543210"
-              onChange={(e) =>
-                setStaffDetails({
-                  ...staffDetails,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
-          </div>
-
-          <div className="col">
-            {user.type === "root" && (
-              <>
-                <label className="form-label" htmlFor="employee-type">
-                  Employee Type*
-                </label>
-                <select
-                  required
-                  className="custom-select w-100"
-                  id="employee-type"
-                  name="type"
-                  value={staffDetails.type}
-                  onChange={(e) =>
-                    setStaffDetails({
-                      ...staffDetails,
-                      [e.target.name]: e.target.value,
-                    })
-                  }
-                >
-                  <option value="staff">Staff</option>
-                  {user.type === "root" && <option value="admin">Admin</option>}
-                </select>
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className="mb-4">
+        <div className="mb-3">
           <label htmlFor="description" className="form-label">
             Job Description*
           </label>
@@ -265,10 +291,10 @@ function GymStaff() {
             onClick={(e) => {
               setShowForm(true);
               setFormType("ADD");
-              setStaffDetails({});
+              setStaffDetails({ gym_id: gymId });
             }}
           >
-            Add Staff ... not working
+            Add Staff
           </button>
           <h4>Gym Staff</h4>
 
@@ -279,7 +305,7 @@ function GymStaff() {
           >
             <thead className="bg-light">
               <tr className="center">
-                {cols.map((item, index) => (
+                {Object.keys(staffs[0]).map((item, index) => (
                   <th key={index} scope="col">
                     <strong>{item.replace("_", " ").toUpperCase()}</strong>
                   </th>
@@ -290,32 +316,34 @@ function GymStaff() {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, rowIndex) => (
-                <tr key={rowIndex} className="center">
-                  {row.map((item, colIndex) => (
-                    <td className="m-auto" key={colIndex}>
-                      {item}
-                    </td>
-                  ))}
+              {staffs
+                .map((staff) => Object.values(staff))
+                .map((row, rowIndex) => (
+                  <tr key={rowIndex} className="center">
+                    {row.map((item, colIndex) => (
+                      <td className="m-auto" key={colIndex}>
+                        {item}
+                      </td>
+                    ))}
 
-                  {(user.type === "admin" || user.type === "root") && (
-                    <td className="d-flex justify-content-between align-items-center">
-                      <i
-                        className="fas fa-pen icon"
-                        onClick={(e) => {
-                          displayEditForm(true);
-                          setStaffDetails(staffs[rowIndex]);
-                        }}
-                      ></i>
+                    {(user.type === "admin" || user.type === "root") && (
+                      <td className="d-flex justify-content-between align-items-center">
+                        <i
+                          className="fas fa-pen icon"
+                          onClick={(e) => {
+                            displayEditForm(true);
+                            setStaffDetails(staffs[rowIndex]);
+                          }}
+                        ></i>
 
-                      <i
-                        className="fas fa-trash icon ms-2"
-                        onClick={(e) => deleteGymStaff(e, row[0])}
-                      ></i>
-                    </td>
-                  )}
-                </tr>
-              ))}
+                        <i
+                          className="fas fa-trash icon ms-2"
+                          onClick={(e) => deleteGymStaff(e, row[0])}
+                        ></i>
+                      </td>
+                    )}
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
