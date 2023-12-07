@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BMIChart from "../components/BMIChart";
+import { addHealthRecord } from "../api/healthRecord";
 
 function MemberHealthRecord() {
   const user = JSON.parse(localStorage.getItem("user")) || {};
@@ -27,18 +28,7 @@ function MemberHealthRecord() {
       return;
     }
     try {
-      const res = await axios.post(
-        `/healthRecord`,
-        {
-          ...newHealthRecord,
-          email: user.username,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${user.accessToken}`,
-          },
-        }
-      );
+      const status = addHealthRecord({ ...newHealthRecord, email: user.email });
       getHealthRecords();
       setShowHealthRecordForm(false);
     } catch (err) {
