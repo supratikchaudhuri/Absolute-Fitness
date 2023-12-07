@@ -19,7 +19,8 @@ function GymStaff() {
     setShowEditForm(true);
   };
 
-  const handleSubmit = async (updatedStaff) => {
+  const updateGymStaff = async (updatedStaff) => {
+    console.log(updatedStaff);
     if (updatedStaff && updatedStaff.phone.length !== 10) {
       alert("Phone needs to be 10 digits long");
       return;
@@ -75,7 +76,7 @@ function GymStaff() {
         className="m-4 popup-form"
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(staffDetails);
+          updateGymStaff(staffDetails);
         }}
       >
         <div className="mb-4 row">
@@ -88,9 +89,8 @@ function GymStaff() {
               className="form-control"
               id="staffID"
               name="staff_id"
-              value={staffDetails.username}
+              value={staffDetails.staff_id}
               placeholder="Immutable"
-              disabled
               required
             />
           </div>
@@ -110,8 +110,8 @@ function GymStaff() {
                 })
               }
             >
-              <option value="0">Part Time</option>
-              <option value="1" selected>
+              <option value={0}>Part Time</option>
+              <option value={1} selected>
                 Full Time
               </option>
             </select>

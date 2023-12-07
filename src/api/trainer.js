@@ -31,3 +31,16 @@ export const addNewTrainer = async (newTrainer, gymId) => {
     console.log(err);
   }
 };
+
+// export const deleteTrainerFromGym = async (trainerId) => {
+//   try {
+//     const res = await api.delete(`/trainer/${trainerId}`, {
+//       headers: {
+//         Authorization: `Bearer ${user.accessToken}`,
+//       },
+//     });
+//     return res.status;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };

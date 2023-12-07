@@ -20,7 +20,7 @@ function Branches() {
     <>
       <div id="branches-div" className="container center ">
         {user && user.type === "root" && (
-          <a className="btn btn-primary float-end" href="/gym/addGym">
+          <a className="btn btn-outline-success float-end" href="/gym/addGym">
             Add Branch
           </a>
         )}

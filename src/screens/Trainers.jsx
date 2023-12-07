@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { Link, useParams } from "react-router-dom";
 import { getGymTrainers } from "../api/gym";
-import { addNewTrainer } from "../api/trainer";
+import { addNewTrainer, deleteTrainerFromGym } from "../api/trainer";
 import AlertBox from "../components/AlertBox";
+import { deleteStaff } from "../api/staff";
 
 function Trainers() {
   const { gym_id } = useParams();
@@ -43,6 +44,15 @@ function Trainers() {
       setDisplayAddTrainerForm(false);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const deleteTrainer = async (e, trainerId) => {
+    e.preventDefault();
+    const status = await deleteStaff(trainerId);
+
+    if (status === 200) {
+      setTrainers((o) => [...o]);
     }
   };
 
@@ -298,12 +308,19 @@ function Trainers() {
                     <br />
                     {trainer.description}
                   </p>
-                  <div>
+                  <div className="d-flex align-items-center">
                     <Link to={`/trainer/${trainer.staff_id}/memberRecords`}>
                       <button className="btn btn-primary">
                         See Performance
                       </button>
                     </Link>
+
+                    {(user.type === "root" || user.type === "admin") && (
+                      <i
+                        className="ms-auto fas fa-trash-alt icon text-danger"
+                        onClick={(e) => deleteTrainer(e, trainer.staff_id)}
+                      ></i>
+                    )}
                   </div>
                 </div>
               </div>
