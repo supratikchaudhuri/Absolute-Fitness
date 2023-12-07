@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   Label,
+  ResponsiveContainer,
 } from "recharts";
 import { getAllGyms } from "../api/gym";
 import { getAllUsers } from "../api/user";
@@ -72,31 +73,39 @@ const Dashboard = () => {
       <h4>Analytics Dashboard</h4>
 
       {/* Stacked Bar Chart */}
-      <BarChart width={600} height={400} data={subscribedVsNonSubscribedData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="gym_id" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="subscribed" stackId="a" fill="#8884d8">
-          {subscribedVsNonSubscribedData.map((entry, index) => (
-            <Label
-              key={index}
-              content={<CustomLabel value={entry.subscribed} />}
-              position="insideTop"
-            />
-          ))}
-        </Bar>
-        <Bar dataKey="nonSubscribed" stackId="a" fill="#82ca9d">
-          {subscribedVsNonSubscribedData.map((entry, index) => (
-            <Label
-              key={index}
-              content={<CustomLabel value={entry.nonSubscribed} />}
-              position="insideTop"
-            />
-          ))}
-        </Bar>
-      </BarChart>
+      <h6>Subscribed vs Non-Subscribed Users in Each Gym</h6>
+      <ResponsiveContainer width="100%" height={600}>
+        <BarChart width={600} height={400} data={subscribedVsNonSubscribedData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            dataKey="gym_id"
+            label={{ value: "Gym ID", position: "insideBottom" }}
+          />
+          <YAxis
+            label={{ value: "Frequency", angle: -90, position: "insideLeft" }}
+          />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="subscribed" stackId="a" fill="#8884d8">
+            {subscribedVsNonSubscribedData.map((entry, index) => (
+              <Label
+                key={index}
+                content={<CustomLabel value={entry.subscribed} />}
+                position="insideTop"
+              />
+            ))}
+          </Bar>
+          <Bar dataKey="nonSubscribed" stackId="a" fill="#82ca9d">
+            {subscribedVsNonSubscribedData.map((entry, index) => (
+              <Label
+                key={index}
+                content={<CustomLabel value={entry.nonSubscribed} />}
+                position="insideTop"
+              />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
