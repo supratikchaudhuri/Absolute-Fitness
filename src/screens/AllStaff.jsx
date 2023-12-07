@@ -20,8 +20,15 @@ const AllStaff = () => {
   return (
     <div className="container center">
       <h4>Absolute Fitness Users</h4>
+      <h6>Got {staffs.length} users</h6>
       {staffs.length ? (
-        <Table content="staffs" data={staffs} setUsers={setStaffs} />
+        <Table
+          content="staffs"
+          data={staffs}
+          setUsers={setStaffs}
+          firstItemLink={true}
+          firstItemPath={{ name: "Profile", path: "/user/profile" }}
+        />
       ) : (
         <AlertBox message="No users found" type="danger" />
       )}

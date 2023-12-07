@@ -115,7 +115,7 @@ const EditProfile = () => {
             <a
               href="/user/profile"
               type="button"
-              className="btn btn-outline-primary mt-3 ms-3"
+              className="btn btn-danger mt-3 ms-3"
             >
               Cancel
             </a>
