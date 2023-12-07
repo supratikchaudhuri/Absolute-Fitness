@@ -257,14 +257,12 @@ function Trainers() {
   return trainers.length > 0 ? (
     <>
       {displayAddTrainerForm && trainerForm}
-      <div
-        id="trainer-div"
-        className="container d-flex flex-column align-items-center"
-      >
+      <div className="container center">
         <h4 className="page-title">Meet The Team</h4>
-        {(user.type === "root" || user.type === "admin") && (
+        {(user.type === "root" ||
+          (user.type === "admin" && user.gym_id == gym_id)) && (
           <button
-            className="btn btn-primary ms-auto"
+            className="btn btn-primary float-end"
             onClick={(e) => setDisplayAddTrainerForm(true)}
           >
             Add Trainer
