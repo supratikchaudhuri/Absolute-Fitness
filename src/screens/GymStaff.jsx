@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AlertBox from "../components/AlertBox";
 import { getGymStaff } from "../api/gym";
 import { useParams } from "react-router-dom";
-import { deleteStaff, updateStaff } from "../api/staff";
+import { addStaff, deleteStaff, updateStaff } from "../api/staff";
 
 function GymStaff() {
   const { gymId } = useParams();
@@ -12,32 +12,42 @@ function GymStaff() {
   const [cols, setCols] = useState([]);
   const [rows, setRows] = useState([]);
 
-  const [showEditForm, setShowEditForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [staffDetails, setStaffDetails] = useState({});
+  const [formType, setFormType] = useState("EDIT");
 
   const displayEditForm = (e) => {
-    setShowEditForm(true);
+    setShowForm(true);
   };
 
-  const updateGymStaff = async (updatedStaff) => {
-    if (updatedStaff && updatedStaff.phone.length !== 10) {
+  const addGymStaff = async () => {
+    const status = await addStaff(staffDetails);
+    if (status === 200) {
+      setStaffs({ ...staffs, staffDetails });
+    } else {
+      alert("Error adding new staff");
+    }
+  };
+
+  const updateGymStaff = async () => {
+    if (staffDetails && staffDetails.phone.length !== 10) {
       alert("Phone needs to be 10 digits long");
       return;
     }
 
-    const status = await updateStaff(updatedStaff);
+    const status = await updateStaff(staffDetails);
     console.log(status);
 
     if (status === 200) {
       setStaffs(
         staffs.map((s) =>
-          s.staff_id === updatedStaff.staff_id ? updatedStaff : s
+          s.staff_id === staffDetails.staff_id ? staffDetails : s
         )
       );
-      const staffValues = Object.values(updatedStaff);
+      const staffValues = Object.values(staffDetails);
       setRows(
         staffs.map((sv) =>
-          sv.staff_id === updatedStaff.staff_id
+          sv.staff_id === staffDetails.staff_id
             ? staffValues
             : Object.values(sv)
         )
@@ -46,7 +56,7 @@ function GymStaff() {
       alert("Error updating staff");
     }
 
-    setShowEditForm(false);
+    setShowForm(false);
   };
 
   const deleteGymStaff = async (e, staffId) => {
@@ -88,13 +98,13 @@ function GymStaff() {
     getStaff();
   }, []);
 
-  const renderEditForm = showEditForm && (
+  const renderForm = showForm && (
     <div className="edit-form-div">
       <form
         className="m-4 popup-form"
         onSubmit={(e) => {
           e.preventDefault();
-          updateGymStaff(staffDetails);
+          formType === "ADD" ? addGymStaff() : updateGymStaff();
         }}
       >
         <div className="mb-4 row">
@@ -108,7 +118,7 @@ function GymStaff() {
               id="staffID"
               name="staff_id"
               value={staffDetails.staff_id}
-              placeholder="Immutable"
+              placeholder="abc@af.com"
               required
             />
           </div>
@@ -197,8 +207,7 @@ function GymStaff() {
                   }
                 >
                   <option value="staff">Staff</option>
-                  <option value="trainer">Trainer</option>
-                  <option value="admin">Admin</option>
+                  {user.type === "root" && <option value="admin">Admin</option>}
                 </select>
               </>
             )}
@@ -228,14 +237,15 @@ function GymStaff() {
         <div className="row">
           <div className="col">
             <button type="submit" className="btn btn-primary mb-0">
-              Update
+              {console.log(formType)}
+              {formType === "ADD" ? "Add" : "Update"}
             </button>
           </div>
           <div className="col">
             <button
               type="button"
               className="btn btn-danger mb-0"
-              onClick={() => setShowEditForm(false)}
+              onClick={() => setShowForm(false)}
             >
               Cancel
             </button>
@@ -249,10 +259,14 @@ function GymStaff() {
     <>
       {staffs && staffs.length > 0 ? (
         <div className=" container gym-staff-div center">
-          {renderEditForm}
+          {renderForm}
           <button
             className="btn btn-outline-primary float-end"
-            onClick={(e) => setShowEditForm(true)}
+            onClick={(e) => {
+              setShowForm(true);
+              setFormType("ADD");
+              setStaffDetails({});
+            }}
           >
             Add Staff ... not working
           </button>

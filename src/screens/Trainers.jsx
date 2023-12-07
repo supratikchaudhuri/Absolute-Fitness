@@ -36,11 +36,14 @@ function Trainers() {
     e.preventDefault();
 
     try {
-      const res = await addNewTrainer(newTrainer, gym_id);
-      console.log(res.data);
-      setTrainers((o) => [...o]);
-      setNewTrainer({});
-      setDisplayAddTrainerForm(false);
+      const { status, data } = await addNewTrainer(newTrainer, gym_id);
+      console.log(data);
+      if (status === 200) {
+        setTrainers([...trainers, data]);
+        setDisplayAddTrainerForm(false);
+      } else {
+        alert("Error adding trainer");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +54,7 @@ function Trainers() {
     const status = await deleteStaff(trainerId);
 
     if (status === 200) {
-      setTrainers((o) => [...o]);
+      setTrainers(trainers.filter((t) => t.staff_id !== trainerId));
     }
   };
 

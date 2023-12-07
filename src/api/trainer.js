@@ -26,21 +26,8 @@ export const addNewTrainer = async (newTrainer, gymId) => {
         },
       }
     );
-    return res.data;
+    return { status: res.status, data: res.data };
   } catch (err) {
     console.log(err);
   }
 };
-
-// export const deleteTrainerFromGym = async (trainerId) => {
-//   try {
-//     const res = await api.delete(`/trainer/${trainerId}`, {
-//       headers: {
-//         Authorization: `Bearer ${user.accessToken}`,
-//       },
-//     });
-//     return res.status;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
