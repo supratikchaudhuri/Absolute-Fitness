@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createCheckoutSession, getProductWithPricing } from "../../api/stripe";
 import AlertBox from "../../components/AlertBox";
+import muscle_man from "../../Images/muscle_man.jpg";
 
 function MembershipPricingPlans() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -33,13 +34,8 @@ function MembershipPricingPlans() {
     />
   ) : (
     <>
-      <AlertBox
-        message="This is a test environment. No real money would be deducted from your account"
-        type="warning"
-        anchor={{ name: "More info", href: "https://google.com" }}
-      />
       <div className="container mt-2">
-        <h1 className="text-center mb-4">Pricing Plans</h1>
+        <h1 className="text-center mb-2">Pricing Plans</h1>
         <div className="row">
           {productPrices.prices &&
             productPrices.prices.map((price, idx) => {
@@ -48,13 +44,18 @@ function MembershipPricingPlans() {
                   <div className="card">
                     <div className="card-header bg-secondary-light text-white">
                       <h5 className="card-title text-dark">
-                        {price.lookup_key}
+                        {price.nickname}
                         {idx === productPrices.prices.length - 1 && (
                           <span className="badge bg-danger float-end">
                             Most Popular
                           </span>
                         )}
                       </h5>
+                      <img
+                        alt="muscle_man"
+                        src={muscle_man}
+                        className="img-fluid"
+                      />
                     </div>
                     <div className="card-body">
                       <h2 className="card-title">
@@ -63,7 +64,7 @@ function MembershipPricingPlans() {
                           ? `/${price.recurring.interval}`
                           : " One Time Payment"}
                       </h2>
-                      <p className="card-text">{price.nickname} adasdas</p>
+                      <p className="card-text">{price.lookup_key}</p>
                       {user.type === "member" && (
                         <button
                           className="btn btn-primary"
@@ -79,6 +80,11 @@ function MembershipPricingPlans() {
             })}
         </div>
       </div>
+      <AlertBox
+        message="This is a test environment. No real money would be deducted from your account"
+        type="warning"
+        anchor={{ name: "More info", href: "https://google.com" }}
+      />
     </>
   );
 }
