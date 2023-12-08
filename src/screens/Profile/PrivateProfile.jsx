@@ -28,7 +28,7 @@ function PrivateProfile() {
 
   return (
     <>
-      <div className="container col profile-details">
+      <div className="container profile-details">
         <div className="row">
           {!user ? (
             <AlertBox

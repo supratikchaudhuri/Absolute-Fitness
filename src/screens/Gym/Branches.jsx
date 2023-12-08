@@ -18,13 +18,15 @@ function Branches() {
 
   return (
     <>
-      <div id="branches-div" className="container center ">
+      <div id="branches-div" className="container ">
         {user && user.type === "root" && (
           <a className="btn btn-outline-success float-end" href="/gym/addGym">
             Add Branch
           </a>
         )}
-        <h4 className="page-title">Absolute Fitness Branches</h4>
+        <div className="center">
+          <h4 className="page-title">Absolute Fitness Branches</h4>
+        </div>
         <div className="row mt-4">
           {branches.map((branch) => (
             <div

@@ -10,6 +10,10 @@ select {
   color: rgb(44, 41, 41);
 }
 
+.page-title {
+  text-align: center;
+}
+
 .pointer {
   cursor: pointer;
 }

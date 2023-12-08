@@ -18,9 +18,9 @@ function DietPlan() {
 
   return mealPlan ? (
     <div className="container d-flex flex-column align-items-center">
-      <h4 className="page-title">{mealPlan.description}</h4>
-      <div className="workout-plan mt-3">
-        <h5 className="center">Today's Meals</h5>
+      <h4 className="page-title">Today's Meals</h4>
+      <div className="workout-plan">
+        <h5 className="mt-2">{mealPlan.description}</h5>
 
         <div className="meals-div row">
           {mealPlan.meals.map((meal, index) => (

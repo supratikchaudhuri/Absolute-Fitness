@@ -257,8 +257,10 @@ function Trainers() {
   return trainers.length > 0 ? (
     <>
       {displayAddTrainerForm && trainerForm}
-      <div className="container center">
-        <h4 className="page-title">Meet The Team</h4>
+      <div className="container">
+        <div className="center">
+          <h4 className="page-title">Meet The Team</h4>
+        </div>
         {(user.type === "root" ||
           (user.type === "admin" && user.gym_id == gym_id)) && (
           <button

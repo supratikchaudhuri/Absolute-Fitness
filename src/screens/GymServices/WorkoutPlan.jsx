@@ -19,10 +19,10 @@ function WorkoutPlan() {
 
   return workoutPlan ? (
     <div className="container d-flex flex-column align-items-center">
-      <h4 className="page-title mt-2">Today's exceerecises</h4>
-      <h5 className=" center mt-2">{workoutPlan.description}</h5>
+      <h4 className="page-title">Today's exceerecises</h4>
 
       <div className="workouts-div row">
+        <h5 className="mt-2">{workoutPlan.description}</h5>
         {workoutPlan.excercises.map((exc, index) => (
           <div
             className="col-xs-12 col-md-4 mt-3 ms-3 p-0 fit-content"
