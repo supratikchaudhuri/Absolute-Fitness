@@ -11,6 +11,7 @@ const Franchise = () => {
 
   const fetchGym = async () => {
     const res = await getGym(gym_id);
+    console.log(res);
     setGymDetails(res);
   };
 

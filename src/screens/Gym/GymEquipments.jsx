@@ -11,7 +11,7 @@ import AlertBox from "../../components/AlertBox";
 
 // TODO: gym equipments add delete, etc
 function GymEquipments() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || {};
   const { gym_id } = useParams();
 
   const [equipments, setEquipments] = useState([]);
@@ -134,7 +134,6 @@ function GymEquipments() {
                 last_serviced: e.target.value,
               })
             }
-            // max={new Date().toJSON().slice(0, 10)}
           />
         </div>
       </div>
@@ -164,22 +163,6 @@ function GymEquipments() {
       {renderEditEquipmentForm}
       {renderNewEquipmentForm}
       <h4>Gym Equipments</h4>
-      {/* {user.type === "staff" ||
-        (user.type === "admin" && (
-          <button
-            className="btn btn-primary float-end mb-3"
-            onCick={(e) => setShowNewEquipmentForm(true)}
-          >
-            Add Equpments
-          </button>
-        ))} */}
-      {/* <Table
-        content="equipments"
-        data={equipments}
-        setEquipments={processEquipmentData}
-        displayEditForm={setShowEditEquipmentForm}
-        deleteEquipment={deleteEquipment}
-      /> */}
 
       <table
         className="table mt-0"
@@ -193,7 +176,7 @@ function GymEquipments() {
                 <strong>{item.toUpperCase()}</strong>
               </th>
             ))}
-            {(user.type === "admin" || user.type === "root") && (
+            {user && (user.type === "admin" || user.type === "root") && (
               <th scope="col"></th>
             )}
           </tr>
@@ -209,7 +192,7 @@ function GymEquipments() {
                   </td>
                 ))}
 
-                {((user.type === "admin" && user.gym_id == gym_id) ||
+                {((user && user.type === "admin" && user.gym_id == gym_id) ||
                   user.type === "root") && (
                   <td>
                     <i
