@@ -41,9 +41,11 @@ const AddGymBranch = () => {
 
   const addBranchFn = async (e) => {
     e.preventDefault();
-    urlInputs.filter((url) => url !== "");
-    gymDetails["image_urls"] = urlInputs;
-    // gymDetails["images"] = imageFiles;
+
+    if (!gymDetails.images) {
+      urlInputs.filter((url) => url !== "");
+      gymDetails["image_urls"] = urlInputs;
+    }
     console.log(gymDetails);
     const { status, data } = await addGym(gymDetails, adminDetails);
     if (status === 200) {
