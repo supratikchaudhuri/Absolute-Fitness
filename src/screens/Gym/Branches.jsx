@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllGyms } from "../../api/gym";
+import stock_gym_image from "../../Images/stock_gym_image.jpeg";
 
 function Branches() {
   const user = JSON.parse(localStorage.getItem("user")) || null;
@@ -35,7 +36,7 @@ function Branches() {
             >
               <div className="card h-100">
                 <img
-                  src={branch.image_urls[0]}
+                  src={branch.image_urls[0] || stock_gym_image}
                   className="card-img-top"
                   alt="..."
                 />

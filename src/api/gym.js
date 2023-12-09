@@ -34,7 +34,7 @@ export const addGym = async (gymDetails, adminDetails) => {
     );
     return { status: res.status, data: res.data };
   } catch (err) {
-    return { status: err.response.status, data: err.response.data };
+    alert(err.response.data.msg);
   }
 };
 

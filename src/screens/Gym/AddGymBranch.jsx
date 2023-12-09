@@ -19,6 +19,8 @@ const AddGymBranch = () => {
     "https://i.insider.com/5cc74939b14bf43dd85e6d03?width=1000&format=jpeg&auto=webp",
     "https://www.lakeflato.com/sites/default/files/project-media/8_1.jpg",
   ]);
+  const [imageFiles, setImageFiles] = useState(null);
+  const [uploadFile, setUploadFile] = useState(true);
 
   const handleUrlChange = (index, value) => {
     // Update the URL at the specified index in the array
@@ -28,8 +30,6 @@ const AddGymBranch = () => {
       return newUrls;
     });
   };
-
-  console.log(urlInputs);
 
   const handleAddMore = () => {
     setUrlInputs((prevUrls) => [...prevUrls, ""]);
@@ -43,8 +43,9 @@ const AddGymBranch = () => {
     e.preventDefault();
     urlInputs.filter((url) => url !== "");
     gymDetails["image_urls"] = urlInputs;
+    // gymDetails["images"] = imageFiles;
+    console.log(gymDetails);
     const { status, data } = await addGym(gymDetails, adminDetails);
-    console.log(data);
     if (status === 200) {
       alert("Branch Added Successfully");
       window.location.href = "/home";
@@ -52,6 +53,8 @@ const AddGymBranch = () => {
       alert("Error adding branch");
     }
   };
+
+  //   console.log(gymDetails);
 
   return (
     <>
@@ -143,6 +146,25 @@ const AddGymBranch = () => {
           </div>
           <div className="row">
             <label className="form-label">Choose gym images</label>
+            <input
+              type="file"
+              className="form-control mb-2"
+              id="images"
+              name="images[]"
+              accept="image/*"
+              onChange={(e) => {
+                const files = Array.from(e.target.files);
+                console.log(files);
+                setGymDetails({
+                  ...gymDetails,
+                  images: files.map((file, index) => ({
+                    file: file,
+                    url: URL.createObjectURL(file),
+                  })),
+                });
+              }}
+              multiple
+            />
 
             {urlInputs.map((url, index) => (
               <div className="row mb-1" key={index}>

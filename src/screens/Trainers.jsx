@@ -5,6 +5,7 @@ import { getGymTrainers } from "../api/gym";
 import { addNewTrainer } from "../api/trainer";
 import AlertBox from "../components/AlertBox";
 import { deleteStaff } from "../api/staff";
+import stock_gym_trainer from "../Images/stock_gym_trainer.jpeg";
 
 function Trainers() {
   const { gym_id } = useParams();
@@ -260,16 +261,16 @@ function Trainers() {
       <div className="container">
         <div className="center">
           <h4 className="page-title">Meet The Team</h4>
+          {(user.type === "root" ||
+            (user.type === "admin" && user.gym_id == gym_id)) && (
+            <button
+              className="btn btn-primary float-end"
+              onClick={(e) => setDisplayAddTrainerForm(true)}
+            >
+              Add Trainer
+            </button>
+          )}
         </div>
-        {(user.type === "root" ||
-          (user.type === "admin" && user.gym_id == gym_id)) && (
-          <button
-            className="btn btn-primary float-end"
-            onClick={(e) => setDisplayAddTrainerForm(true)}
-          >
-            Add Trainer
-          </button>
-        )}
         <div className="row mt-3">
           {trainers.map((trainer, index) => (
             <div
@@ -278,7 +279,7 @@ function Trainers() {
             >
               <div className="card">
                 <img
-                  src={trainer.image_url}
+                  src={trainer.image_url || stock_gym_trainer}
                   className="card-img-top"
                   alt="trainer"
                 />
