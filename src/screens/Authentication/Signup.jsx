@@ -11,6 +11,7 @@ import {
 import img1 from "../../Images/img1.jpg";
 import logoImg from "../../Images/AbsoluteFitnessLogo.jpg";
 import { signup } from "../../api/user";
+import { getAllGyms } from "../../api/gym";
 
 function Signup() {
   const [userDetails, setUserDetails] = useState({
@@ -26,13 +27,13 @@ function Signup() {
   const [gyms, setGyms] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
 
-  const getAllGyms = async () => {
+  const fetchGyms = async () => {
     const data = await getAllGyms();
     setGyms(data);
   };
 
   useEffect(() => {
-    getAllGyms();
+    fetchGyms();
   }, []);
 
   const handleChange = (e) => {
@@ -99,7 +100,7 @@ function Signup() {
           <div className="row">
             <div className="col-xs-12 col-md-6">
               <label for="name-input" className="form-label mb-2">
-                Name
+                Name*
               </label>
               <input
                 id="name-input"
@@ -114,7 +115,7 @@ function Signup() {
             </div>
             <div className="col-xs-12 col-md-6">
               <label for="phone-input" className="form-label mb-2">
-                Phone
+                Phone*
               </label>
               <input
                 id="phone-input"
@@ -132,7 +133,7 @@ function Signup() {
           <div className="row">
             <div className="col-xs-12 col-md-6">
               <label for="email-input" className="form-label mb-2">
-                Email
+                Email*
               </label>
               <input
                 id="email-input"
@@ -147,7 +148,7 @@ function Signup() {
             </div>
             <div className="col-xs-12 col-md-6">
               <label for="password-input" className="form-label mb-2">
-                Password
+                Password*
               </label>
               <div className="row">
                 <div className="col-11">
@@ -174,7 +175,7 @@ function Signup() {
           <div className="row">
             <div className="col-xs-12 col-md-6 mb-3">
               <label for="dob-input" className="form-label mb-2">
-                Date of Birth
+                Date of Birth*
               </label>
               <input
                 id="dob-input"
@@ -187,7 +188,7 @@ function Signup() {
             </div>
             <div className="col-xs-12 col-md-6">
               <label for="sex-input" className="form-label mb-2">
-                Sex
+                Sex*
               </label>
               <br />
               <select
@@ -213,7 +214,7 @@ function Signup() {
           <div className="row">
             <div className="col col-xs-12">
               <label for="gym-input" className="form-label mb-2">
-                Choose your gym
+                Choose your gym*
               </label>
               <select
                 required
