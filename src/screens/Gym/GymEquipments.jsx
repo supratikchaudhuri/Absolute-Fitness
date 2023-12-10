@@ -83,7 +83,7 @@ function GymEquipments() {
       });
       setEquipments({ ...equipments, equipmentDetails });
       setShowEquipmentForm(false);
-      setEquipments({});
+      setEquipmentDetails({});
     }
   };
 
@@ -107,8 +107,11 @@ function GymEquipments() {
           <input
             id="eqp-name"
             type="text"
+            required
+            disabled={formType === "EDIT"}
             className="form-control"
-            value={equipmentDetails.name || ""}
+            value={equipmentDetails.name}
+            placeholder="equipment name"
             onChange={(e) =>
               setEquipmentDetails({ ...equipmentDetails, name: e.target.value })
             }
@@ -122,8 +125,10 @@ function GymEquipments() {
           <input
             id="eqp-image"
             type="text"
+            required
             className="form-control"
-            value={equipmentDetails.image_url || ""}
+            value={equipmentDetails.image_url}
+            placeholder="equipment image url"
             onChange={(e) =>
               setEquipmentDetails({
                 ...equipmentDetails,
@@ -144,6 +149,7 @@ function GymEquipments() {
             className="form-control"
             id="quantity"
             name="quantity"
+            placeholder="must be atleast 1"
             value={equipmentDetails.quantity}
             onChange={(e) =>
               setEquipmentDetails({
@@ -206,6 +212,7 @@ function GymEquipments() {
             className="btn btn-primary float-end"
             onClick={(e) => {
               setFormType("ADD");
+              setEquipmentDetails({});
               setShowEquipmentForm(true);
             }}
           >

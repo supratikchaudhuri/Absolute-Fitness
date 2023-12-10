@@ -67,6 +67,7 @@ export const addNewGymEquipment = async (gym_id, newEquipment) => {
     });
     return res.status;
   } catch (err) {
+    alert(err.response.data.msg);
     console.log(err);
   }
 };
