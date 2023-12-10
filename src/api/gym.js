@@ -58,6 +58,8 @@ export const getGymEquipments = async (gym_id) => {
 
 export const addNewGymEquipment = async (gym_id, newEquipment) => {
   try {
+    newEquipment.quantity = parseInt(newEquipment.quantity) || 1;
+
     const res = await api.post(`gym/${gym_id}/equipment`, newEquipment, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,

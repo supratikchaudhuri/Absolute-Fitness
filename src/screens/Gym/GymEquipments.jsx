@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
 import {
   addNewGymEquipment,
@@ -34,7 +33,7 @@ function GymEquipments() {
     getEquipments();
   }, []);
 
-  console.log(equipments);
+  //   console.log(equipments);
 
   const updateEquipment = async () => {
     try {
@@ -76,6 +75,7 @@ function GymEquipments() {
     setEquipmentDetails({ ...equipmentDetails, gymId: gym_id });
 
     const status = await addNewGymEquipment(gym_id, equipmentDetails);
+    console.log(equipmentDetails);
     if (status === 200) {
       setEquipmentDetails({
         ...equipmentDetails,
@@ -87,7 +87,7 @@ function GymEquipments() {
     }
   };
 
-  console.log(equipments);
+  //   console.log(equipments);
 
   const renderEquipmentForm = showEquipmentForm && (
     <form
@@ -144,7 +144,7 @@ function GymEquipments() {
             className="form-control"
             id="quantity"
             name="quantity"
-            value={equipmentDetails.quantity || 0}
+            value={equipmentDetails.quantity}
             onChange={(e) =>
               setEquipmentDetails({
                 ...equipmentDetails,
@@ -200,15 +200,18 @@ function GymEquipments() {
       {renderEquipmentForm}
       <div className="center mb-2">
         <h4>Gym Equipments</h4>
-        <button
-          className="btn btn-primary float-end"
-          onClick={(e) => {
-            setFormType("ADD");
-            setShowEquipmentForm(true);
-          }}
-        >
-          Add Equipment
-        </button>
+        {(user.type === "root" ||
+          (user.type === "admin" && user.gym_id == gym_id)) && (
+          <button
+            className="btn btn-primary float-end"
+            onClick={(e) => {
+              setFormType("ADD");
+              setShowEquipmentForm(true);
+            }}
+          >
+            Add Equipment
+          </button>
+        )}
       </div>
 
       <table
