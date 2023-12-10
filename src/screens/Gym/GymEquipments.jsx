@@ -16,9 +16,8 @@ function GymEquipments() {
 
   const [equipments, setEquipments] = useState([]);
   const [showEquipmentForm, setShowEquipmentForm] = useState(false);
-  const [formType, setFormType] = useState(false);
-  const [equipmentDetails, setEquipmentDetails] = useState(null);
-  //   const [newEquipment, setNewEquipment] = useState({});
+  const [formType, setFormType] = useState("EDIT");
+  const [equipmentDetails, setEquipmentDetails] = useState({});
 
   const getEquipments = async () => {
     const res = await getGymEquipments(gym_id);
@@ -71,25 +70,26 @@ function GymEquipments() {
     }
   };
 
-  //   const addNewEquipment = async (e) => {
-  //     e.preventDefault();
-  //     const status = await addNewGymEquipment(gym_id, newEquipment);
-  //     if (status === 200) {
-  //       setEquipments(
-  //         equipments.map((equipment) => {
-  //           if (equipment.equipment_id === newEquipment.equipment_id) {
-  //             return newEquipment;
-  //           }
-  //           return equipment;
-  //         })
-  //       );
-  //     }
-  //     setShowNewEquipmentForm(false);
-  //   };
+  const addNewEquipment = async (e) => {
+    e.preventDefault();
+
+    setEquipmentDetails({ ...equipmentDetails, gymId: gym_id });
+
+    const status = await addNewGymEquipment(gym_id, equipmentDetails);
+    if (status === 200) {
+      setEquipmentDetails({
+        ...equipmentDetails,
+        image: <img src={`${equipmentDetails.image_url}`} alt="equipment" />,
+      });
+      setEquipments({ ...equipments, equipmentDetails });
+      setShowEquipmentForm(false);
+      setEquipments({});
+    }
+  };
 
   console.log(equipments);
 
-  const renderEditEquipmentForm = showEquipmentForm && (
+  const renderEquipmentForm = showEquipmentForm && (
     <form
       className="m-4 popup-form"
       onSubmit={(e) => {
@@ -97,17 +97,54 @@ function GymEquipments() {
         updateEquipment();
       }}
     >
-      <div className="mb-4 row w-3">
-        <div className="col">
-          <label htmlFor="quantity" className="form-label">
-            Quantity
+      <h3 className="">Trainer Information Form</h3>
+      <div className="row mb-2">
+        <div className="col-xs-12 col-md-6">
+          <label htmlFor="eqp-name" className="form-label">
+            Name*
+          </label>
+
+          <input
+            id="eqp-name"
+            type="text"
+            className="form-control"
+            value={equipmentDetails.name || ""}
+            onChange={(e) =>
+              setEquipmentDetails({ ...equipmentDetails, name: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="col-xs-12 col-md-6">
+          <label htmlFor="eqp-image" className="form-label">
+            Image*
           </label>
           <input
+            id="eqp-image"
             type="text"
+            className="form-control"
+            value={equipmentDetails.image_url || ""}
+            onChange={(e) =>
+              setEquipmentDetails({
+                ...equipmentDetails,
+                image_url: e.target.value,
+              })
+            }
+          />
+        </div>
+      </div>
+
+      <div className="mb-4 row">
+        <div className="col-xs-12 col-md-6">
+          <label htmlFor="quantity" className="form-label">
+            Quantity*
+          </label>
+          <input
+            type="number"
             className="form-control"
             id="quantity"
             name="quantity"
-            value={equipmentDetails.quantity}
+            value={equipmentDetails.quantity || 0}
             onChange={(e) =>
               setEquipmentDetails({
                 ...equipmentDetails,
@@ -117,7 +154,7 @@ function GymEquipments() {
             required
           />
         </div>
-        <div className="col">
+        <div className="col-xs-12 col-md-6">
           <label htmlFor="last_serviced" className="form-label">
             Last Serviced
           </label>
@@ -140,29 +177,39 @@ function GymEquipments() {
 
       <button
         type="submit"
-        className="btn btn-primary mb-0"
-        style={{ width: "100%" }}
+        className="btn btn-primary mb-0 inline"
+        onClick={(e) =>
+          formType === "EDIT" ? updateGymEquipment(e) : addNewEquipment(e)
+        }
       >
         {formType === "ADD" ? "Add" : "Update"}
       </button>
+
       <button
         type="button"
-        className="btn btn-danger mb-0"
+        className="btn btn-danger ms-2"
         onClick={(e) => setShowEquipmentForm(false)}
-        style={{ width: "100%" }}
       >
         Cancel
       </button>
     </form>
   );
 
-  const renderNewEquipmentForm = showEquipmentForm && <></>;
-
   return equipments.length > 0 ? (
-    <div className="container center euipment-div">
-      {renderEditEquipmentForm}
-      {renderNewEquipmentForm}
-      <h4>Gym Equipments</h4>
+    <div className="container euipment-div">
+      {renderEquipmentForm}
+      <div className="center mb-2">
+        <h4>Gym Equipments</h4>
+        <button
+          className="btn btn-primary float-end"
+          onClick={(e) => {
+            setFormType("ADD");
+            setShowEquipmentForm(true);
+          }}
+        >
+          Add Equipment
+        </button>
+      </div>
 
       <table
         className="table mt-0"

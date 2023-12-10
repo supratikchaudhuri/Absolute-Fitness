@@ -159,10 +159,7 @@ const AddGymBranch = () => {
                 console.log(files);
                 setGymDetails({
                   ...gymDetails,
-                  images: files.map((file, index) => ({
-                    file: file,
-                    url: URL.createObjectURL(file),
-                  })),
+                  images: files,
                 });
               }}
               multiple
