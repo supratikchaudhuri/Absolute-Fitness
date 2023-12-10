@@ -8,7 +8,6 @@ import {
 } from "../../api/gym";
 import AlertBox from "../../components/AlertBox";
 
-// TODO: gym equipments add delete, etc
 function GymEquipments() {
   const user = JSON.parse(localStorage.getItem("user")) || {};
   const { gym_id } = useParams();

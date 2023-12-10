@@ -23,17 +23,12 @@ function Signup() {
     gymId: -1,
   });
 
-  //   TODO: input validation in signup / login
   const [gyms, setGyms] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
 
   const getAllGyms = async () => {
-    try {
-      const res = await axios.get("gym/");
-      setGyms(res.data);
-    } catch (err) {
-      throw err;
-    }
+    const data = await getAllGyms();
+    setGyms(data);
   };
 
   useEffect(() => {
