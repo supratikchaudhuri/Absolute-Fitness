@@ -4,8 +4,9 @@ import AlertBox from "../components/AlertBox";
 import TreemapChart from "../components/TreeMap";
 
 const NutrionIX = () => {
+  const last_query = localStorage.getItem("last_nutrition_search_query");
   const [query, setQuery] = useState(
-    "1 chicken salad, 1 cup orange juice, 2 scoops whey protein"
+    last_query || "1 chicken salad, 1 cup orange juice, 2 scoops whey protein"
   );
   const interest = [
     "food_name",
@@ -76,7 +77,7 @@ const NutrionIX = () => {
             }
           }
         });
-
+        localStorage.setItem("last_nutrition_search_query", query);
         return selectedObject;
       });
 
