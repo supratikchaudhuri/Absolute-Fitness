@@ -86,7 +86,7 @@ function GymEquipments() {
     }
   };
 
-  //   console.log(equipments);
+  console.log(equipments);
 
   const renderEquipmentForm = showEquipmentForm && (
     <form
@@ -126,7 +126,9 @@ function GymEquipments() {
             type="text"
             required
             className="form-control"
-            value={equipmentDetails.image_url}
+            value={
+              equipmentDetails.image_url || equipmentDetails.image.props.src
+            }
             placeholder="equipment image url"
             onChange={(e) =>
               setEquipmentDetails({
