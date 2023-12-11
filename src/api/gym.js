@@ -7,6 +7,7 @@ export const getAllGyms = async () => {
     const res = await api.get("gym/");
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -17,6 +18,7 @@ export const getGym = async (gym_id) => {
     console.log(res);
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -34,7 +36,7 @@ export const addGym = async (gymDetails, adminDetails) => {
     );
     return { status: res.status, data: res.data };
   } catch (err) {
-    alert(err.response.data.msg);
+    alert(err?.response?.data?.msg);
   }
 };
 
@@ -43,6 +45,7 @@ export const getGymFacilities = async (gym_id) => {
     const res = await api.get(`gym/${gym_id}/facilities`);
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -52,6 +55,7 @@ export const getGymEquipments = async (gym_id) => {
     const res = await api.get(`gym/${gym_id}/equipments`);
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -67,7 +71,7 @@ export const addNewGymEquipment = async (gym_id, newEquipment) => {
     });
     return res.status;
   } catch (err) {
-    alert(err.response.data.msg);
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -85,6 +89,7 @@ export const updateGymEquipment = async (gym_id, updatedEquipment) => {
     );
     return res.status;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -98,6 +103,7 @@ export const deleteGymEquipment = async (gym_id, equipment_id) => {
     });
     return res.status;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -107,6 +113,7 @@ export const getGymTrainers = async (gym_id) => {
     const res = await api.get(`gym/${gym_id}/trainers`);
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -120,6 +127,7 @@ export const getGymStaff = async (gym_id) => {
     });
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -133,6 +141,7 @@ export const getGymMembers = async (gym_id) => {
     });
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -147,6 +156,7 @@ export const updateGymBranch = async (updatedGym) => {
     });
     return res.status;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };

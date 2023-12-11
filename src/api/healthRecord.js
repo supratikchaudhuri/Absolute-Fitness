@@ -11,6 +11,7 @@ export const getHealthRecordForUser = async (username) => {
     });
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -25,6 +26,6 @@ export const addHealthRecord = async (record) => {
     });
     return res.status;
   } catch (err) {
-    alert(err.response.data.msg);
+    alert(err?.response?.data?.msg);
   }
 };

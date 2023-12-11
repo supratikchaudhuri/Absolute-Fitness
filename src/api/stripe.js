@@ -12,6 +12,7 @@ export const getProductWithPricing = async () => {
 
     return res;
   } catch (err) {
+    alert(err.response.data.msg);
     console.log(err);
   }
 };
@@ -29,6 +30,7 @@ export const createCheckoutSession = async (priceId) => {
     );
     return res;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };

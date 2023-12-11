@@ -69,7 +69,7 @@ function GymMembers() {
     <div className="container">
       <form className="form-inline mb-3" onSubmit={handleFormSubmit}>
         <div className="d-flex align-items-center">
-          <div className="col-xs-12">
+          <div className="col-xs-12 w-75">
             <input
               className="form-control col-xs-12"
               type="search"
@@ -78,7 +78,7 @@ function GymMembers() {
             />
           </div>
 
-          <div className="col-xs-12">
+          <div className="col-xs-12 ms-2">
             <input
               className="form-check-input"
               type="checkbox"
@@ -92,7 +92,7 @@ function GymMembers() {
             </label>
           </div>
 
-          <div className="col ms-auto">
+          <div className="col ms-3">
             <button className="btn btn-outline-success" type="submit">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>

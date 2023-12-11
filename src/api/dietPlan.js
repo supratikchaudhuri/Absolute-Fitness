@@ -11,6 +11,7 @@ export const getDietPlanForUser = async (username) => {
     });
     return res.data;
   } catch (err) {
+    alert(err.response.data.msg);
     console.log(err);
   }
 };
