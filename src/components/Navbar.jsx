@@ -4,7 +4,7 @@ import { useJwt } from "react-jwt";
 function Navbar() {
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/login";
+    window.location.href = "/home";
   };
 
   let user = JSON.parse(localStorage.getItem("user")) || {};
@@ -231,10 +231,26 @@ function Navbar() {
             </ul>
           ) : (
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="/login">
-                  Login
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="."
+                  id="navbarDropdown2"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Anonymous User
                 </a>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdown2"
+                >
+                  <a className="dropdown-item mb-0 pointer" href="/login">
+                    Log in
+                  </a>
+                </div>
               </li>
             </ul>
           )}

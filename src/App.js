@@ -76,12 +76,6 @@ function App() {
             />
             <Route exact path="/signup" element={<Signup />} />
 
-            <Route
-              exact
-              path="/user/public/profile/:username"
-              element={<PublicProfile />}
-            />
-
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/gyms" element={<Branches />} />
             <Route exact path="/gym/:gym_id" element={<Franchise />} />
@@ -125,6 +119,12 @@ function App() {
                     <MembershipPricingPlans />
                   </Elements>
                 }
+              />
+
+              <Route
+                exact
+                path="/user/public/profile/:username"
+                element={<PublicProfile />}
               />
 
               <Route

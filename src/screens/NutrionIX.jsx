@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
 import TreemapChart from "../components/TreeMap";
 
