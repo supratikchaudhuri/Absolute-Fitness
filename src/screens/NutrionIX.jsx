@@ -40,7 +40,7 @@ const NutrionIX = () => {
   const [totalValues, setTotalValues] = useState(initialTotalValues);
 
   const fetchNutritionDate = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     try {
       const res = await axios.post(
@@ -93,8 +93,9 @@ const NutrionIX = () => {
   };
 
   useEffect(() => {
-    console.log(totalValues);
-  }, [totalValues]);
+    console.log("called");
+    fetchNutritionDate();
+  }, []);
 
   console.log(totalValues);
 
