@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BMIChart from "../../components/BMIChart";
 import { getClientHealthRecords } from "../../api/trainer";
+import AlertBox from "../../components/AlertBox";
 
 function TrainerPerformance() {
   const params = useParams();
@@ -100,11 +101,14 @@ function TrainerPerformance() {
           ></BMIChart>
         </>
       ) : (
-        <div className="no-data">No client progress for this trainer found</div>
+        <AlertBox
+          message="No client progress for this trainer found"
+          type="warning"
+        />
       )}
     </div>
   ) : (
-    <div className="no-data">This trainer has no clients yet.</div>
+    <AlertBox message="This trainer has no clients yet" type="warning" />
   );
 }
 
