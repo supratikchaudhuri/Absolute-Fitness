@@ -170,8 +170,8 @@ function App() {
                 <Route exact path="/all-members" element={<AllMembers />} />
                 <Route exact path="/all-staff" element={<AllStaff />} />
                 <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/gym/addGym" element={<AddGymBranch />} />
               </Route>
-              <Route exact path="/gym/addGym" element={<AddGymBranch />} />
             </Route>
 
             {/* tema members in root */}
