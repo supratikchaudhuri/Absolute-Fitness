@@ -74,10 +74,7 @@ const ForgotPassword = () => {
             Don't have an account? <a href="/signup">Signup here</a>
           </p>
           <p className="center small mb-0 pb-lg-2">
-            Are you a staff? <a href="/staff-login">Login here</a>
-          </p>
-          <p className="center small mb-5 pb-lg-2">
-            Forgot Password? <a href="/forgot-password">Click here</a>
+            Already have an account? <a href="/login">Login here</a>
           </p>
         </form>
       </div>

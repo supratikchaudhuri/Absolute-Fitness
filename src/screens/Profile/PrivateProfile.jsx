@@ -70,7 +70,9 @@ function PrivateProfile() {
                   <>
                     <p>
                       <strong>Gym:</strong>{" "}
-                      <a href={`/gym/${userGym.gym_id}`}>{userGym.branch}</a>
+                      <a href={`/gym/${userGym.gym_id}`}>
+                        {userGym.branch || userGym.pincode}
+                      </a>
                     </p>
                   </>
                 )}
