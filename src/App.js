@@ -110,6 +110,12 @@ function App() {
               element={<MySubscriptionsPage />}
             />
 
+            <Route
+              exact
+              path="/user/public/profile/:username"
+              element={<PublicProfile />}
+            />
+
             <Route element={<PrivateRoute />}>
               <Route
                 exact
@@ -119,12 +125,6 @@ function App() {
                     <MembershipPricingPlans />
                   </Elements>
                 }
-              />
-
-              <Route
-                exact
-                path="/user/public/profile/:username"
-                element={<PublicProfile />}
               />
 
               <Route
