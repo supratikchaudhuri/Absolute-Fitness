@@ -32,3 +32,20 @@ export const createCheckoutSession = async (priceId) => {
     console.log(err);
   }
 };
+
+export const subscribeWithoutPayment = async (priceId) => {
+  try {
+    const res = await api.post(
+        `stripe/subscribe-without-payment/${priceId}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${user.accessToken}`,
+          },
+        }
+    );
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
