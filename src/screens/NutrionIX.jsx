@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Table from "../components/Table";
 import AlertBox from "../components/AlertBox";
 import TreemapChart from "../components/TreeMap";
 
 const NutrionIX = () => {
+  const last_query = localStorage.getItem("last_nutrition_search_query");
   const [query, setQuery] = useState(
-    "1 chicken salad, 1 cup orange juice, 2 scoops whey protein"
+    last_query || "1 chicken salad, 1 cup orange juice, 2 scoops whey protein"
   );
   const interest = [
     "food_name",
@@ -40,7 +40,7 @@ const NutrionIX = () => {
   const [totalValues, setTotalValues] = useState(initialTotalValues);
 
   const fetchNutritionDate = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     try {
       const res = await axios.post(
@@ -77,7 +77,7 @@ const NutrionIX = () => {
             }
           }
         });
-
+        localStorage.setItem("last_nutrition_search_query", query);
         return selectedObject;
       });
 
@@ -93,8 +93,9 @@ const NutrionIX = () => {
   };
 
   useEffect(() => {
-    console.log(totalValues);
-  }, [totalValues]);
+    console.log("called");
+    fetchNutritionDate();
+  }, []);
 
   console.log(totalValues);
 

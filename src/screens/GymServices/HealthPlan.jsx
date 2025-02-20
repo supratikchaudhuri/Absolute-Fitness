@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertBox from "../../components/AlertBox";
@@ -13,12 +12,12 @@ function HealthPlan() {
   const [healthPlan, setHealthPlan] = useState(null);
 
   const getHealthRecord = async () => {
-    const data = await getHealthRecordForUser(user.username);
+    const data = await getHealthRecordForUser(user.username || user.email);
     setUserHealthRecord(data);
   };
 
   const getHealthPlan = async () => {
-    const data = await getHealthPlanForUser(user.username);
+    const data = await getHealthPlanForUser(user.username || user.email);
     setHealthPlan(data);
   };
 

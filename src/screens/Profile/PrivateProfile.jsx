@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
 import "../../profileStyles.css";
 import AlertBox from "../../components/AlertBox";
 import { getGym } from "../../api/gym";
@@ -10,7 +9,6 @@ function PrivateProfile() {
 
   //   TODO: show paying customer or not
   // TODO: aesthetic page, add more details paying cutomer or not, (maybe add healt record here?)
-  //    TODO: global profile less info
   const [userGym, setUserGym] = useState(null);
 
   const fetchUserGym = async () => {
@@ -72,7 +70,9 @@ function PrivateProfile() {
                   <>
                     <p>
                       <strong>Gym:</strong>{" "}
-                      <a href={`/gym/${userGym.gym_id}`}>{userGym.branch}</a>
+                      <a href={`/gym/${userGym.gym_id}`}>
+                        {userGym.branch || userGym.pincode}
+                      </a>
                     </p>
                   </>
                 )}

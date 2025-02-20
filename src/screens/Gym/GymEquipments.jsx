@@ -8,7 +8,6 @@ import {
 } from "../../api/gym";
 import AlertBox from "../../components/AlertBox";
 
-// TODO: gym equipments add delete, etc
 function GymEquipments() {
   const user = JSON.parse(localStorage.getItem("user")) || {};
   const { gym_id } = useParams();
@@ -83,11 +82,12 @@ function GymEquipments() {
       });
       setEquipments({ ...equipments, equipmentDetails });
       setShowEquipmentForm(false);
-      setEquipments({});
+      setEquipmentDetails({});
     }
   };
 
-  //   console.log(equipments);
+  console.log(equipments);
+  console.log(equipmentDetails);
 
   const renderEquipmentForm = showEquipmentForm && (
     <form
@@ -107,8 +107,11 @@ function GymEquipments() {
           <input
             id="eqp-name"
             type="text"
+            required
+            disabled={formType === "EDIT"}
             className="form-control"
-            value={equipmentDetails.name || ""}
+            value={equipmentDetails.name}
+            placeholder="equipment name"
             onChange={(e) =>
               setEquipmentDetails({ ...equipmentDetails, name: e.target.value })
             }
@@ -122,8 +125,14 @@ function GymEquipments() {
           <input
             id="eqp-image"
             type="text"
+            required
             className="form-control"
-            value={equipmentDetails.image_url || ""}
+            value={
+              equipmentDetails.image_url ||
+              equipmentDetails?.image?.props?.src ||
+              ""
+            }
+            placeholder="equipment image url"
             onChange={(e) =>
               setEquipmentDetails({
                 ...equipmentDetails,
@@ -144,6 +153,7 @@ function GymEquipments() {
             className="form-control"
             id="quantity"
             name="quantity"
+            placeholder="must be atleast 1"
             value={equipmentDetails.quantity}
             onChange={(e) =>
               setEquipmentDetails({
@@ -206,6 +216,7 @@ function GymEquipments() {
             className="btn btn-primary float-end"
             onClick={(e) => {
               setFormType("ADD");
+              setEquipmentDetails({});
               setShowEquipmentForm(true);
             }}
           >

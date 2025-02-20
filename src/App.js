@@ -76,12 +76,6 @@ function App() {
             />
             <Route exact path="/signup" element={<Signup />} />
 
-            <Route
-              exact
-              path="/user/public/profile/:username"
-              element={<PublicProfile />}
-            />
-
             <Route exact path="/home" element={<Home />} />
             <Route exact path="/gyms" element={<Branches />} />
             <Route exact path="/gym/:gym_id" element={<Franchise />} />
@@ -114,6 +108,12 @@ function App() {
               exact
               path="/my-subscriptions"
               element={<MySubscriptionsPage />}
+            />
+
+            <Route
+              exact
+              path="/user/public/profile/:username"
+              element={<PublicProfile />}
             />
 
             <Route element={<PrivateRoute />}>
@@ -170,8 +170,8 @@ function App() {
                 <Route exact path="/all-members" element={<AllMembers />} />
                 <Route exact path="/all-staff" element={<AllStaff />} />
                 <Route exact path="/dashboard" element={<Dashboard />} />
+                <Route exact path="/gym/addGym" element={<AddGymBranch />} />
               </Route>
-              <Route exact path="/gym/addGym" element={<AddGymBranch />} />
             </Route>
 
             {/* tema members in root */}

@@ -10,6 +10,7 @@ export const signup = async (userDetails) => {
     }
     return res.status;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -23,6 +24,7 @@ export const getAllUsers = async () => {
     });
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -32,6 +34,7 @@ export const getUser = async (username) => {
     const res = await api.get(`user/${username}`);
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -51,6 +54,7 @@ export const updateUser = async (userDetails) => {
     }
     return res.status;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
     return err.response.status;
   }
@@ -65,6 +69,7 @@ export const deleteGymUser = async (userId) => {
     });
     return res.status;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -92,6 +97,7 @@ export const paymentSuccessful = async (paymentToken) => {
     user = localStorage.getItem("user");
     console.log(user.accessToken === accessToken);
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };

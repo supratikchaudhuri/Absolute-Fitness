@@ -11,6 +11,7 @@ export const getClientHealthRecords = async (client_id) => {
     });
     return res.data;
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
@@ -28,6 +29,7 @@ export const addNewTrainer = async (newTrainer, gymId) => {
     );
     return { status: res.status, data: res.data };
   } catch (err) {
+    alert(err?.response?.data?.msg);
     console.log(err);
   }
 };
