@@ -87,12 +87,13 @@ function Signup() {
               src={logoImg}
               alt="login form"
               className="rounded center"
-              style={{ "max-width": "100px" }}
+              style={{ "max-width": "100px", cursor: "pointer" }}
+              onClick={() => window.location.href = "/"}
             />
           </div>
 
           <h5 className="center mt-2 mb-4">
-            Log into your Absolte Fitness Account
+            Log into your Absolute Fitness Account
           </h5>
 
           <div className="row">
@@ -250,9 +251,9 @@ function Signup() {
           <p className="center small mt-2 mb-0 pb-lg-2">
             Have an account? <a href="/login">Login here</a>
           </p>
-          <p className="center small mb-5 pb-lg-2">
-            Are you a staff? <a href="/staff-login">Login here</a>
-          </p>
+          {/*<p className="center small mb-5 pb-lg-2">*/}
+          {/*  Are you a staff? <a href="/staff-login">Login here</a>*/}
+          {/*</p>*/}
         </form>
       </div>
     </div>

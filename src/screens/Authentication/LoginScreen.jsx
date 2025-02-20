@@ -41,12 +41,13 @@ function LoginScreen() {
               src={logoImg}
               alt="login form"
               className="rounded center"
-              style={{ "max-width": "100px" }}
+              style={{ "max-width": "100px", cursor: "pointer" }}
+              onClick={() => window.location.href = "/"}
             />
           </div>
 
           <h5 className="center mt-2 mb-4">
-            Log into your Absolte Fitness Account
+            Log into your Absolute Fitness Account
           </h5>
 
           <label for="email-input" className="form-label mb-2">

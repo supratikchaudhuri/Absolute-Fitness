@@ -53,12 +53,13 @@ const SetupNewPassword = () => {
                             src={logoImg}
                             alt="login form"
                             className="rounded center"
-                            style={{ "max-width": "100px" }}
+                            style={{ "max-width": "100px", cursor: "pointer" }}
+                            onClick={() => window.location.href = "/"}
                         />
                     </div>
 
                     <h5 className="center mt-2 mb-4">
-                        Reset your Absolte Fitness Account Password
+                        Reset your Absolute Fitness Account Password
                     </h5>
 
                     <label for="password-input" className="form-label mb-2">
@@ -143,9 +144,9 @@ const SetupNewPassword = () => {
                     <p className="center small mt-2 mb-0 pb-lg-2">
                         Don't have an account? <a href="/signup">Signup here</a>
                     </p>
-                    <p className="center small mb-0 pb-lg-2">
-                        Are you a staff? <a href="/staff-login">Login here</a>
-                    </p>
+                    {/*<p className="center small mb-0 pb-lg-2">*/}
+                    {/*    Are you a staff? <a href="/staff-login">Login here</a>*/}
+                    {/*</p>*/}
                     <p className="center small mb-5 pb-lg-2">
                         Forgot Password?{" "}
                         <a href="/forgot-password">Click here</a>

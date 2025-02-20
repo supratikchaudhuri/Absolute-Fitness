@@ -35,12 +35,13 @@ const ForgotPassword = () => {
               src={logoImg}
               alt="login form"
               className="rounded center"
-              style={{ "max-width": "100px" }}
+              style={{ "max-width": "100px", cursor: "pointer" }}
+              onClick={() => window.location.href = "/"}
             />
           </div>
 
           <h5 className="center mt-2 mb-4">
-            Reset your Absolte Fitness Account Password
+            Reset your Absolute Fitness Account Password
           </h5>
 
           <label for="email-input" className="form-label mb-2">
